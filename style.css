@@ -1,0 +1,153 @@
+/**
+ * Theme Name: GAP
+ * Description: GAP Theme
+ * Author: Duc Nguyen [0936-770-119]
+ * Template: blocksy
+ * Text Domain: blocksy
+ */
+
+
+@font-face {
+  font-family: 'PN';
+  src: url(//theme.hstatic.net/1000324393/1000429977/14/PN-Regular2.ttf?v=1228) format("truetype");
+}
+
+@font-face {
+  font-family: 'PN';
+  src: url(//theme.hstatic.net/1000324393/1000429977/14/PN_SemiBold_gdi.ttf?v=1228) format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'PN';
+  src: url(//theme.hstatic.net/1000324393/1000429977/14/PN_SemiBold_gdi.ttf?v=1228) format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'SVN-Veneer';
+  src: url(//theme.hstatic.net/1000324393/1000429977/14/SVN-Veneer.eot?v=1228) format("embedded-opentype"),
+    url("//theme.hstatic.net/1000314545/1000404148/14/SVN-Veneer.woff?v=796") format("woff"),
+    url(//theme.hstatic.net/1000324393/1000429977/14/SVN-Veneer.ttf?v=1228) format("truetype"),
+    url("//theme.hstatic.net/1000314545/1000404148/14/SVN-Veneer.svg?v=796#SVN-Veneer") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('//file.hstatic.net/1000243716/file/fontawesome-webfont.eot');
+  src: url('//file.hstatic.net/1000243716/file/fontawesome-webfont.eot') format('embedded-opentype'), url('//file.hstatic.net/1000243716/file/fontawesome-webfont.woff') format('woff'), url('//file.hstatic.net/1000243716/file/fontawesome-webfont.ttf') format('truetype'), url('//file.hstatic.net/1000243716/file/fontawesome-webfont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "abchanel-corpo";
+  src: url("//db.onlinewebfonts.com/t/08d38d30f8748388c11592e40dd0ad68.eot");
+  src: url("//db.onlinewebfonts.com/t/08d38d30f8748388c11592e40dd0ad68.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/08d38d30f8748388c11592e40dd0ad68.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/08d38d30f8748388c11592e40dd0ad68.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/08d38d30f8748388c11592e40dd0ad68.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/08d38d30f8748388c11592e40dd0ad68.svg#ABChanel Corpo Light") format("svg");
+}
+
+:root {
+  --fontFamily: 'PN', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+body {
+  font-family: 'PN', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #484848;
+}
+
+@media (min-width: 1000px) {
+  .ct-container-fluid {
+    --container-edge-spacing: calc(100vw - 150px);
+  }
+
+}
+
+#menu-main .current-menu-item i.home-icon,
+#menu-main .current_page_item i.home-icon {
+  opacity: 1;
+}
+
+i.home-icon {
+  display: inline-block;
+  opacity: .5;
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('data:image/svg+xml,<svg width="189" height="189" viewBox="0 0 189 189" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M128.874 177.187H60.1256C52.351 177.476 44.7765 174.685 39.0478 169.421C33.3192 164.157 29.8993 156.845 29.5312 149.074V112.219C29.5312 110.652 30.1535 109.15 31.2611 108.042C32.3688 106.935 33.8711 106.312 35.4375 106.312C37.0039 106.312 38.5062 106.935 39.6138 108.042C40.7215 109.15 41.3437 110.652 41.3437 112.219V149.074C41.7068 153.713 43.8801 158.023 47.3943 161.073C50.9086 164.123 55.4816 165.668 60.1256 165.375H128.874C133.518 165.668 138.091 164.123 141.606 161.073C145.12 158.023 147.293 153.713 147.656 149.074V112.219C147.656 110.652 148.279 109.15 149.386 108.042C150.494 106.935 151.996 106.312 153.562 106.312C155.129 106.312 156.631 106.935 157.739 108.042C158.846 109.15 159.469 110.652 159.469 112.219V149.074C159.101 156.845 155.681 164.157 149.952 169.421C144.224 174.685 136.649 177.476 128.874 177.187ZM175.475 98.6934C176.028 98.1444 176.468 97.4911 176.768 96.7714C177.067 96.0517 177.222 95.2797 177.222 94.5C177.222 93.7203 177.067 92.9483 176.768 92.2286C176.468 91.5089 176.028 90.8556 175.475 90.3066L98.6934 13.5253C98.1444 12.9717 97.4911 12.5323 96.7714 12.2325C96.0517 11.9326 95.2797 11.7783 94.5 11.7783C93.7203 11.7783 92.9483 11.9326 92.2286 12.2325C91.5089 12.5323 90.8556 12.9717 90.3066 13.5253L13.5253 90.3066C12.4131 91.4187 11.7883 92.9272 11.7883 94.5C11.7883 96.0728 12.4131 97.5813 13.5253 98.6934C14.6375 99.8056 16.1459 100.43 17.7187 100.43C19.2916 100.43 20.8 99.8056 21.9122 98.6934L94.5 26.0466L167.088 98.6934C167.637 99.247 168.29 99.6864 169.01 99.9863C169.73 100.286 170.502 100.44 171.281 100.44C172.061 100.44 172.833 100.286 173.553 99.9863C174.272 99.6864 174.926 99.247 175.475 98.6934Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M88.9722 122.236C89.5 122.125 89.6181 122.403 89.6667 122.771C89.9097 124.16 90.1736 125.549 90.4444 126.937C89.7986 126.937 89.2014 126.937 88.6111 126.937C88.3542 126.937 88.2569 127.007 88.2153 127.257C87.5694 131.486 86.8958 135.708 86.2292 139.937C86.2292 140.056 86.1875 140.167 86.1597 140.306H81C84.588 120.208 88.1713 100.106 91.75 80H97.0278C100.579 100.093 104.144 120.206 107.722 140.34H102.424C102.299 139.562 102.167 138.792 102.056 138.014C101.479 134.444 100.917 130.861 100.347 127.292C100.347 127.035 100.236 126.951 99.9792 126.965C99.5 126.965 99.0208 126.965 98.5347 126.965C98.1806 126.965 98.0903 126.812 98.0764 126.479C97.965 125.223 98.1383 123.958 98.5833 122.778C98.7778 122.264 98.7708 122.243 99.3403 122.236H99.6042C97.8634 111.431 96.1181 100.632 94.3681 89.8403H94.2917C92.5324 100.627 90.7708 111.44 89.0069 122.278" fill="%23231F20"/><path fill-rule="evenodd" clip-rule="evenodd" d="M95.0416 122.222C95.3724 122.204 95.7039 122.204 96.0347 122.222C96.1054 122.241 96.1709 122.276 96.2263 122.324C96.2816 122.373 96.3253 122.433 96.3541 122.5C96.7916 123.778 97.2986 125.042 97.1389 126.451C97.1389 126.785 97.0208 126.931 96.6666 126.931C95.9722 126.931 95.9722 126.931 95.8264 126.236L95.0416 122.194" fill="%23231F20"/><path fill-rule="evenodd" clip-rule="evenodd" d="M94.5972 122.215C94.3194 123.715 94.0625 125.146 93.8056 126.576C93.7984 126.677 93.7522 126.77 93.6768 126.836C93.6014 126.902 93.503 126.936 93.4028 126.931H92.4028C92.5139 126.354 92.6319 125.806 92.7292 125.257C92.9097 124.389 93.0833 123.528 93.2361 122.667C93.2395 122.602 93.2561 122.538 93.2848 122.48C93.3135 122.422 93.3538 122.37 93.4032 122.328C93.4525 122.286 93.51 122.254 93.572 122.234C93.634 122.215 93.6993 122.209 93.7639 122.215H94.5972Z" fill="%23231F20"/><path fill-rule="evenodd" clip-rule="evenodd" d="M92.0486 126.917H90.8125C91.0139 125.882 91.2083 124.833 91.4028 123.812H91.4792C91.6667 124.847 91.8472 125.896 92.0486 126.924" fill="%23231F20"/><path fill-rule="evenodd" clip-rule="evenodd" d="M92.6042 125.021C92.4583 124.208 92.3194 123.389 92.1805 122.569C92.125 122.229 92.3611 122.208 92.6042 122.215C92.8472 122.222 93.1597 122.167 93.0972 122.562C92.9722 123.382 92.8333 124.208 92.6944 125.021H92.6042Z" fill="%23231F20"/><path fill-rule="evenodd" clip-rule="evenodd" d="M97.9097 124.285C97.7292 123.694 97.5417 123.104 97.3681 122.521C97.3533 122.466 97.3533 122.409 97.3681 122.354C97.6708 122.297 97.977 122.26 98.2847 122.243C98.3542 122.243 98.4792 122.451 98.4722 122.535C98.3264 123.118 98.1528 123.708 98 124.285H97.9097Z" fill="%23231F20"/><path fill-rule="evenodd" clip-rule="evenodd" d="M91 124.931C90.8542 124.174 90.7222 123.41 90.5903 122.646C90.5556 122.486 90.4931 122.278 90.7569 122.229C91.0208 122.181 91.125 122.285 91.2222 122.535C91.5208 123.368 91.2222 124.146 91 124.931Z" fill="%23231F20"/><path fill-rule="evenodd" clip-rule="evenodd" d="M94.1041 125.521C94.2399 125.499 94.3781 125.499 94.5139 125.521C94.5719 125.537 94.6259 125.565 94.6725 125.604C94.7191 125.642 94.7573 125.689 94.7847 125.743C94.8517 126.003 94.8982 126.268 94.9236 126.535C94.9722 126.875 94.7708 126.931 94.5069 126.937C94.0555 126.937 93.9305 126.868 93.9653 126.542C94 126.215 94.0555 125.889 94.1041 125.514" fill="%23231F20"/><path fill-rule="evenodd" clip-rule="evenodd" d="M94.4445 123.917C94.5486 124.375 94.6181 124.84 94.7153 125.306H94.1528C94.2222 124.826 94.3056 124.361 94.3889 123.917H94.4445Z" fill="%23231F20"/><circle cx="94.5" cy="110.5" r="40" stroke="black" stroke-width="5"/></svg>');
+}
+
+.ct-breadcrumbs i.home-icon{
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
+}
+.ct-breadcrumbs a i.home-icon{
+  opacity: 1;
+}
+
+/* About */
+#about_tab .elementor-tabs .elementor-tab-title{
+  position: relative;
+}
+#about_tab .elementor-tabs .elementor-tab-title.elementor-active::after{
+  content: "";
+  width: 10px;
+  height: 30px;
+  background: url("img/arrow.png") no-repeat left center;
+  background-size: 100%;
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  margin-top: -15px;
+}
+
+/* Footer */
+.ct-widget img.footer-logo{
+  max-width: 130px!important;
+}
+
+.ct-widget .footer-item{
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  text-align: left;
+}
+
+.ct-widget .footer-item:not(:first-child){
+  margin-left: 30px;
+}
+
+.ct-widget .footer-item-icon{
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+.ct-widget .footer-item-icon svg{
+  fill: #fff;
+  width: 36px;
+  height: 36px;
+}
+
+.footer-item-title,
+.footer-item-content{
+  display: block;
+}
+
+.footer-item-content{
+  color: var(--paletteColor8);
+}
+
+img.footer-checkout-icons{
+  max-width: 300px!important;
+}
