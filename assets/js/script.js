@@ -1,12 +1,48 @@
 jQuery(document).ready(function ($) {
 
-  
-
-  $('#gap_carousel .products').addClass('owl-carousel owl-theme').owlCarousel({
-    items: 3,
-    margin: 30
+  /* */
+  $('.navigable').contentNavigation({
+    offsetIndicator: '-33%',
   });
 
+  var products = $('#gap_carousel .products').addClass('owl-carousel owl-theme');
+
+  /* Product carousel */
+  /* products.owlCarousel({
+    items: 3,
+    margin: 30,
+    nav: true,
+    dots: false,
+    autoplay: true,
+    navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px; " d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px; " d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+  }); */
+
+  products.owlCarousel({
+    loop: true,
+    margin: 30,
+    responsiveClass: true,
+    dots: false,
+    responsive: {
+      0: {
+        items: 1,
+        nav: false,
+        dots: true
+      },
+      600: {
+        items: 2,
+        nav: false,
+        dots: true
+      },
+      1000: {
+        items: 3,
+        nav: true
+      }
+    },
+    autoplay: true,
+    navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px; " d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px; " d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+  })
+
+  /* Hero slider */
   var sync1 = $("#sync1");
   var sync2 = $("#sync2");
   var slidesPerPage = 6; //globaly define number of elements per page
@@ -16,34 +52,53 @@ jQuery(document).ready(function ($) {
     items: 1,
     animateOut: 'fadeOut',
     slideSpeed: 2000,
-    nav: true,
+    nav: false,
     dots: false,
-    autoplay: false,
+    autoplay: true,
     loop: true,
     responsiveRefreshRate: 200,
     navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
   }).on('changed.owl.carousel', syncPosition);
 
+
+  /*Thumbs*/
   sync2
     .on('initialized.owl.carousel', function () {
       sync2.find(".owl-item").eq(0).addClass("current");
     })
     .owlCarousel({
-      items: 6,
+      // items: 6,
       dots: false,
-      nav: true,
-      itemsDesktop: [1000, 5],
-      itemsDesktopSmall: [900, 3],
-      itemsTablet: [600, 1],
+      nav: false,
+      responsive: {
+        0: {
+          items: 3,
+        },
+        600: {
+          items: 4,
+
+        },
+        1000: {
+          items: 6,
+        }
+      },
       margin: 20,
       smartSpeed: 200,
       slideSpeed: 500,
       //center: true,
-      
+
       //autoWidth:true,
       //slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
       responsiveRefreshRate: 100
     }).on('changed.owl.carousel', syncPosition2);
+
+
+  $(".cnext").click(function () {
+    sync2.trigger('next.owl.carousel');
+  })
+  $(".cprev").click(function () {
+    sync2.trigger('prev.owl.carousel', [300]);
+  });
 
   function syncPosition(el) {
     //if you set loop to false, you have to restore this next line
@@ -90,5 +145,25 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
     var number = $(this).index();
     sync1.data('owl.carousel').to(number, 300, true);
+  });
+});
+
+
+jQuery(function ($) {
+  $(document).on('submit_success', function (e, data) {
+    //alert("AA");
+    console.log(data.data);
+    if (data.data.post_amount) {
+      /* var img = $('<img />', {
+        src: data.data.success_image
+      });
+      */
+      var post_amount = data.data.post_amount;
+
+      $('#cal_result').html(post_amount);
+
+      //$(e.target).append(post_amount);
+    }
+
   });
 });
