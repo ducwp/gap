@@ -14,22 +14,15 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style('gap-jquery-modal', get_stylesheet_directory_uri() . '/assets/vendor/jquery-modal/jquery.modal.min.css', array('gap'));
   wp_enqueue_style('gap-cf', get_stylesheet_directory_uri() . '/assets/css/cf.css', array('gap'));
   wp_enqueue_style('gap-flexboxgrid', get_stylesheet_directory_uri() . '/assets/css/flexboxgrid.css', array('gap'));
-  wp_enqueue_style('gap-drag-and-drop-file-upload', get_stylesheet_directory_uri() . '/assets/vendor/drag-and-drop-file-upload/style.css', array('gap'));
   wp_enqueue_style('gap-style', get_stylesheet_directory_uri() . '/assets/css/gap.css', array('gap'));
 
   # JS
-  wp_enqueue_script('gap-drag-and-drop-file-upload', get_stylesheet_directory_uri() . '/assets/vendor/drag-and-drop-file-upload/script.js', ['jquery'], '', true);
   wp_enqueue_script('gap-jquery-modal', get_stylesheet_directory_uri() . '/assets/vendor/jquery-modal/jquery.modal.min.js', ['jquery'], '', true);
-  wp_enqueue_script('gap-pcn', get_stylesheet_directory_uri() . '/assets/vendor/page-content-navigation/page-content-navigation.js', ['jquery'], '', true);
+  wp_enqueue_script('gap-pcn', get_stylesheet_directory_uri() . '/assets/js/page-content-navigation.js', ['jquery'], '', true);
   wp_enqueue_script('owl-slider', get_stylesheet_directory_uri() . '/assets/vendor/OwlCarousel2-2.3.4/owl.carousel.min.js', ['jquery'], '', true);
-  wp_enqueue_script('gap-script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery', 'owl-slider'], '', true);
-  
-  wp_enqueue_script('gap-html2canvas', get_stylesheet_directory_uri() . '/assets/vendor/jspdf/html2canvas.min.js', [], '', true);
-  wp_enqueue_script('gap-jspdf.umd', get_stylesheet_directory_uri() . '/assets/vendor/jspdf/jspdf.umd.js', [], '', true);
-  wp_enqueue_script('gap-html2pdf', 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js', [], '', true);
-  
-  wp_enqueue_script('gap-html-to-pdf', get_stylesheet_directory_uri() . '/assets/js/HtmlToPDF.js', ['gap-html2canvas', 'gap-jspdf.umd'], '', true);
+  wp_enqueue_script('gap-html2pdf', get_stylesheet_directory_uri(). '/assets/js/html2pdf.bundle.min.js', [], '', true);
   wp_enqueue_script('gap-summary', get_stylesheet_directory_uri() . '/assets/js/summary.js', ['jquery'], '', true);
+  wp_enqueue_script('gap-script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery', 'owl-slider'], '', true);
 });
 
 add_image_size('hero-thumb-size', 200, 200, true);
