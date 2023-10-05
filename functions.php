@@ -14,9 +14,11 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style('gap-jquery-modal', get_stylesheet_directory_uri() . '/assets/vendor/jquery-modal/jquery.modal.min.css', array('gap'));
   wp_enqueue_style('gap-cf', get_stylesheet_directory_uri() . '/assets/css/cf.css', array('gap'));
   wp_enqueue_style('gap-flexboxgrid', get_stylesheet_directory_uri() . '/assets/css/flexboxgrid.css', array('gap'));
+  wp_enqueue_style('gap-drag-and-drop-file-upload', get_stylesheet_directory_uri() . '/assets/vendor/drag-and-drop-file-upload/style.css', array('gap'));
   wp_enqueue_style('gap-style', get_stylesheet_directory_uri() . '/assets/css/gap.css', array('gap'));
 
   # JS
+  wp_enqueue_script('gap-drag-and-drop-file-upload', get_stylesheet_directory_uri() . '/assets/vendor/drag-and-drop-file-upload/script.js', ['jquery'], '', true);
   wp_enqueue_script('gap-jquery-modal', get_stylesheet_directory_uri() . '/assets/vendor/jquery-modal/jquery.modal.min.js', ['jquery'], '', true);
   wp_enqueue_script('gap-pcn', get_stylesheet_directory_uri() . '/assets/vendor/page-content-navigation/page-content-navigation.js', ['jquery'], '', true);
   wp_enqueue_script('owl-slider', get_stylesheet_directory_uri() . '/assets/vendor/OwlCarousel2-2.3.4/owl.carousel.min.js', ['jquery'], '', true);

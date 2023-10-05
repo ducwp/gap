@@ -12,12 +12,12 @@ function gap_number_confirmation_validation_filter($result, $tag)
     }
   } */
 
-  $clothes_new_local_number = absint($_POST['clothes_new_local_number']);
-  $clothes_new_global_number = absint($_POST['clothes_new_global_number']);
-  $clothes_old_local_number = absint($_POST['clothes_old_local_number']);
-  $clothes_old_global_brand = absint($_POST['clothes_old_global_brand']);
+  $clothes_new_local = absint($_POST['clothes_new_local']);
+  $clothes_new_global = absint($_POST['clothes_new_global']);
+  $clothes_used_local = absint($_POST['clothes_used_local']);
+  $clothes_used_global = absint($_POST['clothes_used_global']);
 
-  if ($clothes_new_local_number + $clothes_new_global_number + $clothes_old_local_number + $clothes_old_global_brand < 5) {
+  if ($clothes_new_local + $clothes_new_global + $clothes_used_local + $clothes_used_global < 5) {
     $result->invalidate($tag, "Tổng số sản phẩm phải từ 5 trở lên.");
   }
 
