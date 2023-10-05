@@ -49,10 +49,17 @@ class FormSummary extends Action_Base {
       $html = '<h4 style="text-align: center; margin: 20px 0">Kết quả tổng kết</h4>';
       $html .= '<ul data-products="type-1" class="products columns-3">';
       $xtk_modal = '';
-      $ths_arr_1 = ['Mã ký gửi', 'Họ tên khách hàng', 'Số điện thoại', 'Phương thức thanh toán', 'Số tài khoản', 'Tên ngân hàng'];
+      $ths_arr_1 = ['Mã ký gửi', 'Họ tên khách hàng', 'Số điện thoại', 'P.thức thanh toán', 'Số tài khoản', 'Tên ngân hàng'];
       $ths_arr_2 = ['Ký gửi', 'Bán', 'Tồn', 'Doanh thu', 'Phí', 'Thực nhận'];
       $ths_1 = '<th>' . join('</th><th>', $ths_arr_1) . '</th>';
       $ths_2 = '<th>' . join('</th><th>', $ths_arr_2) . '</th>';
+
+      $text = 'Lập lệnh chuyển khoản theo thứ tự mã ký gửi, thời gian nhận được thanh toán sẽ từ ngày 10-20/09/2023.<ul>
+      <li>Khách hàng chọn phương thức chuyển khoản, kế toán sẽ lập lệnh thanh toán cho mình qua số tài khoản đã cung cấp.</li>
+      <li>Khách hàng chọn phương thức tiền mặt, vui lòng đến đúng hẹn trong biên nhận ký gửi (10-20/09/2023).</li>
+      <li>DANH SÁCH SẼ ĐƯỢC CHỐT VÀO 10 GIỜ NGÀY 9 HÀNG THÁNG, VUI LÒNG KHÔNG ĐỔI PHƯƠNG THỨC SAU KHI DANH SÁCH ĐƯỢC CHỐT</li>
+      </ul>';
+      $text = sprintf('<img src="%s" />',  get_stylesheet_directory_uri().'/assets/img/xtk_info.jpg');
       foreach ($results as $row) {
         $arr = explode('/', $row->ngay_ky_gui);
         $date_str = $arr[1] . '/' . $arr[0] . '/' . $arr[2];
@@ -79,16 +86,17 @@ class FormSummary extends Action_Base {
         }
         
 
-        $xtk_modal .= sprintf('<div id="xtk_detail_%s" class="login_form modal modal_xtk_detail">', $row->id);
+        $xtk_modal .= sprintf('<div id="xtk_detail_%s" class="modal modal_xtk_detail"><div id="contentToPrint">', $row->id);
         $xtk_modal .= '<h3 class="modal_xtk_detail_header">Hóa đơn chi tiết bán hàng</h3>';
         $xtk_modal .= sprintf('<table><thead><tr>%s</tr></thead><tbody>', $ths_1);
         $xtk_modal .= sprintf('<tr>%s</tr>', $td_1);
-        $xtk_modal .= '</tbody><table><br>';
+        $xtk_modal .= '</tbody></table><br>';
 
         $xtk_modal .= sprintf('<table><thead><tr>%s</tr></thead><tbody>', $ths_2);
         $xtk_modal .= sprintf('<tr>%s</tr>', $td_2);
-        $xtk_modal .= '</tbody><table>';
-        
+        $xtk_modal .= '</tbody></table><br>';
+        $xtk_modal .= $text .'</div>';
+        $xtk_modal .= sprintf('<p class="xtk_detail_download_btn"><a onclick="gap_html2pdf();" href="#" class="xbutton"><img src="%s" /> Tải về</a></p>', get_stylesheet_directory_uri().'/assets/img/download.svg');
         $xtk_modal .= '</div>';
       }
       $html .= '</ul>';

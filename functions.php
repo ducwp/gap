@@ -23,6 +23,12 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_script('gap-pcn', get_stylesheet_directory_uri() . '/assets/vendor/page-content-navigation/page-content-navigation.js', ['jquery'], '', true);
   wp_enqueue_script('owl-slider', get_stylesheet_directory_uri() . '/assets/vendor/OwlCarousel2-2.3.4/owl.carousel.min.js', ['jquery'], '', true);
   wp_enqueue_script('gap-script', get_stylesheet_directory_uri() . '/assets/js/script.js', ['jquery', 'owl-slider'], '', true);
+  
+  wp_enqueue_script('gap-html2canvas', get_stylesheet_directory_uri() . '/assets/vendor/jspdf/html2canvas.min.js', [], '', true);
+  wp_enqueue_script('gap-jspdf.umd', get_stylesheet_directory_uri() . '/assets/vendor/jspdf/jspdf.umd.js', [], '', true);
+  wp_enqueue_script('gap-html2pdf', 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js', [], '', true);
+  
+  wp_enqueue_script('gap-html-to-pdf', get_stylesheet_directory_uri() . '/assets/js/HtmlToPDF.js', ['gap-html2canvas', 'gap-jspdf.umd'], '', true);
   wp_enqueue_script('gap-summary', get_stylesheet_directory_uri() . '/assets/js/summary.js', ['jquery'], '', true);
 });
 
@@ -30,3 +36,4 @@ add_image_size('hero-thumb-size', 200, 200, true);
 
 require_once(__DIR__ . '/vendor/autoload.php');
 GAPTheme\Init::instance();
+

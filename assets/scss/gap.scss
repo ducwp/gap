@@ -576,4 +576,25 @@ body:not(.home) {
     text-transform: uppercase;
     font-weight: 500;
   }
+
+  table{
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .xtk_detail_download_btn{
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    a{
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 6px;
+      border: 1px solid var(--paletteColor5);
+      img{
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
 }

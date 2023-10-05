@@ -8,18 +8,18 @@
 
  @font-face {
   font-family: 'PN';
-  src: url('fonts/PN/PN-Regular2.ttf') format("truetype");
+  src: url('assets/fonts/PN/PN-Regular2.ttf') format("truetype");
 }
 
 @font-face {
   font-family: 'PN';
-  src: url('fonts/PN/PN_SemiBold_gdi.ttf') format("truetype");
+  src: url('assets/fonts/PN/PN_SemiBold_gdi.ttf') format("truetype");
   font-weight: 600;
 }
 
 @font-face {
   font-family: 'PN';
-  src: url('fonts/PN/PN_SemiBold_gdi.ttf') format("truetype");
+  src: url('assets/fonts/PN/PN_SemiBold_gdi.ttf') format("truetype");
   font-weight: bold;
 }
 
@@ -43,10 +43,10 @@
 
 @font-face {
   font-family: "abchanel-corpo";
-  src: url("fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.eot");
-  src: url("fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.eot?#iefix") format("embedded-opentype"),
-    url("fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.woff2") format("woff2"),
-    url("fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.woff") format("woff"),
-    url("fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.ttf") format("truetype"),
-    url("fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.svg#ABChanel Corpo Light") format("svg");
+  src: url("assets/fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.eot");
+  src: url("assets/fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.eot?#iefix") format("embedded-opentype"),
+    url("assets/fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.woff2") format("woff2"),
+    url("assets/fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.woff") format("woff"),
+    url("assets/fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.ttf") format("truetype"),
+    url("assets/fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.svg#ABChanel Corpo Light") format("svg");
 }

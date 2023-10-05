@@ -378,5 +378,20 @@ body:not(.home) .ct-footer {
     font-size: 24px;
     text-transform: uppercase;
     font-weight: 500; }
+  .modal.modal_xtk_detail table {
+    table-layout: fixed;
+    width: 100%; }
+  .modal.modal_xtk_detail .xtk_detail_download_btn {
+    display: block;
+    margin-top: 30px;
+    text-align: center; }
+    .modal.modal_xtk_detail .xtk_detail_download_btn a {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 6px;
+      border: 1px solid var(--paletteColor5); }
+      .modal.modal_xtk_detail .xtk_detail_download_btn a img {
+        width: 16px;
+        height: 16px; }
 
 /*# sourceMappingURL=gap.css.map */
