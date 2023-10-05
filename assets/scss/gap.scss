@@ -590,6 +590,9 @@ body:not(.home) {
   table{
     table-layout: fixed;
     width: 100%;
+    thead{
+      background-color: var(--paletteColor6);
+    }
   }
 
   .xtk_detail_download_btn{

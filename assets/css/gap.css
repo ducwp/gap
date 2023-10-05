@@ -384,6 +384,8 @@ body:not(.home) .ct-footer {
   .modal.modal_xtk_detail table {
     table-layout: fixed;
     width: 100%; }
+    .modal.modal_xtk_detail table thead {
+      background-color: var(--paletteColor6); }
   .modal.modal_xtk_detail .xtk_detail_download_btn {
     display: block;
     margin-top: 30px;
