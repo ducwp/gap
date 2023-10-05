@@ -16,6 +16,9 @@ body {
   margin: 0 auto;
   max-width: 1360px; }
 
+body.home[data-header*="type-1"] .ct-header [data-row*="middle"], body.page-id-2[data-header*="type-1"] .ct-header [data-row*="middle"], body.single-product[data-header*="type-1"] .ct-header [data-row*="middle"], body.archive[data-header*="type-1"] .ct-header [data-row*="middle"] {
+  --borderBottom: none; }
+
 .add_to_cart_button::after,
 .button.single_add_to_cart_button:before {
   display: inline-block;

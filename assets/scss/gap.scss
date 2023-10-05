@@ -5,6 +5,17 @@
 
 body.page.page-id-2 {}
 
+body{
+  &.home,
+  &.page-id-2,
+  &.single-product,
+  &.archive{
+    &[data-header*="type-1"] .ct-header [data-row*="middle"]{
+      --borderBottom: none;
+    }
+  }
+}
+
 .add_to_cart_button::after,
 .button.single_add_to_cart_button:before {
   display: inline-block;

@@ -19,7 +19,7 @@ class Hooks
 
     add_action('wp', [$this, 'gap_check_user_login']);
     add_action('blocksy:loop:before', [$this, 'gap_add_bc'], 99);
-    //add_action('blocksy:single:top', 'gap_add_bc', 99);
+    add_action('woocommerce_before_single_product', [$this, 'gap_add_bc'], 99);
     add_action('woocommerce_archive_description', [$this, 'gap_add_bc'], 99);
     add_action('woocommerce_after_add_to_cart_button', [$this, 'gap_woocommerce_after_add_to_cart_button']);
     add_filter('the_title', [$this, 'gap_shorten_woo_product_title'], 10, 2);
