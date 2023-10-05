@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "psr-4": {
+      "GAPTheme\\": "src/"
+    }
+  },
+  "require": {
+    "phpoffice/phpspreadsheet": "^1.29"
+  },
+  "config": {
+    "platform-check": false
+  }
+}

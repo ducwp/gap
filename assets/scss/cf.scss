@@ -55,6 +55,20 @@
     }
   }
 
+  div[class^='cf-col-'] a {
+    text-decoration: underline;
+
+
+    /* .wpcf7-form-control-wrap{
+      display: inline-block;
+      margin-bottom: 10px!important;
+    }
+    .wpcf7-form-control.wpcf7-checkbox {
+      display: inline-block;
+      margin-bottom: 10px!important;
+    } */
+  }
+
 }
 
 @media (min-width: 576px) {

@@ -1,6 +1,10 @@
 jQuery(document).ready(function ($) {
 
   /* */
+  $('#verify_zalo_btn').click(function(){
+    alert("Gửi mã xác minh Zalo!!!\nTest OPT: 12345");
+  });
+
   $('.navigable').contentNavigation({
     offsetIndicator: '-33%',
   });
@@ -152,17 +156,21 @@ jQuery(document).ready(function ($) {
 jQuery(function ($) {
   $(document).on('submit_success', function (e, data) {
     //alert("AA");
-    console.log(data.data);
+    
+    //Phuong thuc ky gui
     if (data.data.post_amount) {
-      /* var img = $('<img />', {
-        src: data.data.success_image
-      });
-      */
+      //console.log(data.data);
       var post_amount = data.data.post_amount;
-
       $('#cal_result').html(post_amount);
-
       //$(e.target).append(post_amount);
+    }
+
+    //Xem tong ket
+    if (data.data.summary_result) {
+      //console.log(data.data);
+      var summary_result = data.data.summary_result;
+      $('#summary_result').html(summary_result);
+      //$(e.target).append(summary_result);
     }
 
   });
