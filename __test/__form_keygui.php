@@ -31,8 +31,10 @@
   [checkbox clothes_checkbox use_label_element default:1 "Quần áo"]
 
   [group clothes_box]
-  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
+  <div
+    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
+      lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
@@ -78,8 +80,10 @@
   [checkbox bag_checkbox use_label_element default:1 "Túi"]
 
   [group bag_box]
-  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
+  <div
+    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
+      lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
@@ -122,8 +126,10 @@
   [checkbox shoe_checkbox use_label_element "Giày"]
 
   [group shoe_box]
-  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
+  <div
+    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
+      lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
@@ -167,8 +173,10 @@
   [checkbox cosmetic_checkbox use_label_element "Mỹ phẩm"]
 
   [group cosmetic_box]
-  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
+  <div
+    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
+      lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
@@ -214,8 +222,10 @@
   [checkbox perfume_checkbox use_label_element "Nước hoa"]
 
   [group perfume_box]
-  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
+  <div
+    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
+      lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
@@ -258,8 +268,7 @@
     [acceptance agree_checkbox]Tôi cam kết sản phẩm trên là sản phẩm chính hãng. Bảng tổng kết sẽ được
     gửi qua Zalo, thanh toán chuyển khoản, phí shop hai đầu do khách chịu.[/acceptance]
     <div style="margin-top: 10px">
-    <label style="display: inline-block">[submit "Ký gửi"]</label>
+      <label style="display: inline-block">[submit "Ký gửi"]</label>
     </div>
   </div>
 </div>
-
