@@ -20,11 +20,6 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_script('gap-pcn', $theme_uri . '/assets/js/page-content-navigation.js', ['jquery'], '', true);
   wp_enqueue_script('gap-html2pdf', $theme_uri. '/assets/js/html2pdf.bundle.min.js', [], '', true);
   wp_enqueue_script('gap-summary', $theme_uri . '/assets/js/summary.js', ['jquery'], '', true);
-
-  //Money format
-  //wp_enqueue_style('gap-currency-format', $theme_uri . '/assets/vendor/currency-format-input-field/style.css', array('gap'));
-  //wp_enqueue_script('gap-currency-format', $theme_uri. '/assets/vendor/currency-format-input-field/script.js', ['jquery'], '', true);
-  wp_enqueue_script( 'gap-autoNumeric', 'https://unpkg.com/autonumeric@4.10.0/dist/autoNumeric.min.js' , [], '', true);
   
   //Owl slider
   wp_enqueue_style('owl-style', $theme_uri . '/assets/vendor/OwlCarousel2-2.3.4/assets/owl.carousel.min.css', array('gap'));
