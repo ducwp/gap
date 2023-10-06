@@ -1,6 +1,9 @@
 jQuery(document).ready(function ($) {
 
   /* */
+  $('select.wpcf7-select').attr('data-placeholder', 'Chọn thương hiệu');
+  $("select.wpcf7-select").chosen({width: '100%'});
+
   $('.wpcf7-checkbox input[type=checkbox], .wpcf7-acceptance input[type=checkbox], .wpcf7-radio input[type=radio]').addClass('ct-checkbox');
 
   $('#verify_zalo_btn').click(function(){

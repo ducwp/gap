@@ -38,8 +38,7 @@
       border-radius: 4px; }
   .cf-container .dnd-upload-status .dnd-upload-details .name span {
     max-width: 80px; }
-  .cf-container div[class^='cf-col-'] a {
-    text-decoration: underline;
+  .cf-container div[class^='cf-col-'] {
     /* .wpcf7-form-control-wrap{
       display: inline-block;
       margin-bottom: 10px!important;
@@ -48,6 +47,10 @@
       display: inline-block;
       margin-bottom: 10px!important;
     } */ }
+    .cf-container div[class^='cf-col-'] a {
+      text-decoration: underline; }
+    .cf-container div[class^='cf-col-'] * + p, .cf-container div[class^='cf-col-'] * + label {
+      margin-top: 10px; }
 
 @media (min-width: 576px) {
   .cf-container .cf-col-1 {

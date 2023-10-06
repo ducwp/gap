@@ -61,10 +61,13 @@ class FormSummary extends Action_Base {
       </ul>';
       $text = sprintf('<img src="%s" />',  get_stylesheet_directory_uri().'/assets/img/xtk_info.jpg');
       foreach ($results as $row) {
-        $arr = explode('/', $row->ngay_ky_gui);
+        /* $arr = explode('/', $row->ngay_ky_gui);
         $date_str = $arr[1] . '/' . $arr[0] . '/' . $arr[2];
         $mktime = strtotime($date_str);
-        $ngay_ky_gui = date("d/m/Y", $mktime);
+        $ngay_ky_gui = date("d/m/Y", $mktime); */
+        
+        $time = strtotime($row->ngay_ky_gui);
+        $ngay_ky_gui = date('d/m/Y', $time);
 
         $html .= '<li class="product xem_tong_ket">';
         $html .= sprintf('<div class="xtk_header">%s</div>', $row->ma_ky_gui);

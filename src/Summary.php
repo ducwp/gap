@@ -29,9 +29,9 @@ class Summary {
       return $form_fields;
 
     $form_fields['import_xlxs'] = array(
-      'label' => esc_html__('Import file tổng kết', 'lazaff'),
+      'label' => esc_html__('Import file tổng kết', 'gap-theme'),
       'input' => 'html',
-      'html' => sprintf('<button type="button" id="btnImportXLXSFile" data-id="%s" class="button">%s</button> <button id="btnCancelImport" class="button hidden">Cancel</button>', $post->ID, __('Import Now')),
+      'html' => sprintf('<button type="button" id="btnImportXLXSFile" data-id="%s" class="button">%s</button> <button id="btnCancelImport" class="button hidden">Hủy</button>', $post->ID, __('Nhập vào')),
       'helps' => __('Click vào nút trên để bắt đầu import file tổng kết.'),
     );
 
@@ -39,45 +39,42 @@ class Summary {
   }
 
   public function summary_import_xlxs() {
-
     header("Cache-Control: no-store");
     header("Content-Type: text/event-stream");
 
     global $wpdb;
     $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
-
-    //$platform = 'lazada';
-    $file_id = absint($_POST['file_id']);
     $reader = new Xlsx();
-    $spreadsheet = $reader->load(get_attached_file($file_id));
+    $spreadsheet = $reader->load(get_attached_file(absint($_POST['file_id'])));
     $worksheet = $spreadsheet->getActiveSheet();
-
-    $a1 = $spreadsheet->getActiveSheet()->getCell('A1')->getFormattedValue();
-    $platform = $a1 === 'date' ? 'lazada' : 'shopee';
 
     foreach ($worksheet->getRowIterator(2) as $row) {
       @ob_end_flush();
       flush();
 
       $ngay_ky_gui = $spreadsheet->getActiveSheet()->getCell('A' . $row->getRowIndex())->getFormattedValue();
+      if (empty($ngay_ky_gui))
+        break;
+      $ngay_ky_gui = join('-', array_reverse(explode('/', $ngay_ky_gui)));
       $ma_ky_gui = $spreadsheet->getActiveSheet()->getCell('B' . $row->getRowIndex())->getFormattedValue();
       $ho_va_ten = $spreadsheet->getActiveSheet()->getCell('C' . $row->getRowIndex())->getFormattedValue();
       $so_dien_thoai = $spreadsheet->getActiveSheet()->getCell('D' . $row->getRowIndex())->getFormattedValue();
-      $so_tai_khoan = $spreadsheet->getActiveSheet()->getCell('E' . $row->getRowIndex())->getFormattedValue();
-      $ngan_hang = $spreadsheet->getActiveSheet()->getCell('F' . $row->getRowIndex())->getFormattedValue();
-      $ky_gui = $spreadsheet->getActiveSheet()->getCell('G' . $row->getRowIndex())->getFormattedValue();
-      $ban = $spreadsheet->getActiveSheet()->getCell('H' . $row->getRowIndex())->getFormattedValue();
-      $ton = $spreadsheet->getActiveSheet()->getCell('I' . $row->getRowIndex())->getFormattedValue();
-      $doanh_thu = $spreadsheet->getActiveSheet()->getCell('J' . $row->getRowIndex())->getFormattedValue();
-      $phi = $spreadsheet->getActiveSheet()->getCell('K' . $row->getRowIndex())->getFormattedValue();
-      $thuc_nhan = $spreadsheet->getActiveSheet()->getCell('L' . $row->getRowIndex())->getFormattedValue();
-
+      $pthuc_thanhtoan = $spreadsheet->getActiveSheet()->getCell('E' . $row->getRowIndex())->getFormattedValue();
+      $so_tai_khoan = $spreadsheet->getActiveSheet()->getCell('F' . $row->getRowIndex())->getFormattedValue();
+      $ngan_hang = $spreadsheet->getActiveSheet()->getCell('G' . $row->getRowIndex())->getFormattedValue();
+      $ky_gui = $spreadsheet->getActiveSheet()->getCell('H' . $row->getRowIndex())->getFormattedValue();
+      $ban = $spreadsheet->getActiveSheet()->getCell('I' . $row->getRowIndex())->getFormattedValue();
+      $ton = $spreadsheet->getActiveSheet()->getCell('J' . $row->getRowIndex())->getFormattedValue();
+      $doanh_thu = $spreadsheet->getActiveSheet()->getCell('K' . $row->getRowIndex())->getFormattedValue();
+      $phi = $spreadsheet->getActiveSheet()->getCell('L' . $row->getRowIndex())->getFormattedValue();
+      $thuc_nhan = $spreadsheet->getActiveSheet()->getCell('M' . $row->getRowIndex())->getFormattedValue();
 
       $data = array(
         'ngay_ky_gui' => $ngay_ky_gui,
         'ma_ky_gui' => $ma_ky_gui,
         'ho_va_ten' => $ho_va_ten,
         'so_dien_thoai' => $so_dien_thoai,
+        'phuong_thuc_thanh_toan' => $pthuc_thanhtoan,
         'so_tai_khoan' => $so_tai_khoan,
         'ngan_hang' => $ngan_hang,
         'ky_gui' => $ky_gui,
@@ -88,11 +85,11 @@ class Summary {
         'thuc_nhan' => $thuc_nhan,
 
       );
-      
-      $id = $wpdb->insert($db_table_name, $data);
+
+      $wpdb->insert($db_table_name, $data);
 
       //$link = sprintf('[<a href="%s" target="_blank">%s</a>]', get_permalink($id), $id);
-      printf('<p>%s - %s - %s</p>', $row->getRowIndex(), $ma_ky_gui, $ho_va_ten, $so_dien_thoai);
+      printf('<p>%s - %s - %s</p>', $ma_ky_gui, $ho_va_ten, $so_dien_thoai);
 
       // Break the loop if the client aborted the connection (closed the page)
       if (connection_aborted())
@@ -105,37 +102,6 @@ class Summary {
 
   public function check_abort() {
     if (connection_aborted())
-      error_log("Script was aborted by the user.");
+      error_log("Tiến trình bị người dùng hủy.");
   }
-
-  public function faul_clean($str) {
-    return @preg_replace('/[\x00-\x1F\x7F]/u', '', $str);
-  }
-  public function check_product_exists($sku) {
-    $query = new \WC_Product_Query(
-      array(
-        'sku' => $sku,
-      )
-    );
-
-    $products = $query->get_products();
-    $product = reset($products);
-    if (!empty($product))
-      return true;
-
-    return false;
-  }
-
-  public function getAmount($money) {
-    $cleanString = preg_replace('/([^0-9\.,])/i', '', $money);
-    $onlyNumbersString = preg_replace('/([^0-9])/i', '', $money);
-
-    $separatorsCountToBeErased = strlen($cleanString) - strlen($onlyNumbersString) - 1;
-
-    $stringWithCommaOrDot = preg_replace('/([,\.])/', '', $cleanString, $separatorsCountToBeErased);
-    $removedThousandSeparator = preg_replace('/(\.|,)(?=[0-9]{3,}$)/', '', $stringWithCommaOrDot);
-
-    return (float) str_replace(',', '.', $removedThousandSeparator);
-  }
-
 }

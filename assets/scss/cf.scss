@@ -55,9 +55,11 @@
     }
   }
 
-  div[class^='cf-col-'] a {
-    text-decoration: underline;
+  div[class^='cf-col-'] {
+    a {
+      text-decoration: underline;
 
+    }
 
     /* .wpcf7-form-control-wrap{
       display: inline-block;
@@ -67,6 +69,11 @@
       display: inline-block;
       margin-bottom: 10px!important;
     } */
+
+    *+p, *+label {
+      margin-top: 10px;
+    }
+
   }
 
 }

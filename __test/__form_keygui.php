@@ -1,6 +1,6 @@
 <div class="cf-container">
   <div class="cf-col-4"><label>Tên</label>[text* name autocomplete:name default:user_display_name]</div>
-  <div class="cf-col-4"><label>Số điện thoại (có Zalo)</label> [tel* phone autocomplete:phone]</div>
+  <div class="cf-col-4"><label>Số điện thoại (có Zalo)</label> [dynamic_tel* phone autocomplete:phone default:billing_phone]</div>
   <div class="cf-col-4"><label>Tên Zalo</label> [text* zalo_name]</div>
 </div>
 
@@ -31,10 +31,8 @@
   [checkbox clothes_checkbox use_label_element default:1 "Quần áo"]
 
   [group clothes_box]
-  <div
-    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
-      lên</div>
+  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
@@ -80,10 +78,8 @@
   [checkbox bag_checkbox use_label_element default:1 "Túi"]
 
   [group bag_box]
-  <div
-    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
-      lên</div>
+  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
@@ -126,17 +122,15 @@
   [checkbox shoe_checkbox use_label_element "Giày"]
 
   [group shoe_box]
-  <div
-    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
-      lên</div>
+  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
         <fieldset>
           <legend>Mới</legend>
           <label>Số lượng</label> [number shoe_new min:1 placeholder "số lượng"]
-          <label>Brand</label> [select shoe_new_brand multiple include_blank "Adidas" "Nike" "Reebox"]
+          <label>Brand</label> [select shoe_new_brand multiple "Adidas" "Nike" "Reebox"]
           <p>***Nếu sản phẩm thuộc dòng thương hiệu high-end thì cần phải có bill hoặc trả mức phí kiểm định Entrupy</p>
         </fieldset>
       </div>
@@ -145,7 +139,7 @@
           <legend>Qua sử dụng</legend>
           [checkbox shoe_used_90 use_label_element "Sản phẩm còn mới > 90%"]
           <label>Số lượng</label> [number shoe_used min:1 placeholder "số lượng"]
-          <label>Brand</label> [select shoe_used_brand multiple include_blank "Adidas" "Nike" "Reebox"]
+          <label>Brand</label> [select shoe_used_brand multiple "Adidas" "Nike" "Reebox"]
           <p>***Sản phẩm đã qua sử dụng, vui lòng vệ sinh trước khi gửi đến cửa hàng</p>
         </fieldset>
       </div>
@@ -173,10 +167,8 @@
   [checkbox cosmetic_checkbox use_label_element "Mỹ phẩm"]
 
   [group cosmetic_box]
-  <div
-    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
-      lên</div>
+  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
@@ -184,7 +176,7 @@
           <legend>Mới</legend>
           [checkbox cosmetic_new_6 use_label_element "Còn date > 6 tháng"]
           <label>Số lượng</label> [number cosmetic_new min:1 max:30 placeholder "1-30"]
-          <label>Brand</label> [select cosmetic_new_brand multiple include_blank "L'Oréal" "Estee Lauder" "MAC"]
+          <label>Brand</label> [select cosmetic_new_brand multiple "L'Oréal" "Estee Lauder" "MAC"]
           <p>***Tem nhãn và thương hiệu phải còn nguyên không được mờ, rách. Sản phẩm cần được đóng gói để đảm bảo</p>
         </fieldset>
       </div>
@@ -194,7 +186,7 @@
           [checkbox cosmetic_used_6 use_label_element "Còn date > 6 tháng"]
           [checkbox cosmetic_used_capacity_80 use_label_element "Dung tích > 80%"]
           <label>Số lượng</label> [number cosmetic_used min:1 max:30 placeholder "1-30"]
-          <label>Brand</label> [select cosmetic_used_brand multiple include_blank "L'Oréal" "Estee Lauder" "MAC"]
+          <label>Brand</label> [select cosmetic_used_brand multiple "L'Oréal" "Estee Lauder" "MAC"]
           <p>***Tem nhãn và thương hiệu phải còn nguyên không được mờ, rách. Sản phẩm cần được đóng gói để đảm bảo</p>
         </fieldset>
       </div>
@@ -222,17 +214,15 @@
   [checkbox perfume_checkbox use_label_element "Nước hoa"]
 
   [group perfume_box]
-  <div
-    style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
-    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở
-      lên</div>
+  <div style="background-color: var(--has-classic-forms, var(--form-field-initial-background)); padding: 20px; border-radius: 10px">
+    <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm trở lên</div>
     <div class="cf-container">
 
       <div class="cf-col-4">
         <fieldset>
           <legend>Mới</legend>
           <label>Số lượng</label> [number perfume_new min:1 max:30 placeholder "1-30"]
-          <label>Brand</label> [select perfume_new_brand multiple include_blank "Dior" "Armani" "Bvlgari"]
+          <label>Brand</label> [select perfume_new_brand multiple "Dior" "Armani" "Bvlgari"]
         </fieldset>
       </div>
       <div class="cf-col-4">
@@ -240,7 +230,7 @@
           <legend>Qua sử dụng</legend>
           [checkbox perfume_used_capacity_80 use_label_element "Dung tích > 80%"]
           <label>Số lượng</label> [number perfume_used min:1 max:30 placeholder "1-30"]
-          <label>Brand</label> [select perfume_used_brand multiple include_blank "Dior" "Armani" "Bvlgari"]
+          <label>Brand</label> [select perfume_used_brand multiple "Dior" "Armani" "Bvlgari"]
         </fieldset>
       </div>
 
@@ -266,9 +256,9 @@
 <div class="cf-container">
   <div class="cf-col-8 cf-push-2" style="text-align: center">
     [acceptance agree_checkbox]Tôi cam kết sản phẩm trên là sản phẩm chính hãng. Bảng tổng kết sẽ được
-    gửi qua Zalo, thanh toán chuyển khoản, phí shop hai đầu do khách chịu.[/acceptance]
+    gửi qua Zalo, thanh toán chuyển khoản, phí ship hai đầu do khách chịu.[/acceptance]
     <div style="margin-top: 10px">
-      <label style="display: inline-block">[submit "Ký gửi"]</label>
+    <label style="display: inline-block">[submit "Ký gửi"]</label>
     </div>
   </div>
 </div>
