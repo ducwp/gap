@@ -399,4 +399,33 @@ body:not(.home) .ct-footer {
         width: 16px;
         height: 16px; }
 
+/* Ký gửi online */
+.kyguionline .row + .row {
+  margin-top: 1rem; }
+  .kyguionline .row + .row a {
+    text-decoration: underline; }
+    .kyguionline .row + .row a:hover {
+      text-decoration: none; }
+.kyguionline .box_inner {
+  background-color: var(--has-classic-forms, var(--form-field-initial-background));
+  padding: 15px 20px 20px;
+  border-radius: 10px;
+  margin-top: 10px; }
+.kyguionline p {
+  margin-bottom: 0; }
+.kyguionline * + p, .kyguionline * + label {
+  margin-top: 10px; }
+.kyguionline fieldset {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  height: 100%; }
+  .kyguionline fieldset legend {
+    background-color: #000;
+    border: none;
+    color: #fff;
+    margin-left: 0px;
+    border-radius: 4px; }
+
 /*# sourceMappingURL=gap.css.map */

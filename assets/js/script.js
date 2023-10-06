@@ -2,11 +2,11 @@ jQuery(document).ready(function ($) {
 
   /* */
   $('select.wpcf7-select').attr('data-placeholder', 'Chọn thương hiệu');
-  $("select.wpcf7-select").chosen({width: '100%'});
+  $("select.wpcf7-select").chosen({ width: '100%' });
 
   $('.wpcf7-checkbox input[type=checkbox], .wpcf7-acceptance input[type=checkbox], .wpcf7-radio input[type=radio]').addClass('ct-checkbox');
 
-  $('#verify_zalo_btn').click(function(){
+  $('#verify_zalo_btn').click(function () {
     alert("Gửi mã xác minh Zalo!!!\nTest OPT: 12345");
   });
 
@@ -161,7 +161,7 @@ jQuery(document).ready(function ($) {
 jQuery(function ($) {
   $(document).on('submit_success', function (e, data) {
     //alert("AA");
-    
+
     //Phuong thuc ky gui
     if (data.data.post_amount) {
       //console.log(data.data);
@@ -194,3 +194,5 @@ function gap_html2pdf() {
   //html2pdf(element, opt);
   //html2pdf(element);
 }
+
+//new AutoNumeric('.money_format', { currencySymbol: '₫', currencySymbolPlacement: 's', decimalCharacter: '.' });

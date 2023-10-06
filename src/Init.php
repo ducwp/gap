@@ -22,15 +22,20 @@ class Init {
     //do_action( 'wpcf7_contact_form', $contact_form, $atts );
     //add_action('wpcf7_shortcode_callback', [$this, 'wpcf7_shortcode_callback'], 99, 2);
 
-   
-   /* add_filter( 'wpcf7_contact_form_default_pack',
-			function($contact_form, $args){
-//print_r($contact_form);
-$contact_form = '';
-return $contact_form;
-      }, 10, 2);*/
-   
-  } 
+
+    /* add_filter( 'wpcf7_contact_form_default_pack',
+       function($contact_form, $args){
+ //print_r($contact_form);
+ $contact_form = '';
+ return $contact_form;
+       }, 10, 2);*/
+
+    /* add_filter( 'wpcf7_form_elements', function($replace_all_form_tags){
+      $replace_all_form_tags = '[text* name autocomplete:name default:user_display_name]';
+      return $replace_all_form_tags;
+    }, 99); */
+
+  }
 
   function wpcf7_shortcode_callback($contact_form, $atts) {
 
