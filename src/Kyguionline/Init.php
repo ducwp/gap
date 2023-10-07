@@ -15,6 +15,17 @@ class Init {
     $this->form_id = 2686;
     Insert::instance();
     new Mainpage();
+
+    $csv = new Export_CSV();
+    if (isset($_REQUEST['csv']) && ($_REQUEST['csv'] == true) && isset($_REQUEST['nonce'])) {
+
+      $nonce = $_REQUEST['nonce'];
+
+      if (!wp_verify_nonce($nonce, 'dnonce'))
+        wp_die('Invalid nonce..!!');
+
+      $csv->download_csv_file($this->form_id);
+    }
   }
 
 }
