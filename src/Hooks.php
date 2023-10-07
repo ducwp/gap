@@ -249,7 +249,7 @@ class Hooks {
       $response = Firebase::instance()->activate_through_firebase($verificationId, $otp);
       if ($response->error && $response->error->code == 400) {
         error_log($response->error->message);
-        $validation_errors->add('billing_phone_error', $response->error->message);
+        $validation_errors->add('billing_phone_error', 'Sai ma4 OTP!!!');
       }
 
     }
@@ -261,19 +261,13 @@ class Hooks {
     return preg_match($regex, $mobile);
   }
 
-  /* add_filter('woocommerce_process_registration_errors', 'gap_process_registration_errors');
-
-  function gap_process_registration_errors($errors)
-  {
-
-    if (isset($_POST['billing_phone']) && empty($_POST['billing_phone'])) {
-      $errors->add(
-        'billing_phone_error',
-        __('billing_phone is required!', 'xxx')
-      );
+  //https://www.cloudways.com/blog/add-woocommerce-registration-form-fields/
+  function wooc_save_extra_register_fields($customer_id) {
+    if (isset($_POST['billing_phone'])) {
+      // Phone input filed which is used in WooCommerce
+      update_user_meta($customer_id, 'billing_phone', sanitize_text_field($_POST['billing_phone']));
     }
-  } */
-
+  }
 
 
   // This will suppress empty email errors when submitting the user form
@@ -298,12 +292,5 @@ class Hooks {
     <?php
   }
   //https://woostify.com/woocommerce-phone-number/
-}
 
-//https://www.cloudways.com/blog/add-woocommerce-registration-form-fields/
-function wooc_save_extra_register_fields($customer_id) {
-  if (isset($_POST['billing_phone'])) {
-    // Phone input filed which is used in WooCommerce
-    update_user_meta($customer_id, 'billing_phone', sanitize_text_field($_POST['billing_phone']));
-  }
-}
+} //Class
