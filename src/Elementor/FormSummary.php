@@ -38,13 +38,12 @@ class FormSummary extends Action_Base {
     $response = \GAPtheme\Firebase::instance()->activate_through_firebase($verificationId, $otp);
     if ($response->error && $response->error->code == 400) {
       error_log($response->error->message);
-      /* echo json_encode([
+      /* wp_send_json_error([
         'success' => false,
         'phone_number' => $phone_number,
         'firebase' => $response->error,
         'message' => __('entered code is wrong!', 'login-with-phone-number')
       ]); */
-      ///$ajax_handler->add_error('verify_error', 'Sai mã OTP!!!');
       $ajax_handler->add_error_message('Sai mã OTP!!!');
       return;
     }
@@ -61,8 +60,8 @@ class FormSummary extends Action_Base {
       $html = '<h4 style="text-align: center; margin: 20px 0">Kết quả tổng kết</h4>';
       $html .= '<ul data-products="type-1" class="products columns-3">';
       $xtk_modal = '';
-      $ths_arr_1 = ['Mã ký gửi', 'Họ tên khách hàng', 'Số điện thoại', 'P.thức thanh toán', 'Số tài khoản', 'Tên ngân hàng'];
-      $ths_arr_2 = ['Ký gửi', 'Bán', 'Tồn', 'Doanh thu', 'Phí', 'Thực nhận'];
+      $ths_arr_1 = ['Mã ký gửi', 'Họ tên khách hàng', 'Số điện thoại', 'P.thức thanh toán', 'Ngày thanh toán', 'Ngày TPTK'];
+      $ths_arr_2 = ['Số tài khoản', 'Ngân hàng', 'Ký gửi', 'Bán', 'Tồn', 'Doanh thu', 'Phí', 'Thực nhận'];
       $ths_1 = '<th>' . join('</th><th>', $ths_arr_1) . '</th>';
       $ths_2 = '<th>' . join('</th><th>', $ths_arr_2) . '</th>';
 
@@ -128,5 +127,5 @@ class FormSummary extends Action_Base {
   public function on_export($element) {
     return $element;
   }
-  
+
 }

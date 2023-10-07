@@ -60,14 +60,18 @@ class Summary {
       $ho_va_ten = $spreadsheet->getActiveSheet()->getCell('C' . $row->getRowIndex())->getFormattedValue();
       $so_dien_thoai = $spreadsheet->getActiveSheet()->getCell('D' . $row->getRowIndex())->getFormattedValue();
       $pthuc_thanhtoan = $spreadsheet->getActiveSheet()->getCell('E' . $row->getRowIndex())->getFormattedValue();
-      $so_tai_khoan = $spreadsheet->getActiveSheet()->getCell('F' . $row->getRowIndex())->getFormattedValue();
-      $ngan_hang = $spreadsheet->getActiveSheet()->getCell('G' . $row->getRowIndex())->getFormattedValue();
-      $ky_gui = $spreadsheet->getActiveSheet()->getCell('H' . $row->getRowIndex())->getFormattedValue();
-      $ban = $spreadsheet->getActiveSheet()->getCell('I' . $row->getRowIndex())->getFormattedValue();
-      $ton = $spreadsheet->getActiveSheet()->getCell('J' . $row->getRowIndex())->getFormattedValue();
-      $doanh_thu = $spreadsheet->getActiveSheet()->getCell('K' . $row->getRowIndex())->getFormattedValue();
-      $phi = $spreadsheet->getActiveSheet()->getCell('L' . $row->getRowIndex())->getFormattedValue();
-      $thuc_nhan = $spreadsheet->getActiveSheet()->getCell('M' . $row->getRowIndex())->getFormattedValue();
+      $ngay_thanh_toan = $spreadsheet->getActiveSheet()->getCell('F' . $row->getRowIndex())->getFormattedValue();
+      $ngay_thanh_toan = join('-', array_reverse(explode('/', $ngay_thanh_toan)));
+      $ngay_tinh_phi_ton_kho = $spreadsheet->getActiveSheet()->getCell('G' . $row->getRowIndex())->getFormattedValue();
+      $ngay_tinh_phi_ton_kho = join('-', array_reverse(explode('/', $ngay_tinh_phi_ton_kho)));
+      $so_tai_khoan = $spreadsheet->getActiveSheet()->getCell('H' . $row->getRowIndex())->getFormattedValue();
+      $ngan_hang = $spreadsheet->getActiveSheet()->getCell('I' . $row->getRowIndex())->getFormattedValue();
+      $ky_gui = $spreadsheet->getActiveSheet()->getCell('K' . $row->getRowIndex())->getFormattedValue();
+      $ban = $spreadsheet->getActiveSheet()->getCell('K' . $row->getRowIndex())->getFormattedValue();
+      $ton = $spreadsheet->getActiveSheet()->getCell('L' . $row->getRowIndex())->getFormattedValue();
+      $doanh_thu = $spreadsheet->getActiveSheet()->getCell('M' . $row->getRowIndex())->getFormattedValue();
+      $phi = $spreadsheet->getActiveSheet()->getCell('N' . $row->getRowIndex())->getFormattedValue();
+      $thuc_nhan = $spreadsheet->getActiveSheet()->getCell('O' . $row->getRowIndex())->getFormattedValue();
 
       $data = array(
         'ngay_ky_gui' => $ngay_ky_gui,
@@ -75,6 +79,8 @@ class Summary {
         'ho_va_ten' => $ho_va_ten,
         'so_dien_thoai' => $so_dien_thoai,
         'phuong_thuc_thanh_toan' => $pthuc_thanhtoan,
+        'ngay_thanh_toan' => $ngay_thanh_toan,
+        'ngay_tinh_phi_ton_kho' => $ngay_tinh_phi_ton_kho,
         'so_tai_khoan' => $so_tai_khoan,
         'ngan_hang' => $ngan_hang,
         'ky_gui' => $ky_gui,
