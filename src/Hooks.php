@@ -32,6 +32,11 @@ class Hooks {
     add_action('user_new_form', [$this, 'my_user_new_form'], 10, 1);
     add_action('show_user_profile', [$this, 'my_user_new_form'], 10, 1);
     add_action('edit_user_profile', [$this, 'my_user_new_form'], 10, 1);
+
+    add_action( 'wp_footer', function(){
+      $current_user = wp_get_current_user();
+      printf('<input type="hidden" id="current_user_billing_phone" value="%s">', $current_user->billing_phone);
+    });
   }
 
   function gap_check_user_login() {

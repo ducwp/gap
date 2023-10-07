@@ -1,6 +1,12 @@
 jQuery(document).ready(function ($) {
 
   /* */
+  var billing_phone = $('#current_user_billing_phone').val();
+  //alert(billing_phone);
+  if($('.wpcf7-validates-as-tel').length){
+    $('.wpcf7-validates-as-tel').val(billing_phone);
+  }
+
   $('select.wpcf7-select').attr('data-placeholder', 'Chọn thương hiệu');
   $("select.wpcf7-select").chosen({ width: '100%' });
 
