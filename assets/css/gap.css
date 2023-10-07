@@ -388,6 +388,20 @@ body:not(.home) .ct-footer {
     width: 100%; }
     .modal.modal_xtk_detail table thead {
       background-color: var(--paletteColor6); }
+  .modal.modal_xtk_detail ul.text_top {
+    padding: 0;
+    padding-left: 20px; }
+  .modal.modal_xtk_detail .modal_xtk_box .col_left {
+    float: left;
+    width: 50%; }
+  .modal.modal_xtk_detail .modal_xtk_box .col_right {
+    float: right;
+    width: 50%;
+    padding-top: 28px;
+    line-height: 1.8em; }
+  .modal.modal_xtk_detail .modal_xtk_box::after {
+    clear: both;
+    display: block; }
   .modal.modal_xtk_detail .modal_xtk_img_box {
     position: relative; }
     .modal.modal_xtk_detail .modal_xtk_img_box .date1,
@@ -432,7 +446,8 @@ body:not(.home) .ct-footer {
   margin-top: 10px; }
 .kyguionline p {
   margin-bottom: 0; }
-.kyguionline * + p, .kyguionline * + label {
+.kyguionline * + p,
+.kyguionline * + label {
   margin-top: 10px; }
 .kyguionline fieldset {
   background-color: #fff;

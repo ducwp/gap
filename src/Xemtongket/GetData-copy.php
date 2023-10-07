@@ -1,11 +1,11 @@
 <?php
-namespace GAPTheme\Elementor;
+namespace GAPTheme\Xemtongket;
 
 use ElementorPro\Modules\Forms\Classes\Action_Base;
 
 use NumberFormatter;
 
-class FormSummary extends Action_Base {
+class GetData extends Action_Base {
   public function get_name() {
     return 'form-summary';
   }
@@ -65,22 +65,30 @@ class FormSummary extends Action_Base {
       $ths_1 = '<th>' . join('</th><th>', $ths_arr_1) . '</th>';
       $ths_2 = '<th>' . join('</th><th>', $ths_arr_2) . '</th>';
 
-      $text = 'Lập lệnh chuyển khoản theo thứ tự mã ký gửi, thời gian nhận được thanh toán sẽ từ ngày 10-20/09/2023.<ul>
-      <li>Khách hàng chọn phương thức chuyển khoản, kế toán sẽ lập lệnh thanh toán cho mình qua số tài khoản đã cung cấp.</li>
-      <li>Khách hàng chọn phương thức tiền mặt, vui lòng đến đúng hẹn trong biên nhận ký gửi (10-20/09/2023).</li>
-      <li>DANH SÁCH SẼ ĐƯỢC CHỐT VÀO 10 GIỜ NGÀY 9 HÀNG THÁNG, VUI LÒNG KHÔNG ĐỔI PHƯƠNG THỨC SAU KHI DANH SÁCH ĐƯỢC CHỐT</li>
-      </ul>';
+      $text_top = 'Lập lệnh chuyển khoản theo thứ tự mã ký gửi, thời gian nhận được thanh toán sẽ từ ngày <b>{NGAY_THANH_TOAN}</b>.<ul class="text_top" style="padding: 0; padding-left: 20px;"><li>Khách hàng chọn phương thức chuyển khoản, kế toán sẽ lập lệnh thanh toán cho mình qua số tài khoản đã cung cấp.</li><li>Khách hàng chọn phương thức tiền mặt, vui lòng đến đúng hẹn trong biên nhận ký gửi <b>{NGAY_THANH_TOAN}</b>.</li><li>DANH SÁCH SẼ ĐƯỢC CHỐT VÀO 10 GIỜ NGÀY 9 HÀNG THÁNG, VUI LÒNG KHÔNG ĐỔI PHƯƠNG THỨC SAU KHI DANH SÁCH ĐƯỢC CHỐT</li></ul>';
+
+      $text_right = '<ul>';
+      $text_right .= '<li><b>File tổng kết sẽ không bao gồm thông tin chi tiết sản phẩm còn tồn (nếu có)</b>. Quý khách vui lòng kiểm tra kỹ số tiền và số lượng hàng tồn đã nhận tại quầy.</li>';
+      $text_right .= '<li>Sau khi rời quầy, mọi thắc mắc, khiếu nại shop sẽ không giải quyết. Rủi ro hư hại trong quá trình thử đồ là không tránh khỏi và ngoài tầm kiểm soát của cửa hàng. Mong các bạn thông cảm!</li>';
+      $text_right .= '<li>Nếu còn sản phẩm tồn, các chị đến shop nhận lại sản phẩm tồn kèm theo biên nhận ký gửi ạ.</li>';
+      $text_right .= '<li>Sau ngày <b>{NGAY_TINH_PHI_TON_KHO}</b> sẽ tính phí tồn kho cho các sản phẩm tồn ạ.</li>';
+      $text_right .= '<li>Phí tồn kho: 50.000vnđ/1 mã ký gửi/1 tháng</li>';
+      $text_right .= '</ul>';
       
+      $img_bieu_phi = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/bieu_phi.png');
+      $img_footer = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/footer.png');
       $img = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/xtk_info.jpg');
 
       foreach ($results as $row) {
         $time_tt = strtotime($row->ngay_thanh_toan);
         $ngay_thanh_toan = date('d/m/Y', $time_tt);
+        $text_top = str_replace('{NGAY_THANH_TOAN}', $ngay_thanh_toan, $text_top);
 
         $time_tptk = strtotime($row->ngay_tinh_phi_ton_kho);
         $ngay_tinh_phi_ton_kho = date('d/m/Y', $time_tptk);
+        $text_right = str_replace('{NGAY_TINH_PHI_TON_KHO}', $ngay_tinh_phi_ton_kho, $text_right);
 
-        $text = sprintf('<div class="modal_xtk_img_box"><span class="date1">%s</span> <span class="date2">%s</span> <span class="date3">%s</span>%s</div>', $ngay_thanh_toan, $ngay_thanh_toan, $ngay_tinh_phi_ton_kho , $img);
+        /* $text = sprintf('<div class="modal_xtk_img_box"><span class="date1">%s</span> <span class="date2">%s</span> <span class="date3">%s</span>%s</div>', $ngay_thanh_toan, $ngay_thanh_toan, $ngay_tinh_phi_ton_kho , $img); */
 
         $time = strtotime($row->ngay_ky_gui);
         $ngay_ky_gui = date('d/m/Y', $time);
@@ -116,11 +124,18 @@ class FormSummary extends Action_Base {
         $xtk_modal .= sprintf('<table><thead><tr>%s</tr></thead><tbody>', $ths_2);
         $xtk_modal .= sprintf('<tr>%s</tr>', $td_2);
         $xtk_modal .= '</tbody></table><br>';
-        $xtk_modal .= $text . '</div>';
+        $xtk_modal .= $text_top;
+        $xtk_modal .='<div class="modal_xtk_box"><div style="float: left; width: 50%;">'.$img_bieu_phi.'</div>';
+        $xtk_modal .= '<div style="float: right; width: 50%; padding-top: 15px; ">'.$text_right.'</div><br style="clear: both"></div>';
+        $xtk_modal .= $img_footer . '</div>';
         $xtk_modal .= sprintf('<p class="xtk_detail_download_btn"><a onclick="gap_html2pdf();" href="#" class="xbutton"><img src="%s" /> Tải về</a></p>', get_stylesheet_directory_uri() . '/assets/img/download.svg');
+
+        
+
         $xtk_modal .= '</div>';
       }
       $html .= '</ul>';
+      
       $summary_result = $html . $xtk_modal;
       //$summary_result = json_encode($results);
     }

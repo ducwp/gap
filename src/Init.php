@@ -15,45 +15,17 @@ class Init {
 
     Hooks::instance();
     Shortcodes::instance();
-    Summary::instance();
+    Xemtongket\Import::instance();
+
     Firebase::instance();
     WooCommerce::instance();
     Kyguionline\Init::instance();
     add_action('elementor_pro/forms/actions/register', [$this, 'add_new_form_action']);
-
-    //do_action( 'wpcf7_contact_form', $contact_form, $atts );
-    //add_action('wpcf7_shortcode_callback', [$this, 'wpcf7_shortcode_callback'], 99, 2);
-
-
-    /* add_filter( 'wpcf7_contact_form_default_pack',
-       function($contact_form, $args){
- //print_r($contact_form);
- $contact_form = '';
- return $contact_form;
-       }, 10, 2);*/
-
-    /* add_filter( 'wpcf7_form_elements', function($replace_all_form_tags){
-      $replace_all_form_tags = '[text* name autocomplete:name default:user_display_name]';
-      return $replace_all_form_tags;
-    }, 99); */
-
-  }
-
-  function wpcf7_shortcode_callback($contact_form, $atts) {
-
-    print_r($atts);
-
-    if ($atts['id'] == '36f8be0')
-      $contact_form = '[tel* abc]';
-    return $contact_form;
-
   }
 
   function add_new_form_action($form_actions_registrar) {
-
-    $form_actions_registrar->register(new Elementor\FormSummary());
-    $form_actions_registrar->register(new Elementor\FormPTKG());
-
+    $form_actions_registrar->register(new Xemtongket\GetData());
+    $form_actions_registrar->register(new Elementor\PhuongthucKygui());
   }
 
 }

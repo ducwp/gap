@@ -14,8 +14,9 @@ body {
       --borderBottom: none;
     }
   }
-  &.error404{
-    .ct-container{
+
+  &.error404 {
+    .ct-container {
       padding-top: 60px;
     }
   }
@@ -602,27 +603,53 @@ body:not(.home) {
     }
   }
 
-  .modal_xtk_img_box{
+  ul.text_top {
+    padding: 0;
+    padding-left: 20px;
+  }
+
+  .modal_xtk_box {
+    .col_left {
+      float: left;
+      width: 50%;
+    }
+
+    .col_right {
+      float: right;
+      width: 50%;
+      padding-top: 28px;
+      line-height: 1.8em;
+    }
+
+    &::after {
+      clear: both;
+      display: block;
+    }
+
+  }
+
+  .modal_xtk_img_box {
     position: relative;
+
     .date1,
     .date2,
-    .date3{
+    .date3 {
       position: absolute;
       color: #ff8900;
       font-size: 14px;
     }
 
-    .date1{
+    .date1 {
       top: 1px;
       right: 348px;
     }
 
-    .date2{
+    .date2 {
       top: 51px;
       right: 349px;
     }
 
-    .date3{
+    .date3 {
       bottom: 184px;
       right: 338px;
     }
@@ -652,9 +679,11 @@ body:not(.home) {
 .kyguionline {
   .row+.row {
     margin-top: 1rem;
-    a{
+
+    a {
       text-decoration: underline;
-      &:hover{
+
+      &:hover {
         text-decoration: none;
       }
     }
@@ -666,11 +695,13 @@ body:not(.home) {
     border-radius: 10px;
     margin-top: 10px;
   }
-  p{
+
+  p {
     margin-bottom: 0;
   }
 
-  *+p, *+label {
+  *+p,
+  *+label {
     margin-top: 10px;
   }
 

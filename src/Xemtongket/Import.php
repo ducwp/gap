@@ -1,10 +1,10 @@
 <?php
 
-namespace GAPTheme;
+namespace GAPTheme\Xemtongket;
 
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
-class Summary {
+class Import {
   private static $_instance = null;
   public static function instance() {
     if (!isset(self::$_instance)) {

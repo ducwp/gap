@@ -5,7 +5,7 @@ namespace GAPTheme\Elementor;
 use ElementorPro\Modules\Forms\Classes\Action_Base;
 use NumberFormatter;
 
-class FormPTKG extends Action_Base {
+class PhuongthucKygui extends Action_Base {
   public function get_name() {
     return 'phuong-thuc-ky-gui';
   }
