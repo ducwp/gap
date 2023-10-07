@@ -18,6 +18,7 @@ class Init {
     Shortcodes::instance();
     Summary::instance();
     Firebase::instance();
+    WooCommerce::instance();
     add_action('elementor_pro/forms/actions/register', [$this, 'add_new_form_action']);
 
     //do_action( 'wpcf7_contact_form', $contact_form, $atts );

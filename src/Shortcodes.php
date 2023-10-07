@@ -30,9 +30,7 @@ class Shortcodes
       return $html;
     });
 
-
     add_shortcode('gap_footer_contact_icon', [$this, 'gap_footer_contact_icon']);
-    add_shortcode('gap_login_form', [$this, 'gap_login_form']);
   }
 
 
@@ -155,21 +153,5 @@ class Shortcodes
 ';
 
     echo $html;
-  }
-
-  function gap_login_form()
-  {
-    $return = log_the_user_in();
-    if (is_wp_error($return)) {
-      echo $return->get_error_message();
-    }
-    ?>
-    <form method="post">
-      <p><input type="text" name="user_login" placeholder="Username, email or mobile" required /></p>
-      <p><input type="password" name="user_password" placeholder="Password" required /></p>
-      <input type="hidden" name="login_nonce" value="<?php echo wp_create_nonce('login_nonce'); ?>" />
-      <input type="submit" name="btn_login" value="Submit" />
-    </form>
-  <?php
   }
 }
