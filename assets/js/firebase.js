@@ -1,3 +1,7 @@
+// Initialize Firebase
+firebase.initializeApp(GAPfirebaseConfig);
+firebase.analytics();
+
 window.onload = function () {
   render();
 };
