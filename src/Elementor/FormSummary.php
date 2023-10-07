@@ -35,7 +35,7 @@ class FormSummary extends Action_Base {
     if (empty($otp))
       $ajax_handler->add_error_message('Vui lòng nhập mã OTP');
 
-    $response = $this->activate_through_firebase($verificationId, $otp);
+    $response = \GAPtheme\Firebase::instance()->activate_through_firebase($verificationId, $otp);
     if ($response->error && $response->error->code == 400) {
       error_log($response->error->message);
       /* echo json_encode([

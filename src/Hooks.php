@@ -26,6 +26,7 @@ class Hooks {
     add_action('wp_footer', [$this, 'gap_page_scrolling']);
     add_action('woocommerce_register_form', [$this, 'text_domain_woo_reg_form_fields']);
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
+    add_action('woocommerce_created_customer', [$this, 'wooc_save_extra_register_fields']);
     add_action('user_profile_update_errors', [$this, 'my_user_profile_update_errors'], 10, 3);
 
     add_action('user_new_form', [$this, 'my_user_new_form'], 10, 1);
@@ -202,21 +203,25 @@ class Hooks {
     <p class="form-row">
       <label for="billing_phone"><?php _e('Số điện thoại (có Zalo)', 'text_domain'); ?><span
           class="required">*</span></label>
-    <div style="display: flex">
-      <input type="text" class="input-text" name="billing_phone" id="billing_phone" value="<?php if (!empty($_POST['billing_phone']))
+    <div style="display: flex; margin-bottom: 10px">
+      <input type="text" class="input-text" name="billing_phone" id="form-field-phone" value="<?php if (!empty($_POST['billing_phone']))
         esc_attr_e($_POST['billing_phone']); ?>" style="
       width: auto;
       flex-grow: 1;
       margin-right: 10px;
   " />
-      <button id="verify_zalo_btn" class="button" type="button">Xác minh</button>
+      <button onclick="phoneAuth();" class="button" type="button">Xác minh</button>
     </div>
+
+    <div id="recaptcha-container"></div>
     </p>
 
     <p class="form-row">
       <label for="zalo_otp"><?php _e('Mã OTP Zalo', 'text_domain'); ?><span class="required">*</span></label>
       <input type="text" class="input-text" name="zalo_otp" id="zalo_otp" value="<?php if (!empty($_POST['zalo_otp']))
         esc_attr_e($_POST['zalo_otp']); ?>" placeholder="Nhập mã OTP Zalo vào đây" />
+
+      <input type="hidden" name="verificationId" id="form-field-verificationId" value="" />
     </p>
 
     <div class="clear"></div>
@@ -229,7 +234,7 @@ class Hooks {
       if (empty($_POST['billing_phone'])) {
         $validation_errors->add('billing_phone_error', __('Vui lòng nhập số điện thoại.', 'woocommerce'));
       }
-      if (!gap_validate_mobile($_POST['billing_phone'])) {
+      if (!$this->validate_mobile($_POST['billing_phone'])) {
         $validation_errors->add('billing_phone_error', __('Số điện thoại không đúng định dạng.', 'woocommerce'));
       }
     }
@@ -238,15 +243,22 @@ class Hooks {
       if (empty($_POST['zalo_otp'])) {
         $validation_errors->add('zalo_otp_error', __('Vui lòng nhập OTP Zalo.', 'woocommerce'));
       }
-      $otp = '123456'; // Nhận từ Zalo và ghi vào DB
-      if ($otp !== $_POST['zalo_otp']) {
-        $validation_errors->add('billing_phone_error', __('Sai mã OTP Zalo.', 'woocommerce'));
+
+      $verificationId = $_POST['verificationId'];
+      $otp = $_POST['zalo_otp'];
+      $response = Firebase::instance()->activate_through_firebase($verificationId, $otp);
+      if ($response->error && $response->error->code == 400) {
+        error_log($response->error->message);
+        $validation_errors->add('billing_phone_error', $response->error->message);
       }
+
     }
   }
 
-  function gap_validate_mobile($mobile) {
-    return preg_match('/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/', $mobile);
+  function validate_mobile($mobile) {
+    //$regex = '/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/';
+    $regex = '/^(0[35789]{1})+([0-9]{8})+$/';
+    return preg_match($regex, $mobile);
   }
 
   /* add_filter('woocommerce_process_registration_errors', 'gap_process_registration_errors');
@@ -285,7 +297,13 @@ class Hooks {
     </script>
     <?php
   }
-
-
   //https://woostify.com/woocommerce-phone-number/
+}
+
+//https://www.cloudways.com/blog/add-woocommerce-registration-form-fields/
+function wooc_save_extra_register_fields($customer_id) {
+  if (isset($_POST['billing_phone'])) {
+    // Phone input filed which is used in WooCommerce
+    update_user_meta($customer_id, 'billing_phone', sanitize_text_field($_POST['billing_phone']));
+  }
 }
