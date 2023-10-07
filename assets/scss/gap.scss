@@ -14,6 +14,11 @@ body {
       --borderBottom: none;
     }
   }
+  &.error404{
+    .ct-container{
+      padding-top: 60px;
+    }
+  }
 }
 
 .add_to_cart_button::after,
@@ -595,6 +600,33 @@ body:not(.home) {
     thead {
       background-color: var(--paletteColor6);
     }
+  }
+
+  .modal_xtk_img_box{
+    position: relative;
+    .date1,
+    .date2,
+    .date3{
+      position: absolute;
+      color: #ff8900;
+      font-size: 14px;
+    }
+
+    .date1{
+      top: 1px;
+      right: 348px;
+    }
+
+    .date2{
+      top: 51px;
+      right: 349px;
+    }
+
+    .date3{
+      bottom: 184px;
+      right: 338px;
+    }
+
   }
 
   .xtk_detail_download_btn {

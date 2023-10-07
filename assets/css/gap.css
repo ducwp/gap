@@ -18,6 +18,8 @@ body {
 
 body.elementor-template-full-width[data-header*="type-1"] .ct-header [data-row*="middle"], body.single-product[data-header*="type-1"] .ct-header [data-row*="middle"], body.archive[data-header*="type-1"] .ct-header [data-row*="middle"] {
   --borderBottom: none; }
+body.error404 .ct-container {
+  padding-top: 60px; }
 
 .add_to_cart_button::after,
 .button.single_add_to_cart_button:before {
@@ -386,6 +388,23 @@ body:not(.home) .ct-footer {
     width: 100%; }
     .modal.modal_xtk_detail table thead {
       background-color: var(--paletteColor6); }
+  .modal.modal_xtk_detail .modal_xtk_img_box {
+    position: relative; }
+    .modal.modal_xtk_detail .modal_xtk_img_box .date1,
+    .modal.modal_xtk_detail .modal_xtk_img_box .date2,
+    .modal.modal_xtk_detail .modal_xtk_img_box .date3 {
+      position: absolute;
+      color: #ff8900;
+      font-size: 14px; }
+    .modal.modal_xtk_detail .modal_xtk_img_box .date1 {
+      top: 1px;
+      right: 348px; }
+    .modal.modal_xtk_detail .modal_xtk_img_box .date2 {
+      top: 51px;
+      right: 349px; }
+    .modal.modal_xtk_detail .modal_xtk_img_box .date3 {
+      bottom: 184px;
+      right: 338px; }
   .modal.modal_xtk_detail .xtk_detail_download_btn {
     display: block;
     margin-top: 30px;

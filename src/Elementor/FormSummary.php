@@ -70,12 +70,17 @@ class FormSummary extends Action_Base {
       <li>Khách hàng chọn phương thức tiền mặt, vui lòng đến đúng hẹn trong biên nhận ký gửi (10-20/09/2023).</li>
       <li>DANH SÁCH SẼ ĐƯỢC CHỐT VÀO 10 GIỜ NGÀY 9 HÀNG THÁNG, VUI LÒNG KHÔNG ĐỔI PHƯƠNG THỨC SAU KHI DANH SÁCH ĐƯỢC CHỐT</li>
       </ul>';
-      $text = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/xtk_info.jpg');
+      
+      $img = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/xtk_info.jpg');
+
       foreach ($results as $row) {
-        /* $arr = explode('/', $row->ngay_ky_gui);
-        $date_str = $arr[1] . '/' . $arr[0] . '/' . $arr[2];
-        $mktime = strtotime($date_str);
-        $ngay_ky_gui = date("d/m/Y", $mktime); */
+        $time_tt = strtotime($row->ngay_thanh_toan);
+        $ngay_thanh_toan = date('d/m/Y', $time_tt);
+
+        $time_tptk = strtotime($row->ngay_tinh_phi_ton_kho);
+        $ngay_tinh_phi_ton_kho = date('d/m/Y', $time_tptk);
+
+        $text = sprintf('<div class="modal_xtk_img_box"><span class="date1">%s</span> <span class="date2">%s</span> <span class="date3">%s</span>%s</div>', $ngay_thanh_toan, $ngay_thanh_toan, $ngay_tinh_phi_ton_kho , $img);
 
         $time = strtotime($row->ngay_ky_gui);
         $ngay_ky_gui = date('d/m/Y', $time);
