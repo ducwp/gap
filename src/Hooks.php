@@ -224,7 +224,7 @@ class Hooks {
     <p class="form-row">
       <label for="zalo_otp"><?php _e('Mã OTP Zalo', 'text_domain'); ?><span class="required">*</span></label>
       <input type="text" class="input-text" name="zalo_otp" id="zalo_otp" value="<?php if (!empty($_POST['zalo_otp']))
-        esc_attr_e($_POST['zalo_otp']); ?>" placeholder="Nhập mã OTP Zalo vào đây" />
+        esc_attr_e($_POST['zalo_otp']); ?>" placeholder="Nhập mã OTP vào đây" />
 
       <input type="hidden" name="verificationId" id="form-field-verificationId" value="" />
     </p>
@@ -246,7 +246,7 @@ class Hooks {
 
     if (isset($_POST['zalo_otp'])) {
       if (empty($_POST['zalo_otp'])) {
-        $validation_errors->add('zalo_otp_error', __('Vui lòng nhập OTP Zalo.', 'woocommerce'));
+        $validation_errors->add('zalo_otp_error', __('Vui lòng nhập OTP.', 'woocommerce'));
       }
 
       $verificationId = $_POST['verificationId'];
@@ -254,7 +254,7 @@ class Hooks {
       $response = Firebase::instance()->activate_through_firebase($verificationId, $otp);
       if ($response->error && $response->error->code == 400) {
         error_log($response->error->message);
-        $validation_errors->add('billing_phone_error', 'Sai ma4 OTP!!!');
+        $validation_errors->add('billing_phone_error', 'Sai mã OTP!!!');
       }
 
     }
