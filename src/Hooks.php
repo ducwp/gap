@@ -2,19 +2,16 @@
 
 namespace GAPTheme;
 
-class Hooks
-{
+class Hooks {
   private static $_instance = null;
-  public static function instance()
-  {
+  public static function instance() {
     if (!isset(self::$_instance)) {
       self::$_instance = new self();
     }
     return self::$_instance;
   }
 
-  private function __construct()
-  {
+  private function __construct() {
     add_filter('wpcf7_autop_or_not', '__return_false');
 
     add_action('wp', [$this, 'gap_check_user_login']);
@@ -22,7 +19,7 @@ class Hooks
     add_action('woocommerce_before_single_product', [$this, 'gap_add_bc'], 99);
     add_action('woocommerce_archive_description', [$this, 'gap_add_bc'], 99);
     //add_action('blocksy:content:top', [$this, 'gap_add_bc'], 99);
-    
+
     add_action('woocommerce_after_add_to_cart_button', [$this, 'gap_woocommerce_after_add_to_cart_button']);
     add_filter('the_title', [$this, 'gap_shorten_woo_product_title'], 10, 2);
     add_filter('woocommerce_loop_add_to_cart_link', [$this, 'gap_woocommerce_loop_add_to_cart_link_filter'], 10, 3);
@@ -36,13 +33,13 @@ class Hooks
     add_action('edit_user_profile', [$this, 'my_user_new_form'], 10, 1);
   }
 
-  function gap_check_user_login()
-  {
+  function gap_check_user_login() {
     if (!is_page(['ky-gui-online']))
       return;
 
     if (!is_user_logged_in()) {
-      wp_safe_redirect(home_url('/tai-khoan'));
+      $myaccount = get_permalink(wc_get_page_id('myaccount'));
+      wp_safe_redirect($myaccount);
       exit;
     }
 
@@ -59,8 +56,7 @@ class Hooks
 
 
 
-  function gap_add_bc()
-  {
+  function gap_add_bc() {
     /* if (!is_archive() && !is_single())
       return; */
     echo do_shortcode('[gap_breadcrumbs]');
@@ -68,8 +64,7 @@ class Hooks
 
 
 
-  function gap_woocommerce_after_add_to_cart_button($product)
-  {
+  function gap_woocommerce_after_add_to_cart_button($product) {
     global $post;
     if (is_singular('product') && !empty($post) && ($product = wc_get_product($post)) && $product->is_type('external')) {
       //print_r($product);
@@ -91,8 +86,7 @@ class Hooks
 
 
 
-  function gap_shorten_woo_product_title($title, $id)
-  {
+  function gap_shorten_woo_product_title($title, $id) {
     if (!is_singular(array('product')) && get_post_type($id) === 'product') {
       return wp_trim_words($title, 16, '...'); // change last number to the number of words you want
     } else {
@@ -102,8 +96,7 @@ class Hooks
 
 
 
-  function gap_woocommerce_loop_add_to_cart_link_filter($class, $product, $args)
-  {
+  function gap_woocommerce_loop_add_to_cart_link_filter($class, $product, $args) {
 
     // filter...
     /* $class = sprintf(
@@ -128,8 +121,7 @@ class Hooks
   }
 
 
-  function gap_page_scrolling()
-  {
+  function gap_page_scrolling() {
     if (!is_front_page())
       return;
 
@@ -194,8 +186,7 @@ class Hooks
 
   //add_action( 'wp_footer', 'gap_contact_form_footer' );
 
-  function gap_contact_form_footer()
-  {
+  function gap_contact_form_footer() {
     echo '<div class="gap_contact_form_footer">';
     echo do_shortcode('[contact-form-7 id="36f8be0" title="Form liên hệ 1"]');
     echo '</div>';
@@ -203,8 +194,7 @@ class Hooks
 
   /* Woocommerce Registration */
 
-  function text_domain_woo_reg_form_fields()
-  {
+  function text_domain_woo_reg_form_fields() {
     ?>
     <!-- <p class="form-row form-row-first"></p>
   <p class="form-row form-row-last"></p> -->
@@ -234,8 +224,7 @@ class Hooks
   }
 
 
-  function wooc_validate_extra_register_fields($username, $email, $validation_errors)
-  {
+  function wooc_validate_extra_register_fields($username, $email, $validation_errors) {
     if (isset($_POST['billing_phone'])) {
       if (empty($_POST['billing_phone'])) {
         $validation_errors->add('billing_phone_error', __('Vui lòng nhập số điện thoại.', 'woocommerce'));
@@ -256,8 +245,7 @@ class Hooks
     }
   }
 
-  function gap_validate_mobile($mobile)
-  {
+  function gap_validate_mobile($mobile) {
     return preg_match('/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/', $mobile);
   }
 
@@ -278,8 +266,7 @@ class Hooks
 
   // This will suppress empty email errors when submitting the user form
 
-  function my_user_profile_update_errors($errors, $update, $user)
-  {
+  function my_user_profile_update_errors($errors, $update, $user) {
     $errors->remove('empty_email');
   }
 
@@ -287,8 +274,7 @@ class Hooks
 // It will also remove the '(required)' text in the label
 // Works for new user, user profile and edit user forms
 
-  function my_user_new_form($form_type)
-  {
+  function my_user_new_form($form_type) {
     ?>
     <script type="text/javascript">
       jQuery('#email').closest('tr').removeClass('form-required').find('.description').remove();

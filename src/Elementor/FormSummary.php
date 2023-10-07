@@ -26,25 +26,37 @@ class FormSummary extends Action_Base {
    * @param \ElementorPro\Modules\Forms\Classes\Ajax_Handler $ajax_handler
    */
   public function run($record, $ajax_handler) {
-
     global $wpdb;
-    $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
 
     //$ajax_handler->data['pre_amount'];
     $phone = $_POST['form_fields']['phone'];
-    $form_otp = $_POST['form_fields']['zalo_otp'];
-    $otp = '12345'; //Lay tu Zalo ghi vao DB
-    if ($form_otp != $otp) {
+    $verificationId = $_POST['form_fields']['verificationId'];
+    $otp = trim($_POST['form_fields']['zalo_otp']);
+    if (empty($otp))
+      $ajax_handler->add_error_message('Vui lòng nhập mã OTP');
+
+    $response = $this->activate_through_firebase($verificationId, $otp);
+    if ($response->error && $response->error->code == 400) {
+      error_log($response->error->message);
+      /* echo json_encode([
+        'success' => false,
+        'phone_number' => $phone_number,
+        'firebase' => $response->error,
+        'message' => __('entered code is wrong!', 'login-with-phone-number')
+      ]); */
+      ///$ajax_handler->add_error('verify_error', 'Sai mã OTP!!!');
       $ajax_handler->add_error_message('Sai mã OTP!!!');
+      return;
     }
 
+    $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
     $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE so_dien_thoai='$phone'");
     if ($wpdb->last_error) {
       $ajax_handler->add_error_message(sprintf('Error: %s', $wpdb->last_error));
     }
 
     if (empty($results)) {
-      $summary_result = "<center>Xin lỗi, hiện tại hóa đơn của bạn chưa đến kỳ tổng kết.</center>";
+      $summary_result = '<h4 style="text-align: center">Xin lỗi, hiện tại hóa đơn của bạn chưa đến kỳ tổng kết.</h4>';
     } else {
       $html = '<h4 style="text-align: center; margin: 20px 0">Kết quả tổng kết</h4>';
       $html .= '<ul data-products="type-1" class="products columns-3">';
@@ -59,13 +71,13 @@ class FormSummary extends Action_Base {
       <li>Khách hàng chọn phương thức tiền mặt, vui lòng đến đúng hẹn trong biên nhận ký gửi (10-20/09/2023).</li>
       <li>DANH SÁCH SẼ ĐƯỢC CHỐT VÀO 10 GIỜ NGÀY 9 HÀNG THÁNG, VUI LÒNG KHÔNG ĐỔI PHƯƠNG THỨC SAU KHI DANH SÁCH ĐƯỢC CHỐT</li>
       </ul>';
-      $text = sprintf('<img src="%s" />',  get_stylesheet_directory_uri().'/assets/img/xtk_info.jpg');
+      $text = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/xtk_info.jpg');
       foreach ($results as $row) {
         /* $arr = explode('/', $row->ngay_ky_gui);
         $date_str = $arr[1] . '/' . $arr[0] . '/' . $arr[2];
         $mktime = strtotime($date_str);
         $ngay_ky_gui = date("d/m/Y", $mktime); */
-        
+
         $time = strtotime($row->ngay_ky_gui);
         $ngay_ky_gui = date('d/m/Y', $time);
 
@@ -77,17 +89,19 @@ class FormSummary extends Action_Base {
         $html .= sprintf('<div class="xtk_row"><span class="xtk_title">Thực nhận: </span><span class="xtk_value"><b>%s</b> ₫</span></div>', $row->thuc_nhan);
         $html .= sprintf('<div class="xtk_footer"><a href="#xtk_detail_%s" rel="modal:open" class="button button-xtk-detail">Xem chi tiết</a></div>', $row->id);
         $html .= '</li>';
-        
+
         $i = 1;
         $td_1 = '';
         $td_2 = '';
         $aa = array_values((array) $row);
 
-        for($i = 2; $i< count($aa); $i++){
-          if($i < 8) $td_1 .= sprintf('<td>%s</td>', $aa[$i]);
-          else $td_2 .= sprintf('<td>%s</td>', $aa[$i]);
+        for ($i = 2; $i < count($aa); $i++) {
+          if ($i < 8)
+            $td_1 .= sprintf('<td>%s</td>', $aa[$i]);
+          else
+            $td_2 .= sprintf('<td>%s</td>', $aa[$i]);
         }
-        
+
 
         $xtk_modal .= sprintf('<div id="xtk_detail_%s" class="modal modal_xtk_detail"><div id="contentToPrint">', $row->id);
         $xtk_modal .= '<h3 class="modal_xtk_detail_header">Hóa đơn chi tiết bán hàng</h3>';
@@ -98,8 +112,8 @@ class FormSummary extends Action_Base {
         $xtk_modal .= sprintf('<table><thead><tr>%s</tr></thead><tbody>', $ths_2);
         $xtk_modal .= sprintf('<tr>%s</tr>', $td_2);
         $xtk_modal .= '</tbody></table><br>';
-        $xtk_modal .= $text .'</div>';
-        $xtk_modal .= sprintf('<p class="xtk_detail_download_btn"><a onclick="gap_html2pdf();" href="#" class="xbutton"><img src="%s" /> Tải về</a></p>', get_stylesheet_directory_uri().'/assets/img/download.svg');
+        $xtk_modal .= $text . '</div>';
+        $xtk_modal .= sprintf('<p class="xtk_detail_download_btn"><a onclick="gap_html2pdf();" href="#" class="xbutton"><img src="%s" /> Tải về</a></p>', get_stylesheet_directory_uri() . '/assets/img/download.svg');
         $xtk_modal .= '</div>';
       }
       $html .= '</ul>';
@@ -113,5 +127,44 @@ class FormSummary extends Action_Base {
 
   public function on_export($element) {
     return $element;
+  }
+
+  protected function activate_through_firebase($verificationId, $otp) {
+    $firebase_api = 'AIzaSyCYsNFgVTVGHuxSsLQ1D9QO5gRqlQlGTmg';
+    /* $response = wp_remote_post("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPhoneNumber?key=" . $firebase_api, [
+      'timeout' => 60,
+      'redirection' => 4,
+      'blocking' => true,
+      'headers' => array('Content-Type' => 'application/json'),
+      'body' => wp_json_encode([
+        'code' => $otp,
+        'sessionInfo' => $verificationId
+      ])
+    ]);
+    $body = wp_remote_retrieve_body($response);
+    */
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPhoneNumber?key=' . $firebase_api,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => '{"code":' . $otp . ',"sessionInfo":\'' . $verificationId . '\'}',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json'
+      ),
+    ));
+
+    $body = curl_exec($curl);
+
+    curl_close($curl);
+    //echo $body;
+    //error_log($body);
+    return json_decode($body);
   }
 }
