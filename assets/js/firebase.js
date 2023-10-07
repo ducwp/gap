@@ -25,7 +25,7 @@ function phoneAuth() {
     window.confirmationResult = confirmationResult;
     coderesult = confirmationResult;
     console.log(coderesult);
-    alert("Đã gửi mã xác minh");
+    alert("Đã gửi mã xác minh OTP");
     verificationId.value = confirmationResult.verificationId;
 
   }).catch(function (error) {
