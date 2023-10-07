@@ -13,6 +13,9 @@ class Init {
 
   private function __construct() {
     $this->form_id = 2686;
+
+    add_action('wp', [$this, 'gap_check_user_login']);
+    Form::instance();
     Insert::instance();
     new Mainpage();
 
@@ -26,6 +29,18 @@ class Init {
 
       $csv->download_csv_file($this->form_id);
     }
+  }
+
+  function gap_check_user_login() {
+    if (!is_page(['ky-gui-online']))
+      return;
+
+    if (!is_user_logged_in()) {
+      $myaccount = get_permalink(wc_get_page_id('myaccount'));
+      wp_safe_redirect($myaccount);
+      exit;
+    }
+
   }
 
 }

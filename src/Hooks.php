@@ -12,7 +12,9 @@ class Hooks {
   }
 
   private function __construct() {
-    add_action('wp', [$this, 'gap_check_user_login']);
+    add_filter('wpcf7_autop_or_not', '__return_false');
+    add_filter('wpcf7_form_elements', 'do_shortcode');
+    //add_action('wp', [$this, 'gap_check_user_login']);
     add_action('blocksy:loop:before', [$this, 'gap_add_bc'], 99);
     add_action('woocommerce_before_single_product', [$this, 'gap_add_bc'], 99);
     add_action('woocommerce_archive_description', [$this, 'gap_add_bc'], 99);
@@ -20,31 +22,19 @@ class Hooks {
 
     add_action('woocommerce_after_add_to_cart_button', [$this, 'gap_woocommerce_after_add_to_cart_button']);
     add_filter('the_title', [$this, 'gap_shorten_woo_product_title'], 10, 2);
-    add_filter('woocommerce_loop_add_to_cart_link', [$this, 'gap_woocommerce_loop_add_to_cart_link_filter'], 10, 3);
+    //add_filter('woocommerce_loop_add_to_cart_link', [$this, 'gap_woocommerce_loop_add_to_cart_link_filter'], 10, 3);
     add_action('wp_footer', [$this, 'gap_page_scrolling']);
     
-    add_action('user_profile_update_errors', [$this, 'my_user_profile_update_errors'], 10, 3);
+    /* add_action('user_profile_update_errors', [$this, 'my_user_profile_update_errors'], 10, 3);
     add_action('user_new_form', [$this, 'my_user_new_form'], 10, 1);
     add_action('show_user_profile', [$this, 'my_user_new_form'], 10, 1);
-    add_action('edit_user_profile', [$this, 'my_user_new_form'], 10, 1);
+    add_action('edit_user_profile', [$this, 'my_user_new_form'], 10, 1); */
 
     add_action( 'wp_footer', function(){
       if(!is_user_logged_in()) return;
       $current_user = wp_get_current_user();
       printf('<input type="hidden" id="current_user_billing_phone" value="%s">', $current_user->billing_phone);
     });
-  }
-
-  function gap_check_user_login() {
-    if (!is_page(['ky-gui-online']))
-      return;
-
-    if (!is_user_logged_in()) {
-      $myaccount = get_permalink(wc_get_page_id('myaccount'));
-      wp_safe_redirect($myaccount);
-      exit;
-    }
-
   }
 
   /* add_action('blocksy:header:after', function () {
@@ -56,15 +46,11 @@ class Hooks {
   }, 99);
    */
 
-
-
   function gap_add_bc() {
     /* if (!is_archive() && !is_single())
       return; */
     echo do_shortcode('[gap_breadcrumbs]');
   }
-
-
 
   function gap_woocommerce_after_add_to_cart_button($product) {
     global $post;
@@ -95,33 +81,6 @@ class Hooks {
       return $title;
     }
   }
-
-
-
-  function gap_woocommerce_loop_add_to_cart_link_filter($class, $product, $args) {
-
-    // filter...
-    /* $class = sprintf(
-    '<div class="wp-block-button wc-block-components-product-button %1$s %2$s">
-    <%3$s href="%4$s" class="%5$s" style="%6$s" %7$s>%8$s</%3$s>
-  </div>',
-    esc_attr( $text_align_styles_and_classes['class'] ?? '' ),
-    esc_attr( $classname . ' ' . $custom_width_classes ),
-    $html_element,
-    esc_url( $product->add_to_cart_url() ),
-    isset( $args['class'] ) ? esc_attr( $args['class'] ) : '',
-    esc_attr( $styles_and_classes['styles'] ),
-    isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-    esc_html( $product->add_to_cart_text() )
-  ); */
-
-    //print_r($product);
-
-    #$icon = '<i class="fa fa-shopping-cart"></i>';
-    $class = sprintf('<a href="%s" class="%s" %s target="_blank">%s</a>', esc_url($product->add_to_cart_url()), $args['class'], isset($args['attributes']) ? wc_implode_html_attributes($args['attributes']) : '', $product->add_to_cart_text());
-    return $class;
-  }
-
 
   function gap_page_scrolling() {
     if (!is_front_page())
@@ -196,15 +155,15 @@ class Hooks {
 
   // This will suppress empty email errors when submitting the user form
 
-  function my_user_profile_update_errors($errors, $update, $user) {
+  /* function my_user_profile_update_errors($errors, $update, $user) {
     $errors->remove('empty_email');
-  }
+  } */
 
   // This will remove javascript required validation for email input
 // It will also remove the '(required)' text in the label
 // Works for new user, user profile and edit user forms
 
-  function my_user_new_form($form_type) {
+  /* function my_user_new_form($form_type) {
     ?>
     <script type="text/javascript">
       jQuery('#email').closest('tr').removeClass('form-required').find('.description').remove();
@@ -214,7 +173,7 @@ class Hooks {
       <?php endif; ?>
     </script>
     <?php
-  }
+  } */
   //https://woostify.com/woocommerce-phone-number/
 
 } //Class

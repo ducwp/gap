@@ -12,9 +12,34 @@ class WooCommerce {
   }
 
   private function __construct() {
+    add_filter('woocommerce_loop_add_to_cart_link', [$this, 'loop_add_to_cart_link_filter'], 10, 3);
     add_action('woocommerce_register_form', [$this, 'text_domain_woo_reg_form_fields']);
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
     add_action('woocommerce_created_customer', [$this, 'wooc_save_extra_register_fields']);
+  }
+
+  function loop_add_to_cart_link_filter($class, $product, $args) {
+
+    // filter...
+    /* $class = sprintf(
+    '<div class="wp-block-button wc-block-components-product-button %1$s %2$s">
+    <%3$s href="%4$s" class="%5$s" style="%6$s" %7$s>%8$s</%3$s>
+  </div>',
+    esc_attr( $text_align_styles_and_classes['class'] ?? '' ),
+    esc_attr( $classname . ' ' . $custom_width_classes ),
+    $html_element,
+    esc_url( $product->add_to_cart_url() ),
+    isset( $args['class'] ) ? esc_attr( $args['class'] ) : '',
+    esc_attr( $styles_and_classes['styles'] ),
+    isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
+    esc_html( $product->add_to_cart_text() )
+  ); */
+
+    //print_r($product);
+
+    #$icon = '<i class="fa fa-shopping-cart"></i>';
+    $class = sprintf('<a href="%s" class="%s" %s target="_blank">%s</a>', esc_url($product->add_to_cart_url()), $args['class'], isset($args['attributes']) ? wc_implode_html_attributes($args['attributes']) : '', $product->add_to_cart_text());
+    return $class;
   }
 
   /* Woocommerce Registration */

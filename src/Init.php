@@ -13,7 +13,6 @@ class Init {
 
   private function __construct() {
 
-    CF7::instance();
     Hooks::instance();
     Shortcodes::instance();
     Summary::instance();

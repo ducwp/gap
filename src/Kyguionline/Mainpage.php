@@ -27,7 +27,7 @@ class Mainpage {
     $cap = 'manage_options';
 
     //add_menu_page( __( 'Contact Forms', 'contact-form-cfdb7' ), __( 'Contact Forms', 'contact-form-cfdb7' ), $cfdb7_cap, 'cfdb7-list.php', array($this, 'list_table_page'), 'dashicons-list-view' );
-    add_menu_page(__('Ký gửi', 'gap-theme'), __('Ký gửi', 'gap-theme'), $cap, 'gap-ky-gui-list', array($this, 'list_table_page'), 'dashicons-list-view');
+    add_menu_page(__('Ký gửi Online', 'gap-theme'), __('Ký gửi Online', 'gap-theme'), $cap, 'gap-ky-gui-list', array($this, 'list_table_page'), 'dashicons-list-view');
   }
   /**
    * Display the list table page
