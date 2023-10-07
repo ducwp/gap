@@ -580,7 +580,7 @@ body:not(.home) {
 
 .modal.modal_xtk_detail {
   padding: 20px;
-  max-width: var(--normal-container-max-width);
+  max-width: calc(var(--normal-container-max-width) + 50px);
 
   h3.modal_xtk_detail_header {
     margin: -20px -20px 30px -20px;

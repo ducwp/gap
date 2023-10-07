@@ -23,6 +23,8 @@ function phoneAuth() {
   number = '+84' + number.substring(1);
   // alert(number);
   var verificationId = document.getElementById('form-field-verificationId');
+  var otp_field = document.getElementById('form-field-zalo_otp');
+  
   //it takes two parameter first one is number and second one is recaptcha
   firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function (confirmationResult) {
     //s is in lowercase
@@ -30,6 +32,7 @@ function phoneAuth() {
     coderesult = confirmationResult;
     console.log(coderesult);
     alert("Đã gửi mã xác minh OTP");
+    otp_field.focus();
     verificationId.value = confirmationResult.verificationId;
 
   }).catch(function (error) {
