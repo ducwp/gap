@@ -16,6 +16,8 @@ jQuery(document).ready(function ($) {
     alert("Gửi mã xác minh Zalo!!!\nTest OPT: 12345");
   });
 
+  $('.calendar-wrapper').calendar();
+
   $('.navigable').contentNavigation({
     offsetIndicator: '-33%',
   });

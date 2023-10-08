@@ -30,6 +30,7 @@ body {
   padding: 10px 60px;
   margin: 0 auto;
 }
+
 .single-product .entry-header .meta-categories a {}
 
 /* Woocommerce */
@@ -194,7 +195,7 @@ ul.products {
   bottom: 100px;
   left: 0;
   right: 0;
-  z-index: 99;
+  z-index: 1;
 
   &-inner {
     max-width: var(--normal-container-max-width);
@@ -204,7 +205,7 @@ ul.products {
     .hero-slider-title {
       position: relative;
       margin-bottom: 100px;
-      z-index: 99;
+      z-index: 1;
       width: 300px;
     }
 
@@ -279,6 +280,7 @@ ul.products {
     }
   }
 }
+
 /* Owl end */
 
 i.home-icon {
@@ -713,6 +715,96 @@ body:not(.home) {
       color: #fff;
       margin-left: 0px;
       border-radius: 4px;
+    }
+  }
+}
+
+/* Dat lich cua hang */
+.gap_booking {
+  border: 1px solid var(--paletteColor4);
+  margin: 30px 0;
+
+  .gb_header {
+    border-bottom: 1px solid var(--paletteColor4);
+  }
+
+  .calendar-wrapper {
+    border-right: 1px solid var(--paletteColor4);
+  }
+
+  .gap_times {
+    //background-color: #ff8900;
+    padding-right: 20px;
+
+    label {
+
+      input {
+        display: none;
+
+        &:disabled+.time_label {
+          border-color: var(--paletteColor4);
+          background-color: var(--paletteColor4);
+        }
+
+        &:checked+.time_label {
+          border-color: var(--paletteColor2);
+          background-color: var(--paletteColor2);
+          color: #fff;
+        }
+      }
+
+
+
+
+
+      .time_label {
+        user-select: none;
+        background: #fff;
+        border: 1px solid var(--paletteColor4);
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 16px;
+        margin-top: 20px;
+        padding: 20px;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+          border-color: var(--paletteColor3);
+        }
+      }
+    }
+  }
+
+  .gap_notes {
+    font-size: 14px;
+    margin-top: 20px;
+
+    .gap_note {
+      display: inline-block;
+      margin-right: 30px;
+
+      &::before {
+        content: "";
+        vertical-align: -4px;
+        margin-right: 5px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--paletteColor4);
+        background-color: var(--paletteColor4);
+      }
+
+      &.gn_available::before {
+        border-color: var(--paletteColor2);
+        background-color: #fff;
+      }
+
+      &.gn_selected::before {
+        border-color: var(--paletteColor2);
+        background-color: var(--paletteColor2);
+      }
     }
   }
 }

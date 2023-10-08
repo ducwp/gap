@@ -1,11 +1,11 @@
 <?php
 //Phuong thuc ky gui
-namespace GAPTheme\Elementor;
+namespace GAPTheme\Phuongthuckygui;
 
 use ElementorPro\Modules\Forms\Classes\Action_Base;
 use NumberFormatter;
 
-class PhuongthucKygui extends Action_Base {
+class Elementor extends Action_Base {
   public function get_name() {
     return 'phuong-thuc-ky-gui';
   }

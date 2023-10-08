@@ -13,6 +13,9 @@ class Firebase {
   }
 
   private function __construct() {
+
+    if(!is_page('ky-gui-online')) return;
+
     $this->firebase_api = 'AIzaSyCYsNFgVTVGHuxSsLQ1D9QO5gRqlQlGTmg';
 
     add_action('wp_enqueue_scripts', function () {

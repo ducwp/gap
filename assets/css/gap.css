@@ -130,7 +130,7 @@ ul.products li.product {
   bottom: 100px;
   left: 0;
   right: 0;
-  z-index: 99; }
+  z-index: 1; }
   .gap-hero-slider-thumbs-inner {
     max-width: var(--normal-container-max-width);
     margin: 0 auto;
@@ -138,7 +138,7 @@ ul.products li.product {
     .gap-hero-slider-thumbs-inner .hero-slider-title {
       position: relative;
       margin-bottom: 100px;
-      z-index: 99;
+      z-index: 1;
       width: 300px; }
     .gap-hero-slider-thumbs-inner .cnext,
     .gap-hero-slider-thumbs-inner .cprev {
@@ -463,5 +463,60 @@ body:not(.home) .ct-footer {
     color: #fff;
     margin-left: 0px;
     border-radius: 4px; }
+
+/* Dat lich cua hang */
+.gap_booking {
+  border: 1px solid var(--paletteColor4);
+  margin: 30px 0; }
+  .gap_booking .gb_header {
+    border-bottom: 1px solid var(--paletteColor4); }
+  .gap_booking .calendar-wrapper {
+    border-right: 1px solid var(--paletteColor4); }
+  .gap_booking .gap_times {
+    padding-right: 20px; }
+    .gap_booking .gap_times label input {
+      display: none; }
+      .gap_booking .gap_times label input:disabled + .time_label {
+        border-color: var(--paletteColor4);
+        background-color: var(--paletteColor4); }
+      .gap_booking .gap_times label input:checked + .time_label {
+        border-color: var(--paletteColor2);
+        background-color: var(--paletteColor2);
+        color: #fff; }
+    .gap_booking .gap_times label .time_label {
+      user-select: none;
+      background: #fff;
+      border: 1px solid var(--paletteColor4);
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 20px;
+      padding: 20px;
+      display: block;
+      text-align: center;
+      cursor: pointer; }
+      .gap_booking .gap_times label .time_label:hover {
+        border-color: var(--paletteColor3); }
+  .gap_booking .gap_notes {
+    font-size: 14px;
+    margin-top: 20px; }
+    .gap_booking .gap_notes .gap_note {
+      display: inline-block;
+      margin-right: 30px; }
+      .gap_booking .gap_notes .gap_note::before {
+        content: "";
+        vertical-align: -4px;
+        margin-right: 5px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--paletteColor4);
+        background-color: var(--paletteColor4); }
+      .gap_booking .gap_notes .gap_note.gn_available::before {
+        border-color: var(--paletteColor2);
+        background-color: #fff; }
+      .gap_booking .gap_notes .gap_note.gn_selected::before {
+        border-color: var(--paletteColor2);
+        background-color: var(--paletteColor2); }
 
 /*# sourceMappingURL=gap.css.map */

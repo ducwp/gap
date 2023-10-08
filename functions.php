@@ -12,7 +12,7 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style('gap', $theme_uri . '/style.css', array('ct-main-styles'));
   wp_enqueue_style('gap-icon', $theme_uri . '/assets/vendor/gap-icon/style.css', array('gap'));
   //wp_enqueue_style('gap-pcn', $theme_uri . '/assets/vendor/page-content-navigation/page-content-navigation.css', array('gap'));
-  wp_enqueue_style('gap-cf', $theme_uri . '/assets/css/cf.css', array('gap'));
+  //wp_enqueue_style('gap-cf', $theme_uri . '/assets/css/cf.css', array('gap'));
   wp_enqueue_style('gap-flexboxgrid', $theme_uri . '/assets/vendor/flexboxgrid/flexboxgrid.css', array('gap'));
   wp_enqueue_style('gap-style', $theme_uri . '/assets/css/gap.css', array('gap'));
 
@@ -38,6 +38,12 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style('gap-drag-and-drop-file-upload', $theme_uri . '/assets/vendor/drag-and-drop-file-upload/style.css');
   wp_enqueue_script('gap-drag-and-drop-file-upload', $theme_uri . '/assets/vendor/drag-and-drop-file-upload/script.js', [], '', true);
   
+  //Calendar
+  wp_enqueue_style('gap-calendar', $theme_uri . '/assets/vendor/calendar/style.css');
+  wp_enqueue_style('gap-calendar-theme', $theme_uri . '/assets/vendor/calendar/theme.css', ['gap-calendar']);
+  wp_enqueue_script('gap-calendar-lib', $theme_uri . '/assets/vendor/calendar/calendar.min.js', ['jquery'], '', true);
+  wp_enqueue_script('gap-calendar', $theme_uri . '/assets/js/calendar.js', ['jquery', 'gap-calendar-lib'], '', true);
+
 
   //SCRIPT
   wp_enqueue_script('gap-script', $theme_uri . '/assets/js/script.js', ['jquery', 'gap-chosen', 'owl-slider'], '', true);

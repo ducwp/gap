@@ -15,17 +15,12 @@ class Init {
 
     Hooks::instance();
     Shortcodes::instance();
-    Xemtongket\Import::instance();
-
+    
     Firebase::instance();
     WooCommerce::instance();
+    Phuongthuckygui\Init::instance();
+    Datlichcuahang\Init::instance();
     Kyguionline\Init::instance();
-    add_action('elementor_pro/forms/actions/register', [$this, 'add_new_form_action']);
+    Xemtongket\Import::instance();
   }
-
-  function add_new_form_action($form_actions_registrar) {
-    $form_actions_registrar->register(new Xemtongket\GetData());
-    $form_actions_registrar->register(new Elementor\PhuongthucKygui());
-  }
-
 }

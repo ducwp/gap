@@ -35,8 +35,6 @@ class Form {
       if (in_array($tag->name, ['clothes_new_local', 'clothes_new_global', 'clothes_used_local', 'clothes_used_global'])) { // validate name field only
         $result->invalidate($tag, "Tổng sản phẩm quần áo phải từ 5 trở lên.");
       }
-
-
     }
 
     return $result;
