@@ -125,8 +125,8 @@ class GetData extends Action_Base {
         $xtk_modal .= sprintf('<tr>%s</tr>', $td_2);
         $xtk_modal .= '</tbody></table><br>';
         $xtk_modal .= $text_top;
-        $xtk_modal .='<div class="modal_xtk_box"><div style="float: left; width: 50%;">'.$img_bieu_phi.'</div>';
-        $xtk_modal .= '<div style="float: right; width: 50%; padding-top: 15px; ">'.$text_right.'</div><br style="clear: both"></div>';
+        $xtk_modal .='<div class="modal_xtk_box"><div class="col_left" style="float: left; width: 50%;">'.$img_bieu_phi.'</div>';
+        $xtk_modal .= '<div class="col_right" style="float: right; width: 50%;">'.$text_right.'</div><br style="clear: both"></div>';
         $xtk_modal .= $img_footer . '</div>';
         $xtk_modal .= sprintf('<p class="xtk_detail_download_btn"><a onclick="gap_html2pdf();" href="#" class="xbutton"><img src="%s" /> Tải về</a></p>', get_stylesheet_directory_uri() . '/assets/img/download.svg');
 

@@ -16,11 +16,21 @@ body {
   margin: 0 auto;
   max-width: 1360px; }
 
+/* General */
 body.elementor-template-full-width[data-header*="type-1"] .ct-header [data-row*="middle"], body.single-product[data-header*="type-1"] .ct-header [data-row*="middle"], body.archive[data-header*="type-1"] .ct-header [data-row*="middle"] {
   --borderBottom: none; }
 body.error404 .ct-container {
   padding-top: 60px; }
 
+.archive .entry-header .page-title,
+.single-product .entry-header .meta-categories a {
+  display: inline-block;
+  border: 3px solid #fff;
+  width: auto;
+  padding: 10px 60px;
+  margin: 0 auto; }
+
+/* Woocommerce */
 .add_to_cart_button::after,
 .button.single_add_to_cart_button:before {
   display: inline-block;
@@ -39,7 +49,47 @@ body.error404 .ct-container {
   margin-left: 10px;
   margin-right: 0; }
 
-/* SLIDERR*/
+/* products  */
+ul.products li.product {
+  padding-bottom: 20px;
+  border: 1px solid var(--paletteColor5);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all .2s; }
+  ul.products li.product .woocommerce-loop-product__title,
+  ul.products li.product span.price,
+  ul.products li.product .ct-woo-card-actions {
+    padding: 0 20px; }
+  ul.products li.product span.price {
+    font-size: 18px; }
+  ul.products li.product .ct-woo-card-actions {
+    margin-top: 10px; }
+
+/* Product carousel on Homepage*/
+#gap_carousel ul.products li.product:hover .woocommerce-loop-product__title,
+#gap_carousel ul.products li.product:hover .price {
+  color: #000 !important; }
+#gap_carousel .owl-nav {
+  position: absolute;
+  top: 50%;
+  margin-top: -30px;
+  left: 0;
+  right: 0; }
+  #gap_carousel .owl-nav button.owl-prev, #gap_carousel .owl-nav button.owl-next {
+    position: absolute;
+    /* width: 60px; */
+    height: 60px;
+    left: -60px;
+    padding: 6px !important; }
+    #gap_carousel .owl-nav button.owl-prev:hover, #gap_carousel .owl-nav button.owl-next:hover {
+      background-color: #000; }
+    #gap_carousel .owl-nav button.owl-prev svg path, #gap_carousel .owl-nav button.owl-next svg path {
+      stroke: #fff; }
+  #gap_carousel .owl-nav button.owl-next {
+    left: auto;
+    right: -60px; }
+
+/* Owl */
 .owl-theme .owl-nav {
   /*default owl-theme theme reset .disabled:hover links */ }
 
@@ -137,7 +187,7 @@ body.error404 .ct-container {
   border-right: 10px solid transparent;
   border-bottom: 10px solid white; }
 
-/* SLIDER END */
+/* Owl end */
 i.home-icon {
   display: inline-block;
   opacity: .5;
@@ -206,46 +256,6 @@ i.home-icon {
     color: var(--paletteColor8); }
 .ct-footer img.footer-payment-icon {
   max-width: 300px !important; }
-
-/* products  */
-ul.products li.product {
-  padding-bottom: 20px;
-  border: 1px solid var(--paletteColor5);
-  border-radius: 6px;
-  overflow: hidden;
-  transition: all .2s; }
-  ul.products li.product .woocommerce-loop-product__title,
-  ul.products li.product span.price,
-  ul.products li.product .ct-woo-card-actions {
-    padding: 0 20px; }
-  ul.products li.product span.price {
-    font-size: 18px; }
-  ul.products li.product .ct-woo-card-actions {
-    margin-top: 10px; }
-
-/* Product carousel on Homepage*/
-#gap_carousel ul.products li.product:hover .woocommerce-loop-product__title,
-#gap_carousel ul.products li.product:hover .price {
-  color: #000 !important; }
-#gap_carousel .owl-nav {
-  position: absolute;
-  top: 50%;
-  margin-top: -30px;
-  left: 0;
-  right: 0; }
-  #gap_carousel .owl-nav button.owl-prev, #gap_carousel .owl-nav button.owl-next {
-    position: absolute;
-    /* width: 60px; */
-    height: 60px;
-    left: -60px;
-    padding: 6px !important; }
-    #gap_carousel .owl-nav button.owl-prev:hover, #gap_carousel .owl-nav button.owl-next:hover {
-      background-color: #000; }
-    #gap_carousel .owl-nav button.owl-prev svg path, #gap_carousel .owl-nav button.owl-next svg path {
-      stroke: #fff; }
-  #gap_carousel .owl-nav button.owl-next {
-    left: auto;
-    right: -60px; }
 
 /* Page Scroll */
 .gap_page_scrolling {
@@ -342,14 +352,6 @@ body:not(.home) .ct-footer {
     width: 100%;
     height: 500px;
     border: 0; }
-
-.archive .entry-header .page-title,
-.single-product .entry-header .meta-categories a {
-  display: inline-block;
-  border: 3px solid #fff;
-  width: auto;
-  padding: 10px 60px;
-  margin: 0 auto; }
 
 /* Xem tổng kết */
 .xem_tong_ket {
