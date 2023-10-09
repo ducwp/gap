@@ -472,8 +472,28 @@ body:not(.home) .ct-footer {
     border-bottom: 1px solid var(--paletteColor4); }
   .gap_booking .calendar-wrapper {
     border-right: 1px solid var(--paletteColor4); }
+  .gap_booking .gap_booking_header {
+    display: block;
+    padding: 30px 20px;
+    border-right: 1px solid var(--paletteColor4);
+    font-weight: 700;
+    font-size: 14px;
+    font-family: sans-serif; }
+    .gap_booking .gap_booking_header img {
+      width: 24px;
+      height: 24px;
+      vertical-align: -4px;
+      margin-right: 10px; }
+    .gap_booking .gap_booking_header.gbh_right {
+      border: none;
+      padding: 10px;
+      margin: 20px 40px 20px 20px;
+      background-color: var(--paletteColor6);
+      text-align: center; }
   .gap_booking .gap_times {
-    padding-right: 20px; }
+    padding-left: 20px;
+    padding-right: 40px;
+    position: relative; }
     .gap_booking .gap_times label input {
       display: none; }
       .gap_booking .gap_times label input:disabled + .time_label {
@@ -497,7 +517,32 @@ body:not(.home) .ct-footer {
       cursor: pointer; }
       .gap_booking .gap_times label .time_label:hover {
         border-color: var(--paletteColor3); }
+    .gap_booking .gap_times nav.gap_time_nav {
+      position: absolute;
+      top: 50%;
+      background-color: #ff8900;
+      z-index: 100;
+      left: -15px;
+      right: 5px; }
+      .gap_booking .gap_times nav.gap_time_nav button {
+        background: none;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        height: 24px;
+        cursor: pointer; }
+        .gap_booking .gap_times nav.gap_time_nav button svg {
+          width: 100%;
+          height: 100%;
+          stroke: #000; }
+        .gap_booking .gap_times nav.gap_time_nav button.prev {
+          rotate: -90deg; }
+        .gap_booking .gap_times nav.gap_time_nav button.next {
+          text-align: right;
+          right: 0;
+          rotate: 90deg; }
   .gap_booking .gap_notes {
+    padding-left: 20px;
     font-size: 14px;
     margin-top: 20px; }
     .gap_booking .gap_notes .gap_note {
@@ -513,10 +558,112 @@ body:not(.home) .ct-footer {
         border: 1px solid var(--paletteColor4);
         background-color: var(--paletteColor4); }
       .gap_booking .gap_notes .gap_note.gn_available::before {
-        border-color: var(--paletteColor2);
+        border-color: var(--paletteColor4);
         background-color: #fff; }
       .gap_booking .gap_notes .gap_note.gn_selected::before {
         border-color: var(--paletteColor2);
         background-color: var(--paletteColor2); }
+
+/* Booking Calendar */
+.wrapper {
+  border-right: 1px solid var(--paletteColor4); }
+  .wrapper header {
+    display: flex;
+    align-items: center;
+    padding: 25px 20px 10px;
+    justify-content: space-between; }
+    .wrapper header .icons {
+      display: flex; }
+      .wrapper header .icons span {
+        height: 38px;
+        width: 38px;
+        margin: 0 1px;
+        cursor: pointer;
+        color: #878787;
+        text-align: center;
+        line-height: 38px;
+        font-size: 1.9rem;
+        user-select: none;
+        border-radius: 4px; }
+        .wrapper header .icons span:last-child {
+          margin-right: -10px; }
+        .wrapper header .icons span:hover {
+          background: #f2f2f2; }
+    .wrapper header .current-date {
+      font-size: 1.45rem;
+      font-weight: 700;
+      font-family: sans-serif; }
+
+.calendar {
+  padding: 20px; }
+  .calendar ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center; }
+    .calendar ul li {
+      color: #333;
+      width: calc(100% / 7);
+      font-size: 1.07rem; }
+  .calendar .weeks li {
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: default; }
+  .calendar .days {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-right: 1px solid var(--paletteColor4);
+    border-bottom: 1px solid var(--paletteColor4); }
+    .calendar .days li {
+      z-index: 1;
+      cursor: pointer;
+      position: relative;
+      border-top: 1px solid var(--paletteColor4);
+      border-left: 1px solid var(--paletteColor4);
+      margin: 0;
+      padding: 12px 0;
+      /* &.active {
+        color: #fff;
+
+        &::before {
+          background-color: var(--paletteColor2);
+        }
+
+      } */
+      /* &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      &:not(.active):not(.inactive):hover::before {
+        background: #f2f2f2;
+      } */ }
+      .calendar .days li label input {
+        display: none; }
+      .calendar .days li label input:checked + .gt_text {
+        color: #fff; }
+        .calendar .days li label input:checked + .gt_text::after {
+          border-color: var(--paletteColor2);
+          background-color: var(--paletteColor2); }
+      .calendar .days li label .gt_text::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1; }
+      .calendar .days li.inactive {
+        color: #aaa;
+        background-color: var(--paletteColor6);
+        cursor: not-allowed; }
 
 /*# sourceMappingURL=gap.css.map */

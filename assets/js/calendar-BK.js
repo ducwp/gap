@@ -1,3 +1,72 @@
+jQuery(document).ready(function ($) {
+
+  const today = new Date();
+  const date_str = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+  $('#gap_date').val(date_str);
+
+  function selectDate(date) {
+    $('#calendar-wrapper').updateCalendarOptions({
+      date: date
+    });
+    $('#gap_date').val(calendar.getSelectedDate());
+    console.log(calendar);
+    //console.log(calendar.getSelectedDate());
+  }
+
+  var defaultConfig = {
+    weekDayLength: 1,
+    date: date_str,
+    onClickDate: selectDate,
+    showYearDropdown: true,
+    startOnMonday: false,
+    prevButton: 'Trước',
+    nextButton: 'Tiếp',
+    startOnMonday: true,
+    monthMap: {
+      1: "Tháng 1",
+      2: "Tháng 2",
+      3: "Tháng 3",
+      4: "Tháng 4",
+      5: "Tháng 5",
+      6: "Tháng 6",
+      7: "Tháng 7",
+      8: "Tháng 8",
+      9: "Tháng 9",
+      10: "Tháng 10",
+      11: "Tháng 11",
+      12: "Tháng 12",
+    },
+    customDateProps: (date) => ({
+      classes: 'date-element date-element-custom',
+      data: {
+        type: 'date',
+        form: 'date-element'
+      }
+    }),
+    customDateHeaderProps: (weekDay) => ({
+      classes: 'date-header-element date-header-element-custom',
+      data: {
+        type: 'date-header',
+        form: 'date-header-element'
+      }
+    }),
+    customWeekProps: (weekNo) => ({
+      classes: 'week-day-element week-day-element-custom',
+      data: {
+        type: 'week-day',
+        form: 'week-day-element'
+      }
+    }),
+  };
+
+
+  var calendar = $('#calendar-wrapper').calendar(defaultConfig);
+  console.log(calendar.getSelectedDate());
+});
+
+/*---------------------------------------------------------------------------*/
+
+
 const daysTag = document.querySelector(".days"),
   currentDate = document.querySelector(".current-date"),
   prevNextIcon = document.querySelectorAll(".icons span");
@@ -24,14 +93,7 @@ const renderCalendar = () => {
   }
 
   for (let i = 1; i <= lastDateofMonth; i++) {
-
-    let isTodayRadioChecked = i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() ? "checked" : "";
-
-    //const mdy = `${currMonth + 1}/${i}/${currYear}`;
-    const mdy = `${currMonth + 1}-${i}-${currYear}`;
-    liTag += `<li data-mdy="${mdy}">`;
-    liTag += `<label><input type="radio" name="gap_day" value="${mdy}" ${isTodayRadioChecked} /> `;
-    liTag += `<span class="gt_text">${i}</span></label></li>`;
+    let isToday = i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() ? "active" : ""; liTag += `<li data-mdy="${currMonth+1}/${i}/${currYear}" class="${isToday}">${i}</li>`;
   }
 
   for (let i = lastDayofMonth; i < 6; i++) {
@@ -57,8 +119,7 @@ prevNextIcon.forEach(icon => {
   });
 });
 
-/* radiobtn = document.getElementById("theid");
-radiobtn.checked = true; */
+
 
 /* const element = document.querySelectorAll("li");
 element.addEventListener("click", () => {
@@ -66,23 +127,13 @@ element.addEventListener("click", () => {
 }); */
 
 
-/* document.querySelector(".days").addEventListener("click", function (e) {
+document.querySelector(".days").addEventListener("click", function (e) {
   if (e.target && e.target.matches("li")) {
-    if (e.target.classList.contains('inactive')) {
-      return;
-    }
-
-    const others_li = document.querySelector('.days li.active');
-    if (typeof (others_li) != 'undefined' && others_li != null) {
-      others_li.className = '';
-    }
-
-    e.target.className = "active";
-
+    //data-mdy
     const mdy = e.target.getAttribute('data-mdy');
     //alert(mdy);
     document.getElementById('gap_date').value = mdy;
     //alert(e.target.textContent);
     //e.target.className = "foo"; // new class name here
   }
-}); */
+});

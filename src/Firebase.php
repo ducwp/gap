@@ -14,7 +14,7 @@ class Firebase {
 
   private function __construct() {
 
-    if(!is_page('ky-gui-online')) return;
+    //if(!is_page('ky-gui-online')) return;
 
     $this->firebase_api = 'AIzaSyCYsNFgVTVGHuxSsLQ1D9QO5gRqlQlGTmg';
 

@@ -16,7 +16,16 @@ jQuery(document).ready(function ($) {
     alert("Gửi mã xác minh Zalo!!!\nTest OPT: 12345");
   });
 
-  $('.calendar-wrapper').calendar();
+  $('.gap_time_nav button.next').click(function(){
+    $('#scr1').hide();
+    $('#scr2').show();
+  });
+  $('.gap_time_nav button.prev').click(function(){
+    $('#scr1').show();
+    $('#scr2').hide();
+  });
+
+  //$('.calendar-wrapper').calendar();
 
   $('.navigable').contentNavigation({
     offsetIndicator: '-33%',

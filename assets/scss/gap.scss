@@ -732,9 +732,36 @@ body:not(.home) {
     border-right: 1px solid var(--paletteColor4);
   }
 
+  .gap_booking_header {
+    display: block;
+    padding: 30px 20px;
+    border-right: 1px solid var(--paletteColor4);
+    font-weight: 700;
+    font-size: 14px;
+    font-family: sans-serif;
+
+    img {
+      width: 24px;
+      height: 24px;
+      vertical-align: -4px;
+      margin-right: 10px;
+    }
+
+    &.gbh_right {
+      border: none;
+      padding: 10px;
+      margin: 20px 40px 20px 20px;
+      background-color: var(--paletteColor6);
+      text-align: center;
+
+    }
+  }
+
   .gap_times {
     //background-color: #ff8900;
-    padding-right: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+    position: relative;
 
     label {
 
@@ -752,10 +779,6 @@ body:not(.home) {
           color: #fff;
         }
       }
-
-
-
-
 
       .time_label {
         user-select: none;
@@ -775,9 +798,42 @@ body:not(.home) {
         }
       }
     }
+
+    nav.gap_time_nav{
+      position: absolute;
+      top: 50%;
+      background-color: #ff8900;
+      z-index: 100;
+      left: -15px;
+      right: 5px;
+      button{
+        background: none;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        height: 24px;
+        cursor: pointer;
+
+        svg{
+          width: 100%;
+          height: 100%;
+          stroke: #000;
+        }
+
+        &.prev{
+          rotate: -90deg;
+        }
+        &.next{
+          text-align: right;
+          right: 0;
+          rotate: 90deg;
+        }
+      }
+    }
   }
 
   .gap_notes {
+    padding-left: 20px;
     font-size: 14px;
     margin-top: 20px;
 
@@ -797,7 +853,7 @@ body:not(.home) {
       }
 
       &.gn_available::before {
-        border-color: var(--paletteColor2);
+        border-color: var(--paletteColor4);
         background-color: #fff;
       }
 
@@ -807,4 +863,149 @@ body:not(.home) {
       }
     }
   }
+}
+
+/* Booking Calendar */
+.wrapper {
+  border-right: 1px solid var(--paletteColor4);
+
+  header {
+    display: flex;
+    align-items: center;
+    padding: 25px 20px 10px;
+    justify-content: space-between;
+
+    .icons {
+      display: flex;
+
+      span {
+        height: 38px;
+        width: 38px;
+        margin: 0 1px;
+        cursor: pointer;
+        color: #878787;
+        text-align: center;
+        line-height: 38px;
+        font-size: 1.9rem;
+        user-select: none;
+        border-radius: 4px;
+
+        &:last-child {
+          margin-right: -10px;
+        }
+
+        &:hover {
+          background: #f2f2f2;
+        }
+      }
+    }
+
+    .current-date {
+      font-size: 1.45rem;
+      font-weight: 700;
+      font-family: sans-serif;
+    }
+  }
+}
+
+.calendar {
+  padding: 20px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+
+    li {
+      color: #333;
+      width: calc(100% / 7);
+      font-size: 1.07rem;
+    }
+  }
+
+
+  .weeks li {
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: default;
+  }
+
+  .days {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-right: 1px solid var(--paletteColor4);
+    border-bottom: 1px solid var(--paletteColor4);
+
+    li {
+      z-index: 1;
+      cursor: pointer;
+      position: relative;
+      border-top: 1px solid var(--paletteColor4);
+      border-left: 1px solid var(--paletteColor4);
+      margin: 0;
+      padding: 12px 0;
+
+      label {
+
+        input {
+          display: none;
+        }
+
+        input:checked+.gt_text {
+          color: #fff;
+          &::after {
+            border-color: var(--paletteColor2);
+            background-color: var(--paletteColor2);
+          }
+        }
+
+        .gt_text {
+          &::after {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+          }
+        }
+      }
+
+      &.inactive {
+        color: #aaa;
+        background-color: var(--paletteColor6);
+        cursor: not-allowed;
+      }
+
+      /* &.active {
+        color: #fff;
+
+        &::before {
+          background-color: var(--paletteColor2);
+        }
+
+      } */
+
+
+      /* &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      &:not(.active):not(.inactive):hover::before {
+        background: #f2f2f2;
+      } */
+    }
+  }
+
 }
