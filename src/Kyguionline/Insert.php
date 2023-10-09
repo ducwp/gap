@@ -3,6 +3,7 @@ namespace GAPTheme\Kyguionline;
 
 
 class Insert {
+  public $user_id;
   private static $_instance = null;
   public static function instance() {
     if (!isset(self::$_instance)) {
@@ -12,6 +13,7 @@ class Insert {
   }
 
   private function __construct() {
+    $this->user_id = get_current_user_id();
     add_action('wpcf7_before_send_mail', [$this, 'cf7_before_send_mail']);
   }
 
@@ -20,7 +22,6 @@ class Insert {
 
     if ($form_tag->id() != $form_id)
       return;
-
 
     global $wpdb;
     $cfdb = apply_filters('cf7_gap_database', $wpdb);
@@ -109,7 +110,8 @@ class Insert {
       $cfdb->insert($table_name, array(
         'form_post_id' => $form_post_id,
         'form_value' => $form_value,
-        'form_date' => $form_date
+        'form_date' => $form_date,
+        'user_id' => $this->user_id
       ));
 
       /* cfdb7 after save data */

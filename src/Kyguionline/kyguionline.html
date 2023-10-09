@@ -1,33 +1,20 @@
 <div class="kyguionline">
   <div class="row">
-    <div class="col-lg-4"><label>Tên</label><span class="wpcf7-form-control-wrap" data-name="name"><input size="40"
-          class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" autocomplete="name" aria-required="true"
-          aria-invalid="false" value="ducnv" type="text" name="name"></span></div>
-    <div class="col-lg-4"><label>Số điện thoại (có Zalo)</label> <span class="wpcf7-form-control-wrap"
-        data-name="phone"><input size="40"
-          class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel"
-          autocomplete="phone" aria-required="true" aria-invalid="false" value="" type="tel" name="phone"></span>
+    <div class="col-lg-4"><label>Tên</label>[text* name autocomplete:name default:user_display_name]</div>
+    <div class="col-lg-4"><label>Số điện thoại (có Zalo)</label> [tel* phone autocomplete:phone default:billing_phone]
     </div>
-    <div class="col-lg-4"><label>Tên Zalo</label> <span class="wpcf7-form-control-wrap" data-name="zalo_name"><input
-          size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true"
-          aria-invalid="false" value="" type="text" name="zalo_name"></span></div>
+    <div class="col-lg-4"><label>Tên Zalo</label> [text* zalo_name]</div>
   </div>
 
   <div class="row">
-    <div class="col-lg-12"><label>Địa chỉ nhận hàng tồn</label> <span class="wpcf7-form-control-wrap"
-        data-name="pickup_address"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
-          aria-required="true" aria-invalid="false" value="" type="text" name="pickup_address"></span></div>
+    <div class="col-lg-12"><label>Địa chỉ nhận hàng tồn</label> [text* pickup_address]</div>
   </div>
 
   <div class="row">
     <div class="col-lg-12">
       <p style="margin-bottom: 10px">
-        <span style="margin-right: 10px;"><b>Bạn đã biết</b>:</span> <span class="wpcf7-form-control-wrap"
-          data-name="you_know"><span class="wpcf7-form-control wpcf7-radio"><span
-              class="wpcf7-list-item first"><label><input type="radio" name="you_know" value="Có" checked="checked"
-                  class="ct-checkbox"><span class="wpcf7-list-item-label">Có</span></label></span><span
-              class="wpcf7-list-item last"><label><input type="radio" name="you_know" value="Không"
-                  class="ct-checkbox"><span class="wpcf7-list-item-label">Không</span></label></span></span></span>
+        <span style="margin-right: 10px;"><b>Bạn đã biết</b>:</span> [radio you_know use_label_element default:1 "Có"
+        "Không"]
       </p>
       GAP là trung gian nhận ký gửi cho người cần bán và bán cho người cần mua, thay mặt người cần
       mua mà thương lượng mức giá, giá cả thuận mua vừa bán. Vậy nên tùy theo tình trạng mức giá thanh lý sẽ được định
@@ -39,9 +26,7 @@
   <div class="row">
     <div class="col-lg-6">
       <h5>Mức phí tại GAP</h5>
-      <label>Giá bán mong muống là giá</label> <span class="wpcf7-form-control-wrap" data-name="desired_price"><input
-          size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required money_format" aria-required="true"
-          aria-invalid="false" value="" type="text" name="desired_price"></span>
+      <label>Giá bán mong muống là giá</label> [text* desired_price class:money_format]
     </div>
 
   </div>
@@ -49,91 +34,55 @@
   <!-- Quần áo - Start  -->
   <div class="row">
     <div class="col-lg-12">
-      <span class="wpcf7-form-control-wrap" data-name="clothes_checkbox"><span
-          class="wpcf7-form-control wpcf7-checkbox"><span class="wpcf7-list-item first last"><label><input
-                type="checkbox" name="clothes_checkbox[]" value="Quần áo" checked="checked" class="ct-checkbox"><span
-                class="wpcf7-list-item-label">Quần áo</span></label></span></span></span>
+      [checkbox clothes_checkbox use_label_element default:1 "Quần áo"]
 
-      <div data-id="clothes_box" data-orig_data_id="clothes_box" data-class="wpcf7cf_group"
-        style="height: auto; display: block;" class="">
-        <div class="box_inner">
-          <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm
-            trở lên</div>
-          <div class="row">
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Mới</legend>
-                <label>Sản phẩm local</label> <span class="wpcf7-form-control-wrap" data-name="clothes_new_local"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" aria-invalid="false"
-                    placeholder="số lượng" value="" type="number" name="clothes_new_local"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="clothes_new_local_brand"><input
-                    size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true"
-                    aria-invalid="false" placeholder="Brand #1, Brand #2..." value="" type="text"
-                    name="clothes_new_local_brand"></span>
-                <label>Sản phẩm global</label> <span class="wpcf7-form-control-wrap"
-                  data-name="clothes_new_global"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" aria-invalid="false"
-                    placeholder="số lượng" value="" type="number" name="clothes_new_global"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="clothes_new_global_brand"><input
-                    size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true"
-                    aria-invalid="false" placeholder="Brand #1, Brand #2..." value="" type="text"
-                    name="clothes_new_global_brand"></span>
-              </fieldset>
-            </div>
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Qua sử dụng</legend>
-                Sản phẩm còn mới &gt; 80%:<br>
-                <span class="wpcf7-form-control-wrap" data-name="clothes_used_80"><span
-                    class="wpcf7-form-control wpcf7-radio"><span class="wpcf7-list-item first"><label><input
-                          type="radio" name="clothes_used_80" value="Có" checked="checked" class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Có</span></label></span><span
-                      class="wpcf7-list-item last"><label><input type="radio" name="clothes_used_80" value="Không"
-                          class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Không</span></label></span></span></span>
-
-                <label>Sản phẩm local</label> <span class="wpcf7-form-control-wrap"
-                  data-name="clothes_used_local"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" aria-invalid="false"
-                    placeholder="số lượng" value="" type="number" name="clothes_used_local"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="clothes_used_local_brand"><input
-                    size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true"
-                    aria-invalid="false" placeholder="Brand #1, Brand #2..." value="" type="text"
-                    name="clothes_used_local_brand"></span>
-                <label>Sản phẩm global</label> <span class="wpcf7-form-control-wrap"
-                  data-name="clothes_used_global"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" aria-invalid="false"
-                    placeholder="số lượng" value="" type="number" name="clothes_used_global"></span>
-                <label>Brand</label><span class="wpcf7-form-control-wrap" data-name="clothes_used_global_brand"><input
-                    size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true"
-                    aria-invalid="false" placeholder="Brand #1, Brand #2..." value="" type="text"
-                    name="clothes_used_global_brand"></span>
-              </fieldset>
-            </div>
-
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Hình ảnh</legend>
-
-                <div class="drop-zone">
-                  <span class="drop-zone__prompt">Kéo &amp; thả file vào đây hoặc bấm vào để tải lên</span>
-                  <span class="wpcf7-form-control-wrap" data-name="clothes_photo"><input size="40"
-                      class="wpcf7-form-control wpcf7-file wpcf7-validates-as-required drop-zone__input"
-                      accept=".png,.jpg,.jpeg" aria-required="true" aria-invalid="false" type="file"
-                      name="clothes_photo"></span>
-                </div>
-
-                <p>
-                  Định dạng: *.PNG, *.JPG, *.JPEG<br>
-                  Dung lượng tối đa của tập tin: 5MB
-                </p>
-                <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
-              </fieldset>
-            </div>
-
+      [group clothes_box]
+      <div class="box_inner">
+        <div style="color: red; margin-bottom: 20px; font-size: 14px">Lưu ý: Tổng số lượng mới + cũ phải từ 5 sản phẩm
+          trở lên</div>
+        <div class="row">
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Mới</legend>
+              <label>Sản phẩm local</label> [number clothes_new_local min:1 placeholder "số lượng"]
+              <label>Brand</label> [text* clothes_new_local_brand placeholder "Brand #1, Brand #2..."]
+              <label>Sản phẩm global</label> [number clothes_new_global min:1 placeholder "số lượng"]
+              <label>Brand</label> [text* clothes_new_global_brand placeholder "Brand #1, Brand #2..."]
+            </fieldset>
           </div>
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Qua sử dụng</legend>
+              Sản phẩm còn mới > 80%:<br>
+              [radio clothes_used_80 use_label_element default:1 "Có" "Không"]
+
+              <label>Sản phẩm local</label> [number clothes_used_local min:1 placeholder "số lượng"]
+              <label>Brand</label> [text* clothes_used_local_brand placeholder "Brand #1, Brand #2..."]
+              <label>Sản phẩm global</label> [number clothes_used_global min:1 placeholder "số lượng"]
+              <label>Brand</label>[text* clothes_used_global_brand placeholder "Brand #1, Brand #2..."]
+            </fieldset>
+          </div>
+
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Hình ảnh</legend>
+
+              <div class="drop-zone">
+                <span class="drop-zone__prompt">Kéo & thả file vào đây hoặc bấm vào để tải lên</span>
+                [file* clothes_photo filetypes:png|jpg|jpeg limit:5000000 class:drop-zone__input]
+              </div>
+
+              <p>
+                Định dạng: *.PNG, *.JPG, *.JPEG<br>
+                Dung lượng tối đa của tập tin: 5MB
+              </p>
+              <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
+            </fieldset>
+          </div>
+
         </div>
       </div>
+      [/group]
     </div>
   </div>
   <!-- Quần áo - End  -->
@@ -141,74 +90,50 @@
   <!-- Túi - Start  -->
   <div class="row">
     <div class="col-lg-12">
-      <span class="wpcf7-form-control-wrap" data-name="bag_checkbox"><span
-          class="wpcf7-form-control wpcf7-checkbox"><span class="wpcf7-list-item first last"><label><input
-                type="checkbox" name="bag_checkbox[]" value="Túi" checked="checked" class="ct-checkbox"><span
-                class="wpcf7-list-item-label">Túi</span></label></span></span></span>
+      [checkbox bag_checkbox use_label_element default:1 "Túi"]
 
-      <div data-id="bag_box" data-orig_data_id="bag_box" data-class="wpcf7cf_group"
-        style="height: auto; display: block;" class="">
-        <div class="box_inner">
-          <div class="row">
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Mới</legend>
-                <label>Số lượng</label> <span class="wpcf7-form-control-wrap" data-name="bag_new"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" aria-invalid="false"
-                    placeholder="số lượng" value="" type="number" name="bag_new"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="bag_new_brand"><input size="40"
-                    class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true"
-                    aria-invalid="false" placeholder="Brand #1, Brand #2..." value="" type="text"
-                    name="bag_new_brand"></span>
-                <p>***Nếu sản phẩm thuộc dòng thương hiệu high-end thì cần phải có bill hoặc trả mức phí kiểm định
-                  Entrupy
-                </p>
-              </fieldset>
-            </div>
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Qua sử dụng</legend>
-                Sản phẩm còn mới &gt; 90%:<br>
-                <span class="wpcf7-form-control-wrap" data-name="bag_used_90"><span
-                    class="wpcf7-form-control wpcf7-radio"><span class="wpcf7-list-item first"><label><input
-                          type="radio" name="bag_used_90" value="Có" checked="checked" class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Có</span></label></span><span
-                      class="wpcf7-list-item last"><label><input type="radio" name="bag_used_90" value="Không"
-                          class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Không</span></label></span></span></span>
-
-                <label>Số lượng</label> <span class="wpcf7-form-control-wrap" data-name="bag_used"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" aria-invalid="false"
-                    placeholder="số lượng" value="" type="number" name="bag_used"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="bag_used_brand"><input size="40"
-                    class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true"
-                    aria-invalid="false" placeholder="Brand #1, Brand #2..." value="" type="text"
-                    name="bag_used_brand"></span>
-              </fieldset>
-            </div>
-
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Hình ảnh</legend>
-                <div class="drop-zone">
-                  <span class="drop-zone__prompt">Kéo &amp; thả file vào đây hoặc bấm vào để tải lên</span>
-                  <span class="wpcf7-form-control-wrap" data-name="bag_photo"><input size="40"
-                      class="wpcf7-form-control wpcf7-file wpcf7-validates-as-required drop-zone__input"
-                      accept=".png,.jpg,.jpeg" aria-required="true" aria-invalid="false" type="file"
-                      name="bag_photo"></span>
-                </div>
-
-                <p>
-                  Định dạng: *.PNG, *.JPG, *.JPEG<br>
-                  Dung lượng tối đa của tập tin: 5MB
-                </p>
-                <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
-              </fieldset>
-            </div>
-
+      [group bag_box]
+      <div class="box_inner">
+        <div class="row">
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Mới</legend>
+              <label>Số lượng</label> [number bag_new min:1 placeholder "số lượng"]
+              <label>Brand</label> [text* bag_new_brand placeholder "Brand #1, Brand #2..."]
+              <p>***Nếu sản phẩm thuộc dòng thương hiệu high-end thì cần phải có bill hoặc trả mức phí kiểm định Entrupy
+              </p>
+            </fieldset>
           </div>
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Qua sử dụng</legend>
+              Sản phẩm còn mới > 90%:<br>
+              [radio bag_used_90 use_label_element default:1 "Có" "Không"]
+
+              <label>Số lượng</label> [number bag_used min:1 placeholder "số lượng"]
+              <label>Brand</label> [text* bag_used_brand placeholder "Brand #1, Brand #2..."]
+            </fieldset>
+          </div>
+
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Hình ảnh</legend>
+              <div class="drop-zone">
+                <span class="drop-zone__prompt">Kéo & thả file vào đây hoặc bấm vào để tải lên</span>
+                [file* bag_photo filetypes:png|jpg|jpeg limit:5000000 class:drop-zone__input]
+              </div>
+
+              <p>
+                Định dạng: *.PNG, *.JPG, *.JPEG<br>
+                Dung lượng tối đa của tập tin: 5MB
+              </p>
+              <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
+            </fieldset>
+          </div>
+
         </div>
       </div>
+      [/group]
     </div>
   </div>
   <!-- Túi - End  -->
@@ -216,111 +141,49 @@
   <!-- Giày - Start  -->
   <div class="row">
     <div class="col-lg-12">
-      <span class="wpcf7-form-control-wrap" data-name="shoe_checkbox"><span
-          class="wpcf7-form-control wpcf7-checkbox"><span class="wpcf7-list-item first last"><label><input
-                type="checkbox" name="shoe_checkbox[]" value="Giày" class="ct-checkbox"><span
-                class="wpcf7-list-item-label">Giày</span></label></span></span></span>
+      [checkbox shoe_checkbox use_label_element "Giày"]
 
-      <div data-id="shoe_box" data-orig_data_id="shoe_box" data-class="wpcf7cf_group" style="height: auto;"
-        class="wpcf7cf-hidden">
-        <div class="box_inner">
-          <div class="row">
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Mới</legend>
-                <label>Số lượng</label> <span class="wpcf7-form-control-wrap" data-name="shoe_new"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" aria-invalid="false"
-                    placeholder="số lượng" value="" type="number" name="shoe_new"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="shoe_new_brand"><select
-                    class="wpcf7-form-control wpcf7-select" aria-invalid="false" multiple="multiple"
-                    name="shoe_new_brand[]" data-placeholder="Chọn thương hiệu" style="display: none;">
-                    <option value="Adidas">Adidas</option>
-                    <option value="Nike">Nike</option>
-                    <option value="Reebox">Reebox</option>
-                    <option value="Converse">Converse</option>
-                    <option value="Skechers">Skechers</option>
-                    <option value="Fila">Fila</option>
-                    <option value="Puma">Puma</option>
-                  </select>
-                  <div class="chosen-container chosen-container-multi" title="" style="width: 100%;">
-                    <ul class="chosen-choices">
-                      <li class="search-field">
-                        <input class="chosen-search-input default" type="text" autocomplete="off"
-                          value="Chọn thương hiệu" style="width: 130.394px;">
-                      </li>
-                    </ul>
-                    <div class="chosen-drop">
-                      <ul class="chosen-results"></ul>
-                    </div>
-                  </div>
-                </span>
-                <p>***Nếu sản phẩm thuộc dòng thương hiệu high-end thì cần phải có bill hoặc trả mức phí kiểm định
-                  Entrupy
-                </p>
-              </fieldset>
-            </div>
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Qua sử dụng</legend>
-                Sản phẩm còn mới &gt; 90%:<br>
-                <span class="wpcf7-form-control-wrap" data-name="shoe_used_90"><span
-                    class="wpcf7-form-control wpcf7-radio"><span class="wpcf7-list-item first"><label><input
-                          type="radio" name="shoe_used_90" value="Có" checked="checked" class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Có</span></label></span><span
-                      class="wpcf7-list-item last"><label><input type="radio" name="shoe_used_90" value="Không"
-                          class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Không</span></label></span></span></span>
-                <label>Số lượng</label> <span class="wpcf7-form-control-wrap" data-name="shoe_used"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" aria-invalid="false"
-                    placeholder="số lượng" value="" type="number" name="shoe_used"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="shoe_used_brand"><select
-                    class="wpcf7-form-control wpcf7-select" aria-invalid="false" multiple="multiple"
-                    name="shoe_used_brand[]" data-placeholder="Chọn thương hiệu" style="display: none;">
-                    <option value="Adidas">Adidas</option>
-                    <option value="Nike">Nike</option>
-                    <option value="Reebox">Reebox</option>
-                    <option value="Converse">Converse</option>
-                    <option value="Skechers">Skechers</option>
-                    <option value="Fila">Fila</option>
-                    <option value="Puma">Puma</option>
-                  </select>
-                  <div class="chosen-container chosen-container-multi" title="" style="width: 100%;">
-                    <ul class="chosen-choices">
-                      <li class="search-field">
-                        <input class="chosen-search-input default" type="text" autocomplete="off"
-                          value="Chọn thương hiệu" style="width: 130.394px;">
-                      </li>
-                    </ul>
-                    <div class="chosen-drop">
-                      <ul class="chosen-results"></ul>
-                    </div>
-                  </div>
-                </span>
-                <p>***Sản phẩm đã qua sử dụng, vui lòng vệ sinh trước khi gửi đến cửa hàng</p>
-              </fieldset>
-            </div>
-
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Hình ảnh</legend>
-                <div class="drop-zone">
-                  <span class="drop-zone__prompt">Kéo &amp; thả file vào đây hoặc bấm vào để tải lên</span>
-                  <span class="wpcf7-form-control-wrap" data-name="shoe_photo"><input size="40"
-                      class="wpcf7-form-control wpcf7-file wpcf7-validates-as-required drop-zone__input"
-                      accept=".png,.jpg,.jpeg" aria-required="true" aria-invalid="false" type="file"
-                      name="shoe_photo"></span>
-                </div>
-                <p>
-                  Định dạng: *.PNG, *.JPG, *.JPEG<br>
-                  Dung lượng tối đa của tập tin: 5MB
-                </p>
-                <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
-              </fieldset>
-            </div>
-
+      [group shoe_box]
+      <div class="box_inner">
+        <div class="row">
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Mới</legend>
+              <label>Số lượng</label> [number shoe_new min:1 placeholder "số lượng"]
+              <label>Brand</label> [select shoe_new_brand multiple "Adidas" "Nike" "Reebox"]
+              <p>***Nếu sản phẩm thuộc dòng thương hiệu high-end thì cần phải có bill hoặc trả mức phí kiểm định Entrupy
+              </p>
+            </fieldset>
           </div>
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Qua sử dụng</legend>
+              Sản phẩm còn mới > 90%:<br>
+              [radio shoe_used_90 use_label_element default:1 "Có" "Không"]
+              <label>Số lượng</label> [number shoe_used min:1 placeholder "số lượng"]
+              <label>Brand</label> [select shoe_used_brand multiple "Adidas" "Nike" "Reebox"]
+              <p>***Sản phẩm đã qua sử dụng, vui lòng vệ sinh trước khi gửi đến cửa hàng</p>
+            </fieldset>
+          </div>
+
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Hình ảnh</legend>
+              <div class="drop-zone">
+                <span class="drop-zone__prompt">Kéo & thả file vào đây hoặc bấm vào để tải lên</span>
+                [file* shoe_photo filetypes:png|jpg|jpeg limit:5000000 class:drop-zone__input]
+              </div>
+              <p>
+                Định dạng: *.PNG, *.JPG, *.JPEG<br>
+                Dung lượng tối đa của tập tin: 5MB
+              </p>
+              <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
+            </fieldset>
+          </div>
+
         </div>
       </div>
+      [/group]
     </div>
   </div>
   <!-- Giày - End  -->
@@ -328,135 +191,56 @@
   <!-- Mỹ phẩm - Start  -->
   <div class="row">
     <div class="col-lg-12">
-      <span class="wpcf7-form-control-wrap" data-name="cosmetic_checkbox"><span
-          class="wpcf7-form-control wpcf7-checkbox"><span class="wpcf7-list-item first last"><label><input
-                type="checkbox" name="cosmetic_checkbox[]" value="Mỹ phẩm" class="ct-checkbox"><span
-                class="wpcf7-list-item-label">Mỹ phẩm</span></label></span></span></span>
+      [checkbox cosmetic_checkbox use_label_element "Mỹ phẩm"]
 
-      <div data-id="cosmetic_box" data-orig_data_id="cosmetic_box" data-class="wpcf7cf_group" style="height: auto;"
-        class="wpcf7cf-hidden">
-        <div class="box_inner">
-          <div class="row">
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Mới</legend>
-                Còn date &gt; 6 tháng:<br>
-                <span class="wpcf7-form-control-wrap" data-name="cosmetic_new_6"><span
-                    class="wpcf7-form-control wpcf7-radio"><span class="wpcf7-list-item first"><label><input
-                          type="radio" name="cosmetic_new_6" value="Có" checked="checked" class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Có</span></label></span><span
-                      class="wpcf7-list-item last"><label><input type="radio" name="cosmetic_new_6" value="Không"
-                          class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Không</span></label></span></span></span>
+      [group cosmetic_box]
+      <div class="box_inner">
+        <div class="row">
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Mới</legend>
+              Còn date > 6 tháng:<br>
+              [radio cosmetic_new_6 use_label_element default:1 "Có" "Không"]
 
-                <label>Số lượng</label> <span class="wpcf7-form-control-wrap" data-name="cosmetic_new"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" max="30"
-                    aria-invalid="false" placeholder="1-30" value="" type="number" name="cosmetic_new"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="cosmetic_new_brand"><select
-                    class="wpcf7-form-control wpcf7-select" aria-invalid="false" multiple="multiple"
-                    name="cosmetic_new_brand[]" data-placeholder="Chọn thương hiệu" style="display: none;">
-                    <option value="L'Oréal">L'Oréal</option>
-                    <option value="Estee Lauder">Estee Lauder</option>
-                    <option value="MAC Cosmetics">MAC Cosmetics</option>
-                    <option value="Maybelline">Maybelline</option>
-                    <option value="Urban Decay">Urban Decay</option>
-                    <option value="Lancôme">Lancôme</option>
-                    <option value="Clinique">Clinique</option>
-                    <option value="Dior">Dior</option>
-                    <option value="Chanel">Chanel</option>
-                    <option value="Clarins">Clarins</option>
-                  </select>
-                  <div class="chosen-container chosen-container-multi" title="" style="width: 100%;">
-                    <ul class="chosen-choices">
-                      <li class="search-field">
-                        <input class="chosen-search-input default" type="text" autocomplete="off"
-                          value="Chọn thương hiệu" style="width: 130.394px;">
-                      </li>
-                    </ul>
-                    <div class="chosen-drop">
-                      <ul class="chosen-results"></ul>
-                    </div>
-                  </div>
-                </span>
-                <p>***Tem nhãn và thương hiệu phải còn nguyên không được mờ, rách. Sản phẩm cần được đóng gói để đảm bảo
-                </p>
-              </fieldset>
-            </div>
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Qua sử dụng</legend>
-                Còn date &gt; 6 tháng:<br>
-                <span class="wpcf7-form-control-wrap" data-name="cosmetic_used_6"><span
-                    class="wpcf7-form-control wpcf7-radio"><span class="wpcf7-list-item first"><label><input
-                          type="radio" name="cosmetic_used_6" value="Có" checked="checked" class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Có</span></label></span><span
-                      class="wpcf7-list-item last"><label><input type="radio" name="cosmetic_used_6" value="Không"
-                          class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Không</span></label></span></span></span><br>
-                Dung tích &gt; 80%:<br>
-                <span class="wpcf7-form-control-wrap" data-name="cosmetic_used_capacity_80"><span
-                    class="wpcf7-form-control wpcf7-radio"><span class="wpcf7-list-item first"><label><input
-                          type="radio" name="cosmetic_used_capacity_80" value="Có" checked="checked"
-                          class="ct-checkbox"><span class="wpcf7-list-item-label">Có</span></label></span><span
-                      class="wpcf7-list-item last"><label><input type="radio" name="cosmetic_used_capacity_80"
-                          value="Không" class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Không</span></label></span></span></span>
-
-                <label>Số lượng</label> <span class="wpcf7-form-control-wrap" data-name="cosmetic_used"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" max="30"
-                    aria-invalid="false" placeholder="1-30" value="" type="number" name="cosmetic_used"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="cosmetic_used_brand"><select
-                    class="wpcf7-form-control wpcf7-select" aria-invalid="false" multiple="multiple"
-                    name="cosmetic_used_brand[]" data-placeholder="Chọn thương hiệu" style="display: none;">
-                    <option value="L'Oréal">L'Oréal</option>
-                    <option value="Estee Lauder">Estee Lauder</option>
-                    <option value="MAC Cosmetics">MAC Cosmetics</option>
-                    <option value="Maybelline">Maybelline</option>
-                    <option value="Urban Decay">Urban Decay</option>
-                    <option value="Lancôme">Lancôme</option>
-                    <option value="Clinique">Clinique</option>
-                    <option value="Dior">Dior</option>
-                    <option value="Chanel">Chanel</option>
-                    <option value="Clarins">Clarins</option>
-                  </select>
-                  <div class="chosen-container chosen-container-multi" title="" style="width: 100%;">
-                    <ul class="chosen-choices">
-                      <li class="search-field">
-                        <input class="chosen-search-input default" type="text" autocomplete="off"
-                          value="Chọn thương hiệu" style="width: 130.394px;">
-                      </li>
-                    </ul>
-                    <div class="chosen-drop">
-                      <ul class="chosen-results"></ul>
-                    </div>
-                  </div>
-                </span>
-                <p>***Tem nhãn và thương hiệu phải còn nguyên không được mờ, rách. Sản phẩm cần được đóng gói để đảm bảo
-                </p>
-              </fieldset>
-            </div>
-
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Hình ảnh</legend>
-                <div class="drop-zone">
-                  <span class="drop-zone__prompt">Kéo &amp; thả file vào đây hoặc bấm vào để tải lên</span>
-                  <span class="wpcf7-form-control-wrap" data-name="cosmetic_photo"><input size="40"
-                      class="wpcf7-form-control wpcf7-file wpcf7-validates-as-required drop-zone__input"
-                      accept=".png,.jpg,.jpeg" aria-required="true" aria-invalid="false" type="file"
-                      name="cosmetic_photo"></span>
-                </div>
-                <p>
-                  Định dạng: *.PNG, *.JPG, *.JPEG<br>
-                  Dung lượng tối đa của tập tin: 5MB
-                </p>
-                <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
-              </fieldset>
-            </div>
-
+              <label>Số lượng</label> [number cosmetic_new min:1 max:30 placeholder "1-30"]
+              <label>Brand</label> [select cosmetic_new_brand multiple "L'Oréal" "Estee Lauder" "MAC"]
+              <p>***Tem nhãn và thương hiệu phải còn nguyên không được mờ, rách. Sản phẩm cần được đóng gói để đảm bảo
+              </p>
+            </fieldset>
           </div>
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Qua sử dụng</legend>
+              Còn date > 6 tháng:<br>
+              [radio cosmetic_used_6 use_label_element default:1 "Có" "Không"]<br>
+              Dung tích > 80%:<br>
+              [radio cosmetic_used_capacity_80 use_label_element default:1 "Có" "Không"]
+
+              <label>Số lượng</label> [number cosmetic_used min:1 max:30 placeholder "1-30"]
+              <label>Brand</label> [select cosmetic_used_brand multiple "L'Oréal" "Estee Lauder" "MAC"]
+              <p>***Tem nhãn và thương hiệu phải còn nguyên không được mờ, rách. Sản phẩm cần được đóng gói để đảm bảo
+              </p>
+            </fieldset>
+          </div>
+
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Hình ảnh</legend>
+              <div class="drop-zone">
+                <span class="drop-zone__prompt">Kéo & thả file vào đây hoặc bấm vào để tải lên</span>
+                [file* cosmetic_photo filetypes:png|jpg|jpeg limit:5000000 class:drop-zone__input]
+              </div>
+              <p>
+                Định dạng: *.PNG, *.JPG, *.JPEG<br>
+                Dung lượng tối đa của tập tin: 5MB
+              </p>
+              <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
+            </fieldset>
+          </div>
+
         </div>
       </div>
+      [/group]
     </div>
   </div>
   <!-- Mỹ phẩm - End  -->
@@ -464,123 +248,57 @@
   <!-- Nước hoa - Start  -->
   <div class="row">
     <div class="col-lg-12">
-      <span class="wpcf7-form-control-wrap" data-name="perfume_checkbox"><span
-          class="wpcf7-form-control wpcf7-checkbox"><span class="wpcf7-list-item first last"><label><input
-                type="checkbox" name="perfume_checkbox[]" value="Nước hoa" class="ct-checkbox"><span
-                class="wpcf7-list-item-label">Nước hoa</span></label></span></span></span>
+      [checkbox perfume_checkbox use_label_element "Nước hoa"]
 
-      <div data-id="perfume_box" data-orig_data_id="perfume_box" data-class="wpcf7cf_group" style="height: auto;"
-        class="wpcf7cf-hidden">
-        <div class="box_inner">
-          <div class="row">
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Mới</legend>
-                <label>Số lượng</label> <span class="wpcf7-form-control-wrap" data-name="perfume_new"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" max="30"
-                    aria-invalid="false" placeholder="1-30" value="" type="number" name="perfume_new"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="perfume_new_brand"><select
-                    class="wpcf7-form-control wpcf7-select" aria-invalid="false" multiple="multiple"
-                    name="perfume_new_brand[]" data-placeholder="Chọn thương hiệu" style="display: none;">
-                    <option value="Dior">Dior</option>
-                    <option value="Yves Saint Laurent">Yves Saint Laurent</option>
-                    <option value="Guerlain">Guerlain</option>
-                    <option value="Calvin Klein">Calvin Klein</option>
-                    <option value="Burberry">Burberry</option>
-                    <option value="Bvlgari">Bvlgari</option>
-                    <option value="Gucci">Gucci</option>
-                  </select>
-                  <div class="chosen-container chosen-container-multi" title="" style="width: 100%;">
-                    <ul class="chosen-choices">
-                      <li class="search-field">
-                        <input class="chosen-search-input default" type="text" autocomplete="off"
-                          value="Chọn thương hiệu" style="width: 130.394px;">
-                      </li>
-                    </ul>
-                    <div class="chosen-drop">
-                      <ul class="chosen-results"></ul>
-                    </div>
-                  </div>
-                </span>
-              </fieldset>
-            </div>
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Qua sử dụng</legend>
-                Dung tích &gt; 80%:<br>
-                <span class="wpcf7-form-control-wrap" data-name="perfume_used_capacity_80"><span
-                    class="wpcf7-form-control wpcf7-radio"><span class="wpcf7-list-item first"><label><input
-                          type="radio" name="perfume_used_capacity_80" value="Có" checked="checked"
-                          class="ct-checkbox"><span class="wpcf7-list-item-label">Có</span></label></span><span
-                      class="wpcf7-list-item last"><label><input type="radio" name="perfume_used_capacity_80"
-                          value="Không" class="ct-checkbox"><span
-                          class="wpcf7-list-item-label">Không</span></label></span></span></span>
-
-                <label>Số lượng</label> <span class="wpcf7-form-control-wrap" data-name="perfume_used"><input
-                    class="wpcf7-form-control wpcf7-number wpcf7-validates-as-number" min="1" max="30"
-                    aria-invalid="false" placeholder="1-30" value="" type="number" name="perfume_used"></span>
-                <label>Brand</label> <span class="wpcf7-form-control-wrap" data-name="perfume_used_brand"><select
-                    class="wpcf7-form-control wpcf7-select" aria-invalid="false" multiple="multiple"
-                    name="perfume_used_brand[]" data-placeholder="Chọn thương hiệu" style="display: none;">
-                    <option value="Dior">Dior</option>
-                    <option value="Yves Saint Laurent">Yves Saint Laurent</option>
-                    <option value="Guerlain">Guerlain</option>
-                    <option value="Calvin Klein">Calvin Klein</option>
-                    <option value="Burberry">Burberry</option>
-                    <option value="Bvlgari">Bvlgari</option>
-                    <option value="Gucci">Gucci</option>
-                  </select>
-                  <div class="chosen-container chosen-container-multi" title="" style="width: 100%;">
-                    <ul class="chosen-choices">
-                      <li class="search-field">
-                        <input class="chosen-search-input default" type="text" autocomplete="off"
-                          value="Chọn thương hiệu" style="width: 130.394px;">
-                      </li>
-                    </ul>
-                    <div class="chosen-drop">
-                      <ul class="chosen-results"></ul>
-                    </div>
-                  </div>
-                </span>
-              </fieldset>
-            </div>
-
-            <div class="col-lg-4">
-              <fieldset>
-                <legend>Hình ảnh</legend>
-                <div class="drop-zone">
-                  <span class="drop-zone__prompt">Kéo &amp; thả file vào đây hoặc bấm vào để tải lên</span>
-                  <span class="wpcf7-form-control-wrap" data-name="perfume_photo"><input size="40"
-                      class="wpcf7-form-control wpcf7-file wpcf7-validates-as-required drop-zone__input"
-                      accept=".png,.jpg,.jpeg" aria-required="true" aria-invalid="false" type="file"
-                      name="perfume_photo"></span>
-                </div>
-                <p>
-                  Định dạng: *.PNG, *.JPG, *.JPEG<br>
-                  Dung lượng tối đa của tập tin: 5MB
-                </p>
-                <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
-              </fieldset>
-            </div>
-
+      [group perfume_box]
+      <div class="box_inner">
+        <div class="row">
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Mới</legend>
+              <label>Số lượng</label> [number perfume_new min:1 max:30 placeholder "1-30"]
+              <label>Brand</label> [select perfume_new_brand multiple "Dior" "Armani" "Bvlgari"]
+            </fieldset>
           </div>
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Qua sử dụng</legend>
+              Dung tích > 80%:<br>
+              [radio perfume_used_capacity_80 use_label_element default:1 "Có" "Không"]
+
+              <label>Số lượng</label> [number perfume_used min:1 max:30 placeholder "1-30"]
+              <label>Brand</label> [select perfume_used_brand multiple "Dior" "Armani" "Bvlgari"]
+            </fieldset>
+          </div>
+
+          <div class="col-lg-4">
+            <fieldset>
+              <legend>Hình ảnh</legend>
+              <div class="drop-zone">
+                <span class="drop-zone__prompt">Kéo & thả file vào đây hoặc bấm vào để tải lên</span>
+                [file* perfume_photo filetypes:png|jpg|jpeg limit:5000000 class:drop-zone__input]
+              </div>
+              <p>
+                Định dạng: *.PNG, *.JPG, *.JPEG<br>
+                Dung lượng tối đa của tập tin: 5MB
+              </p>
+              <p><a href="/huong-dan-chup-hinh" target="_blank">Hướng dẫn chụp hình</a></p>
+            </fieldset>
+          </div>
+
         </div>
       </div>
+      [/group]
     </div>
   </div>
   <!-- Nước hoa - End  -->
 
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2" style="text-align: center">
-      <span class="wpcf7-form-control-wrap" data-name="agree_checkbox"><span
-          class="wpcf7-form-control wpcf7-acceptance"><span class="wpcf7-list-item"><label><input type="checkbox"
-                name="agree_checkbox" value="1" aria-invalid="false" class="ct-checkbox"><span
-                class="wpcf7-list-item-label">Tôi cam kết sản phẩm trên là sản phẩm chính hãng. Bảng tổng kết sẽ được
-                gửi qua Zalo, thanh toán chuyển khoản, phí ship hai đầu do khách
-                chịu.</span></label></span></span></span>
+      [acceptance agree_checkbox]Tôi cam kết sản phẩm trên là sản phẩm chính hãng. Bảng tổng kết sẽ được
+      gửi qua Zalo, thanh toán chuyển khoản, phí ship hai đầu do khách chịu.[/acceptance]
       <div style="margin-top: 10px">
-        <label style="display: inline-block"><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit"
-            value="Ký gửi" disabled=""><span class="wpcf7-spinner"></span></label>
+        <label style="display: inline-block">[submit "Ký gửi"]</label>
       </div>
     </div>
   </div>

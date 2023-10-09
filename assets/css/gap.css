@@ -491,8 +491,7 @@ body:not(.home) .ct-footer {
       background-color: var(--paletteColor6);
       text-align: center; }
   .gap_booking .gap_times {
-    padding-left: 20px;
-    padding-right: 40px;
+    padding: 20px 40px 0px 20px;
     position: relative; }
     .gap_booking .gap_times label input {
       display: none; }
@@ -510,7 +509,7 @@ body:not(.home) .ct-footer {
       border-radius: 6px;
       font-weight: 700;
       font-size: 16px;
-      margin-top: 20px;
+      margin-top: 10px;
       padding: 20px;
       display: block;
       text-align: center;
@@ -665,5 +664,21 @@ body:not(.home) .ct-footer {
         color: #aaa;
         background-color: var(--paletteColor6);
         cursor: not-allowed; }
+
+.datlichcuahang {
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 1px solid var(--paletteColor4);
+  border-radius: 10px; }
+  .datlichcuahang-inner {
+    max-width: 739px;
+    margin: 0 auto; }
+  .datlichcuahang .row + .row {
+    margin-top: 1.5rem; }
+  .datlichcuahang div[data-class=wpcf7cf_group] {
+    margin-top: 1rem;
+    margin-bottom: 30px; }
+    .datlichcuahang div[data-class=wpcf7cf_group] .row + .row {
+      margin-top: .5rem; }
 
 /*# sourceMappingURL=gap.css.map */

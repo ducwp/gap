@@ -1,0 +1,123 @@
+[uacf7_step_start uacf7_step_start-30 "Step 1"]
+<div class="gap_booking">
+  <div class="gb_header">
+    <div class="row">
+      <div class="col-lg-6"><span class="gap_booking_header"><img
+            src="https://gap.dev/wp-content/themes/gap/assets/img/date.svg" width="24" height="24"> Chọn ngày</span>
+      </div>
+      <div class="col-lg-6"><span class="gap_booking_header gbh_right"><img
+            src="https://gap.dev/wp-content/themes/gap/assets/img/date.svg" width="24" height="24"> Hôm nay: 9 Tháng
+          Mười, 2023</span></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      [gap_calendar gap_calendar]
+    </div>
+    <div class="col-lg-6 wpcf7-form-control-wrap">
+
+      [gap_time gap_time]
+
+      <div class="gap_notes"><span class="gap_note">Đã hết chỗ</span><span class="gap_note gn_available">Còn
+          trống</span><span class="gap_note gn_selected">Đang chọn</span></div>
+    </div>
+  </div>
+</div>
+[uacf7_step_end end]
+[uacf7_step_start uacf7_step_start-31 "Step 2"]
+<div class="datlichcuahang">
+
+  <div class="datlichcuahang-inner">
+
+    <div class="row">
+      <div class="col-lg-12">
+        Địa chỉ tại 69 Nguyễn Trọng Tuyển,<br>P.15, Q. Phú Nhuận, TP. HCM (<a href="#">Hướng dẫn đường đi</a>)
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">Tên</div>
+      <div class="col-lg-8">[text* name]</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">Số điện thoại</div>
+      <div class="col-lg-8">[text* phone]</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">Số lượng sản phẩm (1-10)</div>
+      <div class="col-lg-8">[number* quantity min:1 max:10]</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">Bạn cần thanh lý những sản phẩm nào sau đây</div>
+    </div>
+
+    <!-- Quần áo -->
+    <div class="row">
+      <div class="col-lg-12">[checkbox clothes_checkbox use_label_element default:1 "Quần áo"]</div>
+    </div>
+    [group clothes_box]
+    <div class="row">
+      <div class="col-lg-4">Có thương hiệu (local/global)</div>
+      <div class="col-lg-8">[radio clothes_has_brand use_label_element default:1 "Có" "Không"]</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">Số lượng tối thiểu > 5</div>
+      <div class="col-lg-8">[radio clothes_min_quantity_5 use_label_element default:1 "Có" "Không"]</div>
+    </div>
+    [/group]
+
+    <!-- Túi/Giày-->
+    <div class="row">
+      <div class="col-lg-12">[checkbox bagshoe_checkbox use_label_element "Túi/giày"]</div>
+    </div>
+    [group bagshoe_box]
+    <div class="row">
+      <div class="col-lg-4">Sản phẩm bạn ký gửi thuộc thương hiệu</div>
+      <div class="col-lg-8">[text* bagshoe_brands]</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">Tình trạng sản phẩm còn mới từ 80%</div>
+      <div class="col-lg-8">[radio bagshoe_new_80 use_label_element default:1 "Có" "Không"]</div>
+    </div>
+    [/group]
+
+    <!-- Mỹ phẩm/nước hoa-->
+    <div class="row">
+      <div class="col-lg-12">[checkbox cosmeticperfume_checkbox use_label_element "Mỹ phẩm/nước hoa"]</div>
+    </div>
+    [group cosmeticperfume_box]
+    <div class="row">
+      <div class="col-lg-4">Còn date > 6 tháng</div>
+      <div class="col-lg-8">[radio cosmeticperfume_date_6 use_label_element default:1 "Có" "Không"]</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">Dung tích > 80%</div>
+      <div class="col-lg-8">[radio cosmeticperfume_cap_80 use_label_element default:1 "Có" "Không"]</div>
+    </div>
+    [/group]
+
+    <!-- Phụ kiện -->
+    <div class="row">
+      <div class="col-lg-12">[checkbox accessory_checkbox use_label_element "Phụ kiện (kính mắt, trang sức)"]</div>
+    </div>
+    [group accessory_box]
+    <div class="row">
+      <div class="col-lg-4">Tình trạng còn mới > 80</div>
+      <div class="col-lg-8">[radio accessory_new_80 use_label_element default:1 "Có" "Không"]</div>
+    </div>
+    [/group]
+
+
+  </div>
+</div>
+<div style="max-width: 739px; margin: 0 auto; text-align: center;">
+  <p> [acceptance agree_checkbox]Tôi đảm bảo tất cả sản phẩm ký gửi là chính hãng (authentic) [/acceptance]</p>
+  <div style="margin-top: 10px">
+    <label style="display: inline-block">[submit "Ký gửi"]</label>
+  </div>
+</div>
+[uacf7_step_end end]

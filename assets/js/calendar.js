@@ -27,8 +27,7 @@ const renderCalendar = () => {
 
     let isTodayRadioChecked = i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() ? "checked" : "";
 
-    //const mdy = `${currMonth + 1}/${i}/${currYear}`;
-    const mdy = `${currMonth + 1}-${i}-${currYear}`;
+    const mdy = `${currMonth + 1}/${i}/${currYear}`;
     liTag += `<li data-mdy="${mdy}">`;
     liTag += `<label><input type="radio" name="gap_day" value="${mdy}" ${isTodayRadioChecked} /> `;
     liTag += `<span class="gt_text">${i}</span></label></li>`;
