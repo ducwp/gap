@@ -45,17 +45,10 @@ class CF7 {
       <div class="icons">
         <span id="prev" class="material-symbols-rounded">chevron_left</span>
         <span id="next" class="material-symbols-rounded">chevron_right</span>
-      </div>
-    </header>
+      </div></header>
     <div class="calendar">
       <ul class="weeks">
-        <li>Sun</li>
-        <li>Mon</li>
-        <li>Tue</li>
-        <li>Wed</li>
-        <li>Thu</li>
-        <li>Fri</li>
-        <li>Sat</li>
+        <li>Sun</li><li>Mon</li><li>Tue</li><li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li>
       </ul>
       <ul class="days"></ul>
     </div>
@@ -140,7 +133,7 @@ class CF7 {
       }
     } */
 
-    $gap_day = absint($_POST['gap_day']);
+    $gap_day = $_POST['gap_day'];
     if (empty($gap_day)) {
       $result->invalidate($tag, "Vui lòng chọn ngày");
     }
@@ -167,9 +160,7 @@ class CF7 {
       }
     } */
 
-    file_put_contents("D:/_POST.txt", json_encode($_POST));
-
-    $gap_time = absint($_POST['gap_time']);
+    $gap_time = $_POST['gap_time'];
     if (empty($gap_time)) {
       $result->invalidate($tag, "Vui lòng chọn thời gian");
     }
