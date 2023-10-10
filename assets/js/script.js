@@ -1,9 +1,36 @@
 jQuery(document).ready(function ($) {
 
-  /* */
-  $('input[name=gap_date]').click(function () {
-    var date = $(this).val();
+  $.fn.gap_load_time = function (date) {
     $.ajax({
+      url: gap.ajax_url,
+      type: 'POST',
+      data: {
+        action: 'gap_click_date',
+        date: date,
+        nonce: gap.nonce
+      },
+      success: function (response) {
+        console.log(response.data);
+        $('#gap_time_ajax').html(response.data);
+      },
+      error: function (error) {
+        alert("error");
+        //code
+        console.log(error);
+      }
+    });
+  }
+
+  //$.fn.gap_load_time('10/10/2023');
+
+  /* */
+  $(document).on('click', 'input[name=gap_date]', function (e) {
+    var old_html = $('#gap_time_ajax').html();
+    $('#gap_time_ajax').html("Loading...");
+    var date = $(this).val();
+
+    $.fn.gap_load_time(date);
+    /* $.ajax({
       url: gap.ajax_url,
       type: 'POST',
       data: {
@@ -19,7 +46,7 @@ jQuery(document).ready(function ($) {
         //code
         console.log(error);
       }
-    });
+    }); */
   });
 
   var billing_phone = $('#current_user_billing_phone').val();

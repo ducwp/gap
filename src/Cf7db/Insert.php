@@ -121,8 +121,8 @@ class Insert {
         'form_date' => $form_date,
         'form_type' => $form_type,
         'user_id' => $this->user_id,
-        'date' => $date,
-        'time' => $time,
+        'gap_date' => $date,
+        'gap_time' => $time,
       ));
 
       /* cfdb7 after save data */
