@@ -16,8 +16,8 @@ class Init {
 
     add_action('wp', [$this, 'gap_check_user_login']);
     Form::instance();
-    Insert::instance();
-    new Mainpage();
+    //Insert::instance();
+    //new Mainpage();
 
     $csv = new Export_CSV();
     if (isset($_REQUEST['csv']) && ($_REQUEST['csv'] == true) && isset($_REQUEST['nonce'])) {

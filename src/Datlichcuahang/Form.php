@@ -1,7 +1,7 @@
 <?php
 namespace GAPTheme\Datlichcuahang;
 
-class CF7 {
+class Form {
   private static $_instance = null;
   public static function instance() {
     if (!isset(self::$_instance)) {

@@ -1,5 +1,5 @@
-<?php 
-namespace GAPTheme\Datlichcuahang;
+<?php
+namespace GAPTheme\Cf7db;
 
 class Init {
   private static $_instance = null;
@@ -11,6 +11,7 @@ class Init {
   }
 
   private function __construct() {
-    Form::instance();
+    Insert::instance();
+    new Mainpage();
   }
 }

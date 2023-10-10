@@ -25,6 +25,9 @@ jQuery(document).ready(function ($) {
     $('#scr2').hide();
   });
 
+  $('button.uacf7-prev').text('Về trước');
+  $('button.uacf7-next').text('Tiếp theo');
+
   //$('.calendar-wrapper').calendar();
 
   $('.navigable').contentNavigation({

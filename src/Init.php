@@ -15,9 +15,9 @@ class Init {
 
     Hooks::instance();
     Shortcodes::instance();
-    
     Firebase::instance();
     WooCommerce::instance();
+    Cf7db\Init::instance();
     Phuongthuckygui\Init::instance();
     Datlichcuahang\Init::instance();
     Kyguionline\Init::instance();

@@ -31,17 +31,17 @@
 
     <div class="row">
       <div class="col-lg-12">
-        Địa chỉ tại 69 Nguyễn Trọng Tuyển,<br>P.15, Q. Phú Nhuận, TP. HCM (<a href="#">Hướng dẫn đường đi</a>)
+					<div class="gap_address">Địa chỉ tại 69 Nguyễn Trọng Tuyển,<br>P.15, Q. Phú Nhuận, TP. HCM (<a href="#gap_map" rel="modal:open">Hướng dẫn đường đi</a>)</div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-4">Tên</div>
-      <div class="col-lg-8">[text* name]</div>
+      <div class="col-lg-8">[text* name autocomplete:name default:user_display_name]</div>
     </div>
     <div class="row">
       <div class="col-lg-4">Số điện thoại</div>
-      <div class="col-lg-8">[text* phone]</div>
+      <div class="col-lg-8">[tel* phone autocomplete:phone default:billing_phone]</div>
     </div>
     <div class="row">
       <div class="col-lg-4">Số lượng sản phẩm (1-10)</div>
@@ -120,4 +120,5 @@
     <label style="display: inline-block">[submit "Ký gửi"]</label>
   </div>
 </div>
+[hidden form_type id:form_type class:form_type "offline"]
 [uacf7_step_end end]

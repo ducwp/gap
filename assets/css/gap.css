@@ -444,7 +444,7 @@ body:not(.home) .ct-footer {
 .kyguionline .box_inner {
   background-color: var(--has-classic-forms, var(--form-field-initial-background));
   padding: 15px 20px 20px;
-  border-radius: 10px;
+  border-radius: 6px;
   margin-top: 10px; }
 .kyguionline p {
   margin-bottom: 0; }
@@ -467,7 +467,8 @@ body:not(.home) .ct-footer {
 /* Dat lich cua hang */
 .gap_booking {
   border: 1px solid var(--paletteColor4);
-  margin: 30px 0; }
+  margin: 30px 0;
+  border-radius: 6px; }
   .gap_booking .gb_header {
     border-bottom: 1px solid var(--paletteColor4); }
   .gap_booking .calendar-wrapper {
@@ -669,7 +670,7 @@ body:not(.home) .ct-footer {
   padding: 30px;
   margin-bottom: 30px;
   border: 1px solid var(--paletteColor4);
-  border-radius: 10px; }
+  border-radius: 6px; }
   .datlichcuahang-inner {
     max-width: 739px;
     margin: 0 auto; }
@@ -680,5 +681,21 @@ body:not(.home) .ct-footer {
     margin-bottom: 30px; }
     .datlichcuahang div[data-class=wpcf7cf_group] .row + .row {
       margin-top: .5rem; }
+  .datlichcuahang .gap_address {
+    background: url("../img/location.svg") left center no-repeat;
+    background-size: 36px;
+    padding-left: 46px;
+    font-weight: 700;
+    margin-bottom: 30px; }
+    .datlichcuahang .gap_address a {
+      font-weight: 400;
+      text-decoration: underline; }
+
+.uacf7-step.step-content button.uacf7-prev,
+.uacf7-step.step-content button.uacf7-next {
+  padding: 5px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px; }
 
 /*# sourceMappingURL=gap.css.map */
