@@ -11,6 +11,7 @@ class Init {
   }
 
   private function __construct() {
+    Import::instance();
     add_action('elementor_pro/forms/actions/register', function ($form_actions_registrar) {
       $form_actions_registrar->register(new GetData());
     });

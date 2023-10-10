@@ -12,8 +12,8 @@ class Form {
 
   private function __construct() {
     add_action('wpcf7_init', [$this, 'add_form_tags']);
-    add_filter('wpcf7_validate_gap_date', [$this, 'gap_date_validation_filter'], 20, 2);
-    add_filter('wpcf7_validate_gap_time', [$this, 'gap_time_validation_filter'], 20, 2);
+    add_filter('wpcf7_validate_gap_date*', [$this, 'gap_date_validation_filter'], 20, 2);
+    add_filter('wpcf7_validate_gap_time*', [$this, 'gap_time_validation_filter'], 20, 2);
   }
 
   public function add_form_tags() {
@@ -58,7 +58,7 @@ class Form {
         <span id="prev"><i class="fa fa-chevron-left"></i></span>
         <span id="next"><i class="fa fa-chevron-right"></i></span>
       </div></header>
-    <div class="calendar">
+    <div class="calendar wpcf7-form-control-wrap" data-name="gap_date">
       <ul class="weeks">
         <li>Sun</li><li>Mon</li><li>Tue</li><li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li>
       </ul>
@@ -105,14 +105,14 @@ class Form {
       $array_of_time[] = date("H:i", $start_time);
       $start_time += $add_mins; // to check endtie=me
     }
-    $html .= '<div class="gap_times wpcf7-form-control wpcf7-gap_calendar"><div class="row" id="scr1">';
+    $html .= '<div class="gap_times wpcf7-form-control-wrap" data-name="gap_time"><div class="row" id="scr1">';
     foreach ($array_of_time as $i => $time) {
       $html .= '<div class="col-lg-4"><label>';
       if (strtotime($time . ':00') < current_time('timestamp')) {
         $dis = 'disabled';
       } else
         $dis = '';
-        
+
       //if($dis === 'disabled') $checked = '';
 
       /* if ($time === '10:30' || $time === '13:00')
@@ -143,16 +143,14 @@ class Form {
 
   //Validation
   function gap_date_validation_filter($result, $tag) {
-    $gap_date = $_POST['gap_date'];
-    if (empty($gap_date)) {
+    if (!isset($_POST['gap_date']) || empty($_POST['gap_date'])) {
       $result->invalidate($tag, "Vui lòng chọn ngày");
     }
     return $result;
   }
 
   function gap_time_validation_filter($result, $tag) {
-    $gap_time = $_POST['gap_time'];
-    if (empty($gap_time)) {
+    if (!isset($_POST['gap_time']) || empty($_POST['gap_time'])) {
       $result->invalidate($tag, "Vui lòng chọn thời gian");
     }
     return $result;

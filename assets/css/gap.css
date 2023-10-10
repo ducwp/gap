@@ -491,79 +491,81 @@ body:not(.home) .ct-footer {
       margin: 20px 40px 20px 20px;
       background-color: var(--paletteColor6);
       text-align: center; }
-  .gap_booking .gap_times {
-    padding: 20px 40px 0px 20px;
-    position: relative; }
-    .gap_booking .gap_times label input {
-      display: none; }
-      .gap_booking .gap_times label input:disabled + .time_label {
-        border-color: var(--paletteColor4);
-        background-color: var(--paletteColor4);
-        cursor: not-allowed; }
-      .gap_booking .gap_times label input:checked + .time_label {
-        border-color: var(--paletteColor2);
-        background-color: var(--paletteColor2);
-        color: #fff; }
-    .gap_booking .gap_times label .time_label {
-      user-select: none;
-      background: #fff;
-      border: 1px solid var(--paletteColor4);
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 16px;
-      margin-top: 10px;
-      padding: 20px;
-      display: block;
-      text-align: center;
-      cursor: pointer; }
-      .gap_booking .gap_times label .time_label:hover {
-        border-color: var(--paletteColor3); }
-    .gap_booking .gap_times nav.gap_time_nav {
+
+.gap_times {
+  padding: 20px 40px 0px 20px;
+  position: relative; }
+  .gap_times label input {
+    display: none; }
+    .gap_times label input:disabled + .time_label {
+      border-color: var(--paletteColor4);
+      background-color: var(--paletteColor4);
+      cursor: not-allowed; }
+    .gap_times label input:checked + .time_label {
+      border-color: var(--paletteColor2);
+      background-color: var(--paletteColor2);
+      color: #fff; }
+  .gap_times label .time_label {
+    user-select: none;
+    background: #fff;
+    border: 1px solid var(--paletteColor4);
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 20px;
+    display: block;
+    text-align: center;
+    cursor: pointer; }
+    .gap_times label .time_label:hover {
+      border-color: var(--paletteColor3); }
+  .gap_times nav.gap_time_nav {
+    position: absolute;
+    top: 50%;
+    background-color: #ff8900;
+    z-index: 100;
+    left: -15px;
+    right: 5px; }
+    .gap_times nav.gap_time_nav button {
+      background: none;
       position: absolute;
-      top: 50%;
-      background-color: #ff8900;
-      z-index: 100;
-      left: -15px;
-      right: 5px; }
-      .gap_booking .gap_times nav.gap_time_nav button {
-        background: none;
-        position: absolute;
-        margin: 0;
-        padding: 0;
-        height: 24px;
-        cursor: pointer; }
-        .gap_booking .gap_times nav.gap_time_nav button svg {
-          width: 100%;
-          height: 100%;
-          stroke: #000; }
-        .gap_booking .gap_times nav.gap_time_nav button.prev {
-          rotate: -90deg; }
-        .gap_booking .gap_times nav.gap_time_nav button.next {
-          text-align: right;
-          right: 0;
-          rotate: 90deg; }
-  .gap_booking .gap_notes {
-    padding-left: 20px;
-    font-size: 14px;
-    margin-top: 20px; }
-    .gap_booking .gap_notes .gap_note {
+      margin: 0;
+      padding: 0;
+      height: 24px;
+      cursor: pointer; }
+      .gap_times nav.gap_time_nav button svg {
+        width: 100%;
+        height: 100%;
+        stroke: #000; }
+      .gap_times nav.gap_time_nav button.prev {
+        rotate: -90deg; }
+      .gap_times nav.gap_time_nav button.next {
+        text-align: right;
+        right: 0;
+        rotate: 90deg; }
+
+.gap_notes {
+  padding-left: 20px;
+  font-size: 14px;
+  margin-top: 20px; }
+  .gap_notes .gap_note {
+    display: inline-block;
+    margin-right: 30px; }
+    .gap_notes .gap_note::before {
+      content: "";
+      vertical-align: -4px;
+      margin-right: 5px;
       display: inline-block;
-      margin-right: 30px; }
-      .gap_booking .gap_notes .gap_note::before {
-        content: "";
-        vertical-align: -4px;
-        margin-right: 5px;
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        border: 1px solid var(--paletteColor4);
-        background-color: var(--paletteColor4); }
-      .gap_booking .gap_notes .gap_note.gn_available::before {
-        border-color: var(--paletteColor4);
-        background-color: #fff; }
-      .gap_booking .gap_notes .gap_note.gn_selected::before {
-        border-color: var(--paletteColor2);
-        background-color: var(--paletteColor2); }
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--paletteColor4);
+      background-color: var(--paletteColor4); }
+    .gap_notes .gap_note.gn_available::before {
+      border-color: var(--paletteColor4);
+      background-color: #fff; }
+    .gap_notes .gap_note.gn_selected::before {
+      border-color: var(--paletteColor2);
+      background-color: var(--paletteColor2); }
 
 /* Booking Calendar */
 .wrapper {

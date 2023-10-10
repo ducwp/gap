@@ -109,7 +109,7 @@ class Insert {
       //Datlich
       $form_type = isset($data['form_type']) ? $data['form_type'] : 'other';
       $date = '';
-      if ($data['form_type'] == 'offline') {
+      if ($form_type == 'offline') {
         $date_arr = explode("/", $data['gap_date']);
         $date = $date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0];
       }

@@ -3,7 +3,7 @@ if (!defined('WP_DEBUG')) {
   die('Direct access forbidden.');
 }
 add_action('wp_enqueue_scripts', function () {
-  
+
   $theme_uri = get_stylesheet_directory_uri();
 
   # CSS
@@ -18,9 +18,9 @@ add_action('wp_enqueue_scripts', function () {
 
   # JS
   wp_enqueue_script('gap-pcn', $theme_uri . '/assets/js/page-content-navigation.js', ['jquery'], '', true);
-  wp_enqueue_script('gap-html2pdf', $theme_uri. '/assets/js/html2pdf.bundle.min.js', [], '', true);
+  wp_enqueue_script('gap-html2pdf', $theme_uri . '/assets/js/html2pdf.bundle.min.js', [], '', true);
   wp_enqueue_script('gap-summary', $theme_uri . '/assets/js/summary.js', ['jquery'], '', true);
-  
+
   //Owl slider
   wp_enqueue_style('owl-style', $theme_uri . '/assets/vendor/OwlCarousel2-2.3.4/assets/owl.carousel.min.css', array('gap'));
   wp_enqueue_style('owl-theme-style', $theme_uri . '/assets/vendor/OwlCarousel2-2.3.4/assets/owl.theme.default.min.css', array('owl-style'));
@@ -37,7 +37,7 @@ add_action('wp_enqueue_scripts', function () {
   //drag-and-drop-file-upload
   wp_enqueue_style('gap-drag-and-drop-file-upload', $theme_uri . '/assets/vendor/drag-and-drop-file-upload/style.css');
   wp_enqueue_script('gap-drag-and-drop-file-upload', $theme_uri . '/assets/vendor/drag-and-drop-file-upload/script.js', [], '', true);
-  
+
   //Calendar
   // wp_enqueue_style('gap-calendar', $theme_uri . '/assets/vendor/calendar/style.css');
   // wp_enqueue_style('gap-calendar-theme', $theme_uri . '/assets/vendor/calendar/theme.css', ['gap-calendar']);
@@ -46,9 +46,15 @@ add_action('wp_enqueue_scripts', function () {
 
   //Google material icons
   //wp_enqueue_style('gap-google-material', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
-  
+
   //SCRIPT
   wp_enqueue_script('gap-script', $theme_uri . '/assets/js/script.js', ['jquery', 'gap-chosen', 'owl-slider'], '', true);
+
+  $params = array(
+    'nonce' => wp_create_nonce('gap_ajax_action'),
+    'ajax_url' => admin_url('admin-ajax.php'),
+  );
+  wp_localize_script('gap-script', 'gap', $params);
 });
 
 add_image_size('hero-thumb-size', 200, 200, true);

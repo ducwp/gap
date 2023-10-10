@@ -54,7 +54,7 @@ class Elementor extends Action_Base {
       return;
     } */
     //$ajax_handler->data['pre_amount'];
-    $luxury_brand = $_POST['form_fields']['luxury_brand'];
+    $luxury_brand = isset($_POST['form_fields']['luxury_brand']) ? $_POST['form_fields']['luxury_brand'] : '';
     $pre_amount = absint($_POST['form_fields']['pre_amount']);
 
     if ($pre_amount < 100000) {

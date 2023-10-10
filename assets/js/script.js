@@ -1,6 +1,27 @@
 jQuery(document).ready(function ($) {
 
   /* */
+  $('input[name=gap_date]').click(function () {
+    var date = $(this).val();
+    $.ajax({
+      url: gap.ajax_url,
+      type: 'POST',
+      data: {
+        action: 'gap_click_date',
+        date: date,
+        nonce: gap.nonce
+      },
+      success: function (response) {
+        console.log(response.data);
+      },
+      error: function (error) {
+        alert("error");
+        //code
+        console.log(error);
+      }
+    });
+  });
+
   var billing_phone = $('#current_user_billing_phone').val();
   //alert(billing_phone);
   if ($('.wpcf7-validates-as-tel').length) {

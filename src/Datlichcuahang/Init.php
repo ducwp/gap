@@ -11,6 +11,7 @@ class Init {
   }
 
   private function __construct() {
+    Ajax::instance();
     Form::instance();
   }
 }

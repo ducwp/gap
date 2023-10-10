@@ -17,7 +17,7 @@ class Import {
     add_action('admin_enqueue_scripts', [$this, 'scripts']);
     add_filter('attachment_fields_to_edit', [$this, 'add_fields'], 10, 2);
     add_action('wp_ajax_' . 'summary_import_xlxs', [$this, 'summary_import_xlxs']);
-    register_shutdown_function([$this, "check_abort"]);
+    //register_shutdown_function([$this, "check_abort"]);
   }
 
   public function scripts() {

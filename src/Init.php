@@ -21,6 +21,6 @@ class Init {
     Phuongthuckygui\Init::instance();
     Datlichcuahang\Init::instance();
     Kyguionline\Init::instance();
-    Xemtongket\Import::instance();
+    Xemtongket\Init::instance();
   }
 }
