@@ -495,6 +495,11 @@ body:not(.home) .ct-footer {
 .gap_times {
   padding: 20px 40px 0px 20px;
   position: relative; }
+  .gap_times .gap_times_loading {
+    margin-top: 10px;
+    background: url(../img/loader.gif) left center no-repeat;
+    min-height: 100px;
+    padding: 40px 0 0 80px; }
   .gap_times label input {
     display: none; }
     .gap_times label input:disabled + .time_label {

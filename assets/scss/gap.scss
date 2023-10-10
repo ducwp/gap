@@ -764,6 +764,13 @@ body:not(.home) {
   padding: 20px 40px 0px 20px;
   position: relative;
 
+  .gap_times_loading{
+    margin-top: 10px;
+    background: url(../img/loader.gif) left center no-repeat;
+    min-height: 100px;
+    padding: 40px 0 0 80px;
+  }
+
   label {
 
     input {

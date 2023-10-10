@@ -2,7 +2,7 @@ jQuery(document).ready(function ($) {
 
   $.fn.gap_load_time = function (date) {
     var old_html = $('#gap_time_ajax').html();
-    $('#gap_time_ajax').html("Đang tải...");
+    $('#gap_time_ajax').html('<div class="gap_times_loading">Đang tải...</div>');
     $.ajax({
       url: gap.ajax_url,
       type: 'POST',
