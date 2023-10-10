@@ -1,6 +1,8 @@
 jQuery(document).ready(function ($) {
 
   $.fn.gap_load_time = function (date) {
+    var old_html = $('#gap_time_ajax').html();
+    $('#gap_time_ajax').html("Đang tải...");
     $.ajax({
       url: gap.ajax_url,
       type: 'POST',
@@ -9,9 +11,9 @@ jQuery(document).ready(function ($) {
         date: date,
         nonce: gap.nonce
       },
-      success: function (response) {
-        console.log(response.data);
-        $('#gap_time_ajax').html(response.data);
+      success: function (html) {
+        console.log(html);
+        $('#gap_time_ajax').html(html);
       },
       error: function (error) {
         alert("error");
@@ -21,12 +23,11 @@ jQuery(document).ready(function ($) {
     });
   }
 
-  //$.fn.gap_load_time('10/10/2023');
+  //$.fn.gap_load_time('');
 
   /* */
   $(document).on('click', 'input[name=gap_date]', function (e) {
-    var old_html = $('#gap_time_ajax').html();
-    $('#gap_time_ajax').html("Loading...");
+    
     var date = $(this).val();
 
     $.fn.gap_load_time(date);

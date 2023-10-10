@@ -105,9 +105,30 @@ class Form {
       $array_of_time[] = date("H:i", $start_time);
       $start_time += $add_mins; // to check endtie=me
     }
-    $html .= '<div class="gap_times wpcf7-form-control-wrap" data-name="gap_time"><div id="gap_time_ajax">';
-    $html .= Ajax::instance()->gap_times(date('d/m/Y'));
-    $html .= '</div>';
+    $html .= '<div class="gap_times wpcf7-form-control-wrap" data-name="gap_time"><div id="gap_time_ajax"><div class="row" id="scr1">';
+    foreach ($array_of_time as $i => $time) {
+      $html .= '<div class="col-lg-4"><label>';
+      $dis = '';
+      /* if (strtotime($time . ':00') < current_time('timestamp'))
+        $dis = 'disabled'; */
+
+
+      //if($dis === 'disabled') $checked = '';
+
+      /* if ($time === '10:30' || $time === '13:00')
+        $dis = 'disabled';
+      else
+        $dis = ''; */
+      //$checked = $i == 0 ? 'checked' : '';
+      $html .= sprintf('<input type="radio" name="gap_time" value="%s" %s >', $time, $dis);
+      $html .= sprintf('<span class="time_label">%s</span>', $time);
+      $html .= '</label></div>';
+
+      if ($time === '15:30')
+        $html .= '</div><div class="row" id="scr2" style="display: none">';
+    }
+
+    $html .= '</div></div>';
 
     $arrow = '<svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1 14.5L14 1.5L27 14.5" stroke="000" stroke-width="1" stroke-linejoin="round"/><path d="M8 19L14 13L20 19" stroke="#000" stroke-width="1" stroke-linejoin="round"/></svg>';
