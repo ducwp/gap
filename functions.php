@@ -45,7 +45,7 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_script('gap-calendar', $theme_uri . '/assets/js/calendar.js', ['jquery'], '', true);
 
   //Google material icons
-  wp_enqueue_style('gap-google-material', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+  //wp_enqueue_style('gap-google-material', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
   
   //SCRIPT
   wp_enqueue_script('gap-script', $theme_uri . '/assets/js/script.js', ['jquery', 'gap-chosen', 'owl-slider'], '', true);

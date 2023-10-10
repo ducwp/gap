@@ -23,13 +23,35 @@ const renderCalendar = () => {
     liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
   }
 
+  let toDay = new Date();
+  let toDayStr = (toDay.getMonth() + 1) + '/' + toDay.getDate() + '/' + toDay.getFullYear();
+
   for (let i = 1; i <= lastDateofMonth; i++) {
 
-    let isTodayRadioChecked = i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() ? "checked" : "";
+    //let isTodayRadioChecked = (i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear()) ? "checked" : "";
 
-    const mdy = `${i}/${currMonth + 1}/${currYear}`;
-    liTag += `<li data-mdy="${mdy}">`;
-    liTag += `<label><input type="radio" name="gap_date" value="${mdy}" ${isTodayRadioChecked} /> `;
+    const dmy = `${i}/${currMonth + 1}/${currYear}`;
+
+    let d1 = `${currMonth + 1}/${i}/${currYear}`;
+    let date1 = new Date(d1).getTime();
+    let date2 = new Date(toDayStr).getTime();
+
+    let liClass = '';
+    let dis = '';
+    let isChecked = '';
+
+    if (date1 < date2) {
+      liClass = 'past';
+      dis = 'disabled';
+    } else if (date1 == date2) {
+      isChecked = 'checked'
+    } else {
+      liClass = '';
+      dis = '';
+    }
+
+    liTag += `<li class="${liClass}" data-dmy="${dmy}">`;
+    liTag += `<label><input type="radio" name="gap_date" value="${dmy}" ${isChecked} ${dis} /> `;
     liTag += `<span class="gt_text">${i}</span></label></li>`;
   }
 
@@ -55,33 +77,3 @@ prevNextIcon.forEach(icon => {
     renderCalendar();
   });
 });
-
-/* radiobtn = document.getElementById("theid");
-radiobtn.checked = true; */
-
-/* const element = document.querySelectorAll("li");
-element.addEventListener("click", () => {
-  alert(element.textContent);
-}); */
-
-
-/* document.querySelector(".days").addEventListener("click", function (e) {
-  if (e.target && e.target.matches("li")) {
-    if (e.target.classList.contains('inactive')) {
-      return;
-    }
-
-    const others_li = document.querySelector('.days li.active');
-    if (typeof (others_li) != 'undefined' && others_li != null) {
-      others_li.className = '';
-    }
-
-    e.target.className = "active";
-
-    const mdy = e.target.getAttribute('data-mdy');
-    //alert(mdy);
-    document.getElementById('gap_date').value = mdy;
-    //alert(e.target.textContent);
-    //e.target.className = "foo"; // new class name here
-  }
-}); */

@@ -771,6 +771,7 @@ body:not(.home) {
         &:disabled+.time_label {
           border-color: var(--paletteColor4);
           background-color: var(--paletteColor4);
+          cursor: not-allowed;
         }
 
         &:checked+.time_label {
@@ -881,14 +882,13 @@ body:not(.home) {
       display: flex;
 
       span {
+        width: 32px;
         height: 38px;
-        width: 38px;
         margin: 0 1px;
         cursor: pointer;
         color: #878787;
         text-align: center;
         line-height: 38px;
-        font-size: 1.9rem;
         user-select: none;
         border-radius: 4px;
 
@@ -957,6 +957,16 @@ body:not(.home) {
           display: none;
         }
 
+        input:disabled+.gt_text {
+          color: #c32020;
+          text-decoration: line-through;
+          &::after {
+            border-color: var(--paletteColor4);
+            background-color: var(--paletteColor5);
+            cursor: not-allowed;
+          }
+        }
+
         input:checked+.gt_text {
           color: #fff;
 
@@ -976,6 +986,15 @@ body:not(.home) {
             left: 0;
             z-index: -1;
           }
+        }
+      }
+
+      &.past{
+        background-color: var(--paletteColor6);
+        cursor: not-allowed;
+
+        label{
+          cursor: not-allowed;
         }
       }
 
@@ -1037,13 +1056,14 @@ body:not(.home) {
     }
   }
 
-  .gap_address{
+  .gap_address {
     background: url('../img/location.svg') left center no-repeat;
     background-size: 36px;
     padding-left: 46px;
     font-weight: 700;
     margin-bottom: 30px;
-    a{
+
+    a {
       font-weight: 400;
       text-decoration: underline;
     }
@@ -1052,6 +1072,7 @@ body:not(.home) {
 
 //Multi step
 .uacf7-step.step-content {
+
   button.uacf7-prev,
   button.uacf7-next {
     padding: 5px 20px;

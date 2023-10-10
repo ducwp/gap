@@ -498,7 +498,8 @@ body:not(.home) .ct-footer {
       display: none; }
       .gap_booking .gap_times label input:disabled + .time_label {
         border-color: var(--paletteColor4);
-        background-color: var(--paletteColor4); }
+        background-color: var(--paletteColor4);
+        cursor: not-allowed; }
       .gap_booking .gap_times label input:checked + .time_label {
         border-color: var(--paletteColor2);
         background-color: var(--paletteColor2);
@@ -575,14 +576,13 @@ body:not(.home) .ct-footer {
     .wrapper header .icons {
       display: flex; }
       .wrapper header .icons span {
+        width: 32px;
         height: 38px;
-        width: 38px;
         margin: 0 1px;
         cursor: pointer;
         color: #878787;
         text-align: center;
         line-height: 38px;
-        font-size: 1.9rem;
         user-select: none;
         border-radius: 4px; }
         .wrapper header .icons span:last-child {
@@ -648,6 +648,13 @@ body:not(.home) .ct-footer {
       } */ }
       .calendar .days li label input {
         display: none; }
+      .calendar .days li label input:disabled + .gt_text {
+        color: #c32020;
+        text-decoration: line-through; }
+        .calendar .days li label input:disabled + .gt_text::after {
+          border-color: var(--paletteColor4);
+          background-color: var(--paletteColor5);
+          cursor: not-allowed; }
       .calendar .days li label input:checked + .gt_text {
         color: #fff; }
         .calendar .days li label input:checked + .gt_text::after {
@@ -661,6 +668,11 @@ body:not(.home) .ct-footer {
         bottom: 0;
         left: 0;
         z-index: -1; }
+      .calendar .days li.past {
+        background-color: var(--paletteColor6);
+        cursor: not-allowed; }
+        .calendar .days li.past label {
+          cursor: not-allowed; }
       .calendar .days li.inactive {
         color: #aaa;
         background-color: var(--paletteColor6);

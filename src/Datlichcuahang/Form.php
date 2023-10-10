@@ -55,8 +55,8 @@ class Form {
     <header>
       <p class="current-date"></p>
       <div class="icons">
-        <span id="prev" class="material-symbols-rounded">chevron_left</span>
-        <span id="next" class="material-symbols-rounded">chevron_right</span>
+        <span id="prev"><i class="fa fa-chevron-left"></i></span>
+        <span id="next"><i class="fa fa-chevron-right"></i></span>
       </div></header>
     <div class="calendar">
       <ul class="weeks">
@@ -108,10 +108,17 @@ class Form {
     $html .= '<div class="gap_times wpcf7-form-control wpcf7-gap_calendar"><div class="row" id="scr1">';
     foreach ($array_of_time as $i => $time) {
       $html .= '<div class="col-lg-4"><label>';
-      if ($time === '10:30' || $time === '13:00')
+      if (strtotime($time . ':00') < current_time('timestamp')) {
+        $dis = 'disabled';
+      } else
+        $dis = '';
+        
+      //if($dis === 'disabled') $checked = '';
+
+      /* if ($time === '10:30' || $time === '13:00')
         $dis = 'disabled';
       else
-        $dis = '';
+        $dis = ''; */
       $checked = $i == 0 ? 'checked' : '';
       $html .= sprintf('<input type="radio" name="gap_time" value="%s" %s %s>', $time, $dis, $checked);
       $html .= sprintf('<span class="time_label">%s</span>', $time);
