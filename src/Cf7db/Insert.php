@@ -17,10 +17,10 @@ class Insert {
   }
 
   public function cf7_before_send_mail($form_tag) {
-   /*  $form_id = Init::instance()->form_id;
+    /*  $form_id = Init::instance()->form_id;
 
-    if ($form_tag->id() != $form_id)
-      return; */
+     if ($form_tag->id() != $form_id)
+       return; */
 
     global $wpdb;
     $cfdb = apply_filters('cf7_gap_database', $wpdb);
@@ -108,7 +108,11 @@ class Insert {
 
       //Datlich
       $form_type = isset($data['form_type']) ? $data['form_type'] : 'other';
-      $date = isset($data['gap_date']) ? $data['gap_date'] : '';
+      $date = '';
+      if ($data['form_type'] == 'offline') {
+        $date_arr = explode("/", $data['gap_date']);
+        $date = $date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0];
+      }
       $time = isset($data['gap_time']) ? $data['gap_time'] : '';
 
       $cfdb->insert($table_name, array(

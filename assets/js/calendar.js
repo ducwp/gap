@@ -29,7 +29,7 @@ const renderCalendar = () => {
 
     const mdy = `${i}/${currMonth + 1}/${currYear}`;
     liTag += `<li data-mdy="${mdy}">`;
-    liTag += `<label><input type="radio" name="gap_day" value="${mdy}" ${isTodayRadioChecked} /> `;
+    liTag += `<label><input type="radio" name="gap_date" value="${mdy}" ${isTodayRadioChecked} /> `;
     liTag += `<span class="gt_text">${i}</span></label></li>`;
   }
 

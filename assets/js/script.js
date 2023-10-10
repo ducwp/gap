@@ -3,7 +3,7 @@ jQuery(document).ready(function ($) {
   /* */
   var billing_phone = $('#current_user_billing_phone').val();
   //alert(billing_phone);
-  if($('.wpcf7-validates-as-tel').length){
+  if ($('.wpcf7-validates-as-tel').length) {
     $('.wpcf7-validates-as-tel').val(billing_phone);
   }
 
@@ -16,17 +16,29 @@ jQuery(document).ready(function ($) {
     alert("Gửi mã xác minh Zalo!!!\nTest OPT: 12345");
   });
 
-  $('.gap_time_nav button.next').click(function(){
+  $('.gap_time_nav button.next').click(function () {
     $('#scr1').hide();
     $('#scr2').show();
   });
-  $('.gap_time_nav button.prev').click(function(){
+  $('.gap_time_nav button.prev').click(function () {
     $('#scr1').show();
     $('#scr2').hide();
   });
 
   $('button.uacf7-prev').text('Về trước');
-  $('button.uacf7-next').text('Tiếp theo');
+  var uacf7_next = $('button.uacf7-next');
+  uacf7_next.text('Tiếp theo');
+
+  /* uacf7_next.click(function (e) {
+    if (!$('input[name="gap_date"]').is(':checked')) {
+      alert("Vui lòng chọn ngày!!!");
+      return false;
+    }
+
+    $('input[name="gap_date"]:checked').val();
+    
+    return false;
+  }); */
 
   //$('.calendar-wrapper').calendar();
 

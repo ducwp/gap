@@ -18,12 +18,14 @@ class Details {
     //$this->form_type = 'offline';
 
     if ($this->form_type == 'online') //Ky gui online
-      $this->form_details_page();
+      $this->form_details_online();
+    elseif ($this->form_type == 'offline') //Dat lich cua hang
+      $this->form_details_offline();
     else
       $this->form_details_page_others();
   }
 
-  public function form_details_page() {
+  public function form_details_online() {
     global $wpdb;
     $cfdb = apply_filters('cfdb7_database', $wpdb);
     $table_name = $cfdb->prefix . 'gap_cf7';
@@ -159,6 +161,113 @@ class Details {
           </div>
         </div>
       </div>
+    </div>
+    <?php
+    do_action('cfdb7_after_formdetails', $this->form_post_id);
+  }
+
+  public function form_details_offline() {
+    global $wpdb;
+    $cfdb = apply_filters('cfdb7_database', $wpdb);
+    $table_name = $cfdb->prefix . 'gap_cf7';
+    $upload_dir = wp_upload_dir();
+    $cfdb7_dir_url = $upload_dir['baseurl'] . '/gap_cf7_uploads';
+    $rm_underscore = apply_filters('cfdb7_remove_underscore_data', true);
+
+    $results = $cfdb->get_results("SELECT * FROM $table_name WHERE form_post_id = $this->form_post_id AND form_id = $this->form_id LIMIT 1", OBJECT);
+
+
+    if (empty($results)) {
+      wp_die($message = 'Not valid contact form');
+    }
+    ?>
+    <div class="wrap" style="font-size: 110%">
+      <?php do_action('cfdb7_before_formdetails_title', $this->form_post_id); ?>
+      <h3><?php echo get_the_title($this->form_post_id); ?></h3>
+      <?php do_action('cfdb7_after_formdetails_title', $this->form_post_id); ?>
+      <p></span><?php echo $results[0]->form_date; ?></p>
+      <?php $form_data = unserialize($results[0]->form_value); ?>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <h3>Khách hàng</h3>
+          <hr>
+          <p><strong>Thời gian</strong>:
+            <?php printf('Ngày <b>%s</b> lúc <b>%s</b>', $form_data['gap_date'], $form_data['gap_time']); ?></p>
+          <p><strong>Họ tên</strong>: <?php echo $form_data['name']; ?></p>
+          <p><strong>Số điện thoại</strong>: <a target="_blank"
+              href="https://zalo.me/<?php echo $form_data['phone']; ?>"><?php echo $form_data['phone']; ?></a></p>
+          <p><strong>Số lượng</strong>: <?php echo $form_data['quantity']; ?></p>
+        </div>
+        <div class="col-lg-8">
+          <h3>Sản phẩm</h3>
+          <hr>
+
+          <?php if ($form_data['clothes_checkbox'][0] === 'Quần áo'): ?>
+            <h4>Quần áo</h4>
+            <ul>
+              <li>Có thương hiệu (local/global): <b><?php echo $form_data['clothes_has_brand'][0]; ?></b></li>
+              <li>Số lượng tối thiểu > 5: <b><?php echo $form_data['clothes_min_quantity_5'][0]; ?></b></li>
+            </ul>
+          <?php endif; ?>
+
+          <?php if ($form_data['bagshoe_checkbox'][0] === 'Túi&#047;giày'): ?>
+            <hr>
+            <h4>Túi/giày</h4>
+            <ul>
+              <li>Sản phẩm bạn ký gửi thuộc thương hiệu: <b><?php echo $form_data['bagshoe_brands']; ?></b></li>
+              <li>Tình trạng sản phẩm còn mới từ 80%: <b><?php echo $form_data['bagshoe_new_80'][0]; ?></b></li>
+            </ul>
+          <?php endif; ?>
+
+          <?php if ($form_data['cosmeticperfume_checkbox'][0] === 'Mỹ phẩm&#047;nước hoa'): ?>
+            <hr>
+            <h4>Mỹ phẩm/nước hoa</h4>
+            <ul>
+              <li>Còn date > 6 tháng: <b><?php echo $form_data['cosmeticperfume_date_6'][0]; ?></b></li>
+              <li>Dung tích > 80%: <b><?php echo $form_data['cosmeticperfume_cap_80'][0]; ?></b></li>
+            </ul>
+          <?php endif; ?>
+
+          <?php if ($form_data['accessory_checkbox'][0] === 'Phụ kiện (kính mắt, trang sức)'): ?>
+            <hr>
+            <h4>Phụ kiện (kính mắt, trang sức)</h4>
+            <ul>
+              <li>Tình trạng còn mới > 80: <b><?php echo $form_data['accessory_new_80'][0]; ?></b></li>
+            </ul>
+          <?php endif; ?>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+
+        </div>
+        <div class="col-lg-4">
+
+        </div>
+        <div class="col-lg-4">
+
+        </div>
+
+        <div class="col-lg-4">
+
+        </div>
+        <div class="col-lg-4">
+
+        </div>
+        <div class="col-lg-4">
+
+        </div>
+      </div>
+      <?php
+      $form_data['gap_status'] = 'read';
+      $form_data = serialize($form_data);
+      $form_id = $results[0]->form_id;
+
+      $cfdb->query("UPDATE $table_name SET form_value = '$form_data' WHERE form_id = '$form_id' LIMIT 1");
+      ?>
+
     </div>
     <?php
     do_action('cfdb7_after_formdetails', $this->form_post_id);

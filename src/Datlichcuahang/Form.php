@@ -12,17 +12,29 @@ class Form {
 
   private function __construct() {
     add_action('wpcf7_init', [$this, 'add_form_tags']);
-    add_filter('wpcf7_validate_gap_calendar', [$this, 'gap_calendar_validation_filter'], 20, 2);
+    add_filter('wpcf7_validate_gap_date', [$this, 'gap_date_validation_filter'], 20, 2);
     add_filter('wpcf7_validate_gap_time', [$this, 'gap_time_validation_filter'], 20, 2);
   }
 
   public function add_form_tags() {
-    wpcf7_add_form_tag('gap_calendar', [$this, 'gap_calendar_form_tag_handler'], array('name-attr' => true));
-    wpcf7_add_form_tag('gap_time', [$this, 'gap_time_form_tag_handler'], array('name-attr' => true));
+    wpcf7_add_form_tag('gap_calendar_icon', [$this, 'gap_calendar_icon_handler']);
+    wpcf7_add_form_tag('gap_today', [$this, 'gap_today_handler']);
+    wpcf7_add_form_tag(['gap_date', 'gap_date*'], [$this, 'gap_date_form_tag_handler'], array('name-attr' => true));
+    wpcf7_add_form_tag(['gap_time', 'gap_time*'], [$this, 'gap_time_form_tag_handler'], array('name-attr' => true));
   }
 
+  public function gap_calendar_icon_handler($tag) {
+    $img = sprintf('<img src="%s" width="24" height="24" />', get_stylesheet_directory_uri() . '/assets/img/date.svg');
+    return $img;
+  }
+  public function gap_today_handler($tag) {
+    return date_i18n(get_option('date_format'));
+  }
+
+
+
   /* Calendar */
-  public function gap_calendar_form_tag_handler($tag) {
+  public function gap_date_form_tag_handler($tag) {
     $tag = new \WPCF7_FormTag($tag);
 
     if (empty($tag->name)) {
@@ -123,57 +135,19 @@ class Form {
   }
 
   //Validation
-  function gap_calendar_validation_filter($result, $tag) {
-    /* if ('your-email-confirm' == $tag->name) {
-      $your_email = isset($_POST['your-email']) ? trim($_POST['your-email']) : '';
-      $your_email_confirm = isset($_POST['your-email-confirm']) ? trim($_POST['your-email-confirm']) : '';
-
-      if ($your_email != $your_email_confirm) {
-        $result->invalidate($tag, "Are you sure this is the correct address?");
-      }
-    } */
-
-    $gap_day = $_POST['gap_day'];
-    if (empty($gap_day)) {
+  function gap_date_validation_filter($result, $tag) {
+    $gap_date = $_POST['gap_date'];
+    if (empty($gap_date)) {
       $result->invalidate($tag, "Vui lòng chọn ngày");
     }
-
-    //$result->invalidate($tag, "Vui lòng chọn thời gian");
-
-    /*  if ($clothes_new_local + $clothes_new_global + $clothes_used_local + $clothes_used_global < 5) {
-       $tag = new \WPCF7_Shortcode($tag);
-       if (in_array($tag->name, ['clothes_new_local', 'clothes_new_global', 'clothes_used_local', 'clothes_used_global'])) { // validate name field only
-         $result->invalidate($tag, "Tổng sản phẩm quần áo phải từ 5 trở lên.");
-       }
-     } */
-
     return $result;
   }
 
   function gap_time_validation_filter($result, $tag) {
-    /* if ('your-email-confirm' == $tag->name) {
-      $your_email = isset($_POST['your-email']) ? trim($_POST['your-email']) : '';
-      $your_email_confirm = isset($_POST['your-email-confirm']) ? trim($_POST['your-email-confirm']) : '';
-
-      if ($your_email != $your_email_confirm) {
-        $result->invalidate($tag, "Are you sure this is the correct address?");
-      }
-    } */
-
     $gap_time = $_POST['gap_time'];
     if (empty($gap_time)) {
       $result->invalidate($tag, "Vui lòng chọn thời gian");
     }
-
-    //$result->invalidate($tag, "Vui lòng chọn thời gian");
-
-    /*  if ($clothes_new_local + $clothes_new_global + $clothes_used_local + $clothes_used_global < 5) {
-       $tag = new \WPCF7_Shortcode($tag);
-       if (in_array($tag->name, ['clothes_new_local', 'clothes_new_global', 'clothes_used_local', 'clothes_used_global'])) { // validate name field only
-         $result->invalidate($tag, "Tổng sản phẩm quần áo phải từ 5 trở lên.");
-       }
-     } */
-
     return $result;
   }
 
