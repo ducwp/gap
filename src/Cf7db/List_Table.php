@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace GAPTheme\Cf7db;
 
 class List_Table extends \WP_List_Table {
@@ -24,7 +24,7 @@ class List_Table extends \WP_List_Table {
    */
   public function prepare_items() {
     $this->form_post_id = (int) $_GET['fid'];
-    
+
     $search = empty($_REQUEST['s']) ? false : esc_sql($_REQUEST['s']);
     $form_post_id = $this->form_post_id;
 
@@ -189,11 +189,12 @@ class List_Table extends \WP_List_Table {
     foreach ($results as $result) {
 
       $form_value = unserialize($result->form_value);
+      $ftype = isset($form_value['form_type']) ? $form_value['form_type'] : 'other';
 
-      $link = "<b><a href=admin.php?page=gap-ky-gui&fid=%s&ufid=%s>%s</a></b>";
+      $link_inner = "<a href=admin.php?page=gap-ky-gui&fid=%s&ufid=%s&ftype=".$ftype.">%s</a>";
+      $link = "<b>{$link_inner}</b>";
       if (isset($form_value['gap_status']) && ($form_value['gap_status'] === 'read'))
-        $link = "<a href=admin.php?page=gap-ky-gui&fid=%s&ufid=%s>%s</a>";
-
+        $link = $link_inner;
 
 
       $fid = $result->form_post_id;
