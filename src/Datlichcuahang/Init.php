@@ -16,6 +16,16 @@ class Init {
     add_action('wp', [$this, 'gap_check_user_login']);
     Ajax::instance();
     Form::instance();
+    add_action('blocksy:single:content:bottom', function () {
+      if (!current_user_can('manage_options'))
+        return;
+      ?>
+      <div style="max-width: var(--normal-container-max-width); padding: 0 10px; margin: 0 auto; text-align: center">
+        <button type="button" class="button BlockingBtn" data-action="gap_block_date_time">Block</button>
+        <button type="button" class="button BlockingBtn" data-action="gap_unblock_date_time">UnBlock</button>
+      </div>
+      <?php
+    });
   }
 
   function gap_check_user_login() {

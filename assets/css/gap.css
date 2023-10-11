@@ -54,6 +54,13 @@ body.elementor-template-full-width[data-header*="type-1"] .ct-header [data-row*=
 body.error404 .ct-container {
   padding-top: 60px; }
 
+.gap_breadcrumbs {
+  padding: 0 20px; }
+
+/* Modal*/
+.blocker.jquery-modal {
+  z-index: 99; }
+
 .archive .entry-header .page-title,
 .single-product .entry-header .meta-categories a {
   display: inline-block;
@@ -140,6 +147,12 @@ ul.products li.product {
     background-size: cover; }
     #sync1 .item img {
       height: 800px; }
+      @media (min-width: 768px) and (max-width: 1023px) {
+        #sync1 .item img {
+          height: 600px; } }
+      @media (max-width: 479px) {
+        #sync1 .item img {
+          height: 400px; } }
   #sync1.owl-theme {
     position: relative; }
   #sync1.owl-theme .owl-next, #sync1.owl-theme .owl-prev {
@@ -162,7 +175,14 @@ ul.products li.product {
   bottom: 100px;
   left: 0;
   right: 0;
-  z-index: 1; }
+  z-index: 1;
+  padding: 0 10px; }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .gap-hero-slider-thumbs {
+      bottom: 30px; } }
+  @media (max-width: 479px) {
+    .gap-hero-slider-thumbs {
+      bottom: 10px; } }
   .gap-hero-slider-thumbs-inner {
     max-width: var(--normal-container-max-width);
     margin: 0 auto;
@@ -172,6 +192,14 @@ ul.products li.product {
       margin-bottom: 100px;
       z-index: 1;
       width: 300px; }
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .gap-hero-slider-thumbs-inner .hero-slider-title {
+          margin-bottom: 60px;
+          width: 200px; } }
+      @media (max-width: 479px) {
+        .gap-hero-slider-thumbs-inner .hero-slider-title {
+          margin-bottom: 40px;
+          max-width: 160px; } }
     .gap-hero-slider-thumbs-inner .cnext,
     .gap-hero-slider-thumbs-inner .cprev {
       background-color: #000;
@@ -666,6 +694,9 @@ body:not(.home):not(.page-id-2042) .ct-footer {
       border-color: var(--paletteColor2);
       background-color: var(--paletteColor2);
       color: #fff; }
+      .gap_times label input:checked + .time_label.blocked_by_admin {
+        background-color: #ca4949 !important;
+        border-color: #911717; }
   .gap_times label .time_label {
     user-select: none;
     background: #fff;
@@ -682,6 +713,8 @@ body:not(.home):not(.page-id-2042) .ct-footer {
       border-color: var(--paletteColor3); }
     .gap_times label .time_label.pass {
       text-decoration: line-through; }
+    .gap_times label .time_label.blocked_by_admin {
+      background-color: #ee9c9c !important; }
   .gap_times nav.gap_time_nav {
     position: absolute;
     top: 50%;

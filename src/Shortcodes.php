@@ -100,7 +100,7 @@ class Shortcodes {
         )
       )
     ]);
-    echo $html;
+    echo '<div class="gap_breadcrumbs">'.$html.'</div>';
   }
 
   /* Footer */

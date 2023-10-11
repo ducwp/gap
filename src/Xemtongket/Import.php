@@ -72,6 +72,7 @@ class Import {
       $doanh_thu = $spreadsheet->getActiveSheet()->getCell('M' . $row->getRowIndex())->getFormattedValue();
       $phi = $spreadsheet->getActiveSheet()->getCell('N' . $row->getRowIndex())->getFormattedValue();
       $thuc_nhan = $spreadsheet->getActiveSheet()->getCell('O' . $row->getRowIndex())->getFormattedValue();
+      $tinh_trang_thanh_toan = $spreadsheet->getActiveSheet()->getCell('P' . $row->getRowIndex())->getFormattedValue();
 
       $data = array(
         'ngay_ky_gui' => $ngay_ky_gui,
@@ -89,7 +90,7 @@ class Import {
         'doanh_thu' => $doanh_thu,
         'phi' => $phi,
         'thuc_nhan' => $thuc_nhan,
-
+        'tinh_trang_thanh_toan' => $tinh_trang_thanh_toan,
       );
 
       $wpdb->insert($db_table_name, $data);

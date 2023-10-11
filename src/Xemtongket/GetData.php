@@ -61,7 +61,7 @@ class GetData extends Action_Base {
       $html .= '<ul data-products="type-1" class="products columns-3">';
       $xtk_modal = '';
       $ths_arr_1 = ['Mã ký gửi', 'Họ tên khách hàng', 'Số điện thoại', 'P.thức thanh toán', 'Ngày thanh toán', 'Ngày TPTK'];
-      $ths_arr_2 = ['Số tài khoản', 'Ngân hàng', 'Ký gửi', 'Bán', 'Tồn', 'Doanh thu', 'Phí', 'Thực nhận'];
+      $ths_arr_2 = ['Số tài khoản', 'Ngân hàng', 'Ký gửi', 'Bán', 'Tồn', 'Doanh thu', 'Phí', 'Thực nhận', 'Tình trạng thanh toán'];
       $ths_1 = '<th>' . join('</th><th>', $ths_arr_1) . '</th>';
       $ths_2 = '<th>' . join('</th><th>', $ths_arr_2) . '</th>';
 
@@ -93,12 +93,14 @@ class GetData extends Action_Base {
         $time = strtotime($row->ngay_ky_gui);
         $ngay_ky_gui = date('d/m/Y', $time);
 
+        $tinh_trang_thanh_toan = !empty($row->tinh_trang_thanh_toan) ? $row->tinh_trang_thanh_toan : 'N/A';
         $html .= '<li class="product xem_tong_ket">';
         $html .= sprintf('<div class="xtk_header">%s</div>', $row->ma_ky_gui);
         $html .= sprintf('<div class="xtk_row"><span class="xtk_title">Ngày ký gửi: </span><span class="xtk_value">%s</span></div>', $ngay_ky_gui);
         $html .= sprintf('<div class="xtk_row"><span class="xtk_title">Số điện thoại: </span><span class="xtk_value">%s</span></div>', $row->so_dien_thoai);
         $html .= sprintf('<div class="xtk_row"><span class="xtk_title">Họ và tên: </span><span class="xtk_value">%s</span></div>', $row->ho_va_ten);
         $html .= sprintf('<div class="xtk_row"><span class="xtk_title">Thực nhận: </span><span class="xtk_value"><b>%s</b> ₫</span></div>', $row->thuc_nhan);
+        //$html .= sprintf('<div class="xtk_row"><span class="xtk_title">Tình trạng thanh toán: </span><span class="xtk_value"><b>%s</b></span></div>', $tinh_trang_thanh_toan);
         $html .= sprintf('<div class="xtk_footer"><a href="#xtk_detail_%s" rel="modal:open" class="button button-xtk-detail">Xem chi tiết</a></div>', $row->id);
         $html .= '</li>';
 

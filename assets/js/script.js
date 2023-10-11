@@ -12,7 +12,7 @@ jQuery(document).ready(function ($) {
         nonce: gap.nonce
       },
       success: function (html) {
-        console.log(html);
+        //console.log(html);
         $('#gap_time_ajax').html(html);
       },
       error: function (error) {
@@ -22,6 +22,45 @@ jQuery(document).ready(function ($) {
       }
     });
   }
+
+  //Blocking
+  $('.BlockingBtn').click(function (e) {
+    var button = $(this);
+    var date = $('input[name=gap_date]:checked').val();
+    var time = $('input[name=gap_time]:checked').val();
+    var action = button.data('action');
+
+    if (date === 'undefined' || time === 'undefined') {
+      alert("Vui lòng chọn ngày và giờ");
+      return;
+    }
+
+    button.addClass('disabled');
+
+    $.ajax({
+      url: gap.ajax_url,
+      type: 'POST',
+      data: {
+        action: action,
+        date: date,
+        time: time,
+        nonce: gap.nonce
+      },
+      success: function (html) {
+        //console.log(html);
+        $('input[name=gap_date]:checked').click();
+        //$.fn.gap_load_time('');
+        button.removeClass('disabled');
+      },
+      error: function (error) {
+        alert("error");
+        //code
+        console.log(error);
+        button.removeClass('disabled');
+      }
+    });
+  });
+
 
   //$.fn.gap_load_time('');
 

@@ -13,7 +13,10 @@ class Ajax {
   private function __construct() {
     add_action('wp_ajax_' . 'gap_click_date', [$this, 'click_date']);
     add_action('wp_ajax_nopriv_' . 'gap_click_date', [$this, 'click_date']);
-
+    add_action('wp_ajax_' . 'gap_block_date_time', [$this, 'block_date_time']);
+    add_action('wp_ajax_nopriv_' . 'gap_block_date_time', [$this, 'block_date_time']);
+    add_action('wp_ajax_' . 'gap_unblock_date_time', [$this, 'unblock_date_time']);
+    add_action('wp_ajax_nopriv_' . 'gap_unblock_date_time', [$this, 'unblock_date_time']);
   }
 
   public function click_date() {
@@ -25,7 +28,54 @@ class Ajax {
   public function gap_times($vn_date) {
     global $wpdb;
     $db_table_name = $wpdb->prefix . 'gap_cf7'; // table name
+    $date_arr = explode('/', $vn_date);
+    $date = $date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0];
+    $slot_num = Init::instance()->slot_num;
 
+    $html = '<div class="row" id="scr1">';
+    $array_of_time = $this->array_of_time();
+    foreach ($array_of_time as $i => $time) {
+      $dis = '';
+      $sql_time = $time . ':00';
+      $sql = "SELECT COUNT(*) as num_rows FROM  $db_table_name WHERE (form_type='offline' AND gap_date='{$date}' AND gap_time='{$sql_time}')";
+      $rows = $wpdb->get_results($sql);
+
+      if ($rows[0]->num_rows >= $slot_num)
+        $dis = 'disabled';
+
+      $label_class = '';
+
+      $date_time = $date . ' ' . $time . ':00';
+
+      if (strtotime($date_time) < current_time('timestamp')) {
+        $dis = 'disabled';
+        $label_class = 'pass';
+      }
+
+      $blocking_times = $this->blocking_times();
+      if (!empty($blocking_times)) {
+        if (in_array($date_time, $blocking_times)) {
+          if (!current_user_can('manage_options'))
+            $dis = 'disabled';
+          else
+            $label_class .= ' blocked_by_admin';
+        }
+      }
+
+      $html .= '<div class="col-lg-4"><label>';
+      $html .= sprintf('<input type="radio" name="gap_time" value="%s" %s >', $time, $dis);
+      $html .= sprintf('<span class="time_label %s">%s</span>', $label_class, $time);
+      $html .= '</label></div>';
+
+      if ($time === '15:30')
+        $html .= '</div><div class="row" id="scr2" style="display: none">';
+    }
+    $html .= '</div>';
+
+    return $html;
+  }
+
+  public function array_of_time() {
     $starttime = '10:00'; // your start time
     $endtime = '20:00'; // End time
     $duration = '30'; // split by 30 mins
@@ -42,40 +92,55 @@ class Ajax {
       $start_time += $add_mins; // to check endtie=me
     }
 
+    return $array_of_time;
+  }
+
+  public function block_date_time() {
+    global $wpdb;
+    $db_table_name = $wpdb->prefix . 'gap_blockings'; // table name
+
+    $vn_date = $_POST['date'];
     $date_arr = explode('/', $vn_date);
     $date = $date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0];
-    $slot_num = Init::instance()->slot_num;
-    
-    $html = '<div class="row" id="scr1">';
-    foreach ($array_of_time as $i => $time) {
-      $dis = '';
-      $sql_time = $time . ':00';
-      $sql = "SELECT COUNT(*) as num_rows FROM  $db_table_name WHERE (form_type='offline' AND gap_date='{$date}' AND gap_time='{$sql_time}')";
-      $rows = $wpdb->get_results($sql);
+    $time = $_POST['time'] . ':00';
+    $block_time = current_time('Y-m-d H:i:s');
+    $data = array(
+      'gap_date' => $date,
+      'gap_time' => $time,
+      'block_time' => $block_time
+    );
+    $wpdb->insert($db_table_name, $data);
+    die;
+  }
 
-      if ($rows[0]->num_rows >= $slot_num)
-        $dis = 'disabled';
+  public function unblock_date_time() {
+    global $wpdb;
+    $db_table_name = $wpdb->prefix . 'gap_blockings'; // table name
 
-      $label_class = '';
+    $vn_date = $_POST['date'];
+    $date_arr = explode('/', $vn_date);
+    $date = $date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0];
+    $time = $_POST['time'] . ':00';
+    $data = array(
+      'gap_date' => $date,
+      'gap_time' => $time
+    );
+    $wpdb->delete( $db_table_name, $data );
 
-      if (strtotime($date . ' ' . $time . ':00') < current_time('timestamp')) {
-        $dis = 'disabled';
-        $label_class = 'pass';
+    die;
+  }
+
+  public function blocking_times() {
+    global $wpdb;
+    $db_table_name = $wpdb->prefix . 'gap_blockings'; // table name
+    $sql = "SELECT * FROM  $db_table_name";
+    $rows = $wpdb->get_results($sql);
+    $time_block = [];
+    if (!empty($rows)) {
+      foreach ($rows as $row) {
+        $time_block[] = $row->gap_date . ' ' . $row->gap_time;
       }
-
-
-      $html .= '<div class="col-lg-4"><label>';
-
-
-      $html .= sprintf('<input type="radio" name="gap_time" value="%s" %s >', $time, $dis);
-      $html .= sprintf('<span class="time_label %s">%s</span>', $label_class, $time);
-      $html .= '</label></div>';
-
-      if ($time === '15:30')
-        $html .= '</div><div class="row" id="scr2" style="display: none">';
     }
-    $html .= '</div>';
-
-    return $html;
+    return $time_block;
   }
 }
