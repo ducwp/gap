@@ -760,17 +760,13 @@ body:not(.home):not(.page-id-2042) {
 
 
 /* Dat lich cua hang */
-.gap_booking {
+.gap_bookingXXXX {
   border: 1px solid var(--paletteColor4);
   margin: 30px 0;
   border-radius: 6px;
 
   .gb_header {
     border-bottom: 1px solid var(--paletteColor4);
-  }
-
-  .calendar-wrapper {
-    border-right: 1px solid var(--paletteColor4);
   }
 
   .gap_booking_header {
@@ -780,8 +776,6 @@ body:not(.home):not(.page-id-2042) {
     font-weight: 700;
     font-size: 14px;
     font-family: sans-serif;
-
-
 
     img {
       width: 24px;
@@ -796,25 +790,86 @@ body:not(.home):not(.page-id-2042) {
       margin: 20px 40px 20px 20px;
       background-color: var(--paletteColor6);
       text-align: center;
+
+      @include mobile {
+        background-color: #ca4949;
+      }
     }
   }
 }
 
-/* .gap_booking .gap_booking_header {
-  @include mobile {
-    background-color: #ca4949;
+.bk_frame {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--paletteColor4);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  .bk_frame_cell {
+    position: relative;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    &:nth-child(1) {
+      border-right: 1px solid var(--paletteColor4);
+    }
+    &:nth-child(3) {
+      border-top: 1px solid var(--paletteColor4);
+      border-right: 1px solid var(--paletteColor4);
+    }
+    &:nth-child(4) {
+      border-top: 1px solid var(--paletteColor4);
+    }
+
+    .gap_booking_header {
+      display: block;
+      padding: 10px 0;
+      font-weight: 700;
+      font-size: 14px;
+      font-family: sans-serif;
+
+      img {
+        width: 24px;
+        height: 24px;
+        vertical-align: -4px;
+        margin-right: 10px;
+      }
+
+      &.gbh_right {
+        border: none;
+        background-color: var(--paletteColor6);
+        text-align: center;
+        margin: 0 20px;
+
+        @include mobile {
+          background-color: #ca4949;
+        }
+      }
+    }
+
+    /* &:after {
+      content: attr(class);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+    } */
   }
-} */
+}
 
 /* Booking Calendar */
-.booking-wrapper {
-  border-right: 1px solid var(--paletteColor4);
+.calendar-wrapper {
 
   header {
     display: flex;
     align-items: center;
-    padding: 25px 20px 10px;
     justify-content: space-between;
+    margin-bottom: 30px;
 
     .icons {
       display: flex;
@@ -850,7 +905,6 @@ body:not(.home):not(.page-id-2042) {
 
 /* Calendar */
 .calendar {
-  padding: 20px;
   user-select: none;
 
   ul {
@@ -950,36 +1004,7 @@ body:not(.home):not(.page-id-2042) {
           cursor: not-allowed;
         }
       }
-
-      /* &.inactive {
-        color: #aaa;
-        background-color: var(--paletteColor6);
-        cursor: not-allowed;
-      } */
-
-      /* &.active {
-        color: #fff;
-
-        &::before {
-          background-color: var(--paletteColor2);
-        }
-
-      } */
-
-
-      /* &::before {
-        position: absolute;
-        content: "";
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -1;
-      }
-
-      &:not(.active):not(.inactive):hover::before {
-        background: #f2f2f2;
-      } */
+      
     }
   }
 
@@ -988,7 +1013,7 @@ body:not(.home):not(.page-id-2042) {
 /* Times */
 .gap_times {
   //background-color: #ff8900;
-  padding: 20px 40px 0px 20px;
+  padding: 20px 20px;
   position: relative;
 
   .gap_times_loading {
@@ -996,6 +1021,7 @@ body:not(.home):not(.page-id-2042) {
     background: url(../img/loader.gif) left center no-repeat;
     min-height: 100px;
     padding: 40px 0 0 80px;
+    text-align: left;
   }
 
   label {
@@ -1053,10 +1079,10 @@ body:not(.home):not(.page-id-2042) {
   nav.gap_time_nav {
     position: absolute;
     top: 50%;
+    left: 0;
+    right: 0;
     background-color: #ff8900;
     z-index: 100;
-    left: -15px;
-    right: 5px;
 
     button {
       background: none;
@@ -1065,6 +1091,7 @@ body:not(.home):not(.page-id-2042) {
       padding: 0;
       height: 24px;
       cursor: pointer;
+      left: -18px;
 
       svg {
         width: 100%;
@@ -1078,7 +1105,8 @@ body:not(.home):not(.page-id-2042) {
 
       &.next {
         text-align: right;
-        right: 0;
+        right: -18px;
+        left: auto;
         rotate: 90deg;
       }
     }
@@ -1088,7 +1116,6 @@ body:not(.home):not(.page-id-2042) {
 .gap_notes {
   padding-left: 20px;
   font-size: 14px;
-  margin-top: 20px;
 
   .gap_note {
     display: inline-block;
