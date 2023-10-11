@@ -405,9 +405,9 @@ class List_Table extends \WP_List_Table {
     echo "\n";
     $nonce = wp_create_nonce('dnonce');
 
-    echo "<a href='" . esc_html($_SERVER['REQUEST_URI']) . "&csv=true&nonce=" . $nonce . "' style='float:right; margin:0;' class='button'>";
+    /* echo "<a href='" . esc_html($_SERVER['REQUEST_URI']) . "&csv=true&nonce=" . $nonce . "' style='float:right; margin:0;' class='button'>";
     _e('Export CSV', 'contact-form-cfdb7');
-    echo '</a>';
+    echo '</a>'; */
     do_action('cfdb7_after_export_button');
   }
 }

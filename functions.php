@@ -3,15 +3,6 @@ if (!defined('WP_DEBUG')) {
   die('Direct access forbidden.');
 }
 
-add_action('admin_enqueue_scripts', function ($hook) {
-  /* if ('edit.php' != $hook) {
-    return;
-  } */
-  wp_enqueue_script('jquery.repeater', get_stylesheet_directory_uri(). '/assets/js/jquery.repeater.js', array(), '1.0');
-});
-
-
-
 add_action('wp_enqueue_scripts', function () {
 
   $theme_uri = get_stylesheet_directory_uri();

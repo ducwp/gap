@@ -20,7 +20,7 @@ class Init {
     Cf7db\Init::instance();
     Phuongthuckygui\Init::instance();
     Datlichcuahang\Init::instance();
-    Blocking::instance();
+    //Blocking::instance();
     Kyguionline\Init::instance();
     Xemtongket\Init::instance();
   }

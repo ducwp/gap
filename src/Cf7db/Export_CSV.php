@@ -73,7 +73,7 @@ class Export_CSV {
    * Download file
    * @return csv file
    */
-  public function download_csv_file($form_id) {
+  public function download_csv_file() {
 
     global $wpdb;
     $cfdb = apply_filters('cf7_gap_database', $wpdb);
@@ -86,8 +86,8 @@ class Export_CSV {
 
         wp_die('Not Valid.. Download nonce..!! ');
       }
-      //$fid = (int) $_REQUEST['fid'];
-      $fid = $form_id;
+      $fid = (int) $_REQUEST['fid'];
+      //$fid = $form_id;
       $heading_row = $cfdb->get_results("SELECT form_id, form_value, form_date FROM $table_name
                 WHERE form_post_id = '$fid' ORDER BY form_id DESC LIMIT 1", OBJECT);
 
