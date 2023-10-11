@@ -781,6 +781,8 @@ body:not(.home):not(.page-id-2042) {
     font-size: 14px;
     font-family: sans-serif;
 
+
+
     img {
       width: 24px;
       height: 24px;
@@ -794,13 +796,15 @@ body:not(.home):not(.page-id-2042) {
       margin: 20px 40px 20px 20px;
       background-color: var(--paletteColor6);
       text-align: center;
-
     }
   }
 }
 
-
-
+/* .gap_booking .gap_booking_header {
+  @include mobile {
+    background-color: #ca4949;
+  }
+} */
 
 /* Booking Calendar */
 .booking-wrapper {
@@ -1000,8 +1004,9 @@ body:not(.home):not(.page-id-2042) {
       display: none;
 
       &:disabled+.time_label {
-        border-color: var(--paletteColor4);
-        background-color: var(--paletteColor4);
+        border-color: var(--paletteColor5);
+        background-color: var(--paletteColor5);
+        color: #aaa;
         cursor: not-allowed;
       }
 
@@ -1009,8 +1014,9 @@ body:not(.home):not(.page-id-2042) {
         border-color: var(--paletteColor2);
         background-color: var(--paletteColor2);
         color: #fff;
+
         &.blocked_by_admin {
-          background-color: #ca4949!important;
+          background-color: #ca4949 !important;
           border-color: rgb(145, 23, 23);
         }
       }
@@ -1038,7 +1044,7 @@ body:not(.home):not(.page-id-2042) {
       }
 
       &.blocked_by_admin {
-        background-color: #ee9c9c!important;
+        background-color: #ee9c9c !important;
       }
 
     }
@@ -1095,8 +1101,8 @@ body:not(.home):not(.page-id-2042) {
       display: inline-block;
       width: 16px;
       height: 16px;
-      border: 1px solid var(--paletteColor4);
-      background-color: var(--paletteColor4);
+      border: 1px solid var(--paletteColor5);
+      background-color: var(--paletteColor5);
     }
 
     &.gn_available::before {

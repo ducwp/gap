@@ -552,6 +552,11 @@ body:not(.home):not(.page-id-2042) .ct-footer {
       background-color: var(--paletteColor6);
       text-align: center; }
 
+/* .gap_booking .gap_booking_header {
+  @include mobile {
+    background-color: #ca4949;
+  }
+} */
 /* Booking Calendar */
 .booking-wrapper {
   border-right: 1px solid var(--paletteColor4); }
@@ -687,8 +692,9 @@ body:not(.home):not(.page-id-2042) .ct-footer {
   .gap_times label input {
     display: none; }
     .gap_times label input:disabled + .time_label {
-      border-color: var(--paletteColor4);
-      background-color: var(--paletteColor4);
+      border-color: var(--paletteColor5);
+      background-color: var(--paletteColor5);
+      color: #aaa;
       cursor: not-allowed; }
     .gap_times label input:checked + .time_label {
       border-color: var(--paletteColor2);
@@ -754,8 +760,8 @@ body:not(.home):not(.page-id-2042) .ct-footer {
       display: inline-block;
       width: 16px;
       height: 16px;
-      border: 1px solid var(--paletteColor4);
-      background-color: var(--paletteColor4); }
+      border: 1px solid var(--paletteColor5);
+      background-color: var(--paletteColor5); }
     .gap_notes .gap_note.gn_available::before {
       border-color: var(--paletteColor4);
       background-color: #fff; }
