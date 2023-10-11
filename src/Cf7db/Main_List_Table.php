@@ -74,7 +74,8 @@ class Main_List_Table extends \WP_List_Table {
       'post_type' => 'wpcf7_contact_form',
       'order' => 'ASC',
       'posts_per_page' => 10,
-      'offset' => $start
+      'offset' => $start,
+      'post__not_in' => [Init::instance()->form_test_id], //Form Test
     );
 
     $the_query = new \WP_Query($args);

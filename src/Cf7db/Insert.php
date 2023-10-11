@@ -17,10 +17,10 @@ class Insert {
   }
 
   public function cf7_before_send_mail($form_tag) {
-    /*  $form_id = Init::instance()->form_id;
+    $form_test_id = Init::instance()->form_test_id;
 
-     if ($form_tag->id() != $form_id)
-       return; */
+    if ($form_tag->id() === $form_test_id)
+      return;
 
     global $wpdb;
     $cfdb = apply_filters('cf7_gap_database', $wpdb);
