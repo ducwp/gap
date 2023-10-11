@@ -1,4 +1,36 @@
 @charset "UTF-8";
+@font-face {
+  font-family: 'PN';
+  src: url("../fonts/PN/PN-Regular2.ttf") format("truetype"); }
+@font-face {
+  font-family: 'PN';
+  src: url("../fonts/PN/PN_SemiBold_gdi.ttf") format("truetype");
+  font-weight: 600; }
+@font-face {
+  font-family: 'PN';
+  src: url("../fonts/PN/PN_SemiBold_gdi.ttf") format("truetype");
+  font-weight: bold; }
+/* @font-face {
+  font-family: 'SVN-Veneer';
+  src: url(//theme.hstatic.net/1000324393/1000429977/14/SVN-Veneer.eot?v=1228) format("embedded-opentype"),
+    url("//theme.hstatic.net/1000314545/1000404148/14/SVN-Veneer.woff?v=796") format("woff"),
+    url(//theme.hstatic.net/1000324393/1000429977/14/SVN-Veneer.ttf?v=1228) format("truetype"),
+    url("//theme.hstatic.net/1000314545/1000404148/14/SVN-Veneer.svg?v=796#SVN-Veneer") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('//file.hstatic.net/1000243716/file/fontawesome-webfont.eot');
+  src: url('//file.hstatic.net/1000243716/file/fontawesome-webfont.eot') format('embedded-opentype'), url('//file.hstatic.net/1000243716/file/fontawesome-webfont.woff') format('woff'), url('//file.hstatic.net/1000243716/file/fontawesome-webfont.ttf') format('truetype'), url('//file.hstatic.net/1000243716/file/fontawesome-webfont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+} */
+@font-face {
+  font-family: "abchanel-corpo";
+  src: url("../fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.eot");
+  src: url("../fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.eot?#iefix") format("embedded-opentype"), url("../fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.woff2") format("woff2"), url("../fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.woff") format("woff"), url("../fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.ttf") format("truetype"), url("../fonts/ABchanel-Corpo/5fd740bac1abfb826fb7e35ae963efc9.svg#ABChanel Corpo Light") format("svg"); }
 :root {
   --fontFamily: 'PN', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
 
@@ -648,6 +680,8 @@ body:not(.home):not(.page-id-2042) .ct-footer {
     cursor: pointer; }
     .gap_times label .time_label:hover {
       border-color: var(--paletteColor3); }
+    .gap_times label .time_label.pass {
+      text-decoration: line-through; }
   .gap_times nav.gap_time_nav {
     position: absolute;
     top: 50%;

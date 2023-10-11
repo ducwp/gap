@@ -27,7 +27,7 @@ jQuery(document).ready(function ($) {
 
   /* */
   $(document).on('click', 'input[name=gap_date]', function (e) {
-    
+
     var date = $(this).val();
 
     $.fn.gap_load_time(date);
@@ -74,9 +74,15 @@ jQuery(document).ready(function ($) {
     $('#scr2').hide();
   });
 
-  $('button.uacf7-prev').text('Về trước');
+  var uacf7_prev = $('button.uacf7-prev');
+  uacf7_prev.text('Về trước');
+  uacf7_prev.click(function () {
+    $.fn.gap_load_time('');
+  });
+
   var uacf7_next = $('button.uacf7-next');
   uacf7_next.text('Tiếp theo');
+
 
   /* uacf7_next.click(function (e) {
     if (!$('input[name="gap_date"]').is(':checked')) {

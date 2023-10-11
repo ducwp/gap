@@ -2,7 +2,6 @@
 namespace GAPTheme\Datlichcuahang;
 
 class Ajax {
-  public $slot_num; //Gioi han so dat lich cho 1 thoi gian
   private static $_instance = null;
   public static function instance() {
     if (!isset(self::$_instance)) {
@@ -12,7 +11,6 @@ class Ajax {
   }
 
   private function __construct() {
-    $this->slot_num = 2; //Gioi han so dat lich cho 1 thoi gian
     add_action('wp_ajax_' . 'gap_click_date', [$this, 'click_date']);
     add_action('wp_ajax_nopriv_' . 'gap_click_date', [$this, 'click_date']);
 
@@ -43,10 +41,11 @@ class Ajax {
       $array_of_time[] = date("H:i", $start_time);
       $start_time += $add_mins; // to check endtie=me
     }
-    
+
     $date_arr = explode('/', $vn_date);
     $date = $date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0];
-
+    $slot_num = Init::instance()->slot_num;
+    
     $html = '<div class="row" id="scr1">';
     foreach ($array_of_time as $i => $time) {
       $dis = '';
@@ -54,19 +53,22 @@ class Ajax {
       $sql = "SELECT COUNT(*) as num_rows FROM  $db_table_name WHERE (form_type='offline' AND gap_date='{$date}' AND gap_time='{$sql_time}')";
       $rows = $wpdb->get_results($sql);
 
-
-      if ($rows[0]->num_rows >= $this->slot_num)
+      if ($rows[0]->num_rows >= $slot_num)
         $dis = 'disabled';
 
-      if (strtotime($date . ' ' . $time . ':00') < current_time('timestamp'))
+      $label_class = '';
+
+      if (strtotime($date . ' ' . $time . ':00') < current_time('timestamp')) {
         $dis = 'disabled';
+        $label_class = 'pass';
+      }
 
 
       $html .= '<div class="col-lg-4"><label>';
 
 
       $html .= sprintf('<input type="radio" name="gap_time" value="%s" %s >', $time, $dis);
-      $html .= sprintf('<span class="time_label">%s</span>', $time);
+      $html .= sprintf('<span class="time_label %s">%s</span>', $label_class, $time);
       $html .= '</label></div>';
 
       if ($time === '15:30')

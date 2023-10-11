@@ -311,6 +311,8 @@ class Details {
       'shoe_new_brand' => 'Giày mới Brand',
       'shoe_used' => 'Giày cũ',
       'shoe_used_brand' => 'Giày cũ Brand',
+      'shoe_used_90' => 'Giày củ còn mới > 90%',
+      'shoe_photo_gap_file' => 'Hình giày',
 
       //Mỹ phẩm
       'cosmetic_new_6' => 'Mỹ phẩm mới date > 6 tháng',
@@ -321,6 +323,7 @@ class Details {
       'cosmetic_used_capacity_80' => 'Mỹ phẩm cũ dung tích > 80%',
       'cosmetic_used' => 'Mỹ phẩm cũ',
       'cosmetic_used_brand' => 'Mỹ phẩm cũ Brand',
+      'cosmetic_photo_gap_file' => 'Hình mỹ phẩm',
 
       //Nước hoa
       'perfume_new' => 'Nước hoa mới',
@@ -328,6 +331,8 @@ class Details {
 
       'perfume_used' => 'Nước hoa cũ',
       'perfume_used_brand' => 'Nước hoa cũ Brand',
+      'perfume_used_capacity_80' => 'Nước hoa cũ > 80%',
+      'perfume_photo_gap_file' => 'Hình nước hoa'
       // 'cosmetic_used_capacity_80' => 'Mỹ phẩm cũ dung tích > 80%',
       // 'cosmetic_used' => 'Mỹ phẩm cũ',
       // 'cosmetic_used_brand' => 'Mỹ phẩm cũ Brand',

@@ -132,6 +132,24 @@ class Form {
     if (!isset($_POST['gap_time']) || empty($_POST['gap_time'])) {
       $result->invalidate($tag, "Vui lòng chọn thời gian");
     }
+
+    //Kiem tra một lần nữa xem hết chỗ chưa (nhiều người gửi cùng lúc) trong lúc user điền form
+    if (isset($_POST['gap_date']) && isset($_POST['gap_time'])) {
+      global $wpdb;
+      $db_table_name = $wpdb->prefix . 'gap_cf7'; // table name
+
+      $date_arr = explode('/', $_POST['gap_date']);
+      $date = $date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0];
+
+      $sql_time = $_POST['gap_time'] . ':00';
+      $sql = "SELECT COUNT(*) as num_rows FROM  $db_table_name WHERE (form_type='offline' AND gap_date='{$date}' AND gap_time='{$sql_time}')";
+      $rows = $wpdb->get_results($sql);
+      $slot_num = Init::instance()->slot_num;
+      if ($rows[0]->num_rows >= $slot_num) {
+        $result->invalidate($tag, "Thời điểm bạn chọn đã hết chỗ. Vui lòng chọn một thời điểm khác.");
+      }
+    }
+
     return $result;
   }
 

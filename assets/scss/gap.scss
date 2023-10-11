@@ -1,5 +1,6 @@
 //https://www.flaticon.com/packs/retail-102
 
+@import 'inc/fonts';
 @import 'inc/base';
 @import 'inc/hero_slider';
 
@@ -989,6 +990,10 @@ body:not(.home):not(.page-id-2042) {
 
       &:hover {
         border-color: var(--paletteColor3);
+      }
+
+      &.pass{
+        text-decoration: line-through;
       }
     }
   }
