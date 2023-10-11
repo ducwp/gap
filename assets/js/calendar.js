@@ -20,7 +20,7 @@ const renderCalendar = () => {
   let liTag = "";
 
   for (let i = firstDayofMonth; i > 0; i--) {
-    liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+    liTag += `<li class="inactive"><label><span class="gt_text">${lastDateofLastMonth - i + 1}</span></label></li>`;
   }
 
   let toDay = new Date();
@@ -50,13 +50,13 @@ const renderCalendar = () => {
       dis = '';
     }
 
-    liTag += `<li class="${liClass}" data-dmy="${dmy}">`;
-    liTag += `<label><input type="radio" name="gap_date" value="${dmy}" ${isChecked} ${dis} /> `;
+    liTag += `<li class="${liClass}"><label>`;
+    liTag += `<input type="radio" name="gap_date" value="${dmy}" ${isChecked} ${dis} /> `;
     liTag += `<span class="gt_text">${i}</span></label></li>`;
   }
 
   for (let i = lastDayofMonth; i < 6; i++) {
-    liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+    liTag += `<li class="inactive"><label><span class="gt_text">${i - lastDayofMonth + 1}</span></label></li>`
   }
   currentDate.innerText = `${months[currMonth]} ${currYear}`;
   daysTag.innerHTML = liTag;

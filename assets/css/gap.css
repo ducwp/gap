@@ -339,7 +339,7 @@ ul.gap_contact_items {
         width: 100%;
         height: 100%; }
 
-body:not(.home) .ct-footer {
+body:not(.home):not(.page-id-2042) .ct-footer {
   margin-top: 60px; }
 
 #gap_map {
@@ -492,6 +492,130 @@ body:not(.home) .ct-footer {
       background-color: var(--paletteColor6);
       text-align: center; }
 
+/* Booking Calendar */
+.booking-wrapper {
+  border-right: 1px solid var(--paletteColor4); }
+  .booking-wrapper header {
+    display: flex;
+    align-items: center;
+    padding: 25px 20px 10px;
+    justify-content: space-between; }
+    .booking-wrapper header .icons {
+      display: flex; }
+      .booking-wrapper header .icons span {
+        width: 32px;
+        height: 38px;
+        margin: 0 1px;
+        cursor: pointer;
+        color: #878787;
+        text-align: center;
+        line-height: 38px;
+        user-select: none;
+        border-radius: 4px; }
+        .booking-wrapper header .icons span:last-child {
+          margin-right: -10px; }
+        .booking-wrapper header .icons span:hover {
+          background: #f2f2f2; }
+    .booking-wrapper header .current-date {
+      font-size: 1.45rem;
+      font-weight: 700;
+      font-family: sans-serif; }
+
+/* Calendar */
+.calendar {
+  padding: 20px;
+  user-select: none;
+  /* Weeks */
+  /* Days */ }
+  .calendar ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center; }
+    .calendar ul li {
+      color: #333;
+      width: calc(100% / 7); }
+  .calendar .weeks li {
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: default; }
+  .calendar .days {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-right: 1px solid var(--paletteColor4);
+    border-bottom: 1px solid var(--paletteColor4); }
+    .calendar .days li {
+      z-index: 1;
+      position: relative;
+      border-top: 1px solid var(--paletteColor4);
+      border-left: 1px solid var(--paletteColor4);
+      margin: 0;
+      padding: 0;
+      /* &.inactive {
+        color: #aaa;
+        background-color: var(--paletteColor6);
+        cursor: not-allowed;
+      } */
+      /* &.active {
+        color: #fff;
+
+        &::before {
+          background-color: var(--paletteColor2);
+        }
+
+      } */
+      /* &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      &:not(.active):not(.inactive):hover::before {
+        background: #f2f2f2;
+      } */ }
+      .calendar .days li label {
+        padding: 0 !important; }
+        .calendar .days li label input {
+          display: none; }
+          .calendar .days li label input:checked + .gt_text {
+            color: #fff; }
+            .calendar .days li label input:checked + .gt_text::after {
+              border-color: var(--paletteColor2);
+              background-color: var(--paletteColor2); }
+          .calendar .days li label input:disabled + .gt_text::after {
+            height: 1px;
+            background-color: #aaa;
+            rotate: -30deg;
+            width: 30px;
+            top: 50%;
+            left: 50%;
+            margin-left: -15px; }
+        .calendar .days li label span.gt_text {
+          display: block;
+          padding: 15px 0;
+          position: relative; }
+          .calendar .days li label span.gt_text::after {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1; }
+      .calendar .days li.inactive, .calendar .days li.past {
+        color: #aaa;
+        background-color: var(--paletteColor6); }
+        .calendar .days li.inactive label, .calendar .days li.past label {
+          cursor: not-allowed; }
+
+/* Times */
 .gap_times {
   padding: 20px 40px 0px 20px;
   position: relative; }
@@ -572,119 +696,7 @@ body:not(.home) .ct-footer {
       border-color: var(--paletteColor2);
       background-color: var(--paletteColor2); }
 
-/* Booking Calendar */
-.wrapper {
-  border-right: 1px solid var(--paletteColor4); }
-  .wrapper header {
-    display: flex;
-    align-items: center;
-    padding: 25px 20px 10px;
-    justify-content: space-between; }
-    .wrapper header .icons {
-      display: flex; }
-      .wrapper header .icons span {
-        width: 32px;
-        height: 38px;
-        margin: 0 1px;
-        cursor: pointer;
-        color: #878787;
-        text-align: center;
-        line-height: 38px;
-        user-select: none;
-        border-radius: 4px; }
-        .wrapper header .icons span:last-child {
-          margin-right: -10px; }
-        .wrapper header .icons span:hover {
-          background: #f2f2f2; }
-    .wrapper header .current-date {
-      font-size: 1.45rem;
-      font-weight: 700;
-      font-family: sans-serif; }
-
-.calendar {
-  padding: 20px; }
-  .calendar ul {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    text-align: center; }
-    .calendar ul li {
-      color: #333;
-      width: calc(100% / 7);
-      font-size: 1.07rem; }
-  .calendar .weeks li {
-    font-family: sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: default; }
-  .calendar .days {
-    margin-top: 15px;
-    margin-bottom: 20px;
-    border-right: 1px solid var(--paletteColor4);
-    border-bottom: 1px solid var(--paletteColor4); }
-    .calendar .days li {
-      z-index: 1;
-      cursor: pointer;
-      position: relative;
-      border-top: 1px solid var(--paletteColor4);
-      border-left: 1px solid var(--paletteColor4);
-      margin: 0;
-      padding: 12px 0;
-      /* &.active {
-        color: #fff;
-
-        &::before {
-          background-color: var(--paletteColor2);
-        }
-
-      } */
-      /* &::before {
-        position: absolute;
-        content: "";
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -1;
-      }
-
-      &:not(.active):not(.inactive):hover::before {
-        background: #f2f2f2;
-      } */ }
-      .calendar .days li label input {
-        display: none; }
-      .calendar .days li label input:disabled + .gt_text {
-        color: #c32020;
-        text-decoration: line-through; }
-        .calendar .days li label input:disabled + .gt_text::after {
-          border-color: var(--paletteColor4);
-          background-color: var(--paletteColor5);
-          cursor: not-allowed; }
-      .calendar .days li label input:checked + .gt_text {
-        color: #fff; }
-        .calendar .days li label input:checked + .gt_text::after {
-          border-color: var(--paletteColor2);
-          background-color: var(--paletteColor2); }
-      .calendar .days li label .gt_text::after {
-        position: absolute;
-        content: "";
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -1; }
-      .calendar .days li.past {
-        background-color: var(--paletteColor6);
-        cursor: not-allowed; }
-        .calendar .days li.past label {
-          cursor: not-allowed; }
-      .calendar .days li.inactive {
-        color: #aaa;
-        background-color: var(--paletteColor6);
-        cursor: not-allowed; }
-
+/* datlichcuahang step 2 */
 .datlichcuahang {
   padding: 30px;
   margin-bottom: 30px;

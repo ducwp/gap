@@ -50,7 +50,7 @@ class Form {
     $atts['name'] = $tag->name;
     $atts = wpcf7_format_atts($atts);
 
-    $html = '<div class="wrapper">';
+    $html = '<div class="booking-wrapper">';
     $html .= '
     <header>
       <p class="current-date"></p>
