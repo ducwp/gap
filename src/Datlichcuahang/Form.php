@@ -78,35 +78,13 @@ class Form {
     }
 
     /* $atts = array();
-
     $class = wpcf7_form_controls_class($tag->type);
     $atts['class'] = $tag->get_class_option($class);
     $atts['id'] = $tag->get_id_option(); */
-
-    $atts['name'] = $tag->name;
-    $atts = wpcf7_format_atts($atts);
-
-    $img = sprintf('<img src="%s" width="24" height="24" />', get_stylesheet_directory_uri() . '/assets/img/date.svg');
-    $html = '';
-
-
-    //hours
-    $starttime = '10:00'; // your start time
-    $endtime = '20:00'; // End time
-    $duration = '30'; // split by 30 mins
-
-    $array_of_time = array();
-    $start_time = strtotime($starttime); //change to strtotime
-    $end_time = strtotime($endtime); //change to strtotime
-
-    $add_mins = $duration * 60;
-
-    while ($start_time <= $end_time) // loop between time
-    {
-      $array_of_time[] = date("H:i", $start_time);
-      $start_time += $add_mins; // to check endtie=me
-    }
-    $html .= '<div class="gap_times wpcf7-form-control-wrap" data-name="gap_time"><div id="gap_time_ajax">';
+    /* $atts['name'] = $tag->name;
+    $atts = wpcf7_format_atts($atts); */
+    
+    $html = '<div class="gap_times wpcf7-form-control-wrap" data-name="gap_time"><div id="gap_time_ajax">';
     $html .= Ajax::instance()->gap_times(date('d/m/Y'));
     $html .= '</div>';
 

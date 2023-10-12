@@ -1,0 +1,423 @@
+.bk_frame {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--paletteColor4);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 20px;
+
+
+
+  .bk_frame_cell {
+    position: relative;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+
+    @include mobile {
+      width: 100%;
+    }
+
+    &:nth-child(1) {
+      border-right: 1px solid var(--paletteColor4);
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &:nth-child(3) {
+      border-top: 1px solid var(--paletteColor4);
+      border-right: 1px solid var(--paletteColor4);
+      @include mobile {
+        border-right: none;
+      }
+    }
+
+    &:nth-child(4) {
+      border-top: 1px solid var(--paletteColor4);
+    }
+
+    .gap_booking_header {
+      display: block;
+      padding: 10px 0;
+      font-weight: 700;
+      font-size: 14px;
+      font-family: sans-serif;
+
+      @include mobile {
+        display: none;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+        vertical-align: -4px;
+        margin-right: 10px;
+      }
+
+      &.gbh_right {
+        border: none;
+        background-color: var(--paletteColor6);
+        text-align: center;
+        margin: 0 20px;
+
+        @include mobile {
+          display: block;
+          margin: 0;
+        }
+      }
+    }
+
+    /* &:after {
+      content: attr(class);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+    } */
+  }
+}
+
+/* Booking Calendar */
+.calendar-wrapper {
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .icons {
+      display: flex;
+
+      span {
+        width: 32px;
+        height: 38px;
+        margin: 0 1px;
+        cursor: pointer;
+        color: #878787;
+        text-align: center;
+        line-height: 38px;
+        user-select: none;
+        border-radius: 4px;
+
+        &:last-child {
+          margin-right: -10px;
+        }
+
+        &:hover {
+          background: #f2f2f2;
+        }
+      }
+    }
+
+    .current-date {
+      font-size: 1.45rem;
+      font-weight: 700;
+      font-family: sans-serif;
+    }
+  }
+}
+
+/* Calendar */
+.calendar {
+  user-select: none;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+
+    li {
+      color: #333;
+      width: calc(100% / 7);
+    }
+  }
+
+  /* Weeks */
+  .weeks {
+    li {
+      font-family: sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: default;
+    }
+  }
+
+  /* Days */
+  .days {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-right: 1px solid var(--paletteColor4);
+    border-bottom: 1px solid var(--paletteColor4);
+
+    li {
+      z-index: 1;
+      position: relative;
+      border-top: 1px solid var(--paletteColor4);
+      border-left: 1px solid var(--paletteColor4);
+      margin: 0;
+      padding: 0;
+
+      label {
+        padding: 0 !important;
+
+        input {
+          display: none;
+
+          &:checked+.gt_text {
+            color: #fff;
+
+            &::after {
+              border-color: var(--paletteColor2);
+              background-color: var(--paletteColor2);
+            }
+          }
+
+          &:disabled+.gt_text {
+            //color: #c32020;
+            // text-decoration: line-through;
+
+            &::after {
+              height: 1px;
+              background-color: #aaa;
+              rotate: -30deg;
+              width: 30px;
+              top: 50%;
+              left: 50%;
+              margin-left: -15px;
+            }
+          }
+        }
+
+        span.gt_text {
+          display: block;
+          padding: 15px 0;
+          position: relative;
+
+          &::after {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+          }
+        }
+
+      }
+
+      &.inactive,
+      &.past {
+        color: #aaa;
+        background-color: var(--paletteColor6);
+
+        label {
+          cursor: not-allowed;
+        }
+      }
+
+    }
+  }
+
+}
+
+/* Times */
+.gap_times {
+  //background-color: #ff8900;
+  padding: 20px 20px;
+  position: relative;
+
+  .gap_times_loading {
+    margin-top: 10px;
+    background: url(../img/loader.gif) left center no-repeat;
+    min-height: 100px;
+    padding: 40px 0 0 80px;
+    text-align: left;
+  }
+
+  label {
+
+    input {
+      display: none;
+
+      &:disabled+.time_label {
+        border-color: var(--paletteColor5);
+        background-color: var(--paletteColor5);
+        color: #aaa;
+        cursor: not-allowed;
+      }
+
+      &:checked+.time_label {
+        border-color: var(--paletteColor2);
+        background-color: var(--paletteColor2);
+        color: #fff;
+
+        &.blocked_by_admin {
+          background-color: #ca4949 !important;
+          border-color: rgb(145, 23, 23);
+        }
+      }
+    }
+
+    .time_label {
+      user-select: none;
+      background: #fff;
+      border: 1px solid var(--paletteColor4);
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 10px;
+      padding: 20px;
+      display: block;
+      text-align: center;
+      cursor: pointer;
+
+      @include mobile{
+        padding: 10px;
+        margin-top: 5px;
+      }
+
+      &:hover {
+        border-color: var(--paletteColor3);
+      }
+
+      &.pass {
+        text-decoration: line-through;
+      }
+
+      &.blocked_by_admin {
+        background-color: #ee9c9c !important;
+      }
+
+    }
+  }
+
+  nav.gap_time_nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    background-color: #ff8900;
+    z-index: 100;
+
+    button {
+      background: none;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      height: 24px;
+      cursor: pointer;
+      left: -18px;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        stroke: #000;
+      }
+
+      &.prev {
+        rotate: -90deg;
+      }
+
+      &.next {
+        text-align: right;
+        right: -18px;
+        left: auto;
+        rotate: 90deg;
+      }
+    }
+  }
+}
+
+.gap_notes {
+  padding-left: 20px;
+  font-size: 14px;
+
+  .gap_note {
+    display: inline-block;
+    margin-right: 30px;
+
+    &::before {
+      content: "";
+      vertical-align: -4px;
+      margin-right: 5px;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--paletteColor5);
+      background-color: var(--paletteColor5);
+    }
+
+    &.gn_available::before {
+      border-color: var(--paletteColor4);
+      background-color: #fff;
+    }
+
+    &.gn_selected::before {
+      border-color: var(--paletteColor2);
+      background-color: var(--paletteColor2);
+    }
+  }
+}
+
+/* datlichcuahang step 2 */
+.datlichcuahang {
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 1px solid var(--paletteColor4);
+  border-radius: 6px;
+
+  &-inner {
+    max-width: 739px;
+    margin: 0 auto;
+
+
+  }
+
+  .row+.row {
+    margin-top: 1.5rem;
+  }
+
+  div[data-class=wpcf7cf_group] {
+    margin-top: 1rem;
+    margin-bottom: 30px;
+
+    .row+.row {
+      margin-top: .5rem;
+    }
+  }
+
+  .gap_address {
+    background: url('../img/location.svg') left center no-repeat;
+    background-size: 36px;
+    padding-left: 46px;
+    font-weight: 700;
+    margin-bottom: 30px;
+
+    a {
+      font-weight: 400;
+      text-decoration: underline;
+    }
+  }
+}
+
+//Multi step
+.uacf7-step.step-content {
+
+  button.uacf7-prev,
+  button.uacf7-next {
+    padding: 5px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+}
