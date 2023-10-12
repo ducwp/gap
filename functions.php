@@ -7,6 +7,9 @@ add_action('wp_enqueue_scripts', function () {
 
   $theme_uri = get_stylesheet_directory_uri();
 
+  #Fix Elementor Icon
+  //https://giveawaypremium.vn/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.23.0
+  wp_enqueue_style('elementor-icons', plugins_url('/elementor/assets/lib/eicons/css/elementor-icons.min.css'));
   # CSS
   wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
   #wp_enqueue_style('gap-font','https://db.onlinewebfonts.com/c/5fd740bac1abfb826fb7e35ae963efc9?family=ABChanel+Corpo+Regular', array('parent-style'));

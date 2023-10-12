@@ -230,8 +230,9 @@
 .gap_page_scrolling {
   position: fixed;
   right: 30px;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 30px;
+  /* top: 50%;
+  transform: translateY(-50%); */
   z-index: 99999;
 
   &>span {

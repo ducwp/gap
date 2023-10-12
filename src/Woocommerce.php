@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace GAPTheme;
 
@@ -16,6 +16,13 @@ class WooCommerce {
     add_action('woocommerce_register_form', [$this, 'text_domain_woo_reg_form_fields']);
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
     add_action('woocommerce_created_customer', [$this, 'wooc_save_extra_register_fields']);
+
+    /* add_action('woocommerce_login_form_end', function () {
+      if (!wc_get_raw_referer())
+        return;
+      echo '<input type="hidden" name="redirect" value="' . wp_validate_redirect(wc_get_raw_referer(), wc_get_page_permalink('myaccount')) . '" />';
+    }); */
+
   }
 
   function loop_add_to_cart_link_filter($class, $product, $args) {

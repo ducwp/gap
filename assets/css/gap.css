@@ -196,9 +196,9 @@ body {
 .gap_page_scrolling {
   position: fixed;
   right: 30px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  bottom: 30px;
+  /* top: 50%;
+  transform: translateY(-50%); */
   z-index: 99999; }
   .gap_page_scrolling > span {
     display: block;
@@ -756,6 +756,7 @@ body:not(.home):not(.page-id-2042) .ct-footer {
 ul.gap_contact_items {
   padding: 0;
   margin: 0;
+  margin-top: 30px;
   list-style: none; }
   ul.gap_contact_items li {
     margin: 10px auto; }

@@ -281,6 +281,29 @@ jQuery(document).ready(function ($) {
     var number = $(this).index();
     sync1.data('owl.carousel').to(number, 300, true);
   });
+
+  //Auto rotate tabs
+  /* $('#continue-shopping').click(function (event) {
+    var nextLink = $('.tabs-menu').find('li.current').next().find('a');
+
+    if (nextLink.length > 0) {
+      nextLink.click();
+    } else {
+      $('.tabs-menu').find('li:first-of-type a').click();
+    }
+  }); */
+  
+  if ($('.elementor-tabs').length) {
+    setInterval(function () {
+      var nextLink = $('.elementor-tabs-wrapper').find('div.elementor-active').next('.elementor-tab-title');
+      if (nextLink.length > 0) {
+        nextLink.click();
+      } else {
+        $('.elementor-tabs-wrapper').find('.elementor-tab-title:first-of-type').click();
+      }
+    }, 3000);
+  }
+
 });
 
 
