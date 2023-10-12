@@ -248,6 +248,39 @@ body {
         .gap_page_scrolling ul.ps_dots li.ps_dot.active a svg {
           fill: #fff; }
 
+/* About */
+@media (min-width: 1024px) {
+  #about_tab .elementor-tabs .elementor-tab-title {
+    position: relative; }
+    #about_tab .elementor-tabs .elementor-tab-title.elementor-active::after {
+      content: "";
+      width: 10px;
+      height: 30px;
+      background: url("../img/arrow.png") no-repeat left center;
+      background-size: 100%;
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      margin-top: -15px; }
+  #about_tab .elementor-tabs-wrapper {
+    background-color: #000;
+    border-radius: 20px;
+    padding: 15px; }
+  #about_tab .elementor-tab-title {
+    text-align: center;
+    color: #fff; }
+  #about_tab .elementor-tab-title span {
+    display: block;
+    font-size: 130%;
+    margin-top: 6px; }
+  #about_tab .elementor-tab-title.elementor-active {
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px; }
+  #about_tab .elementor-tab-content {
+    padding: 0;
+    padding-left: 20px; } }
+
 .bk_frame {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -835,20 +868,6 @@ i.home-icon {
     background-size: 20px; }
   .ct-breadcrumbs a i.home-icon {
     opacity: 1; }
-
-/* About */
-#about_tab .elementor-tabs .elementor-tab-title {
-  position: relative; }
-  #about_tab .elementor-tabs .elementor-tab-title.elementor-active::after {
-    content: "";
-    width: 10px;
-    height: 30px;
-    background: url("../img/arrow.png") no-repeat left center;
-    background-size: 100%;
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    margin-top: -15px; }
 
 #ptkg_quydinh {
   position: relative;

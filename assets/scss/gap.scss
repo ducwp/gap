@@ -3,6 +3,7 @@
 @import "inc/fonts";
 @import "inc/base";
 @import "inc/homepage"; //Để dấu ngoặc kép mới auto compiler
+@import "inc/about";
 @import "inc/booking";
 @import "inc/kyguionline";
 @import "inc/xemtongket";
@@ -138,32 +139,11 @@ i.home-icon {
   }
 }
 
-/* About */
-#about_tab {
-  .elementor-tabs {
-    .elementor-tab-title {
-      position: relative;
-
-      &.elementor-active::after {
-        content: "";
-        width: 10px;
-        height: 30px;
-        background: url("../img/arrow.png") no-repeat left center;
-        background-size: 100%;
-        position: absolute;
-        right: -10px;
-        top: 50%;
-        margin-top: -15px;
-      }
-    }
-  }
-}
-
 #ptkg_quydinh {
   position: relative;
   height: 100%;
 
-  @include mobile{
+  @include mobile {
     height: 400px;
   }
 
@@ -175,6 +155,6 @@ i.home-icon {
     top: 0;
     bottom: 0;
     right: 0;
-    
+
   }
 }

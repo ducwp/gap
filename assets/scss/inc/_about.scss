@@ -1,0 +1,52 @@
+/* About */
+#about_tab {
+  @include desktop {
+    .elementor-tabs {
+      .elementor-tab-title {
+        position: relative;
+
+        &.elementor-active::after {
+          content: "";
+          width: 10px;
+          height: 30px;
+          background: url("../img/arrow.png") no-repeat left center;
+          background-size: 100%;
+          position: absolute;
+          right: -10px;
+          top: 50%;
+          margin-top: -15px;
+        }
+      }
+    }
+
+    .elementor-tabs-wrapper {
+      background-color: #000;
+      border-radius: 20px;
+      padding: 15px
+    }
+
+    .elementor-tab-title {
+      text-align: center;
+      color: #fff
+    }
+
+    .elementor-tab-title span {
+      display: block;
+      font-size: 130%;
+      margin-top: 6px;
+    }
+
+    .elementor-tab-title.elementor-active {
+      background-color: #fff;
+      color: #000;
+      border-radius: 10px
+    }
+
+    .elementor-tab-content {
+      padding: 0;
+      padding-left: 20px
+    }
+
+  }
+
+}
