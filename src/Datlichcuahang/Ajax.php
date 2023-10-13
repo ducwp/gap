@@ -2,6 +2,7 @@
 namespace GAPTheme\Datlichcuahang;
 
 class Ajax {
+  public $user_id;
   private static $_instance = null;
   public static function instance() {
     if (!isset(self::$_instance)) {
@@ -11,6 +12,7 @@ class Ajax {
   }
 
   private function __construct() {
+    $this->user_id = get_current_user_id();
     add_action('wp_ajax_' . 'gap_click_date', [$this, 'click_date']);
     add_action('wp_ajax_nopriv_' . 'gap_click_date', [$this, 'click_date']);
     add_action('wp_ajax_' . 'gap_block_date_time', [$this, 'block_date_time']);
@@ -62,7 +64,7 @@ class Ajax {
       }
 
       $html .= '<div class="col-xs-12 col-md-6 col-lg-4"><label>';
-      $html .= sprintf('<input type="radio" name="gap_time" value="%s" %s >', $time, $dis);
+      $html .= sprintf('<input type="radio" name="gap_time" value="%s" %s />', $time, $dis);
       $html .= sprintf('<span class="time_label %s">%s</span>', $label_class, $time);
       $html .= '</label></div>';
 
@@ -119,7 +121,8 @@ class Ajax {
     $data = array(
       'gap_date' => $date,
       'gap_time' => $time,
-      'block_time' => $block_time
+      'block_time' => $block_time,
+      'user_id' => $this->user_id
     );
     $wpdb->insert($db_table_name, $data);
     die;

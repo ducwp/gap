@@ -59,11 +59,16 @@ class Form {
         <span id="prev"><i class="fa fa-chevron-left"></i></span>
         <span id="next"><i class="fa fa-chevron-right"></i></span>
       </div></header>
-    <div class="calendar wpcf7-form-control-wrap" data-name="gap_date">
-      <ul class="weeks">
+    <div class="calendar">
+    
+      <ul class="weeks wpcf7-form-control wpcf7-gap_date">
         <li>Sun</li><li>Mon</li><li>Tue</li><li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li>
       </ul>
-      <ul class="days"></ul>
+      <span class="wpcf7-form-control-wrap" data-name="gap_date">
+        <span class="wpcf7-form-control wpcf7-gap_time">
+          <ul class="days"></ul>
+        </span>
+      </span>
     </div>
   </div>';
 
@@ -84,9 +89,10 @@ class Form {
     /* $atts['name'] = $tag->name;
     $atts = wpcf7_format_atts($atts); */
     
-    $html = '<div class="gap_times wpcf7-form-control-wrap" data-name="gap_time"><div id="gap_time_ajax">';
+    $html = '<div class="gap_times"><span class="wpcf7-form-control-wrap" data-name="gap_time"><span id="gap_time_ajax" class="wpcf7-form-control wpcf7-gap_time">';
+
     $html .= Ajax::instance()->gap_times(date('d/m/Y'));
-    $html .= '</div>';
+    $html .= '</span></span>';
 
     $arrow = '<svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1 14.5L14 1.5L27 14.5" stroke="000" stroke-width="1" stroke-linejoin="round"/><path d="M8 19L14 13L20 19" stroke="#000" stroke-width="1" stroke-linejoin="round"/></svg>';
