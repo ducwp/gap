@@ -34,6 +34,9 @@
 :root {
   --fontFamily: 'PN', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
 
+@media (min-width: 480px) {
+  .ct-cart-actions {
+    --buttonMinHeight: 40px; } }
 body {
   font-family: 'PN', sans-serif;
   font-weight: 400;
@@ -51,13 +54,14 @@ body {
 /* Owl */
 .owl-theme .owl-nav {
   /*default owl-theme theme reset .disabled:hover links */ }
-
-.owl-theme .owl-nav [class*=owl-] {
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease; }
-
-.owl-theme .owl-nav [class*=owl-].disabled:hover {
-  background-color: #D6D6D6; }
+  .owl-theme .owl-nav [class*=owl-] {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+    .owl-theme .owl-nav [class*=owl-].disabled:hover {
+      background-color: #D6D6D6; }
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #000 !important; }
 
 #sync1 {
   position: relative;
@@ -196,9 +200,9 @@ body {
 .gap_page_scrolling {
   position: fixed;
   right: 30px;
-  bottom: 30px;
-  /* top: 50%;
-  transform: translateY(-50%); */
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   z-index: 99999; }
   .gap_page_scrolling > span {
     display: block;
@@ -514,7 +518,8 @@ body {
     left: 0;
     right: 0;
     background-color: #ff8900;
-    z-index: 100; }
+    z-index: 100;
+    width: 100%; }
     .gap_times nav.gap_time_nav button {
       background: none;
       position: absolute;
@@ -718,6 +723,11 @@ body:not(.home):not(.page-id-2042) .ct-footer {
           align-items: center;
   font-size: 13px;
   text-align: left; }
+  .ct-footer .ct-widget .footer-item a {
+    color: var(--paletteColor8); }
+    .ct-footer .ct-widget .footer-item a:hover {
+      color: var(--paletteColor4);
+      opacity: 0.8; }
   .ct-footer .ct-widget .footer-item:not(:first-child) {
     margin-left: 30px; }
   .ct-footer .ct-widget .footer-item .footer-item-icon {
@@ -753,25 +763,167 @@ body:not(.home):not(.page-id-2042) .ct-footer {
     -webkit-transform-origin: 6px 6px;
             transform-origin: 6px 6px; }
 
-ul.gap_contact_items {
+.gap_contact_items {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
   padding: 0;
   margin: 0;
-  margin-top: 30px;
-  list-style: none; }
-  ul.gap_contact_items li {
-    margin: 10px auto; }
-    ul.gap_contact_items li a {
+  list-style: none;
+  z-index: 999; }
+  .gap_contact_items .triggerButton {
+    display: none; }
+    .gap_contact_items .triggerButton + label {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      bottom: -7px;
       background-color: #000;
-      display: inline-block;
-      width: 40px;
       height: 40px;
-      padding: 10px;
-      border-radius: 50%; }
-      ul.gap_contact_items li a svg {
-        fill: #fff;
-        width: 100%;
-        height: 100%; }
+      width: 40px;
+      border-radius: 50%;
+      z-index: 2;
+      -webkit-animation: shake 1500ms infinite;
+              animation: shake 1500ms infinite; }
+      .gap_contact_items .triggerButton + label:before, .gap_contact_items .triggerButton + label:after {
+        position: absolute;
+        content: '';
+        height: 20px;
+        width: .25em;
+        background-color: #fff;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border-radius: .5em;
+        -webkit-transition: all .25s;
+        transition: all .25s; }
+      .gap_contact_items .triggerButton + label:before {
+        height: 20px;
+        width: .25em; }
+      .gap_contact_items .triggerButton + label:after {
+        width: 20px;
+        height: .25em; }
+    .gap_contact_items .triggerButton:checked + label:before {
+      -webkit-transform: rotatez(-45deg);
+              transform: rotatez(-45deg); }
+    .gap_contact_items .triggerButton:checked + label:after {
+      -webkit-transform: rotatez(-45deg);
+              transform: rotatez(-45deg); }
+    .gap_contact_items .triggerButton:checked ~ a {
+      opacity: 1; }
+      .gap_contact_items .triggerButton:checked ~ a:hover {
+        opacity: .9; }
+    .gap_contact_items .triggerButton:checked ~ a.one {
+      -webkit-transform: translateX(-93px);
+              transform: translateX(-93px);
+      -webkit-transition-delay: .2s;
+              transition-delay: .2s; }
+    .gap_contact_items .triggerButton:checked ~ a.two {
+      -webkit-transform: translateX(-81px) translateY(-47px);
+              transform: translateX(-81px) translateY(-47px);
+      -webkit-transition-delay: .1s;
+              transition-delay: .1s; }
+    .gap_contact_items .triggerButton:checked ~ a.three {
+      -webkit-transform: translateX(-47px) translateY(-83px);
+              transform: translateX(-47px) translateY(-83px); }
+    .gap_contact_items .triggerButton:checked ~ a.four {
+      -webkit-transform: translateY(-93px);
+              transform: translateY(-93px); }
+  .gap_contact_items a {
+    background-color: #000;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: rotateZ(90deg);
+            transform: rotateZ(90deg);
+    opacity: 0;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-duration: .35s;
+            transition-duration: .35s;
+    -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .gap_contact_items a svg {
+      fill: #fff;
+      width: 100%;
+      height: 100%; }
 
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translate(1px, 1px) rotate(0deg);
+            transform: translate(1px, 1px) rotate(0deg); }
+  10% {
+    -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+            transform: translate(-1px, -2px) rotate(-1deg); }
+  20% {
+    -webkit-transform: translate(-3px, 0px) rotate(1deg);
+            transform: translate(-3px, 0px) rotate(1deg); }
+  30% {
+    -webkit-transform: translate(3px, 2px) rotate(0deg);
+            transform: translate(3px, 2px) rotate(0deg); }
+  40% {
+    -webkit-transform: translate(1px, -1px) rotate(1deg);
+            transform: translate(1px, -1px) rotate(1deg); }
+  50% {
+    -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+            transform: translate(-1px, 2px) rotate(-1deg); }
+  60% {
+    -webkit-transform: translate(-3px, 1px) rotate(0deg);
+            transform: translate(-3px, 1px) rotate(0deg); }
+  70% {
+    -webkit-transform: translate(3px, 1px) rotate(-1deg);
+            transform: translate(3px, 1px) rotate(-1deg); }
+  80% {
+    -webkit-transform: translate(-1px, -1px) rotate(1deg);
+            transform: translate(-1px, -1px) rotate(1deg); }
+  90% {
+    -webkit-transform: translate(1px, 2px) rotate(0deg);
+            transform: translate(1px, 2px) rotate(0deg); }
+  100% {
+    -webkit-transform: translate(1px, -2px) rotate(-1deg);
+            transform: translate(1px, -2px) rotate(-1deg); } }
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translate(1px, 1px) rotate(0deg);
+            transform: translate(1px, 1px) rotate(0deg); }
+  10% {
+    -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+            transform: translate(-1px, -2px) rotate(-1deg); }
+  20% {
+    -webkit-transform: translate(-3px, 0px) rotate(1deg);
+            transform: translate(-3px, 0px) rotate(1deg); }
+  30% {
+    -webkit-transform: translate(3px, 2px) rotate(0deg);
+            transform: translate(3px, 2px) rotate(0deg); }
+  40% {
+    -webkit-transform: translate(1px, -1px) rotate(1deg);
+            transform: translate(1px, -1px) rotate(1deg); }
+  50% {
+    -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+            transform: translate(-1px, 2px) rotate(-1deg); }
+  60% {
+    -webkit-transform: translate(-3px, 1px) rotate(0deg);
+            transform: translate(-3px, 1px) rotate(0deg); }
+  70% {
+    -webkit-transform: translate(3px, 1px) rotate(-1deg);
+            transform: translate(3px, 1px) rotate(-1deg); }
+  80% {
+    -webkit-transform: translate(-1px, -1px) rotate(1deg);
+            transform: translate(-1px, -1px) rotate(1deg); }
+  90% {
+    -webkit-transform: translate(1px, 2px) rotate(0deg);
+            transform: translate(1px, 2px) rotate(0deg); }
+  100% {
+    -webkit-transform: translate(1px, -2px) rotate(-1deg);
+            transform: translate(1px, -2px) rotate(-1deg); } }
 #gap_map {
   background-image: url("../img/loader.gif");
   background-position: center;
@@ -804,7 +956,13 @@ body.error404 .ct-container {
   padding: 10px 60px;
   margin: 0 auto; }
 
+a.wpcbn-btn.wpcbn-btn-archive {
+  margin-right: 5px; }
+
 /* Woocommerce */
+@media (min-width: 480px) {
+  .ct-cart-actions .quantity {
+    width: 80px !important; } }
 .add_to_cart_button::after,
 .button.single_add_to_cart_button:before {
   display: inline-block;

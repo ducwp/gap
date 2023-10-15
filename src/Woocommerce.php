@@ -12,6 +12,10 @@ class WooCommerce {
   }
 
   private function __construct() {
+    /* $username = '1 duc';
+    if (!$this->validate_username($username)) {
+      echo "LOI USENAME";
+    }  */ 
     add_filter('woocommerce_loop_add_to_cart_link', [$this, 'loop_add_to_cart_link_filter'], 10, 3);
     add_action('woocommerce_register_form', [$this, 'text_domain_woo_reg_form_fields']);
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
@@ -22,6 +26,17 @@ class WooCommerce {
         return;
       echo '<input type="hidden" name="redirect" value="' . wp_validate_redirect(wc_get_raw_referer(), wc_get_page_permalink('myaccount')) . '" />';
     }); */
+
+    // Change add to cart text on single product page
+    add_filter('woocommerce_product_single_add_to_cart_text', function () {
+      return __('Thêm giỏ hàng', 'woocommerce');
+    });
+
+
+    // Change add to cart text on product archives page
+    add_filter('woocommerce_product_add_to_cart_text', function () {
+      return __('Thêm giỏ hàng', 'woocommerce');
+    });
 
   }
 
@@ -74,7 +89,7 @@ class WooCommerce {
 
     <p class="form-row">
       <label for="zalo_otp"><?php _e('Mã OTP Zalo', 'text_domain'); ?><span class="required">*</span></label>
-      <input type="text" class="input-text" name="zalo_otp" id="zalo_otp" value="<?php if (!empty($_POST['zalo_otp']))
+      <input type="text" class="input-text" name="zalo_otp" id="form-field-zalo_otp" value="<?php if (!empty($_POST['zalo_otp']))
         esc_attr_e($_POST['zalo_otp']); ?>" placeholder="Nhập mã OTP vào đây" />
 
       <input type="hidden" name="verificationId" id="form-field-verificationId" value="" />
@@ -86,6 +101,15 @@ class WooCommerce {
 
 
   function wooc_validate_extra_register_fields($username, $email, $validation_errors) {
+
+    ///^\w+$/
+    if (isset($_POST['username']) && empty($_POST['username'])) {
+      
+      if (!$this->validate_username($_POST['username'])) {
+        $validation_errors->add('username_error', __('Yêu cầu tên người dùng: a-z, A-Z và _', 'woocommerce'));
+      }
+    }
+
     if (isset($_POST['billing_phone'])) {
       if (empty($_POST['billing_phone'])) {
         $validation_errors->add('billing_phone_error', __('Vui lòng nhập số điện thoại.', 'woocommerce'));
@@ -109,6 +133,12 @@ class WooCommerce {
       }
 
     }
+  }
+
+  function validate_username($usename) {
+    //$regex = '/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/';
+    $regex = '/^\w+$/';
+    return preg_match($regex, $usename);
   }
 
   function validate_mobile($mobile) {

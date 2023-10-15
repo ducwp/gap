@@ -32,24 +32,27 @@ class GetData extends Action_Base {
     $phone = $_POST['form_fields']['phone'];
     $verificationId = $_POST['form_fields']['verificationId'];
     $otp = trim($_POST['form_fields']['zalo_otp']);
-    if (empty($otp))
-      $ajax_handler->add_error_message('Vui lòng nhập mã OTP');
+    // if (empty($otp))
+    //   $ajax_handler->add_error_message('Vui lòng nhập mã OTP');
 
-    $response = \GAPtheme\Firebase::instance()->activate_through_firebase($verificationId, $otp);
-    if ($response->error && $response->error->code == 400) {
-      error_log($response->error->message);
-      /* wp_send_json_error([
-        'success' => false,
-        'phone_number' => $phone_number,
-        'firebase' => $response->error,
-        'message' => __('entered code is wrong!', 'login-with-phone-number')
-      ]); */
-      $ajax_handler->add_error_message('Sai mã OTP!!!');
-      return;
-    }
+    // $response = \GAPtheme\Firebase::instance()->activate_through_firebase($verificationId, $otp);
+    // if ($response->error && $response->error->code == 400) {
+    //   error_log($response->error->message);
+    //   /* wp_send_json_error([
+    //     'success' => false,
+    //     'phone_number' => $phone_number,
+    //     'firebase' => $response->error,
+    //     'message' => __('entered code is wrong!', 'login-with-phone-number')
+    //   ]); */
+    //   $ajax_handler->add_error_message('Sai mã OTP!!!');
+    //   return;
+    // }
 
     $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
-    $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE so_dien_thoai='$phone'");
+    $curmon = date('m');
+    $bmon = ($curmon - 2);
+    //$results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE (MONTH(ngay_ky_gui) = '$curmon' AND so_dien_thoai='$phone') ");
+    $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE MONTH(ngay_ky_gui) >= MONTH(NOW()-interval 2 month) AND so_dien_thoai='$phone' ");
     if ($wpdb->last_error) {
       $ajax_handler->add_error_message(sprintf('Error: %s', $wpdb->last_error));
     }
@@ -74,7 +77,7 @@ class GetData extends Action_Base {
       $text_right .= '<li>Sau ngày <b>{NGAY_TINH_PHI_TON_KHO}</b> sẽ tính phí tồn kho cho các sản phẩm tồn ạ.</li>';
       $text_right .= '<li>Phí tồn kho: 50.000vnđ/1 mã ký gửi/1 tháng</li>';
       $text_right .= '</ul>';
-      
+
       $img_bieu_phi = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/bieu_phi.png');
       $img_footer = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/footer.png');
       $img = sprintf('<img src="%s" />', get_stylesheet_directory_uri() . '/assets/img/xtk_info.jpg');
@@ -127,17 +130,17 @@ class GetData extends Action_Base {
         $xtk_modal .= sprintf('<tr>%s</tr>', $td_2);
         $xtk_modal .= '</tbody></table><br>';
         $xtk_modal .= $text_top;
-        $xtk_modal .='<div class="modal_xtk_box"><div class="col_left" style="float: left; width: 50%;">'.$img_bieu_phi.'</div>';
-        $xtk_modal .= '<div class="col_right" style="float: right; width: 50%;">'.$text_right.'</div><br style="clear: both"></div>';
+        $xtk_modal .= '<div class="modal_xtk_box"><div class="col_left" style="float: left; width: 50%;">' . $img_bieu_phi . '</div>';
+        $xtk_modal .= '<div class="col_right" style="float: right; width: 50%;">' . $text_right . '</div><br style="clear: both"></div>';
         $xtk_modal .= $img_footer . '</div>';
         $xtk_modal .= sprintf('<p class="xtk_detail_download_btn"><a onclick="gap_html2pdf();" href="#" class="xbutton"><img src="%s" /> Tải về</a></p>', get_stylesheet_directory_uri() . '/assets/img/download.svg');
 
-        
+
 
         $xtk_modal .= '</div>';
       }
       $html .= '</ul>';
-      
+
       $summary_result = $html . $xtk_modal;
       //$summary_result = json_encode($results);
     }

@@ -48,7 +48,19 @@ body {
 
 .single-product .entry-header .meta-categories a {}
 
+a.wpcbn-btn.wpcbn-btn-archive{
+	margin-right:5px
+}
+
 /* Woocommerce */
+@media (min-width: 480px) {
+  .ct-cart-actions {
+    .quantity {
+      width: 80px!important;
+    }
+  }
+}
+
 .add_to_cart_button::after,
 .button.single_add_to_cart_button:before {
   display: inline-block;

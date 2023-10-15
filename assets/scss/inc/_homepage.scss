@@ -1,14 +1,26 @@
 /* Owl */
-.owl-theme .owl-nav {
-  /*default owl-theme theme reset .disabled:hover links */
-}
+.owl-theme {
 
-.owl-theme .owl-nav [class*=owl-] {
-  transition: all 0.3s ease;
-}
+  .owl-nav {
 
-.owl-theme .owl-nav [class*=owl-].disabled:hover {
-  background-color: #D6D6D6;
+    /*default owl-theme theme reset .disabled:hover links */
+    [class*=owl-] {
+      transition: all 0.3s ease;
+
+      &.disabled:hover {
+        background-color: #D6D6D6;
+      }
+    }
+  }
+
+  .owl-dots {
+
+    .owl-dot.active span,
+    .owl-dot:hover span {
+      background: #000!important
+    }
+
+  }
 }
 
 #sync1 {
@@ -230,9 +242,8 @@
 .gap_page_scrolling {
   position: fixed;
   right: 30px;
-  bottom: 30px;
-  /* top: 50%;
-  transform: translateY(-50%); */
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 99999;
 
   &>span {

@@ -104,15 +104,6 @@ jQuery(document).ready(function ($) {
     alert("Gửi mã xác minh Zalo!!!\nTest OPT: 12345");
   });
 
-  $('.gap_time_nav button.next').click(function () {
-    $('#scr1').hide();
-    $('#scr2').show();
-  });
-  $('.gap_time_nav button.prev').click(function () {
-    $('#scr1').show();
-    $('#scr2').hide();
-  });
-
   var uacf7_prev = $('button.uacf7-prev');
   uacf7_prev.text('Về trước');
   uacf7_prev.click(function () {
@@ -194,6 +185,45 @@ jQuery(document).ready(function ($) {
     responsiveRefreshRate: 200,
     navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
   }).on('changed.owl.carousel', syncPosition);
+
+  /**/
+
+  /* var gap_time_slide = $(".gap_time_slidexxx");
+  $('.gap_time_slidexxx').owlCarousel({
+    items: 1,
+    dots: false,
+    nav: false,
+    
+    margin: 0,
+    smartSpeed: 200,
+    slideSpeed: 500,
+    //autoplay: true,
+    //center: true,
+
+    //autoWidth:true,
+    //slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+    responsiveRefreshRate: 100,
+    navClass: ['gt-owl-prev','gt-owl-next']
+  });
+
+  $(".gap_time_nav button.next").click(function () {
+    gap_time_slide.trigger('next.owl.carousel');
+  })
+  $(".gap_time_nav button.prev").click(function () {
+    gap_time_slide.trigger('prev.owl.carousel', [300]);
+  }); */
+
+  
+
+  $('.gap_time_nav button.next').click(function () {
+    $('#scr1').hide();
+    $('#scr2').show();
+  });
+  $('.gap_time_nav button.prev').click(function () {
+    $('#scr1').show();
+    $('#scr2').hide();
+  });
+
 
 
   /*Thumbs*/

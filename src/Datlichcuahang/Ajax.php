@@ -63,7 +63,7 @@ class Ajax {
           $label_class .= ' blocked_by_admin';
       }
 
-      $html .= '<div class="col-xs-12 col-md-6 col-lg-4"><label>';
+      $html .= '<div class="col-xs-4 col-md-4 col-lg-4"><label>';
       $html .= sprintf('<input type="radio" name="gap_time" value="%s" %s />', $time, $dis);
       $html .= sprintf('<span class="time_label %s">%s</span>', $label_class, $time);
       $html .= '</label></div>';

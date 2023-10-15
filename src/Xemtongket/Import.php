@@ -93,7 +93,10 @@ class Import {
         'tinh_trang_thanh_toan' => $tinh_trang_thanh_toan,
       );
 
-      $wpdb->insert($db_table_name, $data);
+      if ($this->is_update($ma_ky_gui)) {
+        $wpdb->update($db_table_name, $data, ['ma_ky_gui' => $ma_ky_gui]);
+      } else
+        $wpdb->insert($db_table_name, $data);
 
       //$link = sprintf('[<a href="%s" target="_blank">%s</a>]', get_permalink($id), $id);
       printf('<p>%s - %s - %s</p>', $ma_ky_gui, $ho_va_ten, $so_dien_thoai);
@@ -104,6 +107,21 @@ class Import {
 
       usleep(500000);
     }
+  }
+
+  public function is_update($ma_ky_gui) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'gap_summary'; // table name
+    $total_rows = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE ma_ky_gui = '$ma_ky_gui' ");
+    if ($total_rows > 0)
+      return true;
+    return false;
+
+    // $id = stripslashes_deep($_POST['id']); //added stripslashes_deep which removes WP escaping.
+    // $title = stripslashes_deep($_POST['title']);
+    // $message = stripslashes_deep($_POST['message']);
+
+    // $wpdb->update('table_name', array('id' => $id, 'title' => $title, 'message' => $message), array('id' => $id));
   }
 
 
