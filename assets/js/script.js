@@ -14,12 +14,41 @@ jQuery(document).ready(function ($) {
       success: function (html) {
         //console.log(html);
         $('#gap_time_ajax').html(html);
+        $.fn.gap_time_carousel();
       },
       error: function (error) {
         alert("error");
         //code
         console.log(error);
       }
+    });
+  }
+
+  /**/
+  $.fn.gap_time_carousel = function () {
+    var gap_time_slide = $(".gap_time_slide");
+    $('.gap_time_slide').owlCarousel({
+      items: 1,
+      dots: false,
+      nav: false,
+      loop: true,
+      margin: 0,
+      smartSpeed: 200,
+      slideSpeed: 500,
+      //autoplay: true,
+      //center: true,
+
+      //autoWidth:true,
+      //slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+      responsiveRefreshRate: 100,
+      navClass: ['gt-owl-prev', 'gt-owl-next']
+    });
+
+    $(".gap_time_nav button.next").click(function () {
+      gap_time_slide.trigger('next.owl.carousel');
+    })
+    $(".gap_time_nav button.prev").click(function () {
+      gap_time_slide.trigger('prev.owl.carousel', [300]);
     });
   }
 
@@ -63,6 +92,7 @@ jQuery(document).ready(function ($) {
 
 
   //$.fn.gap_load_time('');
+  $.fn.gap_time_carousel();
 
   /* */
   $(document).on('click', 'input[name=gap_date]', function (e) {
@@ -186,43 +216,18 @@ jQuery(document).ready(function ($) {
     navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
   }).on('changed.owl.carousel', syncPosition);
 
-  /**/
 
-  /* var gap_time_slide = $(".gap_time_slidexxx");
-  $('.gap_time_slidexxx').owlCarousel({
-    items: 1,
-    dots: false,
-    nav: false,
-    
-    margin: 0,
-    smartSpeed: 200,
-    slideSpeed: 500,
-    //autoplay: true,
-    //center: true,
 
-    //autoWidth:true,
-    //slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
-    responsiveRefreshRate: 100,
-    navClass: ['gt-owl-prev','gt-owl-next']
-  });
 
-  $(".gap_time_nav button.next").click(function () {
-    gap_time_slide.trigger('next.owl.carousel');
-  })
-  $(".gap_time_nav button.prev").click(function () {
-    gap_time_slide.trigger('prev.owl.carousel', [300]);
-  }); */
 
-  
-
-  $('.gap_time_nav button.next').click(function () {
+  /* $('.gap_time_nav button.next').click(function () {
     $('#scr1').hide();
     $('#scr2').show();
   });
   $('.gap_time_nav button.prev').click(function () {
     $('#scr1').show();
     $('#scr2').hide();
-  });
+  }); */
 
 
 
@@ -322,7 +327,7 @@ jQuery(document).ready(function ($) {
       $('.tabs-menu').find('li:first-of-type a').click();
     }
   }); */
-  
+
   if ($('.elementor-tabs').length) {
     setInterval(function () {
       var nextLink = $('.elementor-tabs-wrapper').find('div.elementor-active').next('.elementor-tab-title');

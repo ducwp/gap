@@ -3,6 +3,7 @@
 namespace GAPTheme;
 
 class WooCommerce {
+  public $gap_settings;
   private static $_instance = null;
   public static function instance() {
     if (!isset(self::$_instance)) {
@@ -12,10 +13,11 @@ class WooCommerce {
   }
 
   private function __construct() {
+    $this->gap_settings = get_option("gap_settings", array());
     /* $username = '1 duc';
     if (!$this->validate_username($username)) {
       echo "LOI USENAME";
-    }  */ 
+    }  */
     add_filter('woocommerce_loop_add_to_cart_link', [$this, 'loop_add_to_cart_link_filter'], 10, 3);
     add_action('woocommerce_register_form', [$this, 'text_domain_woo_reg_form_fields']);
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
@@ -38,6 +40,29 @@ class WooCommerce {
       return __('Thêm giỏ hàng', 'woocommerce');
     });
 
+    //add_filter('woocommerce_coupons_enabled', [$this, 'bbloomer_disable_coupons_cart_page']);
+    //remove_action('woocommerce_before_checkout_form', [$this, 'woocommerce_checkout_coupon_form'], 10);
+    add_action('woocommerce_review_order_before_submit', [$this, 'bbloomer_checkout_coupon_below_payment_button']);
+
+    //https://www.businessbloomer.com/category/woocommerce-tips/visual-hook-series/
+    //https://www.businessbloomer.com/woocommerce-visual-hook-guide-checkout-page/
+    //https://www.businessbloomer.com/woocommerce-visual-hook-guide-account-pages/
+
+    add_action('woocommerce_account_dashboard', function () {
+      $current_user = Hooks::instance()->current_user;
+      $badge = get_stylesheet_directory_uri() . '/assets/img/medal.svg';
+      echo '<p style="text-align: center">';
+      printf('<img src="%s" width="100" /><br><br>', $badge);
+      printf('<b>%s</b><br>', $current_user->display_name);
+      printf('%s', __('Chúc mừng! Bạn đã được nhận huy chương vàng<br> vì đã kiếm được <b>1267</b> điểm.'));
+      echo '</p>';
+    });
+
+    add_action('woocommerce_account_dashboard', function () {
+      if (isset($this->gap_settings['woo_account_page_dashboard'])) {
+        echo $this->gap_settings['woo_account_page_dashboard'];
+      }
+    });
   }
 
   function loop_add_to_cart_link_filter($class, $product, $args) {
@@ -104,7 +129,7 @@ class WooCommerce {
 
     ///^\w+$/
     if (isset($_POST['username']) && empty($_POST['username'])) {
-      
+
       if (!$this->validate_username($_POST['username'])) {
         $validation_errors->add('username_error', __('Yêu cầu tên người dùng: a-z, A-Z và _', 'woocommerce'));
       }
@@ -153,5 +178,16 @@ class WooCommerce {
       // Phone input filed which is used in WooCommerce
       update_user_meta($customer_id, 'billing_phone', sanitize_text_field($_POST['billing_phone']));
     }
+  }
+
+  function bbloomer_disable_coupons_cart_page() {
+    if (is_cart())
+      return false;
+    return true;
+  }
+
+  function bbloomer_checkout_coupon_below_payment_button() {
+    echo '<hr>';
+    woocommerce_checkout_coupon_form();
   }
 }

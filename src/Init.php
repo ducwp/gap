@@ -12,11 +12,12 @@ class Init {
   }
 
   private function __construct() {
-
+    Settings::instance();
     Hooks::instance();
     Shortcodes::instance();
     Firebase::instance();
     WooCommerce::instance();
+    DePro::instance();
     Cf7db\Init::instance();
     Phuongthuckygui\Init::instance();
     Datlichcuahang\Init::instance();
@@ -24,4 +25,6 @@ class Init {
     Kyguionline\Init::instance();
     Xemtongket\Init::instance();
   }
+
+  
 }

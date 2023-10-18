@@ -3,6 +3,7 @@
 namespace GAPTheme;
 
 class Hooks {
+  public $current_user;
   private static $_instance = null;
   public static function instance() {
     if (!isset(self::$_instance)) {
@@ -12,6 +13,7 @@ class Hooks {
   }
 
   private function __construct() {
+    $this->current_user = wp_get_current_user();
     add_filter('wpcf7_autop_or_not', '__return_false');
     add_filter('wpcf7_form_elements', 'do_shortcode');
     //add_action('wp', [$this, 'gap_check_user_login']);
@@ -33,8 +35,7 @@ class Hooks {
     add_action('wp_footer', function () {
       if (!is_user_logged_in())
         return;
-      $current_user = wp_get_current_user();
-      printf('<input type="hidden" id="current_user_billing_phone" value="%s">', $current_user->billing_phone);
+      printf('<input type="hidden" id="current_user_billing_phone" value="%s">', $this->current_user->billing_phone);
     });
 
     add_action( 'wp_footer', function(){

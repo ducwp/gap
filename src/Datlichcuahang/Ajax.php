@@ -69,10 +69,10 @@ class Ajax {
       $html .= '</label></div>';
 
       if ($time === '15:30')
-        $html .= '</div><div class="row" id="scr2" style="display: none">';
+        $html .= '</div><div class="row" id="scr2">';
     }
     $html .= '</div>';
-
+    $html = '<div class="gap_time_slide owl-carousel">'.$html.'</div>';
     return $html;
   }
 

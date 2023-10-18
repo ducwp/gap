@@ -1,58 +1,24 @@
 <?php
 namespace GAPTheme\Xemtongket;
 
-use ElementorPro\Modules\Forms\Classes\Action_Base;
-
-use NumberFormatter;
-
-class GetData extends Action_Base {
-  public $current_user;
-  public function __construct() {
-    $this->current_user = wp_get_current_user();
-  }
-  public function get_name() {
-    return 'form-summary';
+class View {
+  private static $_instance = null;
+  public static function instance() {
+    if (!isset(self::$_instance)) {
+      self::$_instance = new self();
+    }
+    return self::$_instance;
   }
 
-  public function get_label() {
-    return __('Xem tổng kết', 'gap-theme');
+  private function __construct() {
+    add_shortcode('xemtongket', [$this, 'view_data']);
   }
 
-  /**
-   * @param \Elementor\Widget_Base $widget
-   */
-  public function register_settings_section($widget) {
-
-  }
-
-  /**
-   * @param \ElementorPro\Modules\Forms\Classes\Form_Record $record
-   * @param \ElementorPro\Modules\Forms\Classes\Ajax_Handler $ajax_handler
-   */
-  public function run($record, $ajax_handler) {
+  public function view_data($record, $ajax_handler) {
     global $wpdb;
 
-    //$ajax_handler->data['pre_amount'];
-    $phone = $_POST['form_fields']['phone'];
-    //$current_user = \GAPTheme\Hooks::instance()->current_user;
-    //echo $phone = $this->current_user->billing_phone,"XXXXXXXXXXXXXXXXXXXXXX";
-    $verificationId = $_POST['form_fields']['verificationId'];
-    $otp = trim($_POST['form_fields']['zalo_otp']);
-    // if (empty($otp))
-    //   $ajax_handler->add_error_message('Vui lòng nhập mã OTP');
-
-    // $response = \GAPtheme\Firebase::instance()->activate_through_firebase($verificationId, $otp);
-    // if ($response->error && $response->error->code == 400) {
-    //   error_log($response->error->message);
-    //   /* wp_send_json_error([
-    //     'success' => false,
-    //     'phone_number' => $phone_number,
-    //     'firebase' => $response->error,
-    //     'message' => __('entered code is wrong!', 'login-with-phone-number')
-    //   ]); */
-    //   $ajax_handler->add_error_message('Sai mã OTP!!!');
-    //   return;
-    // }
+    $current_user = wp_get_current_user();
+    $phone = $current_user->billing_phone;
 
     $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
     //$results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE (MONTH(ngay_ky_gui) = '$curmon' AND so_dien_thoai='$phone') ");
@@ -146,15 +112,8 @@ class GetData extends Action_Base {
       $html .= '</ul>';
 
       $summary_result = $html . $xtk_modal;
-      //$summary_result = json_encode($results);
+
+      return $summary_result;
     }
-
-    $ajax_handler->add_response_data('summary_result', $summary_result);
-    #$ajax_handler->add_response_data('success_image', $settings['success_image']['url']);
   }
-
-  public function on_export($element) {
-    return $element;
-  }
-
 }

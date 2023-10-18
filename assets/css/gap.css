@@ -1043,4 +1043,39 @@ i.home-icon {
     bottom: 0;
     right: 0; }
 
+span.onsale {
+  padding: 12px 48px;
+  color: #fff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0, #000), color-stop(30%, #747474), color-stop(40%, #000));
+  background: linear-gradient(to right, #000 0, #747474 30%, #000 40%);
+  background-position: 0;
+  -webkit-animation: shine 2s infinite linear;
+          animation: shine 2s infinite linear; }
+
+@-webkit-keyframes shine {
+  0% {
+    background-position: 0; }
+  100% {
+    background-position: 100px; } }
+
+@keyframes shine {
+  0% {
+    background-position: 0; }
+  100% {
+    background-position: 100px; } }
+/* .quantity  {
+  offset-path: path("M20,20 C20,100 200,0 200,100");
+  animation: move 3000ms infinite alternate ease-in-out;
+ 
+}
+
+@keyframes move {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+} */
+
 /*# sourceMappingURL=gap.css.map */

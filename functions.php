@@ -65,6 +65,8 @@ add_action('wp_enqueue_scripts', function () {
 
 add_image_size('hero-thumb-size', 200, 200, true);
 
+//require_once __DIR__ . '/codestar-framework/codestar-framework.php';
+//https://codestarframework.com/documentation/#/
 require_once(__DIR__ . '/vendor/autoload.php');
 GAPTheme\Init::instance();
 

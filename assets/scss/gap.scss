@@ -48,15 +48,15 @@ body {
 
 .single-product .entry-header .meta-categories a {}
 
-a.wpcbn-btn.wpcbn-btn-archive{
-	margin-right:5px
+a.wpcbn-btn.wpcbn-btn-archive {
+  margin-right: 5px
 }
 
 /* Woocommerce */
 @media (min-width: 480px) {
   .ct-cart-actions {
     .quantity {
-      width: 80px!important;
+      width: 80px !important;
     }
   }
 }
@@ -170,3 +170,47 @@ i.home-icon {
 
   }
 }
+
+//Shine
+
+span.onsale {
+  padding: 12px 48px;
+  color: #fff;
+  background: linear-gradient(to right, #000 0, #747474 30%, #000 40%);
+  background-position: 0;
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
+  animation: shine 2s infinite linear;
+  //animation: shine 3s infinite;
+  // -webkit-text-size-adjust: none;
+
+}
+
+@keyframes shine {
+
+  0% {
+    background-position: 0;
+  }
+
+  
+
+  100% {
+    background-position: 100px;
+  }
+
+}
+
+/* .quantity  {
+  offset-path: path("M20,20 C20,100 200,0 200,100");
+  animation: move 3000ms infinite alternate ease-in-out;
+ 
+}
+
+@keyframes move {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+} */

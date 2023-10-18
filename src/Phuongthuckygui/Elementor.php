@@ -69,7 +69,7 @@ class Elementor extends Action_Base {
         $percent = 0.23;
         break;
       default:
-        $percent = 0.1;
+        $percent = 0.2;
         break;
     }
 
