@@ -646,6 +646,16 @@ body {
     text-align: center;
     margin-top: 20px; }
 
+@media (max-width: 479px) {
+  .button-xtk-detail {
+    display: none; } }
+
+.button-download-mobile {
+  display: none; }
+  @media (max-width: 479px) {
+    .button-download-mobile {
+      display: inline-block; } }
+
 .modal.modal_xtk_detail {
   padding: 20px;
   max-width: calc(var(--normal-container-max-width) + 50px); }
@@ -997,9 +1007,6 @@ ul.products li.product {
     font-size: 18px; }
   ul.products li.product .ct-woo-card-actions {
     margin-top: 10px; }
-
-.cart-discount.coupon-gap_freeshipping_gold {
-  display: none; }
 
 .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--nrp-points a:before {
   content: ''; }

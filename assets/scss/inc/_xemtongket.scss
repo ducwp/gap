@@ -27,6 +27,20 @@
 
 }
 
+.button-xtk-detail {
+  @include mobile {
+    display: none;
+  }
+}
+
+.button-download-mobile {
+  display: none;
+
+  @include mobile {
+    display: inline-block;
+  }
+}
+
 .modal.modal_xtk_detail {
   padding: 20px;
   max-width: calc(var(--normal-container-max-width) + 50px);

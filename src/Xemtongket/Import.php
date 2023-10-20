@@ -55,15 +55,22 @@ class Import {
       $ngay_ky_gui = $spreadsheet->getActiveSheet()->getCell('A' . $row->getRowIndex())->getFormattedValue();
       if (empty($ngay_ky_gui))
         break;
-      $ngay_ky_gui = join('-', array_reverse(explode('/', $ngay_ky_gui)));
+      //$ngay_ky_gui = join('-', array_reverse(explode('/', $ngay_ky_gui)));
       $ma_ky_gui = $spreadsheet->getActiveSheet()->getCell('B' . $row->getRowIndex())->getFormattedValue();
+
+      $ok = preg_replace('~\D~', '', $ma_ky_gui);
+      $m = substr($ok, 0, 2);
+      $y = substr($ok, 2, 2);
+      $date = sprintf('15-%s-20%s', $m, $y);
+      $ngay_ma_ky_gui = date('Y-m-d', strtotime($date));
+
       $ho_va_ten = $spreadsheet->getActiveSheet()->getCell('C' . $row->getRowIndex())->getFormattedValue();
       $so_dien_thoai = $spreadsheet->getActiveSheet()->getCell('D' . $row->getRowIndex())->getFormattedValue();
       $pthuc_thanhtoan = $spreadsheet->getActiveSheet()->getCell('E' . $row->getRowIndex())->getFormattedValue();
       $ngay_thanh_toan = $spreadsheet->getActiveSheet()->getCell('F' . $row->getRowIndex())->getFormattedValue();
-      $ngay_thanh_toan = join('-', array_reverse(explode('/', $ngay_thanh_toan)));
+      //$ngay_thanh_toan = join('-', array_reverse(explode('/', $ngay_thanh_toan)));
       $ngay_tinh_phi_ton_kho = $spreadsheet->getActiveSheet()->getCell('G' . $row->getRowIndex())->getFormattedValue();
-      $ngay_tinh_phi_ton_kho = join('-', array_reverse(explode('/', $ngay_tinh_phi_ton_kho)));
+      //$ngay_tinh_phi_ton_kho = join('-', array_reverse(explode('/', $ngay_tinh_phi_ton_kho)));
       $so_tai_khoan = $spreadsheet->getActiveSheet()->getCell('H' . $row->getRowIndex())->getFormattedValue();
       $ngan_hang = $spreadsheet->getActiveSheet()->getCell('I' . $row->getRowIndex())->getFormattedValue();
       $ky_gui = $spreadsheet->getActiveSheet()->getCell('K' . $row->getRowIndex())->getFormattedValue();
@@ -77,6 +84,7 @@ class Import {
       $data = array(
         'ngay_ky_gui' => $ngay_ky_gui,
         'ma_ky_gui' => $ma_ky_gui,
+        'ngay_ma_ky_gui' => $ngay_ma_ky_gui,
         'ho_va_ten' => $ho_va_ten,
         'so_dien_thoai' => $so_dien_thoai,
         'phuong_thuc_thanh_toan' => $pthuc_thanhtoan,

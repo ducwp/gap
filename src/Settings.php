@@ -39,47 +39,19 @@ class Settings {
 
           //
           array(
-            'id'    => 'woo_account_page_dashboard',
-            'type'  => 'wp_editor',
+            'id' => 'woo_account_page_dashboard',
+            'type' => 'wp_editor',
             'title' => 'Add to Account Dashboard',
           ),
+
           array(
-            'id' => 'post_types',
-            'type' => 'checkbox',
-            'title' => __('Post Types', 'graby'),
-            'options' => 'post_types',
-            'query_args' => array(
-              'orderby' => 'post_title',
-              'order' => 'ASC',
-            ),
-            'default' => array('post'),
-            'desc' => 'Select the post types that you want to use Graby.'
-          ),
-          array(
-            'id' => 'replace_phone',
-            'type' => 'switcher',
-            'title' => 'Replace phone',
-          ),
-          array(
-            'id' => 'phone_number',
+            'id' => 'freeshipping_gold',
             'type' => 'text',
-            'title' => 'Phone Number',
-            'desc' => 'Enter phone number to find in your post content.',
-            'dependency' => array('replace_phone', '==', 'true'),
+            'title' => 'Freeshipping coupon',
+            'default' => 'gap_freeshipping_gold',
+            'desc' => 'Tạo coupon: ' . admin_url('edit.php?post_type=shop_coupon')
           ),
-          
-          array(
-            'id' => 'replace_email',
-            'type' => 'switcher',
-            'title' => 'Replace email',
-          ),
-          array(
-            'id' => 'email_address',
-            'type' => 'text',
-            'title' => 'Email Address',
-            'desc' => 'Enter email address to find in your post content.',
-            'dependency' => array('replace_email', '==', 'true'),
-          ),
+
         )
       ));
 

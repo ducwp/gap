@@ -22,13 +22,13 @@ class View {
 
     $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
     //$results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE (MONTH(ngay_ky_gui) = '$curmon' AND so_dien_thoai='$phone') ");
-    $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE MONTH(ngay_ky_gui) >= MONTH(NOW()-interval 2 month) AND so_dien_thoai='$phone' ");
+    $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE MONTH(ngay_ma_ky_gui) >= MONTH(NOW()-interval 2 month) AND so_dien_thoai='$phone' ");
     if ($wpdb->last_error) {
       $ajax_handler->add_error_message(sprintf('Error: %s', $wpdb->last_error));
     }
 
     if (empty($results)) {
-      $summary_result = '<h4 style="text-align: center">Xin lỗi, hiện tại hóa đơn của bạn chưa đến kỳ tổng kết.</h4>';
+      return $summary_result = '<h4 style="text-align: center">Xin lỗi, hiện tại hóa đơn của bạn chưa đến kỳ tổng kết.</h4>';
     } else {
       $html = '<h4 style="text-align: center; margin: 20px 0">Kết quả tổng kết</h4>';
       $html .= '<ul data-products="type-1" class="products columns-3">';
@@ -63,8 +63,9 @@ class View {
 
         /* $text = sprintf('<div class="modal_xtk_img_box"><span class="date1">%s</span> <span class="date2">%s</span> <span class="date3">%s</span>%s</div>', $ngay_thanh_toan, $ngay_thanh_toan, $ngay_tinh_phi_ton_kho , $img); */
 
-        $time = strtotime($row->ngay_ky_gui);
-        $ngay_ky_gui = date('d/m/Y', $time);
+        // $time = strtotime($row->ngay_ky_gui);
+        // $ngay_ky_gui = date('d/m/Y', $time);
+        $ngay_ky_gui = $row->ngay_ky_gui;
 
         $tinh_trang_thanh_toan = !empty($row->tinh_trang_thanh_toan) ? $row->tinh_trang_thanh_toan : 'N/A';
         $html .= '<li class="product xem_tong_ket">';
@@ -74,7 +75,13 @@ class View {
         $html .= sprintf('<div class="xtk_row"><span class="xtk_title">Họ và tên: </span><span class="xtk_value">%s</span></div>', $row->ho_va_ten);
         $html .= sprintf('<div class="xtk_row"><span class="xtk_title">Thực nhận: </span><span class="xtk_value"><b>%s</b> ₫</span></div>', $row->thuc_nhan);
         //$html .= sprintf('<div class="xtk_row"><span class="xtk_title">Tình trạng thanh toán: </span><span class="xtk_value"><b>%s</b></span></div>', $tinh_trang_thanh_toan);
-        $html .= sprintf('<div class="xtk_footer"><a href="#xtk_detail_%s" rel="modal:open" class="button button-xtk-detail">Xem chi tiết</a></div>', $row->id);
+        $html .= '<div class="xtk_footer">';
+        $html .= sprintf('<a href="#xtk_detail_%s" rel="modal:open" class="button button-xtk-detail">Xem chi tiết</a>', $row->id);
+
+        $html .= sprintf('<a onclick="gap_html2pdf();" href="#" class="button button-download-mobile">Tải về</a>');
+
+        $html .= '</div>';
+
         $html .= '</li>';
 
         $i = 1;
@@ -83,7 +90,9 @@ class View {
         $aa = array_values((array) $row);
 
         for ($i = 2; $i < count($aa); $i++) {
-          if ($i < 8)
+          if ($i == 3)
+            continue;
+          if ($i < 9)
             $td_1 .= sprintf('<td>%s</td>', $aa[$i]);
           else
             $td_2 .= sprintf('<td>%s</td>', $aa[$i]);

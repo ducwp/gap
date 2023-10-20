@@ -87,6 +87,12 @@ class WooCommerce {
     //add_filter('woocommerce_get_shop_coupon_data', [$this, 'set_wc_coupon_data'], 99, 3);
     //add_filter( 'woocommerce_coupon_get_discount_amount', [$this, 'coupon_get_discount_amount_filter'], 10, 4 );
     add_action('woocommerce_checkout_before_order_review', [$this, 'ts_apply_discount_to_cart']);
+
+    add_action('wp_head', function () {
+      $freeshipping_gold_coupon = isset($this->gap_settings['freeshipping_gold']) ? $this->gap_settings['freeshipping_gold'] : 'gap_freeshipping_gold';
+      printf('<style>.cart-discount.coupon-%s {display: none;}</style>', $freeshipping_gold_coupon);
+
+    });
   }
 
   function getUserPoints() {
@@ -98,7 +104,7 @@ class WooCommerce {
     if ($this->getUserPoints() < Init::instance()->level_2)
       return;
     $coupon_code = 'gap_freeshipping_gold';
-    
+
     if (!WC()->cart->has_discount($coupon_code)) {
       if (!WC()->cart->apply_coupon($coupon_code)) {
         wc_print_notices();
