@@ -3,6 +3,8 @@
 namespace GAPTheme;
 
 class Init {
+  public $level_1 = 1000;
+  public $level_2 = 2000;
   private static $_instance = null;
   public static function instance() {
     if (!isset(self::$_instance)) {

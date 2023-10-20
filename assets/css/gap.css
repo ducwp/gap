@@ -783,8 +783,7 @@ body:not(.home):not(.page-id-2042) .ct-footer {
       width: 40px;
       border-radius: 50%;
       z-index: 2;
-      -webkit-animation: shake 1500ms infinite;
-              animation: shake 1500ms infinite; }
+      border: 1px solid rgba(255, 255, 255, 0.2); }
       .gap_contact_items .triggerButton + label:before, .gap_contact_items .triggerButton + label:after {
         position: absolute;
         content: '';
@@ -999,6 +998,12 @@ ul.products li.product {
   ul.products li.product .ct-woo-card-actions {
     margin-top: 10px; }
 
+.cart-discount.coupon-gap_freeshipping_gold {
+  display: none; }
+
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--nrp-points a:before {
+  content: ''; }
+
 i.home-icon {
   display: inline-block;
   opacity: .5;
@@ -1077,5 +1082,9 @@ span.onsale {
     offset-distance: 100%;
   }
 } */
+a.nrp_apply_redemption_coupon {
+  display: inline-block;
+  margin-left: 10px;
+  color: #c00; }
 
 /*# sourceMappingURL=gap.css.map */

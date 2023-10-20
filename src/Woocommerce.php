@@ -50,11 +50,31 @@ class WooCommerce {
 
     add_action('woocommerce_account_dashboard', function () {
       $current_user = Hooks::instance()->current_user;
-      $badge = get_stylesheet_directory_uri() . '/assets/img/medal.svg';
+
+      $level_1 = Init::instance()->level_1; //1000
+      $level_2 = Init::instance()->level_2; //2000
+      $point = absint(get_user_meta($current_user->ID, '_nrp_points', true));
+
+      if ($point < $level_1) {
+        $icon = "star.svg";
+        $level_label = "0";
+      } elseif ($point >= $level_1 && $point < $level_2) {
+        $icon = "medal.svg";
+        $level_label = "1";
+      } else {
+        $icon = "trophy.svg";
+        $level_label = "2";
+      }
+      echo $icon;
+
+      $badge = get_stylesheet_directory_uri() . '/assets/img/' . $icon;
       echo '<p style="text-align: center">';
       printf('<img src="%s" width="100" /><br><br>', $badge);
       printf('<b>%s</b><br>', $current_user->display_name);
-      printf('%s', __('Chúc mừng! Bạn đã được nhận huy chương vàng<br> vì đã kiếm được <b>1267</b> điểm.'));
+      if ($level_label != '0')
+        printf(__('Chúc mừng! Bạn đã đạt <b>Hạng %s</b><br> vì đã kiếm được <b>%s</b> điểm.'), $level_label, $point);
+      else
+        printf(__('Chúc mừng! Bạn đã kiếm được <b>%s</b> điểm.'), $point);
       echo '</p>';
     });
 
@@ -63,7 +83,38 @@ class WooCommerce {
         echo $this->gap_settings['woo_account_page_dashboard'];
       }
     });
+
+    //add_filter('woocommerce_get_shop_coupon_data', [$this, 'set_wc_coupon_data'], 99, 3);
+    //add_filter( 'woocommerce_coupon_get_discount_amount', [$this, 'coupon_get_discount_amount_filter'], 10, 4 );
+    add_action('woocommerce_checkout_before_order_review', [$this, 'ts_apply_discount_to_cart']);
   }
+
+  function getUserPoints() {
+    $current_user = Hooks::instance()->current_user;
+    return absint(get_user_meta($current_user->ID, '_nrp_points', true));
+  }
+
+  function ts_apply_discount_to_cart() {
+    if ($this->getUserPoints() < Init::instance()->level_2)
+      return;
+    $coupon_code = 'gap_freeshipping_gold';
+    
+    if (!WC()->cart->has_discount($coupon_code)) {
+      if (!WC()->cart->apply_coupon($coupon_code)) {
+        wc_print_notices();
+      }
+    }
+
+    /* $discount_amount = 37000;
+    $coupon = new \WC_Coupon();
+    $coupon->set_code($coupon_code);
+    $coupon->set_discount_type('shipping_discount');
+    $coupon->set_amount($discount_amount);
+    $coupon->set_virtual(true); */
+  }
+
+
+
 
   function loop_add_to_cart_link_filter($class, $product, $args) {
 

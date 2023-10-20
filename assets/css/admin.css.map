@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGM,kFAAa,CACX,OAAO,CAAE,eAAe,CAK9B,iIACiB,CACf,OAAO,CAAE,eAAe",
+"sources": ["../scss/admin.scss"],
+"names": [],
+"file": "admin.css"
+}

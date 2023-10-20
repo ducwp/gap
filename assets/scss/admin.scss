@@ -1,0 +1,14 @@
+body.woocommerce_page_nujo-reward-points-settings {
+  nav.nav-tab-wrapper {
+    a {
+      &:last-child {
+        display: none !important;
+      }
+    }
+  }
+
+  #nrp-support,
+  .nrp-upgrade-box {
+    display: none !important;
+  }
+}

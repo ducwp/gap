@@ -104,7 +104,8 @@ body:not(.home):not(.page-id-2042) {
       border-radius: 50%;
       z-index: 2;
       //animation: glowing 1500ms infinite;
-      animation: shake 1500ms infinite;
+      //animation: shake 1500ms infinite;
+      border: 1px solid rgba(255,255,255,0.2);
 
       &:before,
       &:after {

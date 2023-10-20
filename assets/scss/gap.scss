@@ -108,6 +108,18 @@ ul.products {
   }
 }
 
+//Checkout
+
+.cart-discount.coupon-gap_freeshipping_gold {
+  display: none;
+}
+
+//My account
+
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--nrp-points a:before {
+  content: '';
+}
+
 i.home-icon {
   display: inline-block;
   opacity: .5;
@@ -192,7 +204,7 @@ span.onsale {
     background-position: 0;
   }
 
-  
+
 
   100% {
     background-position: 100px;
@@ -214,3 +226,10 @@ span.onsale {
     offset-distance: 100%;
   }
 } */
+
+//Fix redeem
+a.nrp_apply_redemption_coupon {
+  display: inline-block;
+  margin-left: 10px;
+  color: #c00;
+}

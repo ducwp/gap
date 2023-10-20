@@ -63,6 +63,12 @@ add_action('wp_enqueue_scripts', function () {
   wp_localize_script('gap-script', 'gap', $params);
 });
 
+add_action('admin_enqueue_scripts', function () {
+  $ver = '1.0.6';
+  $theme_uri = get_stylesheet_directory_uri();
+  wp_enqueue_style('gap', $theme_uri . '/assets/css/admin.css', [], $ver);
+});
+
 add_image_size('hero-thumb-size', 200, 200, true);
 
 //require_once __DIR__ . '/codestar-framework/codestar-framework.php';
