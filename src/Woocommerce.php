@@ -97,7 +97,7 @@ class WooCommerce {
       }
 
       if (isset($this->gap_settings['woo_account_page_dashboard'])) {
-        echo '<p>'.$this->gap_settings['woo_account_page_dashboard'].'</p>';
+        echo '<p>' . $this->gap_settings['woo_account_page_dashboard'] . '</p>';
       }
     });
 
@@ -115,8 +115,31 @@ class WooCommerce {
       echo '<div class="woocommerce-message" style="background-color: antiquewhite;"><b>Lưu ý: Hàng đã mua không được đổi trả</b></div>';
     });
 
+
+    add_filter('woocommerce_is_purchasable', function ($is_purchasable, $object) {
+      if (!class_exists('\ProWC_Product_Countdown_Core'))
+        return true;
+
+      $product_id = $object->get_id();
+      $countdown_enabled = get_post_meta($product_id, '_' . 'prowc_product_countdown_enabled', true);
+      $finish_time = get_post_meta($product_id, '_' . 'prowc_product_countdown_date', true) . ' ' .
+        get_post_meta($product_id, '_' . 'prowc_product_countdown_time', true);
+      $finish_time = strtotime($finish_time);
+      $current_time = (int) current_time('timestamp');
+      $time_left = ($finish_time - $current_time);
+
+      if ($countdown_enabled === 'yes' && $time_left > 0) {
+        return false;
+      }
+      return true;
+    }, 10, 2);
+
+
     //Check VIP level access categories
     add_filter('woocommerce_product_is_visible', function ($is_visible, $product_id) {
+      $waiting_for_sale = get_post_meta($product_id, 'waiting_for_sale', true);
+      if ($waiting_for_sale == '1')
+        return false;
       //return false;
       /* if ($product_id == 371 )
         return false; */
@@ -158,6 +181,8 @@ class WooCommerce {
         }
       }
     });
+
+
   }
 
   function ts_apply_discount_to_cart() {

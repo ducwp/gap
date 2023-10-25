@@ -779,6 +779,16 @@ ul.products li.product {
       .vip_cats li a:hover {
         border-color: #333; }
 
+.prowc_product_countdown {
+  position: absolute;
+  z-index: 99;
+  right: 30px;
+  background-color: #000;
+  bottom: 30px;
+  color: #fff;
+  padding: 4px 20px;
+  border-radius: 6px; }
+
 body:not(.home):not(.page-id-2042) .ct-footer {
   margin-top: 60px; }
 

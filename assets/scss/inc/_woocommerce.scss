@@ -1,6 +1,6 @@
 //Checkout
 .woocommerce-form-coupon-toggle {
-  & > .woocommerce-info{
+  &>.woocommerce-info {
     display: none;
   }
 }
@@ -71,21 +71,36 @@ ul.products {
 }
 
 //vip_cats
-.vip_cats{
+.vip_cats {
   list-style: none;
   padding: 0;
   margin: 0;
   margin-bottom: 20px;
   text-align: center;
-  li{
+
+  li {
     display: inline-block;
     margin: 0 10px;
-    a{
+
+    a {
       padding: 3px 10px;
       border: 1px solid #ddd;
-      &:hover{
+
+      &:hover {
         border-color: #333;
       }
     }
   }
+}
+
+//Countdown
+.prowc_product_countdown {
+  position: absolute;
+  z-index: 99;
+  right: 30px;
+  background-color: #000;
+  bottom: 30px;
+  color: #fff;
+  padding: 4px 20px;
+  border-radius: 6px;
 }

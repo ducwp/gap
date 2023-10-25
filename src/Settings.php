@@ -12,10 +12,31 @@ class Settings {
     }
     return self::$_instance;
   }
-  
+
 
   private function __construct() {
-    
+
+    /* global $wpdb;
+
+    $charsetCollate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE ppfuture_actions_args (
+            id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            cron_action_id bigint(20) UNSIGNED NOT NULL,
+            post_id bigint(20) UNSIGNED NOT NULL,
+            enabled tinyint(1) NOT NULL DEFAULT '0',
+            scheduled_date datetime NOT NULL,
+            created_at datetime NOT NULL,
+            args varchar(250) NOT NULL,
+            PRIMARY KEY  (id),
+            KEY post_id (post_id, id),
+            KEY enabled_post_id (post_id, enabled, id),
+            KEY cron_action_id (cron_action_id, id),
+            KEY enabled_cron_action_id (cron_action_id, enabled, id)
+        ) ENGINE=InnoDB $charsetCollate;";
+
+        echo $sql; */
+
     // Control core classes for avoid errors
     if (class_exists('CSF')) {
 
@@ -33,8 +54,8 @@ class Settings {
         //'theme' => 'light',
         'footer_text' => 'marup.vn',
       ));
-      
-      
+
+
 
       CSF::createSection($prefix, array(
         'title' => __('General Settings', 'graby'),
@@ -55,12 +76,12 @@ class Settings {
             'desc' => 'Tạo coupon: ' . admin_url('edit.php?post_type=shop_coupon')
           ),
 
-          
+
 
           array(
-            'id'      => 'vip_cats',
-            'type'    => 'text',
-            'title'   => 'VIP Categories',
+            'id' => 'vip_cats',
+            'type' => 'text',
+            'title' => 'VIP Categories',
             'desc' => 'Nhập Categories Ids, cách nhau bởi dấu phẩy (,).'
           ),
 
