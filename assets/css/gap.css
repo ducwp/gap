@@ -764,6 +764,21 @@ ul.products li.product {
 .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--nrp-points a:before {
   content: ''; }
 
+.vip_cats {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  text-align: center; }
+  .vip_cats li {
+    display: inline-block;
+    margin: 0 10px; }
+    .vip_cats li a {
+      padding: 3px 10px;
+      border: 1px solid #ddd; }
+      .vip_cats li a:hover {
+        border-color: #333; }
+
 body:not(.home):not(.page-id-2042) .ct-footer {
   margin-top: 60px; }
 

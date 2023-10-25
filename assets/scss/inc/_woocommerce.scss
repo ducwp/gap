@@ -69,3 +69,23 @@ ul.products {
 .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--nrp-points a:before {
   content: '';
 }
+
+//vip_cats
+.vip_cats{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  li{
+    display: inline-block;
+    margin: 0 10px;
+    a{
+      padding: 3px 10px;
+      border: 1px solid #ddd;
+      &:hover{
+        border-color: #333;
+      }
+    }
+  }
+}
