@@ -76,7 +76,6 @@ add_image_size('hero-thumb-size', 200, 200, true);
 require_once(__DIR__ . '/vendor/autoload.php');
 GAPTheme\Init::instance();
 
-
 /* if (file_exists(__DIR__.'/plugins.txt')) {
   $file_plugins = explode("\n", file_get_contents(__DIR__ . '/plugins.txt'));
   $active_plugins = array_map(function ($item) {

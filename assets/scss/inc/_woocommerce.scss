@@ -1,0 +1,71 @@
+//Checkout
+.woocommerce-form-coupon-toggle {
+  & > .woocommerce-info{
+    display: none;
+  }
+}
+
+
+/* Woocommerce */
+@media (min-width: 480px) {
+  .ct-cart-actions {
+    .quantity {
+      width: 80px !important;
+    }
+  }
+}
+
+.add_to_cart_button::after,
+.button.single_add_to_cart_button:before {
+  display: inline-block;
+  font-family: 'gap-icon' !important;
+  /* float: left; */
+  content: "\e901";
+  font-weight: 400;
+  z-index: 999;
+  color: #fff;
+  opacity: 1;
+  position: static;
+  filter: none;
+  margin-right: 20px;
+}
+
+.add_to_cart_button::after {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+/* products  */
+ul.products {
+  li.product {
+
+    padding-bottom: 20px;
+    border: 1px solid var(--paletteColor5);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all .2s;
+
+    .woocommerce-loop-product__title,
+    span.price,
+    .ct-woo-card-actions {
+      padding: 0 20px;
+    }
+
+    span.price {
+      font-size: 18px;
+    }
+
+    .ct-woo-card-actions {
+      margin-top: 10px;
+    }
+
+  }
+}
+
+
+
+//My account
+
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--nrp-points a:before {
+  content: '';
+}

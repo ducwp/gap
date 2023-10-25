@@ -3,6 +3,7 @@
 namespace GAPTheme;
 
 class WooCommerce {
+  public $user_obj;
   public $gap_settings;
   private static $_instance = null;
   public static function instance() {
@@ -13,6 +14,7 @@ class WooCommerce {
   }
 
   private function __construct() {
+    $this->user_obj = new User;
     $this->gap_settings = get_option("gap_settings", array());
     /* $username = '1 duc';
     if (!$this->validate_username($username)) {
@@ -29,6 +31,13 @@ class WooCommerce {
       echo '<input type="hidden" name="redirect" value="' . wp_validate_redirect(wc_get_raw_referer(), wc_get_page_permalink('myaccount')) . '" />';
     }); */
 
+    add_filter('avatar_defaults', function ($avatar_defaults) {
+      $myavatar = get_stylesheet_directory_uri() . '/assets/img/star.png';
+      $avatar_defaults[$myavatar] = "Default Gravatar";
+      return $avatar_defaults;
+    });
+
+
     // Change add to cart text on single product page
     add_filter('woocommerce_product_single_add_to_cart_text', function () {
       return __('Thêm giỏ hàng', 'woocommerce');
@@ -42,39 +51,26 @@ class WooCommerce {
 
     //add_filter('woocommerce_coupons_enabled', [$this, 'bbloomer_disable_coupons_cart_page']);
     //remove_action('woocommerce_before_checkout_form', [$this, 'woocommerce_checkout_coupon_form'], 10);
-    add_action('woocommerce_review_order_before_submit', [$this, 'bbloomer_checkout_coupon_below_payment_button']);
+    add_action('woocommerce_review_order_before_payment', function () {
+      woocommerce_checkout_coupon_form();
+    });
 
     //https://www.businessbloomer.com/category/woocommerce-tips/visual-hook-series/
     //https://www.businessbloomer.com/woocommerce-visual-hook-guide-checkout-page/
     //https://www.businessbloomer.com/woocommerce-visual-hook-guide-account-pages/
 
     add_action('woocommerce_account_dashboard', function () {
-      $current_user = Hooks::instance()->current_user;
+      $user = new User;
+      $user_data = $user->get_user_data();
 
-      $level_1 = Init::instance()->level_1; //1000
-      $level_2 = Init::instance()->level_2; //2000
-      $point = absint(get_user_meta($current_user->ID, '_nrp_points', true));
-
-      if ($point < $level_1) {
-        $icon = "star.svg";
-        $level_label = "0";
-      } elseif ($point >= $level_1 && $point < $level_2) {
-        $icon = "medal.svg";
-        $level_label = "1";
-      } else {
-        $icon = "trophy.svg";
-        $level_label = "2";
-      }
-      echo $icon;
-
-      $badge = get_stylesheet_directory_uri() . '/assets/img/' . $icon;
+      $badge = get_stylesheet_directory_uri() . '/assets/img/' . $user_data['icon'];
       echo '<p style="text-align: center">';
       printf('<img src="%s" width="100" /><br><br>', $badge);
-      printf('<b>%s</b><br>', $current_user->display_name);
-      if ($level_label != '0')
-        printf(__('Chúc mừng! Bạn đã đạt <b>Hạng %s</b><br> vì đã kiếm được <b>%s</b> điểm.'), $level_label, $point);
+      printf('<b>%s</b><br>', $user_data['name']);
+      if ($user_data['level'] != 0)
+        printf(__('Chúc mừng! Bạn đã đạt <b>%s</b><br> vì đã kiếm được <b>%s</b> điểm.'), $user_data['label'], $user_data['point']);
       else
-        printf(__('Chúc mừng! Bạn đã kiếm được <b>%s</b> điểm.'), $point);
+        printf(__('Chúc mừng! Bạn đã kiếm được <b>%s</b> điểm.'), $user_data['point']);
       echo '</p>';
     });
 
@@ -93,15 +89,61 @@ class WooCommerce {
       printf('<style>.cart-discount.coupon-%s {display: none;}</style>', $freeshipping_gold_coupon);
 
     });
-  }
 
-  function getUserPoints() {
-    $current_user = Hooks::instance()->current_user;
-    return absint(get_user_meta($current_user->ID, '_nrp_points', true));
+    add_action('woocommerce_review_order_before_submit', function () {
+      echo '<div class="woocommerce-message" style="background-color: antiquewhite;"><b>Lưu ý: Hàng đã mua không được đổi trả</b></div>';
+    });
+
+    //Check VIP level access categories
+    add_filter('woocommerce_product_is_visible', function ($is_visible, $product_id) {
+      //return false;
+      /* if ($product_id == 371 )
+        return false; */
+      return true;
+      //return members_can_current_user_view_post($product_id);
+    }, 95, 2);
+
+    add_action('template_redirect', function () {
+      $user = wp_get_current_user();
+      if (!empty($user) && in_array('author', (array) $user->roles))
+        return;
+
+      $point = $this->user_obj->get_user_point();
+      $cat_ids = !empty($this->gap_settings['vip_cats']) ? explode(',', $this->gap_settings['vip_cats']) : 0;
+      if ($cat_ids == 0)
+        return;
+
+      $cat_ids = array_map(function ($id) {
+        return (int) trim($id);
+      }, $cat_ids);
+
+      if (is_product_category($cat_ids)) {
+        if ($point < $this->user_obj->level_1)
+          wp_redirect(home_url());
+        else
+          return;
+      }
+
+      //Single Product
+      if (class_exists('WooCommerce') && is_singular('product')) {
+        $post_id = get_the_ID();
+
+        if (has_term($cat_ids, 'product_cat', $post_id)) {
+          if ($point < $this->user_obj->level_1)
+            wp_redirect(home_url());
+          else
+            return;
+          exit;
+        }
+      }
+    });
   }
 
   function ts_apply_discount_to_cart() {
-    if ($this->getUserPoints() < Init::instance()->level_2)
+    $user = new User;
+    $user_data = $user->get_user_data();
+
+    if ($user_data['level'] < 2)
       return;
     $coupon_code = 'gap_freeshipping_gold';
 
@@ -241,10 +283,5 @@ class WooCommerce {
     if (is_cart())
       return false;
     return true;
-  }
-
-  function bbloomer_checkout_coupon_below_payment_button() {
-    echo '<hr>';
-    woocommerce_checkout_coupon_form();
   }
 }

@@ -12,8 +12,10 @@ class Settings {
     }
     return self::$_instance;
   }
+  
 
   private function __construct() {
+    
     // Control core classes for avoid errors
     if (class_exists('CSF')) {
 
@@ -31,8 +33,9 @@ class Settings {
         //'theme' => 'light',
         'footer_text' => 'marup.vn',
       ));
+      
+      
 
-      // Create a section
       CSF::createSection($prefix, array(
         'title' => __('General Settings', 'graby'),
         'fields' => array(
@@ -52,6 +55,16 @@ class Settings {
             'desc' => 'Tạo coupon: ' . admin_url('edit.php?post_type=shop_coupon')
           ),
 
+          
+
+          array(
+            'id'      => 'vip_cats',
+            'type'    => 'text',
+            'title'   => 'VIP Categories',
+            'desc' => 'Nhập Categories Ids, cách nhau bởi dấu phẩy (,).'
+          ),
+
+
         )
       ));
 
@@ -69,5 +82,14 @@ class Settings {
 
     }
 
+  }
+
+  function product_cats() {
+    // return custom query array.
+    return array(
+      'opt-1' => 'Option 1',
+      'opt-2' => 'Option 2',
+      'opt-3' => 'Option 3',
+    );
   }
 }

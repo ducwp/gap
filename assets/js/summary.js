@@ -52,7 +52,7 @@ jQuery(document).ready(function ($) {
 
       },
       error: function (error) {
-        //console.log(error);
+        console.log('ERROR: '+error);
         button.removeClass('disabled').html(load_text);
         //select_box.show();
         btnCancel.addClass('hidden');
