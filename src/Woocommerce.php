@@ -60,15 +60,15 @@ class WooCommerce {
     //https://www.businessbloomer.com/woocommerce-visual-hook-guide-account-pages/
 
     add_action('woocommerce_account_dashboard', function () {
-      $user = new User;
+      $user = $this->user_obj;
       $user_data = $user->get_user_data();
 
-      $badge = get_stylesheet_directory_uri() . '/assets/img/' . $user_data['icon'];
+      $badge = get_stylesheet_directory_uri() . '/assets/img/' . $user_data['level'] . '.svg';
       echo '<p style="text-align: center">';
       printf('<img src="%s" width="100" /><br><br>', $badge);
       printf('<b>%s</b><br>', $user_data['name']);
-      if ($user_data['level'] != 0)
-        printf(__('Chúc mừng! Bạn đã đạt <b>%s</b><br> vì đã kiếm được <b>%s</b> điểm.'), $user_data['label'], $user_data['point']);
+      if ($user_data['level'] != 'member')
+        printf(__('Chúc mừng! Bạn đã đạt hạng thành viên <b>%s</b>.'), ucwords($user_data['level']));
       else
         printf(__('Chúc mừng! Bạn đã kiếm được <b>%s</b> điểm.'), $user_data['point']);
       echo '</p>';
@@ -116,37 +116,53 @@ class WooCommerce {
     });
 
 
-    add_filter('woocommerce_is_purchasable', function ($is_purchasable, $object) {
-      if (!class_exists('\ProWC_Product_Countdown_Core'))
-        return true;
+    add_filter('prowc_product_countdown', function ($action_options, $actions) {
+      /* file_put_contents("D:/action_options.txt", json_encode($action_options));
+      file_put_contents("D:/actions.txt", $actions); */
+      @$action_options['enable_product'] = __('Enable product', PCFWC_TEXTDOMAIN);
+      @$action_options['delete_product'] = __('Delete product', PCFWC_TEXTDOMAIN);
+      return $action_options;
+    }, 10, 2);
 
+
+    add_filter('woocommerce_is_purchasable', function ($is_purchasable, $object) {
       $product_id = $object->get_id();
       $countdown_enabled = get_post_meta($product_id, '_' . 'prowc_product_countdown_enabled', true);
+      $countdown_action = get_post_meta($product_id, '_' . 'prowc_product_countdown_action', true);
       $finish_time = get_post_meta($product_id, '_' . 'prowc_product_countdown_date', true) . ' ' .
         get_post_meta($product_id, '_' . 'prowc_product_countdown_time', true);
       $finish_time = strtotime($finish_time);
       $current_time = (int) current_time('timestamp');
       $time_left = ($finish_time - $current_time);
 
-      if ($countdown_enabled === 'yes' && $time_left > 0) {
+      if ($countdown_enabled === 'yes' && $countdown_action === 'enable_product' && $time_left > 0) {
         return false;
       }
+
       return true;
     }, 10, 2);
 
 
-    //Check VIP level access categories
+    //Promote list (loop)
     add_filter('woocommerce_product_is_visible', function ($is_visible, $product_id) {
-      $waiting_for_sale = get_post_meta($product_id, 'waiting_for_sale', true);
-      if ($waiting_for_sale == '1')
+      $countdown_enabled = get_post_meta($product_id, '_' . 'prowc_product_countdown_enabled', true);
+      $countdown_action = get_post_meta($product_id, '_' . 'prowc_product_countdown_action', true);
+
+      $finish_time = get_post_meta($product_id, '_' . 'prowc_product_countdown_date', true) . ' ' .
+        get_post_meta($product_id, '_' . 'prowc_product_countdown_time', true);
+      $finish_time = strtotime($finish_time);
+      $current_time = (int) current_time('timestamp');
+      $time_left = ($finish_time - $current_time);
+
+      if ($countdown_enabled === 'yes' && $countdown_action === 'delete_product' && $time_left <= 0) {
+        wp_trash_post($product_id);
         return false;
-      //return false;
-      /* if ($product_id == 371 )
-        return false; */
+      }
+
       return true;
-      //return members_can_current_user_view_post($product_id);
     }, 95, 2);
 
+    //Check VIP level access categories
     add_action('template_redirect', function () {
       $user = wp_get_current_user();
       if (!empty($user) && in_array('author', (array) $user->roles))

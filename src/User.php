@@ -17,15 +17,32 @@ class User {
   public function get_user_data() {
     $point = $this->get_user_point();
     $data = [];
-    if ($point < $this->level_1)
-      $data = ['icon' => 'star.svg', 'label' => 'Hạng 0', 'level' => 0];
-    elseif ($point >= $this->level_1 && $point < $this->level_2)
-      $data = ['icon' => 'medal.svg', 'label' => 'Hạng 1', 'level' => 1];
-    else
-      $data = ['icon' => 'trophy.svg', 'label' => 'Hạng 2', 'level' => 2];
 
     $data['name'] = $this->current_user->display_name;
     $data['point'] = $point;
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'nrp_accounts';
+    $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE account_id = %d LIMIT 1",
+      array($this->current_user->ID)
+    ));
+    $data['level'] = $row->level;
+
+    switch ($data['level']) {
+      case 'member':
+        $data['icon'] = 'member.svg';
+        $data['label'] = 'Member';
+        break;
+      case 'vip':
+        $data['icon'] = 'vip.svg';
+        $data['label'] = 'Vip';
+        break;
+      case 'vvip':
+        $data['icon'] = 'vvip.svg';
+        $data['label'] = 'VVip';
+        break;
+    }
+
     return $data;
   }
 }

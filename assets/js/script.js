@@ -1,6 +1,8 @@
 jQuery(document).ready(function ($) {
 
-  $('.prowc_product_countdown').detach().appendTo('.woocommerce-product-gallery')
+  if ($('.woocommerce-product-gallery').length) {
+    $('.prowc_product_countdown').detach().appendTo('.woocommerce-product-gallery')
+  }
 
   $.fn.gap_load_time = function (date) {
     var old_html = $('#gap_time_ajax').html();

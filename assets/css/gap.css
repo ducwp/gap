@@ -779,7 +779,8 @@ ul.products li.product {
       .vip_cats li a:hover {
         border-color: #333; }
 
-.prowc_product_countdown {
+.woocommerce-product-gallery .prowc_product_countdown,
+.woocommerce-product-gallery .prowc_product_countdown_time_ended {
   position: absolute;
   z-index: 99;
   right: 30px;

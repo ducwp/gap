@@ -25,6 +25,8 @@ class Import {
   }
 
   public function add_fields($form_fields, $post) {
+    if(!current_user_can('administrator')) return;
+    
     if ($post->post_type !== 'attachment' || $post->post_mime_type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
       return $form_fields;
 

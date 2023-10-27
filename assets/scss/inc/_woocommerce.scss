@@ -94,13 +94,17 @@ ul.products {
 }
 
 //Countdown
-.prowc_product_countdown {
-  position: absolute;
-  z-index: 99;
-  right: 30px;
-  background-color: #000;
-  bottom: 30px;
-  color: #fff;
-  padding: 4px 20px;
-  border-radius: 6px;
+.woocommerce-product-gallery {
+
+  .prowc_product_countdown,
+  .prowc_product_countdown_time_ended {
+    position: absolute;
+    z-index: 99;
+    right: 30px;
+    background-color: #000;
+    bottom: 30px;
+    color: #fff;
+    padding: 4px 20px;
+    border-radius: 6px;
+  }
 }
