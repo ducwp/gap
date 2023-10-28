@@ -607,11 +607,18 @@ body {
   padding: 15px 20px 20px;
   border-radius: 6px;
   margin-top: 10px; }
+  @media (max-width: 479px) {
+    .kyguionline .box_inner {
+      padding: 0;
+      background: none; } }
 .kyguionline p {
   margin-bottom: 0; }
 .kyguionline * + p,
 .kyguionline * + label {
   margin-top: 10px; }
+@media (max-width: 479px) {
+  .kyguionline .col-lg-4 + .col-lg-4 {
+    margin-top: 20px; } }
 .kyguionline fieldset {
   background-color: #fff;
   border: 1px solid #ddd;

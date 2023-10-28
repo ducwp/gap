@@ -128,6 +128,11 @@ class Insert {
       /* cfdb7 after save data */
       $insert_id = $cfdb->insert_id;
       do_action('cf7_gap_after_save_data', $insert_id);
+
+      //Add content to Mail
+      $mail = $contact_form->prop('mail');
+      $mail['body'] .= 'ID: '.$insert_id;
+      $form_tag->set_properties(array('mail' => $mail));
     }
 
   }

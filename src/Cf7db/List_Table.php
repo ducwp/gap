@@ -104,6 +104,7 @@ class List_Table extends \WP_List_Table {
           break;
       }
       $columns['form-date'] = 'Date';
+      $columns['form-status'] = 'Status';
     }
 
 
@@ -191,7 +192,7 @@ class List_Table extends \WP_List_Table {
       $form_value = unserialize($result->form_value);
       $ftype = isset($form_value['form_type']) ? $form_value['form_type'] : 'other';
 
-      $link_inner = "<a href=admin.php?page=gap-ky-gui&fid=%s&ufid=%s&ftype=".$ftype.">%s</a>";
+      $link_inner = "<a href=admin.php?page=gap-ky-gui&fid=%s&ufid=%s&ftype=" . $ftype . ">%s</a>";
       $link = "<b>{$link_inner}</b>";
       if (isset($form_value['gap_status']) && ($form_value['gap_status'] === 'read'))
         $link = $link_inner;
@@ -201,8 +202,7 @@ class List_Table extends \WP_List_Table {
       $form_values['form_id'] = $result->form_id;
 
       foreach ($this->column_titles as $col_title) {
-        $form_value[$col_title] = isset($form_value[$col_title]) ?
-          $form_value[$col_title] : '';
+        $form_value[$col_title] = isset($form_value[$col_title]) ? $form_value[$col_title] : '';
       }
 
       foreach ($form_value as $k => $value) {
@@ -227,6 +227,18 @@ class List_Table extends \WP_List_Table {
 
       }
       $form_values['form-date'] = sprintf($link, $fid, $result->form_id, $result->form_date);
+      if ($result->status == 'approved')
+        $color = 'green';
+      elseif ($result->status == 'rejected')
+        $color = 'red';
+      else
+        $color = 'blue';
+      $label =[
+        'new' => 'Mới',
+        'approved' => 'Đã chấp nhận',
+        'rejected' => 'Đã từ chối',
+      ];
+      $form_values['form-status'] = sprintf('<b style="color: %s">%s</b>', $color, $label[$result->status]);
       $data[] = $form_values;
     }
 
