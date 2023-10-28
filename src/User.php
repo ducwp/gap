@@ -3,8 +3,8 @@ namespace GAPTheme;
 
 class User {
   public $current_user;
-  public $level_1 = 1000;
-  public $level_2 = 2000;
+  public $level_1 = 500;
+  public $level_2 = 1000;
 
   public function __construct() {
     $this->current_user = wp_get_current_user();
@@ -23,7 +23,7 @@ class User {
 
     global $wpdb;
     $table_name = $wpdb->prefix . 'nrp_accounts';
-    $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE account_id = %d LIMIT 1",
+    $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE customer_id = %d LIMIT 1",
       array($this->current_user->ID)
     ));
     $data['level'] = $row->level;

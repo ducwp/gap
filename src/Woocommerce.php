@@ -66,12 +66,15 @@ class WooCommerce {
       $badge = get_stylesheet_directory_uri() . '/assets/img/' . $user_data['level'] . '.svg';
       echo '<p style="text-align: center">';
       printf('<img src="%s" width="100" /><br><br>', $badge);
-      printf('<b>%s</b><br>', $user_data['name']);
-      if ($user_data['level'] != 'member')
-        printf(__('Chúc mừng! Bạn đã đạt hạng thành viên <b>%s</b>.'), ucwords($user_data['level']));
+      printf('Xin chào: <b>%s</b><br>', $user_data['name']);
+      if ($user_data['level'] != 'member'){
+        printf(__('Chúc mừng! Bạn đã đạt hạng thành viên <b>%s</b>.'), strtoupper($user_data['level']));
+        printf('<br><span>Số điểm hiện có: <b>%s</b></span>', $user_data['point']);
+      }
       else
         printf(__('Chúc mừng! Bạn đã kiếm được <b>%s</b> điểm.'), $user_data['point']);
       echo '</p>';
+      
     });
 
     add_action('woocommerce_account_dashboard', function () {
