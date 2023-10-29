@@ -2,6 +2,7 @@
 namespace GAPTheme\Cf7db;
 
 class Insert {
+  public $user;
   public $user_id;
   private static $_instance = null;
   public static function instance() {
@@ -12,11 +13,13 @@ class Insert {
   }
 
   private function __construct() {
+    $this->user = wp_get_current_user();
     $this->user_id = get_current_user_id();
     add_action('wpcf7_before_send_mail', [$this, 'cf7_before_send_mail']);
   }
 
   public function cf7_before_send_mail($form_tag) {
+    //$form_id = $form_tag->posted_data['_wpcf7'];
     $form_test_id = Init::instance()->form_test_id;
 
     if ($form_tag->id() === $form_test_id)
@@ -90,7 +93,7 @@ class Insert {
           $form_data[$key] = $tmpD;
         }
         if (in_array($key, $uploaded_files)) {
-          $file = is_array($files[$key]) ? reset($files[$key]) : $files[$key];
+          $file = @is_array($files[$key]) ? reset($files[$key]) : $files[$key];
           $file_name = empty($file) ? '' : $time_now . '-' . $key . '-' . basename($file);
           $key = sanitize_text_field($key);
           $form_data[$key . '_gap_file'] = $file_name;
@@ -127,12 +130,26 @@ class Insert {
 
       /* cfdb7 after save data */
       $insert_id = $cfdb->insert_id;
-      do_action('cf7_gap_after_save_data', $insert_id);
+      //do_action('cf7_gap_after_save_data', $insert_id);
 
       //Add content to Mail
       $mail = $contact_form->prop('mail');
-      $mail['body'] .= 'ID: '.$insert_id;
+      $mail['body'] .= sprintf('<p>ID mã gửi: <b>#%s</b></p>', $insert_id);
       $form_tag->set_properties(array('mail' => $mail));
+
+      //Send mail to user on front-end
+      $subject = 'GIVE AWAY PREMIUM PHÚ NHUẬN ĐÃ NHẬN YÊU CẦU KÝ GỬI ONLINE TỪ BẠN';
+      $body = '<b>Mã đơn yêu cầu: #'.$insert_id.'</b>
+      Xin chào Anh/Chị,
+      Hiện tại Give Away Premium Phú Nhuận đã nhận thông tin yêu cầu ký gửi Online từ Anh/Chị.
+      Bộ phận ký gửi Online đã tiếp nhận và sẽ kiểm duyệt đơn yêu cầu trong vòng 3-5 ngày làm việc. Sau khi kiểm duyệt, chúng tôi sẽ gửi thông báo kết quả đến Anh/Chị.
+      Vui lòng thường xuyên kiểm tra hộp thư (bao gồm “Spam”), để tránh bỏ sót email hướng dẫn bước tiếp theo nhé!';
+      
+      $to = $this->user->user_email;
+      //$to = 'ducnv999@gmail.com';
+      //$body = sprintf($body, $insert_id);
+      $headers = array('Content-Type: text/html; charset=UTF-8');
+      wp_mail($to, $subject, $body, $headers);
     }
 
   }

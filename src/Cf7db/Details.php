@@ -138,8 +138,8 @@ class Details {
               }
 
               //Send mail
-              $user = new \GAPTheme\User;
-              $to = $user->current_user->user_email;
+              $user_obj = get_user_by('id', $results[0]->user_id);
+              $to = $user_obj->user_email;
               $body = sprintf($body, $this->form_id);
               $headers = array('Content-Type: text/html; charset=UTF-8');
               wp_mail($to, $subject, $body, $headers);
