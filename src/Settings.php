@@ -77,16 +77,6 @@ class Settings {
             'desc' => 'Tạo coupon: ' . admin_url('edit.php?post_type=shop_coupon')
           ),
 
-
-
-          array(
-            'id' => 'vip_cats',
-            'type' => 'text',
-            'title' => 'VIP Categories',
-            'desc' => 'Nhập Categories Ids, cách nhau bởi dấu phẩy (,).'
-          ),
-
-
         )
       ));
 
