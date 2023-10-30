@@ -111,7 +111,7 @@ class Shortcodes {
         array(
           'icon' => 'map',
           'title' => 'Địa chỉ',
-          'content' => '<a href="'.$map_link.'" target="_blank">69 Nguyễn Trọng Tuyển, P.15, Q. Phú Nhuận, TP. HCM</a>'
+          'content' => '<a href="'.$map_link.'" target="_blank">69 Nguyễn Trọng Tuyển, P.15, Q. Phú Nhuận</a>'
         ),
         $atts,
         'multilink'

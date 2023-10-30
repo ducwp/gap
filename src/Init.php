@@ -15,6 +15,7 @@ class Init {
 
   private function __construct() {
     Settings::instance();
+    Taxonomy::instance();
     Hooks::instance();
     Shortcodes::instance();
     Firebase::instance();

@@ -67,22 +67,42 @@ class WooCommerce {
       echo '<p style="text-align: center">';
       printf('<img src="%s" width="100" /><br><br>', $badge);
       printf('Xin chào: <b>%s</b><br>', $user_data['name']);
-      if ($user_data['level'] != 'member'){
+      if ($user_data['level'] != 'member') {
         printf(__('Chúc mừng! Bạn đã đạt hạng thành viên <b>%s</b>.'), strtoupper($user_data['level']));
         printf('<br><span>Số điểm hiện có: <b>%s</b></span>', $user_data['point']);
-      }
-      else
+      } else
         printf(__('Chúc mừng! Bạn đã kiếm được <b>%s</b> điểm.'), $user_data['point']);
       echo '</p>';
-      
+
     });
 
     add_action('woocommerce_account_dashboard', function () {
       //VIP cats
       $point = $this->user_obj->get_user_point();
       if ($point >= $this->user_obj->level_1) {
-        $cat_ids = !empty($this->gap_settings['vip_cats']) ? explode(',', $this->gap_settings['vip_cats']) : 0;
-        if (is_array($cat_ids)) {
+        //$cat_ids = !empty($this->gap_settings['vip_cats']) ? explode(',', $this->gap_settings['vip_cats']) : 0;
+        $args = array(
+          'hide_empty' => false, // also retrieve terms which are not used yet
+          'meta_query' => array(
+            array(
+              'key' => 'vip_cat',
+              'value' => '1',
+              'compare' => '=='
+            )
+          ),
+          'taxonomy' => 'product_cat',
+        );
+  
+        $terms = get_terms('product_cat', $args);
+        if (empty($terms))
+          return;
+  
+        $cat_ids = [];
+        foreach ($terms as $term) {
+          $cat_ids[] = $term->term_id;
+        }
+        
+        if (!empty($cat_ids)) {
           $cat_ids = array_map(function ($id) {
             return (int) trim($id);
           }, $cat_ids);
@@ -171,17 +191,35 @@ class WooCommerce {
       if (!empty($user) && in_array('author', (array) $user->roles))
         return;
 
-      $point = $this->user_obj->get_user_point();
-      $cat_ids = !empty($this->gap_settings['vip_cats']) ? explode(',', $this->gap_settings['vip_cats']) : 0;
-      if ($cat_ids == 0)
+      $args = array(
+        'hide_empty' => false, // also retrieve terms which are not used yet
+        'meta_query' => array(
+          array(
+            'key' => 'vip_cat',
+            'value' => '1',
+            'compare' => '=='
+          )
+        ),
+        'taxonomy' => 'product_cat',
+      );
+
+      $terms = get_terms('product_cat', $args);
+      if (empty($terms))
         return;
+
+      $cat_ids = [];
+      foreach ($terms as $term) {
+        $cat_ids[] = $term->term_id;
+      }
 
       $cat_ids = array_map(function ($id) {
         return (int) trim($id);
       }, $cat_ids);
 
+      $user_data = $this->user_obj->get_user_data();
+
       if (is_product_category($cat_ids)) {
-        if ($point < $this->user_obj->level_1)
+        if (!in_array($user_data['level'], ['vip', 'vvip']))
           wp_redirect(home_url());
         else
           return;
@@ -192,7 +230,7 @@ class WooCommerce {
         $post_id = get_the_ID();
 
         if (has_term($cat_ids, 'product_cat', $post_id)) {
-          if ($point < $this->user_obj->level_1)
+          if (!in_array($user_data['level'], ['vip', 'vvip']))
             wp_redirect(home_url());
           else
             return;

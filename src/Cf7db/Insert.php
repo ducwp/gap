@@ -146,8 +146,6 @@ class Insert {
       Vui lòng thường xuyên kiểm tra hộp thư (bao gồm “Spam”), để tránh bỏ sót email hướng dẫn bước tiếp theo nhé!';
       
       $to = $this->user->user_email;
-      //$to = 'ducnv999@gmail.com';
-      //$body = sprintf($body, $insert_id);
       $headers = array('Content-Type: text/html; charset=UTF-8');
       wp_mail($to, $subject, $body, $headers);
     }
