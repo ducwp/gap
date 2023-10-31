@@ -138,13 +138,49 @@ class Insert {
       $form_tag->set_properties(array('mail' => $mail));
 
       //Send mail to user on front-end
-      $subject = 'GIVE AWAY PREMIUM PHÚ NHUẬN ĐÃ NHẬN YÊU CẦU KÝ GỬI ONLINE TỪ BẠN';
-      $body = '<b>Mã đơn yêu cầu: #'.$insert_id.'</b>
+
+      if ($form_type == 'online') { //Ky gui online
+
+        $subject = 'GIVE AWAY PREMIUM PHÚ NHUẬN ĐÃ NHẬN YÊU CẦU KÝ GỬI ONLINE TỪ BẠN';
+        $body = '<b>Mã đơn yêu cầu: #' . $insert_id . '</b>
       Xin chào Anh/Chị,
       Hiện tại Give Away Premium Phú Nhuận đã nhận thông tin yêu cầu ký gửi Online từ Anh/Chị.
       Bộ phận ký gửi Online đã tiếp nhận và sẽ kiểm duyệt đơn yêu cầu trong vòng 3-5 ngày làm việc. Sau khi kiểm duyệt, chúng tôi sẽ gửi thông báo kết quả đến Anh/Chị.
       Vui lòng thường xuyên kiểm tra hộp thư (bao gồm “Spam”), để tránh bỏ sót email hướng dẫn bước tiếp theo nhé!';
       
+      } elseif ($form_type == 'offline') { // Dat lich cua hang
+        $subject = 'GAP PHÚ NHUẬN: XÁC NHẬN LỊCH HẸN THÀNH CÔNG';
+        $body = 'Cảm ơn Anh/Chị <b>'.$this->user->display_name.'</b> đã lựa chọn dịch vụ ký gửi của GAP Phú Nhuận.
+
+        Thông tin chi tiết cuộc hẹn:
+        •	Thời gian: <b>'.$data['gap_time'].' - '.$data['gap_date'].'</b> . Chúng tôi sẽ giữ lịch trong vòng 30 phút, nếu đến trễ Anh/Chị vui lòng đợi theo số thứ tự tại cửa hàng.
+        •	Địa điểm: Lầu 3 – Give Away Premium Phú Nhuận, 69 Nguyễn Trọng Tuyển, Phường 15, Quận Phú Nhuận, Tp.HCM.
+        
+        Khi đến cửa hàng, Anh/Chị vui lòng đến quầy thu ngân (Lầu 2) để xác nhận lịch hẹn.
+        Anh/Chị vui lòng tham khảo trước tiêu chí ký gửi sau đây để hiểu rõ hơn về quy trình tại cửa hàng.
+
+        --------------------------------------------------
+        * Dưới 1 triệu: <b>26%</b> 
+        * Từ 1 triệu đến 10 triệu: <b>23%</b>
+        * Trên 10 triệu: <b>20%</b>
+        * Luxury/ chủ Brand: <b>Thỏa thuận</b>
+        --------------------------------------------------
+
+        Thời gian ký gửi từ 50 đến 70 ngày (tùy đợt)
+
+        Thời gian ký gửi từ 50 đến 70 ngày (tùy đợt)
+
+        – GAP chỉ nhận hàng thương hiệu (Local / Global)
+
+        – Authentic / No Fake
+
+        – Độ mới từ 80% trở lên (Riêng Luxury Vintage từ 50%)
+
+        – Mỹ phẩm còn date (GAP giúp bạn check date)
+
+        Sản phẩm sau khi nhận được double check auth bởi CTV là chuyên viên đang làm việc tại Việt Nam và Quốc tế. Nếu phát hiện hàng Fake, GAP sẽ lưu kho và hoàn trả lại khi đến hẹn trên biên nhận ký gửi.';
+      }
+
       $to = $this->user->user_email;
       $headers = array('Content-Type: text/html; charset=UTF-8');
       wp_mail($to, $subject, $body, $headers);

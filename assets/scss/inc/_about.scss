@@ -48,5 +48,14 @@
     }
 
   }
+  @include mobile {
+    .elementor-tab-title{
+      background-color: #000;
+      color: #fff;
+      margin: 0 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+    }
+  }
 
 }

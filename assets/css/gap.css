@@ -284,6 +284,13 @@ body {
   #about_tab .elementor-tab-content {
     padding: 0;
     padding-left: 20px; } }
+@media (max-width: 479px) {
+  #about_tab .elementor-tab-title {
+    background-color: #000;
+    color: #fff;
+    margin: 0 10px;
+    margin-top: 10px;
+    border-radius: 6px; } }
 
 .bk_frame {
   display: -webkit-box;
