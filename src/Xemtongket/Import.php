@@ -25,10 +25,19 @@ class Import {
   }
 
   public function add_fields($form_fields, $post) {
-    if(!current_user_can('administrator')) return;
-    
+
     if ($post->post_type !== 'attachment' || $post->post_mime_type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
       return $form_fields;
+
+    if (!current_user_can('administrator'))
+      return $form_fields;
+
+    /* $form_fields['review_xlxs'] = array(
+      'label' => esc_html__('Duyệt file tổng kết', 'gap-theme'),
+      'input' => 'html',
+      'html' => sprintf('<button type="button" id="btnReviewXLXSFile" data-id="%s" class="button">%s</button>', $post->ID, __('Phê duyệt')),
+      'helps' => __('Click vào nút trên duyệt file tổng kết.'),
+    ); */
 
     $form_fields['import_xlxs'] = array(
       'label' => esc_html__('Import file tổng kết', 'gap-theme'),
@@ -36,6 +45,7 @@ class Import {
       'html' => sprintf('<button type="button" id="btnImportXLXSFile" data-id="%s" class="button">%s</button> <button id="btnCancelImport" class="button hidden">Hủy</button>', $post->ID, __('Nhập vào')),
       'helps' => __('Click vào nút trên để bắt đầu import file tổng kết.'),
     );
+
 
     return $form_fields;
   }
@@ -45,9 +55,10 @@ class Import {
     header("Content-Type: text/event-stream");
 
     global $wpdb;
+    $excel_file_id = absint($_POST['file_id']);
     $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
     $reader = new Xlsx();
-    $spreadsheet = $reader->load(get_attached_file(absint($_POST['file_id'])));
+    $spreadsheet = $reader->load(get_attached_file($excel_file_id));
     $worksheet = $spreadsheet->getActiveSheet();
 
     foreach ($worksheet->getRowIterator(2) as $row) {
@@ -60,11 +71,14 @@ class Import {
       //$ngay_ky_gui = join('-', array_reverse(explode('/', $ngay_ky_gui)));
       $ma_ky_gui = $spreadsheet->getActiveSheet()->getCell('B' . $row->getRowIndex())->getFormattedValue();
 
-      $ok = preg_replace('~\D~', '', $ma_ky_gui);
+      /* $ok = preg_replace('~\D~', '', $ma_ky_gui);
       $m = substr($ok, 0, 2);
       $y = substr($ok, 2, 2);
       $date = sprintf('15-%s-20%s', $m, $y);
-      $ngay_ma_ky_gui = date('Y-m-d', strtotime($date));
+      $ngay_tong_ket = date('Y-m-d', strtotime($date)); */
+
+      $file = get_post($excel_file_id);
+      $ngay_tong_ket = date('Y-m-d', strtotime($file->post_date));
 
       $ho_va_ten = $spreadsheet->getActiveSheet()->getCell('C' . $row->getRowIndex())->getFormattedValue();
       $so_dien_thoai = $spreadsheet->getActiveSheet()->getCell('D' . $row->getRowIndex())->getFormattedValue();
@@ -86,7 +100,7 @@ class Import {
       $data = array(
         'ngay_ky_gui' => $ngay_ky_gui,
         'ma_ky_gui' => $ma_ky_gui,
-        'ngay_ma_ky_gui' => $ngay_ma_ky_gui,
+        'ngay_tong_ket' => $ngay_tong_ket,
         'ho_va_ten' => $ho_va_ten,
         'so_dien_thoai' => $so_dien_thoai,
         'phuong_thuc_thanh_toan' => $pthuc_thanhtoan,

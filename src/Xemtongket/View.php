@@ -22,7 +22,7 @@ class View {
 
     $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
     //$results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE (MONTH(ngay_ky_gui) = '$curmon' AND so_dien_thoai='$phone') ");
-    $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE MONTH(ngay_ma_ky_gui) >= MONTH(NOW()-interval 2 month) AND so_dien_thoai='$phone' ");
+    $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE MONTH(ngay_tong_ket) >= MONTH(NOW()-interval 2 month) AND so_dien_thoai='$phone' ");
     if ($wpdb->last_error) {
       $ajax_handler->add_error_message(sprintf('Error: %s', $wpdb->last_error));
     }

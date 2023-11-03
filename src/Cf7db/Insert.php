@@ -159,12 +159,12 @@ class Insert {
         Khi đến cửa hàng, Anh/Chị vui lòng đến quầy thu ngân (Lầu 2) để xác nhận lịch hẹn.
         Anh/Chị vui lòng tham khảo trước tiêu chí ký gửi sau đây để hiểu rõ hơn về quy trình tại cửa hàng.
 
-        --------------------------------------------------
+        -------------------------------------------------
         * Dưới 1 triệu: <b>26%</b> 
         * Từ 1 triệu đến 10 triệu: <b>23%</b>
         * Trên 10 triệu: <b>20%</b>
         * Luxury/ chủ Brand: <b>Thỏa thuận</b>
-        --------------------------------------------------
+        -------------------------------------------------
 
         Thời gian ký gửi từ 50 đến 70 ngày (tùy đợt)
 
