@@ -78,8 +78,9 @@ class Woo {
 
     add_action('woocommerce_account_dashboard', function () {
       //VIP cats
-      $point = $this->user_obj->get_user_point();
-      if ($point >= $this->user_obj->level_1) {
+      $user_data = $this->user_obj->get_user_data();
+
+      if ($user_data['level'] !== 'member') {
         //$cat_ids = !empty($this->gap_settings['vip_cats']) ? explode(',', $this->gap_settings['vip_cats']) : 0;
         $args = array(
           'hide_empty' => false, // also retrieve terms which are not used yet
@@ -92,29 +93,30 @@ class Woo {
           ),
           'taxonomy' => 'product_cat',
         );
-  
+
         $terms = get_terms('product_cat', $args);
-        if (empty($terms))
-          return;
-  
-        $cat_ids = [];
-        foreach ($terms as $term) {
-          $cat_ids[] = $term->term_id;
-        }
         
-        if (!empty($cat_ids)) {
-          $cat_ids = array_map(function ($id) {
-            return (int) trim($id);
-          }, $cat_ids);
+        if (!empty($terms)) {
 
-          echo '<ul class="vip_cats"><li><b>Danh mục VIP</b>:</li>';
-          foreach ($cat_ids as $cat_id) {
-            //$cat = get_the_category_by_ID($cat_id);
-            $cat = get_term($cat_id);
-            printf('<li><a href="%s">%s</a></li>', get_category_link($cat->term_id), $cat->name);
+          $cat_ids = [];
+          foreach ($terms as $term) {
+            $cat_ids[] = $term->term_id;
           }
-          echo '</ul>';
 
+          if (!empty($cat_ids)) {
+            $cat_ids = array_map(function ($id) {
+              return (int) trim($id);
+            }, $cat_ids);
+
+            echo '<ul class="vip_cats"><li><b>Danh mục VIP</b>:</li>';
+            foreach ($cat_ids as $cat_id) {
+              //$cat = get_the_category_by_ID($cat_id);
+              $cat = get_term($cat_id);
+              printf('<li><a href="%s">%s</a></li>', get_category_link($cat->term_id), $cat->name);
+            }
+            echo '</ul>';
+
+          }
         }
 
       }
