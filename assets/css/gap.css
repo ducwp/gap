@@ -845,6 +845,8 @@ body:not(.home):not(.page-id-2042) .ct-footer {
     color: var(--paletteColor8); }
 .ct-footer img.footer-payment-icon {
   max-width: 300px !important; }
+.ct-footer [data-column=widget-area-5] {
+  text-align: center; }
 
 /* Footer form */
 #gap_footer_form .wpcf7 form .wpcf7-response-output {

@@ -57,6 +57,10 @@ body:not(.home):not(.page-id-2042) {
   img.footer-payment-icon {
     max-width: 300px !important;
   }
+
+  [data-column=widget-area-5]{
+    text-align: center;
+  }
 }
 
 /* Footer form */
@@ -230,3 +234,4 @@ body:not(.home):not(.page-id-2042) {
     border: 0;
   }
 }
+
