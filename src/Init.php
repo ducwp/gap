@@ -22,6 +22,7 @@ class Init {
     //WooCommerce::instance();
     Woo::instance();
     DePro::instance();
+    Route::instance();
     Cf7db\Init::instance();
     Phuongthuckygui\Init::instance();
     Datlichcuahang\Init::instance();
