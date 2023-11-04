@@ -60,6 +60,8 @@ class Woo {
     //https://www.businessbloomer.com/woocommerce-visual-hook-guide-account-pages/
 
     add_action('woocommerce_account_dashboard', function () {
+      if (!is_user_logged_in())
+        return;
       $user = $this->user_obj;
       $user_data = $user->get_user_data();
 
@@ -77,6 +79,9 @@ class Woo {
     });
 
     add_action('woocommerce_account_dashboard', function () {
+      if (!is_user_logged_in())
+        return;
+
       //VIP cats
       $user_data = $this->user_obj->get_user_data();
 
@@ -95,7 +100,7 @@ class Woo {
         );
 
         $terms = get_terms('product_cat', $args);
-        
+
         if (!empty($terms)) {
 
           $cat_ids = [];
@@ -189,6 +194,9 @@ class Woo {
 
     //Check VIP level access categories
     add_action('template_redirect', function () {
+      if (!is_user_logged_in())
+        return;
+      
       $user = wp_get_current_user();
       if (!empty($user) && in_array('author', (array) $user->roles))
         return;
