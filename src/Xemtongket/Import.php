@@ -17,6 +17,8 @@ class Import {
     add_action('admin_enqueue_scripts', [$this, 'scripts']);
     add_filter('attachment_fields_to_edit', [$this, 'add_fields'], 10, 2);
     add_action('wp_ajax_' . 'summary_import_xlxs', [$this, 'summary_import_xlxs']);
+    add_action('wp_ajax_' . 'summary_approve_xlxs', [$this, 'summary_approve_xlxs']);
+    add_action('delete_attachment', [$this, 'delete_attachment']);
     //register_shutdown_function([$this, "check_abort"]);
   }
 
@@ -29,16 +31,6 @@ class Import {
     if ($post->post_type !== 'attachment' || $post->post_mime_type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
       return $form_fields;
 
-    if (!current_user_can('administrator'))
-      return $form_fields;
-
-    /* $form_fields['review_xlxs'] = array(
-      'label' => esc_html__('Duyệt file tổng kết', 'gap-theme'),
-      'input' => 'html',
-      'html' => sprintf('<button type="button" id="btnReviewXLXSFile" data-id="%s" class="button">%s</button>', $post->ID, __('Phê duyệt')),
-      'helps' => __('Click vào nút trên duyệt file tổng kết.'),
-    ); */
-
     $form_fields['import_xlxs'] = array(
       'label' => esc_html__('Import file tổng kết', 'gap-theme'),
       'input' => 'html',
@@ -46,6 +38,15 @@ class Import {
       'helps' => __('Click vào nút trên để bắt đầu import file tổng kết.'),
     );
 
+    if (!current_user_can('administrator'))
+      return $form_fields;
+
+    $form_fields['review_xlxs'] = array(
+      'label' => esc_html__('Duyệt file tổng kết', 'gap-theme'),
+      'input' => 'html',
+      'html' => sprintf('<button type="button" id="btnReviewXLXSFile" data-id="%s" class="button">%s</button>', $post->ID, __('Phê duyệt')),
+      'helps' => __('Click vào nút trên duyệt file tổng kết.'),
+    );
 
     return $form_fields;
   }
@@ -115,6 +116,7 @@ class Import {
         'phi' => $phi,
         'thuc_nhan' => $thuc_nhan,
         'tinh_trang_thanh_toan' => $tinh_trang_thanh_toan,
+        'file_id' => $excel_file_id,
       );
 
       if ($this->is_update($ma_ky_gui)) {
@@ -148,6 +150,24 @@ class Import {
     // $wpdb->update('table_name', array('id' => $id, 'title' => $title, 'message' => $message), array('id' => $id));
   }
 
+
+  public function summary_approve_xlxs() {
+    global $wpdb;
+    $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
+    $file_id = $_POST['file_id'];
+    try {
+      $update = $wpdb->update($db_table_name, ['status' => 'done'], ['file_id' => $file_id]);
+      wp_send_json_success($update);
+    } catch (Exception $e) {
+      wp_send_json_error($e->get_error_message());
+    }
+  }
+
+  public function delete_attachment($post_id) {
+    global $wpdb;
+    $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
+    $delete = $wpdb->delete($db_table_name, ['file_id' => $post_id]);
+  }
 
   public function check_abort() {
     if (connection_aborted())

@@ -22,7 +22,7 @@ class View {
 
     $db_table_name = $wpdb->prefix . 'gap_summary'; // table name
     //$results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE (MONTH(ngay_ky_gui) = '$curmon' AND so_dien_thoai='$phone') ");
-    $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE MONTH(ngay_tong_ket) >= MONTH(NOW()-interval 2 month) AND so_dien_thoai='$phone' ");
+    $results = $wpdb->get_results("SELECT * FROM  $db_table_name WHERE MONTH(ngay_tong_ket) >= MONTH(NOW()-interval 2 month) AND so_dien_thoai='$phone' AND status='done'");
     if ($wpdb->last_error) {
       $ajax_handler->add_error_message(sprintf('Error: %s', $wpdb->last_error));
     }
@@ -33,7 +33,7 @@ class View {
       $html = '<h4 style="text-align: center; margin: 20px 0">Kết quả tổng kết</h4>';
       $html .= '<ul data-products="type-1" class="products columns-3">';
       $xtk_modal = '';
-      $ths_arr_1 = ['Mã ký gửi', 'Họ tên khách hàng', 'Số điện thoại', 'P.thức thanh toán', 'Ngày thanh toán', 'Ngày TPTK'];
+      $ths_arr_1 = ['Mã ký gửi', 'Khách hàng', 'Số điện thoại', 'P.thức thanh toán', 'Ngày thanh toán', 'Ngày Tính phí tổng kết'];
       $ths_arr_2 = ['Số tài khoản', 'Ngân hàng', 'Ký gửi', 'Bán', 'Tồn', 'Doanh thu', 'Phí', 'Thực nhận', 'Tình trạng thanh toán'];
       $ths_1 = '<th>' . join('</th><th>', $ths_arr_1) . '</th>';
       $ths_2 = '<th>' . join('</th><th>', $ths_arr_2) . '</th>';
@@ -94,8 +94,10 @@ class View {
             continue;
           if ($i < 9)
             $td_1 .= sprintf('<td>%s</td>', $aa[$i]);
-          else
+          elseif ($i > 9 && $i <= 17)
             $td_2 .= sprintf('<td>%s</td>', $aa[$i]);
+          else
+            continue;
         }
 
 

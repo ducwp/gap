@@ -52,7 +52,7 @@ jQuery(document).ready(function ($) {
 
       },
       error: function (error) {
-        console.log('ERROR: '+error);
+        console.log('ERROR: ' + error);
         button.removeClass('disabled').html(load_text);
         //select_box.show();
         btnCancel.addClass('hidden');
@@ -65,36 +65,27 @@ jQuery(document).ready(function ($) {
     });
 
     //XHR - END
+  });
 
-    /* $.ajax({
-      url: ajaxurl,
+  $(document).on('click', '#btnReviewXLXSFile', function () {
+    let button = $(this);
+    if (button.hasClass('disabled')) return;
+    let file_id = button.data('id');
+
+    var ajax = wp.ajax.send({
       data: {
-        action: 'batch_translate',
-        security: button.data('nonce'),
-        lang: lang,
-        post_ids: post_ids
+        action: 'summary_approve_xlxs',
+        file_id: file_id
       },
-      type: "POST",
-      dataType: "json",
       success: function (data) {
-
-        $.each(data['data'], function (id, title) {
-          $('input#cb-select-' + id).parent().next('td.title').find('a.row-title').css('background', '#a8eea8').text(decodeURIComponent(title));
-
-          //alert( id + ": " + title );
-        });
-
+        alert("Đã update " + data + " records");
         console.log(data);
-        button.html(load_text);
-        select_box.show();
       },
       error: function (error) {
+        alert(error);
         console.log(error);
-        select_box.show();
-        button.html(load_text);
       }
-    });  *///ajax
-
+    });
   });
 
 });
