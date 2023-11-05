@@ -847,6 +847,9 @@ body:not(.home):not(.page-id-2042) .ct-footer {
   max-width: 300px !important; }
 .ct-footer [data-column=widget-area-5] {
   text-align: center; }
+@media (max-width: 479px) {
+  .ct-footer [data-column=widget-area-1] {
+    text-align: center; } }
 
 /* Footer form */
 #gap_footer_form .wpcf7 form .wpcf7-response-output {

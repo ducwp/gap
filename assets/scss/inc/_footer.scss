@@ -58,9 +58,16 @@ body:not(.home):not(.page-id-2042) {
     max-width: 300px !important;
   }
 
-  [data-column=widget-area-5]{
+  [data-column=widget-area-5] {
     text-align: center;
   }
+
+  [data-column=widget-area-1] {
+    @include mobile {
+      text-align: center;
+    }
+  }
+
 }
 
 /* Footer form */
@@ -102,14 +109,14 @@ body:not(.home):not(.page-id-2042) {
       position: absolute;
       right: 0;
       bottom: -7px;
-      background-color:#000;
+      background-color: #000;
       height: 40px;
       width: 40px;
       border-radius: 50%;
       z-index: 2;
       //animation: glowing 1500ms infinite;
       //animation: shake 1500ms infinite;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
 
       &:before,
       &:after {
@@ -206,17 +213,49 @@ body:not(.home):not(.page-id-2042) {
 }
 
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 
@@ -234,4 +273,3 @@ body:not(.home):not(.page-id-2042) {
     border: 0;
   }
 }
-
