@@ -804,6 +804,12 @@ ul.products li.product {
   padding: 4px 20px;
   border-radius: 6px; }
 
+.woo-sctr-shortcode-wrap-wrap.woo-sctr-shortcode-wrap-wrap-salescountdowntimer {
+  text-align: left !important; }
+
+.woo-sctr-shortcode-wrap {
+  margin-left: -11px !important; }
+
 body:not(.home):not(.page-id-2042) .ct-footer {
   margin-top: 60px; }
 
