@@ -28,6 +28,12 @@ body {
   }
 }
 
+#menu-wishlist {
+  a {
+    padding: 0;
+  }
+}
+
 .gap_breadcrumbs {
   padding: 0 20px;
 }
@@ -166,4 +172,3 @@ a.nrp_apply_redemption_coupon {
   margin-left: 10px;
   color: #c00;
 }
-

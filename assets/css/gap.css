@@ -1053,6 +1053,9 @@ body.elementor-template-full-width[data-header*="type-1"] .ct-header [data-row*=
 body.error404 .ct-container {
   padding-top: 60px; }
 
+#menu-wishlist a {
+  padding: 0; }
+
 .gap_breadcrumbs {
   padding: 0 20px; }
 
