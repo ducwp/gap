@@ -21,6 +21,7 @@ class Init {
     Firebase::instance();
     //WooCommerce::instance();
     Woo::instance();
+    Countdown::instance();
     DePro::instance();
     Route::instance();
     Cf7db\Init::instance();

@@ -4,6 +4,36 @@ jQuery(document).ready(function ($) {
     $('.prowc_product_countdown').detach().appendTo('.woocommerce-product-gallery')
   }
 
+  let open_countdown = $('#open_countdown');
+  let done = false;
+  if (open_countdown.length && !done) {
+    $('.ct-cart-actions').hide();
+    let product_id = open_countdown.data('product_id');
+    open_countdown.each(function () {
+      setInterval(function () {
+        var xhr = $.ajax({
+          type: "post",
+          url: gap.ajax_url,
+          data: {
+            action: 'gap_countdown',
+            product_id: product_id,
+            nonce: gap.nonce
+          },
+          success: function (data) {
+            if (data == 'finished') {
+              xhr.abort();
+              done = true;
+              open_countdown.remove();
+              $('.ct-cart-actions').show();
+            }
+            console.log(data);
+            $('#open_countdown').html(data);
+          }
+        });
+      }, 999); //time in milliseconds 
+    });
+  }
+
   $.fn.gap_load_time = function (date) {
     var old_html = $('#gap_time_ajax').html();
     $('#gap_time_ajax').html('<div class="gap_times_loading">Đang tải...</div>');

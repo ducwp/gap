@@ -155,7 +155,7 @@ class Woo {
     }, 10, 2);
 
 
-    add_filter('woocommerce_is_purchasable', function ($is_purchasable, $object) {
+    /* add_filter('woocommerce_is_purchasable', function ($is_purchasable, $object) {
       $product_id = $object->get_id();
       $countdown_enabled = get_post_meta($product_id, '_' . 'prowc_product_countdown_enabled', true);
       $countdown_action = get_post_meta($product_id, '_' . 'prowc_product_countdown_action', true);
@@ -170,7 +170,7 @@ class Woo {
       }
 
       return true;
-    }, 10, 2);
+    }, 10, 2); */
 
 
     //Promote list (loop)
@@ -248,8 +248,6 @@ class Woo {
         }
       }
     });
-
-
   }
 
   function ts_apply_discount_to_cart() {
