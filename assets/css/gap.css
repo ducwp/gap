@@ -174,7 +174,8 @@ body {
 
 /* Product carousel on Homepage*/
 #gap_carousel ul.products li.product:hover .woocommerce-loop-product__title,
-#gap_carousel ul.products li.product:hover .price {
+#gap_carousel ul.products li.product:hover .price,
+#gap_carousel ul.products li.product:hover .amount {
   color: #000 !important; }
 #gap_carousel .owl-nav {
   position: absolute;

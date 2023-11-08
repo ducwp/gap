@@ -193,9 +193,10 @@
   ul.products {
     li.product {
       &:hover {
-
+        
         .woocommerce-loop-product__title,
-        .price {
+        .price, 
+        .amount {
           color: #000 !important
         }
       }
