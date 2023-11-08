@@ -17,6 +17,7 @@
     padding: 15px 20px 20px;
     border-radius: 6px;
     margin-top: 10px;
+
     @include mobile {
       padding: 0;
       background: none;
@@ -39,20 +40,27 @@
   }
 
   fieldset {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
     padding: 15px;
-    height: 100%;
 
+    @include desktop {
+      background-color: #fff;
+      
+      border-radius: 6px;
+      padding: 15px;
+      height: 100%;
 
-
-    legend {
-      background-color: #000;
-      border: none;
-      color: #fff;
-      margin-left: 0px;
-      border-radius: 4px;
+      legend {
+        background-color: #000;
+        border: none;
+        color: #fff;
+        margin-left: 0px;
+        border-radius: 4px;
+      }
     }
   }
+
+  span.wpcf7-spinner{
+    display: block;
+  }
+
 }

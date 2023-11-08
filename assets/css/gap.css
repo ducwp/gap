@@ -627,17 +627,21 @@ body {
   .kyguionline .col-lg-4 + .col-lg-4 {
     margin-top: 20px; } }
 .kyguionline fieldset {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 15px;
-  height: 100%; }
-  .kyguionline fieldset legend {
-    background-color: #000;
-    border: none;
-    color: #fff;
-    margin-left: 0px;
-    border-radius: 4px; }
+  padding: 15px; }
+  @media (min-width: 1024px) {
+    .kyguionline fieldset {
+      background-color: #fff;
+      border-radius: 6px;
+      padding: 15px;
+      height: 100%; }
+      .kyguionline fieldset legend {
+        background-color: #000;
+        border: none;
+        color: #fff;
+        margin-left: 0px;
+        border-radius: 4px; } }
+.kyguionline span.wpcf7-spinner {
+  display: block; }
 
 /* Xem tổng kết */
 .xem_tong_ket {
