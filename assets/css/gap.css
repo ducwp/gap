@@ -576,6 +576,11 @@ body {
   margin-bottom: 30px;
   border: 1px solid var(--paletteColor4);
   border-radius: 6px; }
+  @media (max-width: 479px) {
+    .datlichcuahang {
+      padding: 10px; } }
+  .datlichcuahang .wpcf7-spinner {
+    display: block; }
   .datlichcuahang-inner {
     max-width: 739px;
     margin: 0 auto; }

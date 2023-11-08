@@ -377,11 +377,17 @@
   border: 1px solid var(--paletteColor4);
   border-radius: 6px;
 
+  @include mobile{
+    padding: 10px;
+  }
+
+  .wpcf7-spinner{
+    display: block;
+  }
+
   &-inner {
     max-width: 739px;
     margin: 0 auto;
-
-
   }
 
   .row+.row {
