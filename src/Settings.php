@@ -70,6 +70,13 @@ class Settings {
           ),
 
           array(
+            'id' => 'woo_note_doi_tra',
+            'type' => 'text',
+            'title' => 'Lưu ý đổi trả',
+            'default' => 'Lưu ý: Hàng đã mua không được đổi trả',
+          ),
+
+          array(
             'id' => 'freeshipping_gold',
             'type' => 'text',
             'title' => 'Freeshipping coupon',

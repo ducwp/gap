@@ -143,7 +143,10 @@ class Woo {
     });
 
     add_action('woocommerce_review_order_before_submit', function () {
-      echo '<div class="woocommerce-message" style="background-color: antiquewhite;"><b>Lưu ý: Hàng đã mua không được đổi trả</b></div>';
+      if (!isset($this->gap_settings['woo_note_doi_tra']))
+        return;
+
+      printf('<div class="woocommerce-message" style="background-color: antiquewhite;"><b>%s</b></div>', $this->gap_settings['woo_note_doi_tra']);
     });
 
 
