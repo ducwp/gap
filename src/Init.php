@@ -18,7 +18,7 @@ class Init {
     Taxonomy::instance();
     Hooks::instance();
     Shortcodes::instance();
-    Firebase::instance();
+    //Firebase::instance();
     //WooCommerce::instance();
     Woo::instance();
     Countdown::instance();

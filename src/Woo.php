@@ -32,7 +32,8 @@ class Woo {
     }); */
 
     add_filter('avatar_defaults', function ($avatar_defaults) {
-      $myavatar = get_stylesheet_directory_uri() . '/assets/img/star.png';
+      //$myavatar = get_stylesheet_directory_uri() . '/assets/img/star.png';
+      $myavatar = 'http://giveawaypremium.vn/wp-content/themes/gap/assets/img/star.png';
       $avatar_defaults[$myavatar] = "Default Gravatar";
       return $avatar_defaults;
     });
@@ -196,7 +197,7 @@ class Woo {
     add_action('template_redirect', function () {
       if (!is_user_logged_in())
         return;
-      
+
       $user = wp_get_current_user();
       if (!empty($user) && in_array('author', (array) $user->roles))
         return;
@@ -309,7 +310,10 @@ class Woo {
     <p class="form-row">
       <label for="billing_phone"><?php _e('Số điện thoại (có Zalo)', 'text_domain'); ?><span
           class="required">*</span></label>
-    <div style="display: flex; margin-bottom: 10px">
+      <input type="text" class="input-text" name="billing_phone" id="form-field-phone" value="<?php if (!empty($_POST['billing_phone']))
+        esc_attr_e($_POST['billing_phone']); ?>" />
+
+      <!-- <div style="display: flex; margin-bottom: 10px; display: none">
       <input type="text" class="input-text" name="billing_phone" id="form-field-phone" value="<?php if (!empty($_POST['billing_phone']))
         esc_attr_e($_POST['billing_phone']); ?>" style="
       width: auto;
@@ -317,18 +321,18 @@ class Woo {
       margin-right: 10px;
   " />
       <button onclick="phoneAuth();" class="button" type="button">Xác minh</button>
-    </div>
+    </div> -->
 
-    <div id="recaptcha-container"></div>
+      <!-- <div id="recaptcha-container"></div> -->
     </p>
 
-    <p class="form-row">
+    <!-- <p class="form-row">
       <label for="zalo_otp"><?php _e('Mã OTP Zalo', 'text_domain'); ?><span class="required">*</span></label>
       <input type="text" class="input-text" name="zalo_otp" id="form-field-zalo_otp" value="<?php if (!empty($_POST['zalo_otp']))
         esc_attr_e($_POST['zalo_otp']); ?>" placeholder="Nhập mã OTP vào đây" />
 
       <input type="hidden" name="verificationId" id="form-field-verificationId" value="" />
-    </p>
+    </p> -->
 
     <div class="clear"></div>
     <?php
@@ -346,15 +350,23 @@ class Woo {
     }
 
     if (isset($_POST['billing_phone'])) {
-      if (empty($_POST['billing_phone'])) {
+      $billing_phone = trim($_POST['billing_phone']);
+      if (empty($billing_phone)) {
         $validation_errors->add('billing_phone_error', __('Vui lòng nhập số điện thoại.', 'woocommerce'));
       }
-      if (!$this->validate_mobile($_POST['billing_phone'])) {
+      if (!$this->validate_mobile($billing_phone)) {
         $validation_errors->add('billing_phone_error', __('Số điện thoại không đúng định dạng.', 'woocommerce'));
       }
+
+      global $wpdb;
+      $results = $wpdb->get_results('select * from `wp_usermeta` where meta_key = "billing_phone" and meta_value = "' . $billing_phone . '"');
+      if ($results) {
+        $validation_errors->add('billing_phone_error', __('Số điện thoại đã tồn tại.', 'woocommerce'));
+      }
+
     }
 
-    if (isset($_POST['zalo_otp'])) {
+    /* if (isset($_POST['zalo_otp'])) {
       if (empty($_POST['zalo_otp'])) {
         $validation_errors->add('zalo_otp_error', __('Vui lòng nhập OTP.', 'woocommerce'));
       }
@@ -367,7 +379,7 @@ class Woo {
         $validation_errors->add('billing_phone_error', 'Sai mã OTP!!!');
       }
 
-    }
+    } */
   }
 
   function validate_username($usename) {
