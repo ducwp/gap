@@ -21,7 +21,7 @@ class Woo {
       echo "LOI USENAME";
     }  */
     add_filter('woocommerce_loop_add_to_cart_link', [$this, 'loop_add_to_cart_link_filter'], 10, 3);
-    add_action('woocommerce_register_form', [$this, 'text_domain_woo_reg_form_fields']);
+    add_action('woocommerce_register_form', [$this, 'add_woo_reg_form_fields'], 5);
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
     add_action('woocommerce_created_customer', [$this, 'wooc_save_extra_register_fields']);
 
@@ -305,7 +305,7 @@ class Woo {
 
   /* Woocommerce Registration */
 
-  function text_domain_woo_reg_form_fields() {
+  function add_woo_reg_form_fields() {
     ?>
     <!-- <p class="form-row form-row-first"></p>
   <p class="form-row form-row-last"></p> -->
