@@ -5,7 +5,7 @@ if (!defined('WP_DEBUG')) {
 
 add_action('wp_enqueue_scripts', function () {
 
-  $ver = '1.0.6';
+  $ver = '1.0.7';
 
   $theme_uri = get_stylesheet_directory_uri();
 
