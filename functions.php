@@ -12,6 +12,10 @@ add_action('wp_enqueue_scripts', function () {
   #Fix Elementor Icon
   //https://giveawaypremium.vn/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.23.0
   wp_enqueue_style('elementor-icons', plugins_url('/elementor/assets/lib/eicons/css/elementor-icons.min.css'), [], $ver);
+  
+  //Font awesome
+  wp_enqueue_style('gap-font-awesome-4.7', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css', [], $ver);
+
   # CSS
   wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css', [], $ver);
   #wp_enqueue_style('gap-font','https://db.onlinewebfonts.com/c/5fd740bac1abfb826fb7e35ae963efc9?family=ABChanel+Corpo+Regular', array('parent-style'));
@@ -49,9 +53,6 @@ add_action('wp_enqueue_scripts', function () {
   // wp_enqueue_style('gap-calendar-theme', $theme_uri . '/assets/vendor/calendar/theme.css', ['gap-calendar']);
   // wp_enqueue_script('gap-calendar-lib', $theme_uri . '/assets/vendor/calendar/calendar.min.js', ['jquery'], '', true);
   if(is_page()) wp_enqueue_script('gap-calendar', $theme_uri . '/assets/js/calendar.js', ['jquery'], $ver, true);
-
-  //Google material icons
-  //wp_enqueue_style('gap-google-material', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
   //SCRIPT
   wp_enqueue_script('gap-script', $theme_uri . '/assets/js/script.js', ['jquery', 'gap-chosen', 'owl-slider'], $ver, true);

@@ -1,9 +1,5 @@
 jQuery(document).ready(function ($) {
-
-  if ($('.woocommerce-product-gallery').length) {
-    $('.prowc_product_countdown').detach().appendTo('.woocommerce-product-gallery')
-  }
-
+  
   let open_countdown = $('#open_countdown');
   let done = false;
   if (open_countdown.length && !done) {
