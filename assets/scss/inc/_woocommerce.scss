@@ -70,8 +70,8 @@ ul.products {
   content: '';
 }
 
-//vip_cats
-.vip_cats {
+//button_links
+.button_links {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -80,14 +80,18 @@ ul.products {
 
   li {
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 5px;
 
     a {
+      border-radius: 4px;
+      display: inline-block;
       padding: 3px 10px;
-      border: 1px solid #ddd;
+      background-color: #D9D9D9;
+      color: #000;
+      font-size: 14px;
 
       &:hover {
-        border-color: #333;
+        background-color: #ECECEC;
       }
     }
   }
@@ -167,6 +171,51 @@ body.woocommerce-cart {
             margin-bottom: 4px;
           }
         }
+      }
+    }
+  }
+}
+
+//Account page
+
+.membership-bar-wrap{
+  display: block;
+  span{
+    padding: 0;
+  }
+
+  .membership-level,
+  .membership-point-level{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .membership-point-level {
+    margin-top: 5px;
+    span{
+      min-width: 70px;
+      text-align: center;
+      &:last-child{
+        text-align: right;
+      }
+    }
+  }
+
+  .membership-bar{
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: #D9D9D9;
+    display: block;
+    .membership-bar-load{
+      display: block;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      &.load-point-0{
+        visibility: hidden;
       }
     }
   }

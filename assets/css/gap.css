@@ -818,20 +818,24 @@ ul.products li.product {
 .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--nrp-points a:before {
   content: ''; }
 
-.vip_cats {
+.button_links {
   list-style: none;
   padding: 0;
   margin: 0;
   margin-bottom: 20px;
   text-align: center; }
-  .vip_cats li {
+  .button_links li {
     display: inline-block;
-    margin: 0 10px; }
-    .vip_cats li a {
+    margin: 0 5px; }
+    .button_links li a {
+      border-radius: 4px;
+      display: inline-block;
       padding: 3px 10px;
-      border: 1px solid #ddd; }
-      .vip_cats li a:hover {
-        border-color: #333; }
+      background-color: #D9D9D9;
+      color: #000;
+      font-size: 14px; }
+      .button_links li a:hover {
+        background-color: #ECECEC; }
 
 .woocommerce-product-gallery #open_countdown {
   position: absolute;
@@ -898,6 +902,42 @@ body.woocommerce-cart .woocommerce-shipping-totals.shipping {
         .woocommerce-MyAccount-navigation ul li a::before {
           margin-right: 0;
           margin-bottom: 4px; } }
+
+.membership-bar-wrap {
+  display: block; }
+  .membership-bar-wrap span {
+    padding: 0; }
+  .membership-bar-wrap .membership-level,
+  .membership-bar-wrap .membership-point-level {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    font-size: 14px;
+    font-weight: bold; }
+  .membership-bar-wrap .membership-point-level {
+    margin-top: 5px; }
+    .membership-bar-wrap .membership-point-level span {
+      min-width: 70px;
+      text-align: center; }
+      .membership-bar-wrap .membership-point-level span:last-child {
+        text-align: right; }
+  .membership-bar-wrap .membership-bar {
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: #D9D9D9;
+    display: block; }
+    .membership-bar-wrap .membership-bar .membership-bar-load {
+      display: block;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      font-size: 14px; }
+      .membership-bar-wrap .membership-bar .membership-bar-load.load-point-0 {
+        visibility: hidden; }
 
 body:not(.home):not(.page-id-2042) .ct-footer {
   margin-top: 60px; }
