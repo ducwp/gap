@@ -115,8 +115,7 @@ body {
     .gap-hero-slider-thumbs-inner .hero-slider-title {
       position: relative;
       margin-bottom: 100px;
-      z-index: 1;
-      width: 300px; }
+      z-index: 1; }
       @media (min-width: 768px) and (max-width: 1023px) {
         .gap-hero-slider-thumbs-inner .hero-slider-title {
           margin-bottom: 60px;
@@ -125,6 +124,37 @@ body {
         .gap-hero-slider-thumbs-inner .hero-slider-title {
           margin-bottom: 40px;
           max-width: 160px; } }
+    .gap-hero-slider-thumbs-inner .section-title {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      margin-bottom: 100px;
+      z-index: 1; }
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .gap-hero-slider-thumbs-inner .section-title {
+          margin-bottom: 60px;
+          display: block; } }
+      @media (max-width: 479px) {
+        .gap-hero-slider-thumbs-inner .section-title {
+          margin-bottom: 40px;
+          display: block; } }
+      .gap-hero-slider-thumbs-inner .section-title .section-title-left img {
+        max-width: 260px; }
+        @media (max-width: 479px) {
+          .gap-hero-slider-thumbs-inner .section-title .section-title-left img {
+            max-width: 160px; } }
+      .gap-hero-slider-thumbs-inner .section-title .section-title-right {
+        margin-left: auto;
+        color: #fff;
+        font-size: 36px;
+        font-weight: bold; }
+        @media (max-width: 479px) {
+          .gap-hero-slider-thumbs-inner .section-title .section-title-right {
+            font-size: 18px;
+            margin-top: 30px; } }
     .gap-hero-slider-thumbs-inner .cnext,
     .gap-hero-slider-thumbs-inner .cprev {
       background-color: #000;
@@ -821,6 +851,54 @@ ul.products li.product {
 .woo-sctr-shortcode-wrap {
   margin-left: -11px !important; }
 
+body.woocommerce-cart .woocommerce-shipping-totals.shipping {
+  display: none; }
+
+.woocommerce button[name="update_cart"],
+.woocommerce input[name="update_cart"] {
+  display: none; }
+
+@media (max-width: 479px) {
+  .woocommerce-MyAccount-navigation ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
+    .woocommerce-MyAccount-navigation ul li {
+      width: 30%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      -webkit-box-flex: 1;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+      margin: 0 5px 10px;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      text-align: center; }
+      .woocommerce-MyAccount-navigation ul li a {
+        border-radius: 6px;
+        height: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        justify-items: center;
+        font-size: 10px;
+        padding: 12px; }
+        .woocommerce-MyAccount-navigation ul li a::before {
+          margin-right: 0;
+          margin-bottom: 4px; } }
+
 body:not(.home):not(.page-id-2042) .ct-footer {
   margin-top: 60px; }
 
@@ -1051,6 +1129,35 @@ body:not(.home):not(.page-id-2042) .ct-footer {
     width: 100%;
     height: 500px;
     border: 0; }
+
+footer.ct-footer form {
+  text-align: left;
+  font-size: 14px;
+  max-width: 260px; }
+
+div.uacf7-form-3295 {
+  font-size: 14px;
+  text-align: left; }
+  div.uacf7-form-3295 p {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px; }
+  div.uacf7-form-3295 input, div.uacf7-form-3295 textarea {
+    padding: 4px 7px;
+    background-color: #1F1F1F;
+    color: #A1A1A1;
+    border: none; }
+    div.uacf7-form-3295 input:focus, div.uacf7-form-3295 textarea:focus {
+      background-color: #1F1F1F;
+      outline: none; }
+  div.uacf7-form-3295 input[type="submit"] {
+    background-color: #fff;
+    color: #000;
+    min-width: 100px; }
+  div.uacf7-form-3295 input {
+    height: 30px; }
+  div.uacf7-form-3295 textarea {
+    height: 70px; }
 
 /* General */
 body.elementor-template-full-width[data-header*="type-1"] .ct-header [data-row*="middle"], body.single-product[data-header*="type-1"] .ct-header [data-row*="middle"], body.archive[data-header*="type-1"] .ct-header [data-row*="middle"] {

@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-  
+
   let open_countdown = $('#open_countdown');
   let done = false;
   if (open_countdown.length && !done) {
@@ -410,3 +410,52 @@ function gap_html2pdf() {
 }
 
 //new AutoNumeric('.money_format', { currencySymbol: '₫', currencySymbolPlacement: 's', decimalCharacter: '.' });
+
+
+//Format currency
+jQuery(document).ready(function ($) {
+  $(document).ready(function () {
+    // Attach an event listener to the input
+    $('#form-field-pre_amount').attr('maxlength', 14);
+    $('#form-field-pre_amount, #online_price').on('keyup', function (e) {
+      if (e.which == 8 || e.which == 46) return false;
+
+      // Get the entered value
+      var enteredValue = $(this).val();
+
+      // Remove non-numeric characters
+      var numericValue = enteredValue.replace(/[^0-9]/g, '');
+
+      // Limit the length to a specified number of characters
+      var maxLength = parseInt($(this).attr('maxlength'));
+      numericValue = numericValue.substring(0, maxLength);
+
+      // Format as currency without decimals and separate thousands with a period
+      var formattedAmount = parseFloat(numericValue).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      });
+
+      // Update the input value with the formatted amount
+      $(this).val(formattedAmount);
+    });
+  });
+
+});
+
+//
+jQuery(function ($) {
+  let timeout;
+  jQuery('.woocommerce').on('change', 'input.qty', function () {
+    if (timeout !== undefined) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(function () {
+      jQuery("[name='update_cart']").trigger("click"); // trigger cart update
+    }, 1000); // 1 second delay, half a second (500) seems comfortable too
+  });
+
+  $('.woocommerce-order-received .woocommerce-order-details').prev('p').html('');
+});

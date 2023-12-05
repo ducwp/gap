@@ -31,9 +31,34 @@ class Woo {
       echo '<input type="hidden" name="redirect" value="' . wp_validate_redirect(wc_get_raw_referer(), wc_get_page_permalink('myaccount')) . '" />';
     }); */
 
+    add_filter('cfw_billing_shipping_address_heading', function ($heading) {
+      return 'Shipping address';
+    });
+
+    //Change the 'Billing details' checkout label to 'Contact Information'
+
+    add_filter('gettext', function ($translated_text, $text, $domain) {
+      switch ($translated_text) {
+        case 'Thanh toán và giao hàng':
+          $translated_text = __('Thông tin giao hàng', 'woocommerce');
+          break;
+
+        case 'Địa chỉ thanh toán':
+          $translated_text = __('Địa chỉ giao hàng', 'woocommerce');
+          break;
+      }
+      return $translated_text;
+    }, 20, 3);
+
+
+    /* add_filter('woocommerce_checkout_fields', function ($fields) {
+      $fields['billing'] = array();
+      return $fields;
+    }); */
+
     add_filter('avatar_defaults', function ($avatar_defaults) {
       //$myavatar = get_stylesheet_directory_uri() . '/assets/img/star.png';
-      $myavatar = 'http://giveawaypremium.vn/wp-content/themes/gap/assets/img/star.png';
+      $myavatar = 'https://i.imgur.com/M3b76Zh.png';
       $avatar_defaults[$myavatar] = "Default Gravatar";
       return $avatar_defaults;
     });
@@ -60,77 +85,6 @@ class Woo {
     //https://www.businessbloomer.com/woocommerce-visual-hook-guide-checkout-page/
     //https://www.businessbloomer.com/woocommerce-visual-hook-guide-account-pages/
 
-    add_action('woocommerce_account_dashboard', function () {
-      if (!is_user_logged_in())
-        return;
-      $user = $this->user_obj;
-      $user_data = $user->get_user_data();
-
-      $badge = get_stylesheet_directory_uri() . '/assets/img/' . $user_data['level'] . '.svg';
-      echo '<p style="text-align: center">';
-      printf('<img src="%s" width="100" /><br><br>', $badge);
-      printf('Xin chào: <b>%s</b><br>', $user_data['name']);
-      if ($user_data['level'] != 'member') {
-        printf(__('Chúc mừng! Bạn đã đạt hạng thành viên <b>%s</b>.'), strtoupper($user_data['level']));
-        printf('<br><span>Số điểm hiện có: <b>%s</b></span>', $user_data['point']);
-      } else
-        printf(__('Chúc mừng! Bạn đã kiếm được <b>%s</b> điểm.'), $user_data['point']);
-      echo '</p>';
-
-    });
-
-    add_action('woocommerce_account_dashboard', function () {
-      if (!is_user_logged_in())
-        return;
-
-      //VIP cats
-      $user_data = $this->user_obj->get_user_data();
-
-      if ($user_data['level'] !== 'member') {
-        //$cat_ids = !empty($this->gap_settings['vip_cats']) ? explode(',', $this->gap_settings['vip_cats']) : 0;
-        $args = array(
-          'hide_empty' => false, // also retrieve terms which are not used yet
-          'meta_query' => array(
-            array(
-              'key' => 'vip_cat',
-              'value' => '1',
-              'compare' => '=='
-            )
-          ),
-          'taxonomy' => 'product_cat',
-        );
-
-        $terms = get_terms('product_cat', $args);
-
-        if (!empty($terms)) {
-
-          $cat_ids = [];
-          foreach ($terms as $term) {
-            $cat_ids[] = $term->term_id;
-          }
-
-          if (!empty($cat_ids)) {
-            $cat_ids = array_map(function ($id) {
-              return (int) trim($id);
-            }, $cat_ids);
-
-            echo '<ul class="vip_cats"><li><b>Danh mục VIP</b>:</li>';
-            foreach ($cat_ids as $cat_id) {
-              //$cat = get_the_category_by_ID($cat_id);
-              $cat = get_term($cat_id);
-              printf('<li><a href="%s">%s</a></li>', get_category_link($cat->term_id), $cat->name);
-            }
-            echo '</ul>';
-
-          }
-        }
-
-      }
-
-      if (isset($this->gap_settings['woo_account_page_dashboard'])) {
-        echo '<p>' . $this->gap_settings['woo_account_page_dashboard'] . '</p>';
-      }
-    });
 
     //add_filter('woocommerce_get_shop_coupon_data', [$this, 'set_wc_coupon_data'], 99, 3);
     //add_filter( 'woocommerce_coupon_get_discount_amount', [$this, 'coupon_get_discount_amount_filter'], 10, 4 );
@@ -255,6 +209,9 @@ class Woo {
   }
 
   function ts_apply_discount_to_cart() {
+    if (!is_user_logged_in())
+      return;
+
     $user = new User;
     $user_data = $user->get_user_data();
 

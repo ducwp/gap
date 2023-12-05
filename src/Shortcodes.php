@@ -70,8 +70,13 @@ class Shortcodes {
     // $html .= '<span class="cnext"><svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px; " d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg></span>';
     // $html .= '</div></div></div></div>';
 
+    $tips_mua_hang = sprintf('<img src="%s">', get_stylesheet_directory_uri() . '/assets/img/tips_mua_hang.svg');
+
     $html .= '<div class="gap-hero-slider-thumbs"><div class="gap-hero-slider-thumbs-inner">';
-    $html .= wp_get_attachment_image($title_id, 'fullsize', '', ['class' => 'hero-slider-title']);
+    $html .= '<div class="section-title">';
+    $html .= sprintf('<div class="section-title-left">%s</div>', $tips_mua_hang);
+    $html .= '<div class="section-title-right">SĂN HÀNG NHANH NHẤT KHI ĐẾN CỬA HÀNG</div></div>';
+    //$html .= wp_get_attachment_image($title_id, 'fullsize', '', ['class' => 'hero-slider-title']);
     $html .= '<div style="padding: 0 40px; position: relative"><span class="cprev"><svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px; " d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg></span>';
     $html .= '<div id="sync2" class="owl-carousel owl-theme">';
     $html .= $html_thumb . '</div>';
@@ -85,6 +90,7 @@ class Shortcodes {
 
 
   function gap_breadcrumbs() {
+    //if(!class_exists('Blocksy_Breadcrumbs_Builder')) return;
     $single_hero_element = new stdClass;
     $breadcrumbs_builder = new Blocksy_Breadcrumbs_Builder();
     $html = $breadcrumbs_builder->render([

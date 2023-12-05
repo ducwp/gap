@@ -55,10 +55,11 @@ class Elementor extends Action_Base {
     } */
     //$ajax_handler->data['pre_amount'];
     $luxury_brand = isset($_POST['form_fields']['luxury_brand']) ? $_POST['form_fields']['luxury_brand'] : '';
-    $pre_amount = absint($_POST['form_fields']['pre_amount']);
+    $pre_amount = str_replace('.', '', $_POST['form_fields']['pre_amount']);
+    $pre_amount = absint($pre_amount);
 
     if ($pre_amount < 100000) {
-      $ajax_handler->add_error_message('Vui lòng nhập số tiền từ 100.000');
+      $ajax_handler->add_error_message('Vui lòng nhập số tiền từ 100.000' . $pre_amount);
     }
 
     switch ($pre_amount) {

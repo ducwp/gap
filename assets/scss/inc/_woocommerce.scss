@@ -119,3 +119,55 @@ ul.products {
 .woo-sctr-shortcode-wrap {
   margin-left: -11px !important;
 }
+
+//Cart
+body.woocommerce-cart {
+  .woocommerce-shipping-totals.shipping {
+    display: none;
+  }
+}
+
+//Automatically Update Cart when quantity changed in WooCommerce
+.woocommerce button[name="update_cart"],
+.woocommerce input[name="update_cart"] {
+  display: none;
+}
+
+//Mobile account tabs
+
+.woocommerce-MyAccount-navigation {
+  ul {
+    @include mobile {
+      display: flex;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+
+      li {
+        width: 30%;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        flex-grow: 1;
+        box-sizing: border-box;
+        margin: 0 5px 10px;
+        justify-content: space-between;
+        text-align: center;
+
+        a{
+          border-radius: 6px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-items: center;
+          font-size: 10px;
+          padding: 12px;
+
+          &::before{
+            margin-right: 0;
+            margin-bottom: 4px;
+          }
+        }
+      }
+    }
+  }
+}

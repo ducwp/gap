@@ -273,3 +273,42 @@ body:not(.home):not(.page-id-2042) {
     border: 0;
   }
 }
+
+//Footer form contact
+footer.ct-footer{
+  form{
+    text-align: left;
+    font-size: 14px;
+    max-width: 260px;
+  }
+}
+div.uacf7-form-3295{
+  font-size: 14px;
+  text-align: left;
+  p{
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  input,textarea{
+    padding: 4px 7px;
+    background-color: #1F1F1F;
+    color: #A1A1A1;
+    border: none;
+    &:focus{
+      background-color: #1F1F1F;
+      outline: none;
+    }
+  }
+  input[type="submit"]{
+    background-color: #fff;
+    color: #000;
+    min-width: 100px;
+  }
+  input{
+    height: 30px;
+  }
+  textarea{
+    height: 70px;
+  }
+}

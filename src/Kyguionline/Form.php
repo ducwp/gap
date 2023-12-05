@@ -42,6 +42,39 @@ class Form {
 
   function modify_brands($scanned_tag, $replace) {
 
+    //Clothes brands - Local
+    if (in_array($scanned_tag["name"], ['clothes_new_local_brand', 'clothes_used_local_brand'])) {
+      $clothes_brands = ['El.rever/ Elpis','Joie des Roses','Dzung Biez','Gout de Jun','Kido','Libe','Rubies','Dirty coin','Bad Rabbits','Marc','Hnoss','Dear Jose','Ceci Cela','Elise','Nem','Marc','Len Clothing','Anis','Aoem','Popbirdy','Dotie','Gago','Mifworkshop','Strikeapose','Sibling house','Rocky denim','Tinfour','Nudieye','Fleur','Aguja','DVRK','Cocosin','Lider','Colin','Tuby Catu','The Swan','Ruchan','DII','Coqui','Itscicico','Tatuchu','Jubin','Levents','Oia','Ononmade','Naked','She by Shj','Kiserine'];
+      $scanned_tag['values'] = []; //replace default value
+      $scanned_tag['labels'] = []; //replace default value
+      foreach ($clothes_brands as $clothes_brand) {
+        $scanned_tag['values'][] = $clothes_brand;
+        $scanned_tag['labels'][] = $clothes_brand;
+      }
+    }
+
+    //Clothes brands - Global
+    if (in_array($scanned_tag["name"], ['clothes_new_global_brand', 'clothes_used_global_brand'])) {
+      $clothes_brands = ['Zara','H&M','Stradivarius','Pull & Bear','Mango','Cotton:On','Uniqlo','On:Off','Burberry','Versace','Kenzo','Tommy','Tory Burch','Michael Kors'];
+      $scanned_tag['values'] = []; //replace default value
+      $scanned_tag['labels'] = []; //replace default value
+      foreach ($clothes_brands as $clothes_brand) {
+        $scanned_tag['values'][] = $clothes_brand;
+        $scanned_tag['labels'][] = $clothes_brand;
+      }
+    }
+
+    //Bag brands
+    if (in_array($scanned_tag["name"], ['bag_new_brand', 'bag_used_brand'])) {
+      $bag_brands = ['Chanel','Christian Dior','Gucci','Yves Saint Lauren','Versace','Charles & Keith','Aldo','Lyn','Pedro','Bunny Jelly','Marhen.J','MLB','MCM','Juno','Vascara','TTWN Bear','Coach','Kate Spade','Tory Burch','Michael Kors','Celine','Louis Vuitton','Marc Jacobs','Prada','Salvatore','Lesac','Chaufifth','Floral Punk'];
+      $scanned_tag['values'] = []; //replace default value
+      $scanned_tag['labels'] = []; //replace default value
+      foreach ($bag_brands as $bag_brand) {
+        $scanned_tag['values'][] = $bag_brand;
+        $scanned_tag['labels'][] = $bag_brand;
+      }
+    }
+
     //Shoe brands
     if (in_array($scanned_tag["name"], ['shoe_new_brand', 'shoe_used_brand'])) {
       $shoe_brands = ['Chanel','Christian Dior','Gucci','Yves Saint Lauren','Versace','Charles & Keith','Aldo','Lyn','Pedro','Bunny Jelly','Marhen.J','MLB','MCM','Juno','Vascara','TTWN Bear','Coach','Kate Spade','Tory Burch','Michael Kors','Bottega','Converse','Marc Jacobs','Palladium','Salvatore'];

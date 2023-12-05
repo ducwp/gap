@@ -182,8 +182,9 @@ class Details {
       </div>
       <div class="col-lg-4">
         <?php
-        $fmt = new \NumberFormatter('vi_VN', \NumberFormatter::CURRENCY);
-        $desired_price = $fmt->formatCurrency($form_data['desired_price'], "VND");
+        // $fmt = new \NumberFormatter('vi_VN', \NumberFormatter::CURRENCY);
+        // $desired_price = $fmt->formatCurrency($form_data['desired_price'], "VND");
+        $desired_price = $form_data['desired_price'];
         ?>
         <p><strong>Giá bán mong muốn</strong>: <?php echo $desired_price; ?></p>
       </div>
