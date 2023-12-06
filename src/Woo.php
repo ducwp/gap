@@ -31,6 +31,37 @@ class Woo {
       echo '<input type="hidden" name="redirect" value="' . wp_validate_redirect(wc_get_raw_referer(), wc_get_page_permalink('myaccount')) . '" />';
     }); */
 
+    // Check and validate the mobile phone
+    add_action('woocommerce_save_account_details_errors', function ($validation_errors) {
+      if (isset($_POST['billing_phone'])) {
+        $billing_phone = trim($_POST['billing_phone']);
+        if (empty($billing_phone)) {
+          $validation_errors->add('billing_phone_error', __('Vui lòng nhập số điện thoại.', 'woocommerce'));
+        } elseif (!$this->validate_mobile($billing_phone)) {
+          $validation_errors->add('billing_phone_error', __('Số điện thoại không đúng định dạng.', 'woocommerce'));
+        } else {
+
+          global $wpdb;
+          $user_id = get_current_user_id();
+          $results = $wpdb->get_results('select * from `wp_usermeta` where user_id !="'.$user_id.'" AND meta_key = "billing_phone" and meta_value = "' . $billing_phone . '"');
+          if ($results) {
+            $validation_errors->add('billing_phone_error', __('Số điện thoại đã tồn tại.', 'woocommerce'));
+          }
+        }
+
+      }
+
+      /* if (isset($_POST['billing_phone']) && empty($_POST['billing_phone']))
+        $args->add('error', __('Please fill in your Mobile phone', 'woocommerce'), ''); */
+    }, 20, 1);
+
+
+    // Save the mobile phone value to user data
+    add_action('woocommerce_save_account_details', function ($user_id) {
+      if (isset($_POST['billing_phone']) && !empty($_POST['billing_phone']))
+        update_user_meta($user_id, 'billing_phone', sanitize_text_field($_POST['billing_phone']));
+    }, 20, 1);
+
     add_filter('cfw_billing_shipping_address_heading', function ($heading) {
       return 'Shipping address';
     });

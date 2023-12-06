@@ -28,7 +28,7 @@ class View {
     }
 
     if (empty($results)) {
-      return $summary_result = '<h4 style="text-align: center">Xin lỗi, hiện tại hóa đơn của bạn chưa đến kỳ tổng kết.</h4>';
+      return $summary_result = $phone. '<h4 style="text-align: center">Xin lỗi, hiện tại hóa đơn của bạn chưa đến kỳ tổng kết.</h4>';
     } else {
       $html = '<h4 style="text-align: center; margin: 20px 0">Kết quả tổng kết</h4>';
       $html .= '<ul data-products="type-1" class="products columns-3">';
