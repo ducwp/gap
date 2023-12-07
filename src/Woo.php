@@ -25,6 +25,25 @@ class Woo {
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
     add_action('woocommerce_created_customer', [$this, 'wooc_save_extra_register_fields']);
 
+    add_filter( 'woocommerce_account_menu_items', function($items, $endpoints){
+      /* $items = array(
+        'dashboard'       => __( 'Dashboard', 'woocommerce' ),
+        'orders'          => __( 'Orders', 'woocommerce' ),
+        'downloads'       => __( 'Downloads', 'woocommerce' ),
+        'edit-address'    => _n( 'Address', 'Addresses', ( 1 + (int) wc_shipping_enabled() ), 'woocommerce' ),
+        'payment-methods' => __( 'Payment methods', 'woocommerce' ),
+        'edit-account'    => __( 'Account details', 'woocommerce' ),
+        'customer-logout' => __( 'Log out', 'woocommerce' ),
+      ); */
+      
+      $items['orders'] = 'Lịch sử đơn hàng';
+      $items['edit-address'] = 'Địa chỉ giao hàng';
+      $items['edit-account'] = 'Thay đổi thông tin';
+      $items['customer-logout'] = 'Đăng xuất';
+
+      return $items;
+    }, 10, 2);
+
     /* add_action('woocommerce_login_form_end', function () {
       if (!wc_get_raw_referer())
         return;
@@ -391,6 +410,9 @@ class Woo {
       // Phone input filed which is used in WooCommerce
       update_user_meta($customer_id, 'billing_phone', sanitize_text_field($_POST['billing_phone']));
     }
+
+    $avatar_id = 3324; //member
+    update_user_meta($customer_id, 'user_registration_profile_pic_url', $avatar_id);
   }
 
   function bbloomer_disable_coupons_cart_page() {

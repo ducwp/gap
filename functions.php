@@ -93,3 +93,8 @@ GAPTheme\Init::instance();
 //Pay with ATM cards
 
 //Pay with international cards
+
+function ur_replace_gravatar_image(){
+  /* $img =  'https://cdnphoto.dantri.com.vn/YYg1xb6zAKgELfX9pgu-f0COgi0=/zoom/300_200/2023/12/07/filipnguyendtvndocx-1642309570948-crop-1701915844351.jpeg';
+  update_user_meta(1, 'user_registration_profile_pic_url', $img); */
+}

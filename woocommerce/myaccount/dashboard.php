@@ -61,7 +61,7 @@ if ($user_data['level'] != 'member') {
 echo '</p>';
 
 //VIP cats
-if ($user_data['level'] !== 'member') {
+if ($user_data['level'] == 'vip' || $user_data['level'] == 'vvip') {
   //$cat_ids = !empty($this->gap_settings['vip_cats']) ? explode(',', $this->gap_settings['vip_cats']) : 0;
   $args = array(
     'hide_empty' => false, // also retrieve terms which are not used yet

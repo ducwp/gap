@@ -26,7 +26,8 @@ class User {
     $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE customer_id = %d LIMIT 1",
       array($this->current_user->ID)
     ));
-    $data['level'] = $row->level;
+    //var_dump($row);
+    $data['level'] = $row !== NULL && isset($row->level) ? $row->level : 'member';
 
     switch ($data['level']) {
       case 'member':
