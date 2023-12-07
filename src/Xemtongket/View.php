@@ -27,10 +27,14 @@ class View {
       $ajax_handler->add_error_message(sprintf('Error: %s', $wpdb->last_error));
     }
 
+    $norti ='<p style="text-align: center">Nếu có thắc mắc, Anh/Chị vui lòng liên hệ với chúng tôi tại <a href="https://www.facebook.com/giveawaypremiumphunhuan1" target="_blank"><u>Fanpage</u></a>.</p>';
+
     if (empty($results)) {
-      return $summary_result = $phone. '<h4 style="text-align: center">Xin lỗi, hiện tại hóa đơn của bạn chưa đến kỳ tổng kết.</h4>';
+      // return $summary_result = '<h4 style="text-align: center">Xin lỗi, hiện tại hóa đơn của bạn chưa đến kỳ tổng kết.</h4>';
+      return $summary_result = '<h4 style="text-align: center">Mã ký gửi của bạn chưa đến kỳ hạn tổng kết,<br>vui lòng xem lại thông tin “Thời gian tất toán” trên biên lai của bạn.</h4>' . $norti;
     } else {
       $html = '<h4 style="text-align: center; margin: 20px 0">Kết quả tổng kết</h4>';
+      $html .= '<p style="text-align: center">Vui lòng lưu “Hoá đơn chi tiết bán hàng”, hệ thống sẽ không lưu trữ quá 03 (ba) tháng kể từ ngày tổng kết.</p>';
       $html .= '<ul data-products="type-1" class="products columns-3">';
       $xtk_modal = '';
       $ths_arr_1 = ['Mã ký gửi', 'Khách hàng', 'Số điện thoại', 'P.thức thanh toán', 'Ngày thanh toán', 'Ngày Tính phí tổng kết'];
@@ -120,7 +124,7 @@ class View {
 
         $xtk_modal .= '</div>';
       }
-      $html .= '</ul>';
+      $html .= '</ul><br>' . $norti;
 
       $summary_result = $html . $xtk_modal;
 

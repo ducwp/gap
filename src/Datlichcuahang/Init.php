@@ -17,7 +17,7 @@ class Init {
     Ajax::instance();
     Form::instance();
     add_action('blocksy:single:content:bottom', function () {
-      if (!current_user_can('manage_options') || !is_page('dat-lich-cua-hang'))
+      if (!current_user_can('edit_pages') || !is_page('dat-lich-cua-hang'))
         return;
       ?>
       <div style="max-width: var(--normal-container-max-width); padding: 0 10px; margin: 0 auto; text-align: center">
