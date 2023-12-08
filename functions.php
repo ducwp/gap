@@ -12,7 +12,7 @@ add_action('wp_enqueue_scripts', function () {
   #Fix Elementor Icon
   //https://giveawaypremium.vn/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.23.0
   wp_enqueue_style('elementor-icons', plugins_url('/elementor/assets/lib/eicons/css/elementor-icons.min.css'), [], $ver);
-  
+
   //Font awesome
   wp_enqueue_style('gap-font-awesome-4.7', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css', [], $ver);
 
@@ -52,7 +52,8 @@ add_action('wp_enqueue_scripts', function () {
   // wp_enqueue_style('gap-calendar', $theme_uri . '/assets/vendor/calendar/style.css');
   // wp_enqueue_style('gap-calendar-theme', $theme_uri . '/assets/vendor/calendar/theme.css', ['gap-calendar']);
   // wp_enqueue_script('gap-calendar-lib', $theme_uri . '/assets/vendor/calendar/calendar.min.js', ['jquery'], '', true);
-  if(is_page(2959)) wp_enqueue_script('gap-calendar', $theme_uri . '/assets/js/calendar.js', ['jquery'], $ver, true);
+  if (is_page(2959))
+    wp_enqueue_script('gap-calendar', $theme_uri . '/assets/js/calendar.js', ['jquery'], $ver, true);
 
   //wp_enqueue_script('gap-formatCurrency', $theme_uri . '/assets/js/jquery.formatCurrency-1.4.0.js', ['jquery'], $ver, true);
 
@@ -94,7 +95,31 @@ GAPTheme\Init::instance();
 
 //Pay with international cards
 
-function ur_replace_gravatar_image(){
+function ur_replace_gravatar_image() {
   /* $img =  'https://cdnphoto.dantri.com.vn/YYg1xb6zAKgELfX9pgu-f0COgi0=/zoom/300_200/2023/12/07/filipnguyendtvndocx-1642309570948-crop-1701915844351.jpeg';
   update_user_meta(1, 'user_registration_profile_pic_url', $img); */
+}
+
+/* DISABLE UPDATES NOTIFICATIONS */
+//Disable WordPress core update notification
+add_filter('pre_site_transient_update_core', 'remove_core_updates');
+//Disable automatic theme updates
+add_filter('auto_update_theme', '__return_false');
+//Disable theme update notifications
+add_filter('pre_site_transient_update_themes', 'remove_core_updates');
+//Disable automatic theme updates
+add_filter('auto_update_theme', '__return_false');
+//Disable theme update notifications
+add_filter('pre_site_transient_update_themes', 'remove_core_updates');
+//Disable automatic theme updates
+add_filter('auto_update_theme', '__return_false');
+//Disable theme update notifications
+add_filter('pre_site_transient_update_themes', 'remove_core_updates');
+//Disable automatic theme updates
+add_filter('auto_update_theme', '__return_false');
+//Disable theme update notifications
+add_filter('pre_site_transient_update_themes', 'remove_core_updates');
+
+function remove_core_updates() {
+  return true;
 }

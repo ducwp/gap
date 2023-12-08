@@ -25,7 +25,7 @@ class Woo {
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
     add_action('woocommerce_created_customer', [$this, 'wooc_save_extra_register_fields']);
 
-    add_filter( 'woocommerce_account_menu_items', function($items, $endpoints){
+    add_filter('woocommerce_account_menu_items', function ($items, $endpoints) {
       /* $items = array(
         'dashboard'       => __( 'Dashboard', 'woocommerce' ),
         'orders'          => __( 'Orders', 'woocommerce' ),
@@ -35,7 +35,7 @@ class Woo {
         'edit-account'    => __( 'Account details', 'woocommerce' ),
         'customer-logout' => __( 'Log out', 'woocommerce' ),
       ); */
-      
+
       $items['orders'] = 'Lịch sử đơn hàng';
       $items['edit-address'] = 'Địa chỉ giao hàng';
       $items['edit-account'] = 'Thay đổi thông tin';
@@ -62,7 +62,7 @@ class Woo {
 
           global $wpdb;
           $user_id = get_current_user_id();
-          $results = $wpdb->get_results('select * from `wp_usermeta` where user_id !="'.$user_id.'" AND meta_key = "billing_phone" and meta_value = "' . $billing_phone . '"');
+          $results = $wpdb->get_results('select * from `wp_usermeta` where user_id !="' . $user_id . '" AND meta_key = "billing_phone" and meta_value = "' . $billing_phone . '"');
           if ($results) {
             $validation_errors->add('billing_phone_error', __('Số điện thoại đã tồn tại.', 'woocommerce'));
           }
@@ -264,10 +264,9 @@ class Woo {
 
     $user = new User;
     $user_data = $user->get_user_data();
-
-    if ($user_data['level'] < 2)
+    if ($user_data['level'] !== 'vvip')
       return;
-    $coupon_code = 'gap_freeshipping_gold';
+    $coupon_code = isset($this->gap_settings['freeshipping_gold']) ? $this->gap_settings['freeshipping_gold'] : 'gap_freeshipping_gold';
 
     if (!WC()->cart->has_discount($coupon_code)) {
       if (!WC()->cart->apply_coupon($coupon_code)) {
