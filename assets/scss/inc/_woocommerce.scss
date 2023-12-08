@@ -220,3 +220,28 @@ body.woocommerce-cart {
     }
   }
 }
+
+.memship_box_desktop{
+  img{
+    max-width: 100%;
+  }
+  @include tablet {
+    display: none;
+  }
+  @include mobile {
+    display: none;
+  }
+}
+
+.memship_box_mobile{
+  display: none;
+  img{
+    max-width: 100%;
+  }
+  @include tablet {
+    display: block;
+  }
+  @include mobile {
+    display: block;
+  }
+}

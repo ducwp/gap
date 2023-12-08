@@ -939,6 +939,26 @@ body.woocommerce-cart .woocommerce-shipping-totals.shipping {
       .membership-bar-wrap .membership-bar .membership-bar-load.load-point-0 {
         visibility: hidden; }
 
+.memship_box_desktop img {
+  max-width: 100%; }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .memship_box_desktop {
+    display: none; } }
+@media (max-width: 479px) {
+  .memship_box_desktop {
+    display: none; } }
+
+.memship_box_mobile {
+  display: none; }
+  .memship_box_mobile img {
+    max-width: 100%; }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .memship_box_mobile {
+      display: block; } }
+  @media (max-width: 479px) {
+    .memship_box_mobile {
+      display: block; } }
+
 body:not(.home):not(.page-id-2042) .ct-footer {
   margin-top: 60px; }
 
