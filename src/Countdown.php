@@ -22,7 +22,7 @@ class Countdown {
   function add_counter_metabox() {
     add_meta_box(
       'alg-product-countdown',
-      __('Product Time Countdown', 'gap-theme'),
+      __('Countdown Mở bán', 'gap-theme'),
       array($this, 'display_counter_metabox'),
       'product',
       'side',
@@ -45,15 +45,15 @@ class Countdown {
     $field_html .= '<option value="yes" ' . selected('yes', $is_enabled, false) . '>' .
       __('Yes', 'gap-theme') . '</option>';
     $field_html .= '</select>';
-    $table_data[] = array(__('Enabled', 'gap-theme'), $field_html);
+    $table_data[] = array(__('Bật', 'gap-theme'), $field_html);
 
     $field_html = '';
     $field_html .= '<input type="date" name="gap_product_countdown_date" value="' . $countdown_date . '">';
-    $table_data[] = array(__('Date', 'gap-theme'), $field_html);
+    $table_data[] = array(__('Ngày', 'gap-theme'), $field_html);
 
     $field_html = '';
     $field_html .= '<input type="time" name="gap_product_countdown_time" value="' . $countdown_time . '">';
-    $table_data[] = array(__('Time', 'gap-theme'), $field_html);
+    $table_data[] = array(__('Giờ', 'gap-theme'), $field_html);
 
     $action_options = apply_filters('gap_product_countdown', array(
       'do_nothing' => __('Do nothing', 'gap-theme'),
@@ -71,7 +71,7 @@ class Countdown {
 
     $html = '';
     $html .= $this->get_table_html($table_data, array('table_heading_type' => 'vertical', 'table_class' => 'widefat striped'));
-    $html .= '<p><em>' . __('Current date and time', 'gap-theme') . ': ' . current_time('mysql') . '</em></p>';
+    $html .= '<p><em>' . __('Ngày giờ hiện tại', 'gap-theme') . ': ' . current_time('mysql') . '</em></p>';
     $html .= '<input type="hidden" name="gap_product_countdown_save_post" value="gap_product_countdown_save_post">';
     echo $html;
   }
@@ -132,7 +132,7 @@ class Countdown {
     $time_left = ($finish_time - $current_time);
 
     if ($countdown_enabled === 'yes' && $time_left > 0) {
-      printf('<div id="open_countdown" data-product_id="%s">%s</div>', $product_id, gmdate("H:i:s", $time_left));
+      printf('<div id="open_countdown" data-product_id="%s">%s</div>', $product_id, $this->seconds_to_hours($time_left));
     }
 
   }
@@ -149,9 +149,17 @@ class Countdown {
     $time_left = ($finish_time - $current_time);
 
     if ($countdown_enabled === 'yes' && $time_left > 0) {
-      echo gmdate("H:i:s", $time_left);
+      echo $this->seconds_to_hours($time_left);
     } else
       echo 'finished';
     exit;
+  }
+
+  public function seconds_to_hours($time_left) {
+    $secs = $time_left % 60;
+    $hrs = $time_left / 60;
+    $mins = $hrs % 60;
+    $hrs = $hrs / 60;
+    return ((int) $hrs . ":" . (int) $mins . ":" . (int) $secs);
   }
 }

