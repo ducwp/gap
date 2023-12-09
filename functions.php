@@ -68,7 +68,7 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 add_action('admin_enqueue_scripts', function () {
-  $ver = '1.0.6';
+  $ver = '1.0.8';
   $theme_uri = get_stylesheet_directory_uri();
   wp_enqueue_style('gap', $theme_uri . '/assets/css/admin.css', [], $ver);
 });
