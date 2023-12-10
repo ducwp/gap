@@ -124,46 +124,63 @@ function remove_core_updates() {
   return true;
 }
 
+add_filter('woocommerce_get_order_item_totals', 'customize_email_order_line_totals', 1000, 3);
+function customize_email_order_line_totals($total_rows, $order, $tax_display) {
+  // Only on emails notifications
+  if (!is_wc_endpoint_url() || !is_admin()) {
+    // Remove "Shipping" label text from totals rows
+    $total_rows['shipping']['label'] = 'Phí giao hàng';
+
+    $value = trim(str_replace(['qua Đồng giá HCM', 'qua Đồng giá'], '', $total_rows['shipping']['value']));
+    if ($value == 'Đồng giá HCM' || $value == 'Đồng giá')
+      $value = '0₫';
+    $total_rows['shipping']['value'] = $value;
+
+    unset($total_rows['cart_subtotal']);
+  }
+
+  return $total_rows;
+}
 
 //FOR TESTING
 //add_action('woocommerce_cart_calculate_fees', 'bbloomer_add_cart_fee_for_states');
 
 //function bbloomer_add_cart_fee_for_states() {
-  /* $noncontinental = array('ANGIANG', 'BINHDUONG'); // ARRAY OF STATE CODES
-  if (in_array(WC()->customer->get_shipping_state(), $noncontinental)) {
-    $surcharge = 0.05 * WC()->cart->shipping_total; // 5% surcharge based on shipping cost
-    $surcharge = 50000;
-    WC()->cart->add_fee('Non-continental Shipping', $surcharge);
-    //WC()->cart->set_shipping_total(0);
-  }
-  $state = WC()->customer->get_shipping_state();
-  $city = WC()->customer->get_shipping_city();
+/* $noncontinental = array('ANGIANG', 'BINHDUONG'); // ARRAY OF STATE CODES
+if (in_array(WC()->customer->get_shipping_state(), $noncontinental)) {
+  $surcharge = 0.05 * WC()->cart->shipping_total; // 5% surcharge based on shipping cost
+  $surcharge = 50000;
+  WC()->cart->add_fee('Non-continental Shipping', $surcharge);
+  //WC()->cart->set_shipping_total(0);
+}
+$state = WC()->customer->get_shipping_state();
+$city = WC()->customer->get_shipping_city();
 
-  if ('HOCHIMINH' === $state) {
-    $noithanh = ['760', '761', '764', '765', '766', '767', '768', '770', '771', '772', '773', '774', '775', '776', '777', '778'];
-    if (in_array($city, $noithanh)) {
-      $phigiaohang = 25000;
-    } else {
-      $phigiaohang = 30000;
-    }
+if ('HOCHIMINH' === $state) {
+  $noithanh = ['760', '761', '764', '765', '766', '767', '768', '770', '771', '772', '773', '774', '775', '776', '777', '778'];
+  if (in_array($city, $noithanh)) {
+    $phigiaohang = 25000;
   } else {
-    $phigiaohang = 40000;
-  } */
+    $phigiaohang = 30000;
+  }
+} else {
+  $phigiaohang = 40000;
+} */
 
-  //vvip
-  /* $user = new \GAPTheme\User;
-  $user_data = $user->get_user_data();
-  if ($user_data['level'] == 'vvip') {
-    $phigiaohang = 0;
-  } */
+//vvip
+/* $user = new \GAPTheme\User;
+$user_data = $user->get_user_data();
+if ($user_data['level'] == 'vvip') {
+  $phigiaohang = 0;
+} */
 
-  //$phigiaohang = WC()->cart->shipping_total;
-  //WC()->cart->add_fee('Phí Zao Hàng', $phigiaohang, true, '');
+//$phigiaohang = WC()->cart->shipping_total;
+//WC()->cart->add_fee('Phí Zao Hàng', $phigiaohang, true, '');
 
-  //WC()->cart->add_discount('sss');
-  /* $percentage = 0.5;
-  $discount = -(WC()->cart->cart_contents_total + WC()->cart->shipping_total) * $percentage;
-  WC()->cart->add_fee('Discount', $discount, true, ''); */
+//WC()->cart->add_discount('sss');
+/* $percentage = 0.5;
+$discount = -(WC()->cart->cart_contents_total + WC()->cart->shipping_total) * $percentage;
+WC()->cart->add_fee('Discount', $discount, true, ''); */
 //}
 
 /* add_filter('woocommerce_package_rates', 'custom_shipping_costs', 10, 2);
