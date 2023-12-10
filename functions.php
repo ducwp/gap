@@ -123,3 +123,155 @@ add_filter('pre_site_transient_update_themes', 'remove_core_updates');
 function remove_core_updates() {
   return true;
 }
+
+///TESTT
+
+add_action('woocommerce_cart_calculate_fees', 'bbloomer_add_cart_fee_for_states');
+
+function bbloomer_add_cart_fee_for_states() {
+  /* $noncontinental = array('ANGIANG', 'BINHDUONG'); // ARRAY OF STATE CODES
+  if (in_array(WC()->customer->get_shipping_state(), $noncontinental)) {
+    $surcharge = 0.05 * WC()->cart->shipping_total; // 5% surcharge based on shipping cost
+    $surcharge = 50000;
+    WC()->cart->add_fee('Non-continental Shipping', $surcharge);
+    //WC()->cart->set_shipping_total(0);
+  }
+  $state = WC()->customer->get_shipping_state();
+  $city = WC()->customer->get_shipping_city();
+
+  if ('HOCHIMINH' === $state) {
+    $noithanh = ['760', '761', '764', '765', '766', '767', '768', '770', '771', '772', '773', '774', '775', '776', '777', '778'];
+    if (in_array($city, $noithanh)) {
+      $phigiaohang = 25000;
+    } else {
+      $phigiaohang = 30000;
+    }
+  } else {
+    $phigiaohang = 40000;
+  } */
+
+  //vvip
+  /* $user = new \GAPTheme\User;
+  $user_data = $user->get_user_data();
+  if ($user_data['level'] == 'vvip') {
+    $phigiaohang = 0;
+  } */
+
+  //$phigiaohang = WC()->cart->shipping_total;
+  //WC()->cart->add_fee('Phí Zao Hàng', $phigiaohang, true, '');
+
+  //WC()->cart->add_discount('sss');
+  /* $percentage = 0.5;
+  $discount = -(WC()->cart->cart_contents_total + WC()->cart->shipping_total) * $percentage;
+  WC()->cart->add_fee('Discount', $discount, true, ''); */
+}
+
+add_filter('woocommerce_package_rates', 'custom_shipping_costs', 10, 2);
+function custom_shipping_costs($rates, $package) {
+  $address = $package["destination"];
+
+  // file_put_contents("D:/city_function.txt", $address['city']);
+
+  // file_put_contents("D:/rates.txt", json_encode($rates));
+  // Loop through shipping methods rates
+  foreach ($rates as $rate_key => $rate) {
+    if ('free_shipping' === $rate->method_id) {
+
+      if ('HOCHIMINH' === $address['state']) {
+        $noithanh = ['760', '761', '764', '765', '766', '767', '768', '770', '771', '772', '773', '774', '775', '776', '777', '778'];
+        if (in_array($address['city'], $noithanh)) {
+          $rates[$rate_key]->cost = 25000;
+        } else {
+          $rates[$rate_key]->cost = 30000;
+        }
+      } else {
+        $rates[$rate_key]->cost = 40000;
+      }
+
+      //$rates[$rate_key]->discount = 13000;
+
+      /* $user = new \GAPTheme\User;
+      $user_data = $user->get_user_data();
+      if ($user_data['level'] == 'vvip') {
+        $rates[$rate_key]->cost = 0;
+      } */
+    }
+
+  }
+  return $rates;
+}
+
+add_filter('wp_footer', function () {
+  if (is_checkout()) {
+
+    ?>
+    <script>
+      jQuery(function ($) {
+        $('#billing_city').change(function () {
+          jQuery('body').trigger('update_checkout');
+        });
+        $('#shipping_city').change(function () {
+          jQuery('body').trigger('update_checkout');
+        });
+
+
+        // $('#shipping_city').css('height', '50px');
+        // $('input[name="shipping_city_text"]').css('margin-top', '10px');
+
+        // $('#billing_city').css('height', '50px');
+        // $('input[name="billing_city_text"]').css('margin-top', '10px');
+
+        var select1 = $('select[name="shipping_city"]');
+        var input1 = $('input[name="shipping_city_text"]');
+        select1.change(function () {
+          if ($(this).val() == 'Other City') {
+
+            input1.show();
+            $('#shipping_city_field').append(input1);
+
+          } else {
+            input1.hide();
+          }
+        });
+
+        /* var select = $('select[name="billing_city"]');
+        var input = $('input[name="billing_city_text"]');
+        select.change(function () {
+          if ($(this).val() == 'Other City') {
+
+            input.show();
+            $('#billing_city_field').append(input);
+          } else {
+            input.hide();
+          }
+        }); */
+      }); 
+    </script>
+    <?php
+  }
+});
+
+
+/* add_filter('woocommerce_package_rates', 'custom_shipping_costs', 10, 2);
+function custom_shipping_costs($rates, $package) {
+  // Loop through shipping methods rates
+  foreach ($rates as $rate_key => $rate) {
+    // Targeting all shipping methods except "Free shipping"
+    if ('free_shipping' !== $rate->method_id) {
+      $has_taxes = false;
+      $taxes = [];
+
+      $rates[$rate_key]->cost = 100; // Set to 100
+      // Taxes rate cost (if enabled)
+      foreach ($rates[$rate_key]->taxes as $key => $tax) {
+        if ($tax > 0) {
+          $has_taxes = true;
+          $taxes[$key] = 0; // Set to 0 (zero)
+        }
+      }
+      if ($has_taxes)
+        $rates[$rate_key]->taxes = $taxes;
+    }
+  }
+  return $rates;
+} */
