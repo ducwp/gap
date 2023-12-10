@@ -124,36 +124,6 @@ function remove_core_updates() {
   return true;
 }
 
-add_filter('wp_footer', function () {
-  if (is_checkout()) {
-    ?>
-    <script>
-      jQuery(function ($) {
-        $('#billing_city').change(function () {
-          jQuery('body').trigger('update_checkout');
-        });
-        $('#shipping_city').change(function () {
-          jQuery('body').trigger('update_checkout');
-        });
-
-        var select1 = $('select[name="shipping_city"]');
-        var input1 = $('input[name="shipping_city_text"]');
-        select1.change(function () {
-          if ($(this).val() == 'Other City') {
-
-            input1.show();
-            $('#shipping_city_field').append(input1);
-
-          } else {
-            input1.hide();
-          }
-        });
-
-      }); 
-    </script>
-    <?php
-  }
-});
 
 //FOR TESTING
 //add_action('woocommerce_cart_calculate_fees', 'bbloomer_add_cart_fee_for_states');
