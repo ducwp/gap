@@ -166,7 +166,7 @@ function bbloomer_add_cart_fee_for_states() {
   WC()->cart->add_fee('Discount', $discount, true, ''); */
 }
 
-add_filter('woocommerce_package_rates', 'custom_shipping_costs', 10, 2);
+add_filter('woocommerce_package_rates', 'custom_shipping_costs', 5, 2);
 function custom_shipping_costs($rates, $package) {
   $address = $package["destination"];
 
@@ -175,7 +175,7 @@ function custom_shipping_costs($rates, $package) {
   // file_put_contents("D:/rates.txt", json_encode($rates));
   // Loop through shipping methods rates
   foreach ($rates as $rate_key => $rate) {
-    if ('free_shipping' === $rate->method_id) {
+    if ('free_shipping' !== $rate->method_id) {
 
       if ('HOCHIMINH' === $address['state']) {
         $noithanh = ['760', '761', '764', '765', '766', '767', '768', '770', '771', '772', '773', '774', '775', '776', '777', '778'];
@@ -188,7 +188,7 @@ function custom_shipping_costs($rates, $package) {
         $rates[$rate_key]->cost = 40000;
       }
 
-      //$rates[$rate_key]->discount = 13000;
+      //$rates[$rate_key]->cost = 13000;
 
       /* $user = new \GAPTheme\User;
       $user_data = $user->get_user_data();
@@ -203,7 +203,6 @@ function custom_shipping_costs($rates, $package) {
 
 add_filter('wp_footer', function () {
   if (is_checkout()) {
-
     ?>
     <script>
       jQuery(function ($) {
@@ -213,13 +212,6 @@ add_filter('wp_footer', function () {
         $('#shipping_city').change(function () {
           jQuery('body').trigger('update_checkout');
         });
-
-
-        // $('#shipping_city').css('height', '50px');
-        // $('input[name="shipping_city_text"]').css('margin-top', '10px');
-
-        // $('#billing_city').css('height', '50px');
-        // $('input[name="billing_city_text"]').css('margin-top', '10px');
 
         var select1 = $('select[name="shipping_city"]');
         var input1 = $('input[name="shipping_city_text"]');
@@ -234,17 +226,6 @@ add_filter('wp_footer', function () {
           }
         });
 
-        /* var select = $('select[name="billing_city"]');
-        var input = $('input[name="billing_city_text"]');
-        select.change(function () {
-          if ($(this).val() == 'Other City') {
-
-            input.show();
-            $('#billing_city_field').append(input);
-          } else {
-            input.hide();
-          }
-        }); */
       }); 
     </script>
     <?php
