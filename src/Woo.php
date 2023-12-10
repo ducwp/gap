@@ -44,6 +44,29 @@ class Woo {
       return $items;
     }, 10, 2);
 
+    //Tinh phi van chuyen theo quan/huyen cua HCM
+    add_filter('woocommerce_package_rates', function ($rates, $package) {
+      $address = $package["destination"];
+      // Loop through shipping methods rates
+      foreach ($rates as $rate_key => $rate) {
+        if ('free_shipping' !== $rate->method_id) {
+
+          if ('HOCHIMINH' === $address['state']) {
+            $noithanh = ['760', '761', '764', '765', '766', '767', '768', '770', '771', '772', '773', '774', '775', '776', '777', '778'];
+            if (in_array($address['city'], $noithanh)) {
+              $rates[$rate_key]->cost = 25000;
+            } else {
+              $rates[$rate_key]->cost = 30000;
+            }
+          } else {
+            $rates[$rate_key]->cost = 40000;
+          }
+
+        }
+      }
+      return $rates;
+    }, 5, 2);
+
     /* add_action('woocommerce_login_form_end', function () {
       if (!wc_get_raw_referer())
         return;
