@@ -23,7 +23,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 
 	<?php do_action( 'woocommerce_edit_account_form_start' ); ?>
 
-	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
+	<!-- <p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
 		<label for="account_first_name"><?php esc_html_e( 'First name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="account_first_name" id="account_first_name" autocomplete="given-name" value="<?php echo esc_attr( $user->first_name ); ?>" />
 	</p>
@@ -31,7 +31,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 		<label for="account_last_name"><?php esc_html_e( 'Last name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="account_last_name" id="account_last_name" autocomplete="family-name" value="<?php echo esc_attr( $user->last_name ); ?>" />
 	</p>
-	<div class="clear"></div>
+	<div class="clear"></div> -->
 
 	<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 		<label for="account_display_name"><?php esc_html_e( 'Display name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
@@ -51,7 +51,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
       id="billing_phone" value="<?php echo esc_attr($user->billing_phone); ?>" />
   </p>
 
-	<fieldset>
+	<!-- <fieldset>
 		<legend><?php esc_html_e( 'Password change', 'woocommerce' ); ?></legend>
 
 		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -66,7 +66,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 			<label for="password_2"><?php esc_html_e( 'Confirm new password', 'woocommerce' ); ?></label>
 			<input type="password" class="woocommerce-Input woocommerce-Input--password input-text" name="password_2" id="password_2" autocomplete="off" />
 		</p>
-	</fieldset>
+	</fieldset> -->
 	<div class="clear"></div>
 
 	<?php do_action( 'woocommerce_edit_account_form' ); ?>

@@ -21,7 +21,6 @@ class Woo {
       echo "LOI USENAME";
     }  */
     add_filter('woocommerce_loop_add_to_cart_link', [$this, 'loop_add_to_cart_link_filter'], 10, 3);
-    add_action('woocommerce_register_form', [$this, 'add_woo_reg_form_fields'], 5);
     add_action('woocommerce_register_post', [$this, 'wooc_validate_extra_register_fields'], 10, 3);
     add_action('woocommerce_created_customer', [$this, 'wooc_save_extra_register_fields']);
 
@@ -43,6 +42,13 @@ class Woo {
 
       return $items;
     }, 10, 2);
+
+    add_filter('woocommerce_save_account_details_required_fields', function ($required_fields) {
+      unset($required_fields["account_first_name"]);
+      unset($required_fields["account_last_name"]);
+      return $required_fields;
+    });
+
 
     /* add_action('woocommerce_login_form_end', function () {
       if (!wc_get_raw_referer())
@@ -187,7 +193,7 @@ class Woo {
       $countdown_action = get_post_meta($product_id, '_' . 'prowc_product_countdown_action', true);
 
       $finish_time = get_post_meta($product_id, '_' . 'prowc_product_countdown_date', true) . ' ' .
-        get_post_meta($product_id, '_' . 'prowc_product_countdown_time', true);
+      get_post_meta($product_id, '_' . 'prowc_product_countdown_time', true);
       $finish_time = strtotime($finish_time);
       $current_time = (int) current_time('timestamp');
       $time_left = ($finish_time - $current_time);
@@ -212,12 +218,12 @@ class Woo {
       $args = array(
         'hide_empty' => false, // also retrieve terms which are not used yet
         'meta_query' => array(
-          array(
-            'key' => 'vip_cat',
-            'value' => '1',
-            'compare' => '=='
-          )
-        ),
+            array(
+              'key' => 'vip_cat',
+              'value' => '1',
+              'compare' => '=='
+            )
+          ),
         'taxonomy' => 'product_cat',
       );
 
@@ -365,44 +371,6 @@ class Woo {
   }
 
   /* Woocommerce Registration */
-
-  function add_woo_reg_form_fields() {
-    ?>
-    <!-- <p class="form-row form-row-first"></p>
-  <p class="form-row form-row-last"></p> -->
-
-    <p class="form-row">
-      <label for="billing_phone"><?php _e('Số điện thoại (có Zalo)', 'text_domain'); ?><span
-          class="required">*</span></label>
-      <input type="text" class="input-text" name="billing_phone" id="form-field-phone" value="<?php if (!empty($_POST['billing_phone']))
-        esc_attr_e($_POST['billing_phone']); ?>" />
-
-      <!-- <div style="display: flex; margin-bottom: 10px; display: none">
-      <input type="text" class="input-text" name="billing_phone" id="form-field-phone" value="<?php if (!empty($_POST['billing_phone']))
-        esc_attr_e($_POST['billing_phone']); ?>" style="
-      width: auto;
-      flex-grow: 1;
-      margin-right: 10px;
-  " />
-      <button onclick="phoneAuth();" class="button" type="button">Xác minh</button>
-    </div> -->
-
-      <!-- <div id="recaptcha-container"></div> -->
-    </p>
-
-    <!-- <p class="form-row">
-      <label for="zalo_otp"><?php _e('Mã OTP Zalo', 'text_domain'); ?><span class="required">*</span></label>
-      <input type="text" class="input-text" name="zalo_otp" id="form-field-zalo_otp" value="<?php if (!empty($_POST['zalo_otp']))
-        esc_attr_e($_POST['zalo_otp']); ?>" placeholder="Nhập mã OTP vào đây" />
-
-      <input type="hidden" name="verificationId" id="form-field-verificationId" value="" />
-    </p> -->
-
-    <div class="clear"></div>
-    <?php
-  }
-
-
   function wooc_validate_extra_register_fields($username, $email, $validation_errors) {
 
     ///^\w+$/
@@ -430,20 +398,24 @@ class Woo {
 
     }
 
-    /* if (isset($_POST['zalo_otp'])) {
+    if (isset($_POST['zalo_otp'])) {
       if (empty($_POST['zalo_otp'])) {
         $validation_errors->add('zalo_otp_error', __('Vui lòng nhập OTP.', 'woocommerce'));
       }
 
       $verificationId = $_POST['verificationId'];
       $otp = $_POST['zalo_otp'];
-      $response = Firebase::instance()->activate_through_firebase($verificationId, $otp);
+      /* $response = Firebase::instance()->activate_through_firebase($verificationId, $otp);
       if ($response->error && $response->error->code == 400) {
         error_log($response->error->message);
         $validation_errors->add('billing_phone_error', 'Sai mã OTP!!!');
+      } */
+      
+      if ($otp != 123) {
+        $validation_errors->add('billing_phone_error', 'Sai mã OTP!!!');
       }
 
-    } */
+    }
   }
 
   function validate_username($usename) {
