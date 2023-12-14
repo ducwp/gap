@@ -21,6 +21,7 @@ class Init {
     //Firebase::instance();
     //WooCommerce::instance();
     Woo::instance();
+    Zalo::instance();
     Countdown::instance();
     DePro::instance();
     Route::instance();

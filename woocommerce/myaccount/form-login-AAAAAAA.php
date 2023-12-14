@@ -15,79 +15,63 @@
  * @version 7.0.1
  */
 
-if (!defined('ABSPATH')) {
-  exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
 
-do_action('woocommerce_before_customer_login_form'); ?>
+do_action( 'woocommerce_before_customer_login_form' ); ?>
 
-<?php if ('yes' === get_option('woocommerce_enable_myaccount_registration')): ?>
+<?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
-  <div class="u-columns col2-set" id="customer_login">
+<div class="u-columns col2-set" id="customer_login">
 
-    <div class="u-column1 col-1">
+	<div class="u-column1 col-1">
 
-    <?php endif; ?>
+<?php endif; ?>
+xxxxxxxxxxxx
+		<h2><?php esc_html_e( 'Login', 'woocommerce' ); ?></h2>
 
-    <h2><?php esc_html_e('Login', 'woocommerce'); ?></h2>
+		<form class="woocommerce-form woocommerce-form-login login" method="post">
 
-    <form class="woocommerce-form woocommerce-form-login login" method="post">
+			<?php do_action( 'woocommerce_login_form_start' ); ?>
 
-      <?php do_action('woocommerce_login_form_start'); ?>
-
-      <p class="form-row">
-          <label for="username"><?php _e('Số điện thoại (Zalo)', 'text_domain'); ?><span
-              class="required">*</span></label>
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<label for="username"><?php esc_html_e( 'Username or email address', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 
         <div style="display: flex; margin-bottom: 10px; ">
-          <input type="text" class="input-text" name="username" id="username" value="<?php if (!empty($_POST['username']))
-            esc_attr_e($_POST['username']); ?>" style="width: auto;flex-grow: 1;margin-right: 10px;" />
-          <button data-context="login" class="btnGetOTPZNS button" type="button">Gửi OTP</button>
+<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" style="width: auto;flex-grow: 1;margin-right: 10px;" /><?php // @codingStandardsIgnoreLine ?>
+
+          <button data-context="login" class="btnGetOTPZNS button" type="button">Lấy OTP</button>
         </div>
 
-        <!-- <div id="recaptcha-container"></div> -->
-        </p>
+			</p>
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<label for="password"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+				<input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password" />
+			</p>
 
-        <p class="form-row">
-          <label for="zalo_otp_login"><?php _e('Mã OTP Zalo', 'text_domain'); ?><span class="required">*</span></label>
-          <input type="text" class="input-text" name="zalo_otp_login" id="zalo_otp_login" value="<?php if (!empty($_POST['zalo_otp_login']))
-            esc_attr_e($_POST['zalo_otp_login']); ?>" placeholder="Nhập mã OTP vào đây" />
+			<?php do_action( 'woocommerce_login_form' ); ?>
 
-          <?php $verificationId_login = isset($_POST['verificationId_login']) ? trim($_POST['verificationId_login']) : ''; ?>
-          <input type="hidden" name="verificationId_login" id="verificationId_login" value="<?php echo $verificationId_login; ?>" />
-        </p>
+			<p class="form-row">
+				<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
+					<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'woocommerce' ); ?></span>
+				</label>
+				<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
+				<button type="submit" class="woocommerce-button button woocommerce-form-login__submit<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="login" value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'Log in', 'woocommerce' ); ?></button>
+			</p>
+			<p class="woocommerce-LostPassword lost_password">
+				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'woocommerce' ); ?></a>
+			</p>
 
-      
-        <input class="woocommerce-Input woocommerce-Input--text input-text" type="hidden" name="password"
-          id="password" autocomplete="current-password" value="<?php echo wp_generate_password(8); ?>"" />
+			<?php do_action( 'woocommerce_login_form_end' ); ?>
 
-      <?php do_action('woocommerce_login_form'); ?>
+		</form>
 
-      <p class="form-row">
-        <!-- <label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
-          <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox"
-            id="rememberme" value="forever" /> <span><?php esc_html_e('Remember me', 'woocommerce'); ?></span>
-        </label> -->
-        <?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>
-        <button type="submit"
-          class="woocommerce-button button woocommerce-form-login__submit<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>"
-          name="login"
-          value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><?php esc_html_e('Log in', 'woocommerce'); ?></button>
-      </p>
-      <!-- <p class="woocommerce-LostPassword lost_password">
-        <a
-          href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php esc_html_e('Lost your password?', 'woocommerce'); ?></a>
-      </p> -->
+<?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
-      <?php do_action('woocommerce_login_form_end'); ?>
+	</div>
 
-    </form>
-
-    <?php if ('yes' === get_option('woocommerce_enable_myaccount_registration')): ?>
-
-    </div>
-
-    <div class="u-column2 col-2">
+	<div class="u-column2 col-2">
       <h2><?php esc_html_e('Register', 'woocommerce'); ?></h2>
 
       <form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action('woocommerce_register_form_tag'); ?>>
@@ -118,14 +102,14 @@ do_action('woocommerce_before_customer_login_form'); ?>
         <p class="form-row form-row-last"></p> -->
 
         <p class="form-row">
-          <label for="billing_phone"><?php _e('Số điện thoại (Zalo)', 'text_domain'); ?><span
+          <label for="billing_phone"><?php _e('Số điện thoại (có Zalo)', 'text_domain'); ?><span
               class="required">*</span></label>
 
 
         <div style="display: flex; margin-bottom: 10px; ">
           <input type="text" class="input-text" name="billing_phone" id="billing_phone" value="<?php if (!empty($_POST['billing_phone']))
             esc_attr_e($_POST['billing_phone']); ?>" style="width: auto;flex-grow: 1;margin-right: 10px;" />
-          <button data-context="register" class="btnGetOTPZNS button" type="button">Gửi OTP</button>
+          <button data-context="register" class="btnGetOTPZNS button" type="button">Lấy OTP</button>
         </div>
 
         <!-- <div id="recaptcha-container"></div> -->
@@ -170,7 +154,7 @@ do_action('woocommerce_before_customer_login_form'); ?>
 
     </div>
 
-  </div>
+</div>
 <?php endif; ?>
 
-<?php do_action('woocommerce_after_customer_login_form'); ?>
+<?php do_action( 'woocommerce_after_customer_login_form' ); ?>

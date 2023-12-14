@@ -1,5 +1,54 @@
 jQuery(document).ready(function ($) {
 
+  $('.btnGetOTPZNS').on('click', function () {
+    var button = $(this);
+    if (button.hasClass('disabled')) {
+      return;
+    }
+    var button_text = button.text();
+    var context = button.data('context');
+    var phone_field = button.prev('input');
+    var phone = phone_field.val();
+    if (phone == '') {
+      alert("Vui lòng nhập số điện thoại!");
+      phone_field.focus();
+      return;
+    }
+
+    $('#verificationId_' + context).val('');
+
+    $.ajax({
+      url: gap.ajax_url,
+      type: 'POST',
+      dataType: "json",
+      data: {
+        action: 'gap_get_otp_zalo',
+        phone: phone,
+        context: context,
+        nonce: gap.nonce
+      },
+      context: this,
+      beforeSend: function () {
+        button.addClass('disabled').html('Đang gửi...');
+      },
+      success: function (response) {
+        console.log(response);
+        button.text(button_text).removeClass('disabled');
+        if (response.success === true) {
+          $('#verificationId_' + context).val(response.data);
+          alert('Đã gửi OTP, vui lòng kiểm tra điện thoại.');
+        } else {
+          alert(response.data);
+        }
+      },
+      error: function (error) {
+        //console.log(error);
+        button.text(button_text).removeClass('disabled');
+        alert(error);
+      }
+    });
+  });
+
   let open_countdown = $('#open_countdown');
   let done = false;
   if (open_countdown.length && !done) {

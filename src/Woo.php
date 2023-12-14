@@ -193,7 +193,7 @@ class Woo {
       $countdown_action = get_post_meta($product_id, '_' . 'prowc_product_countdown_action', true);
 
       $finish_time = get_post_meta($product_id, '_' . 'prowc_product_countdown_date', true) . ' ' .
-      get_post_meta($product_id, '_' . 'prowc_product_countdown_time', true);
+        get_post_meta($product_id, '_' . 'prowc_product_countdown_time', true);
       $finish_time = strtotime($finish_time);
       $current_time = (int) current_time('timestamp');
       $time_left = ($finish_time - $current_time);
@@ -218,12 +218,12 @@ class Woo {
       $args = array(
         'hide_empty' => false, // also retrieve terms which are not used yet
         'meta_query' => array(
-            array(
-              'key' => 'vip_cat',
-              'value' => '1',
-              'compare' => '=='
-            )
-          ),
+          array(
+            'key' => 'vip_cat',
+            'value' => '1',
+            'compare' => '=='
+          )
+        ),
         'taxonomy' => 'product_cat',
       );
 
@@ -317,6 +317,106 @@ class Woo {
         <?php
       }
     });
+
+    remove_filter('authenticate', 'wp_authenticate_username_password', 20);
+    add_filter('woocommerce_process_login_errors', function ($validation_error, $creds_user_login, $creds_user_password) {
+      $user_login = trim($_POST['username']);
+      if (empty($user_login)) {
+        //remove_action('authenticate', 'wp_authenticate_username_password', 20);
+        $validation_error->add('username_error', __('Vui lòng nhập số điện thoại', 'woocommerce'));
+      } else {
+        $user = @reset(
+          get_users(
+            array(
+              'meta_key' => 'billing_phone',
+              'meta_value' => $user_login,
+              'number' => 1,
+              'count_total' => false
+            )
+          )
+        );
+        if (!$user) {
+          //remove_action('authenticate', 'wp_authenticate_username_password', 20);
+          $validation_error->add('username_error', __('Tài khoản không tồn tại.', 'woocommerce'));
+        }
+      }
+
+      if (empty($_POST['zalo_otp_login'])) {
+        //remove_action('authenticate', 'wp_authenticate_username_password', 20);
+        $validation_error->add('otp_error', __('Vui lòng nhập OTP', 'woocommerce'));
+      } else {
+        $zalo_otp_login = trim($_POST['zalo_otp_login']);
+        $code = trim($_POST['verificationId_login']);
+        $verify = Zalo::instance()->verifyZNS($user_login, $zalo_otp_login, $code);
+        if (!$verify) {
+          //remove_action('authenticate', 'wp_authenticate_username_password', 20);
+          $validation_error->add('otp_error', __('Sai mã OTP', 'woocommerce'));
+        }
+      }
+
+
+
+      // Automatic login //
+      // $username = "ducnv119";
+      // $user = get_user_by('login', $username);
+
+      // Redirect URL //
+      /* if (!is_wp_error($user)) {
+        wp_clear_auth_cookie();
+        wp_set_current_user($user->ID);
+        wp_set_auth_cookie($user->ID);
+
+        $redirect_to = './';
+        wp_safe_redirect($redirect_to);
+        exit();
+      } */
+
+      //remove_filter('authenticate', 'wp_authenticate_username_password', 20);
+
+      /* $login_otp = wc()->session->get('login_otp');
+
+      if (empty($_POST['otp_login_field'])) {
+
+        remove_action('authenticate', 'wp_authenticate_username_password', 20);
+        $user = new WP_Error('denied', __("Otp field is empty"));
+      } elseif ($_POST['otp_login_field'] != $login_otp) {
+        remove_action('authenticate', 'wp_authenticate_username_password', 20);
+        $user = new WP_Error('denied', __("Invalid otp"));
+
+      } */
+
+      return $validation_error;
+
+      /* remove_action('authenticate', 'wp_authenticate_username_password', 20);
+      $user = new \WP_Error('denied', __("Invalid otp")); */
+
+      //return $user;
+    }, 10, 3);
+
+    remove_filter('authenticate', 'wp_authenticate_username_password', 20);
+    add_filter('authenticate', function ($user, $username, $password) {
+      $user_login = sanitize_text_field($_POST['username']);
+      $user = @reset(
+        get_users(
+          array(
+            'meta_key' => 'billing_phone',
+            'meta_value' => $user_login,
+            'number' => 1,
+            'count_total' => false
+          )
+        )
+      );
+
+      if ($user) {
+        wp_set_current_user($user->ID, $user->data->user_login);
+        wp_set_auth_cookie($user->ID);
+        //do_action('wp_login', $user->data->user_login);
+
+        wp_safe_redirect('./tai-khoan');
+        exit;
+      }
+    }, 20, 3);
+
   }
 
   function ts_apply_discount_to_cart() {
@@ -396,26 +496,29 @@ class Woo {
         $validation_errors->add('billing_phone_error', __('Số điện thoại đã tồn tại.', 'woocommerce'));
       }
 
-    }
+      //Verify Phone
+      if (isset($_POST['zalo_otp'])) {
+        if (empty($_POST['zalo_otp'])) {
+          $validation_errors->add('zalo_otp_error', __('Vui lòng nhập OTP.', 'woocommerce'));
+        }
 
-    if (isset($_POST['zalo_otp'])) {
-      if (empty($_POST['zalo_otp'])) {
-        $validation_errors->add('zalo_otp_error', __('Vui lòng nhập OTP.', 'woocommerce'));
+
+        $verificationId = $_POST['verificationId'];
+        $otp = $_POST['zalo_otp'];
+        /* $response = Firebase::instance()->activate_through_firebase($verificationId, $otp);
+        if ($response->error && $response->error->code == 400) {
+          error_log($response->error->message);
+          $validation_errors->add('billing_phone_error', 'Sai mã OTP!!!');
+        } */
+        $verify = Zalo::instance()->verifyZNS($billing_phone, $otp, $verificationId);
+        if ($verify !== true) {
+          $validation_errors->add('billing_phone_error', 'Sai mã OTP!!!');
+        }
+
       }
 
-      $verificationId = $_POST['verificationId'];
-      $otp = $_POST['zalo_otp'];
-      /* $response = Firebase::instance()->activate_through_firebase($verificationId, $otp);
-      if ($response->error && $response->error->code == 400) {
-        error_log($response->error->message);
-        $validation_errors->add('billing_phone_error', 'Sai mã OTP!!!');
-      } */
-      
-      if ($otp != 123) {
-        $validation_errors->add('billing_phone_error', 'Sai mã OTP!!!');
-      }
-
     }
+
   }
 
   function validate_username($usename) {
