@@ -12,7 +12,7 @@ class Init {
   }
 
   private function __construct() {
-    $this->slot_num = 2; //Gioi han so dat lich cho 1 thoi gian
+    $this->slot_num = 5; //Gioi han so dat lich cho 1 thoi gian
     add_action('wp', [$this, 'gap_check_user_login']);
     Ajax::instance();
     Form::instance();
