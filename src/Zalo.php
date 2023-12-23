@@ -41,12 +41,12 @@ class Zalo {
     if ($context === 'login' && !$user) {
       wp_send_json_error('Tài khoản không tồn tại.');
     }
-
-    //$zalo_otp = WC()->session->set('zalo_otp');
+    
     $newotp = rand(100000, 999999);
-    //Gọi API ZNS
+    //$zalo_otp = WC()->session->set('zalo_otp', $newotp);
     //file_put_contents("D:/newotp.txt", $newotp);
 
+    //Gọi API ZNS
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => 'https://api.3ns.com.vn/messages',
