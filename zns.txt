@@ -1,0 +1,19 @@
+https://oauth.zaloapp.com/v4/oa/permission?app_id=3573344420718015144&oa_id=410435173726095913&redirect_uri=https%3A%2F%2Fdevelopers.zalo.me%2Fapi-explorer%2Fcallback%3Ftype%3D2%26v%3D4%26appId%3D3573344420718015144&code_challenge=uUDgZKtruAwZOosUglkT8yP0t01tC4qATT4TtDBKUCY
+
+
+AT: https://oauth.zaloapp.com/v4/oa/permission?app_id=3573344420718015144&oa_id=410435173726095913&redirect_uri=https%3A%2F%2Fdevelopers.zalo.me%2Fapi-explorer%2Fcallback%3Ftype%3D2%26v%3D4%26appId%3D3573344420718015144&code_challenge=uUDgZKtruAwZOosUglkT8yP0t01tC4qATT4TtDBKUCY
+
+RT: qzq3T1qSIM_GsW9m7Xb3RzRU2tGR0XmUW8DTM355IXM1xq5U6LfL48pCQbe_2YSOXu8GG1Cs7mRQz2L0RtCx6yJxD7D4PYeexFjZR4D5Mnley7DV8ML_Dhx2CMu3111nrvC65bmW6mpig55AGsnx1l_FJ0GpJrr-hzfk0MD6VnlKs7HPOdrwGDhQLWPv61jdoTDN5mLDHNo_YtavBnXcP8-PToKG9NXwiBfA0IOvS1wUebjYB654Ak7CRc0jTM4Wu-DtLtz0RnN0_LTJU49wJkdUDpHgIpHBzOq37ZK9C5wYgZiI4pCK29sEFMal6oD-jwG0OWylFNkIY2SCFaqFIxNt9IOdJcHyfyGm12m0CKpWlY0JRZiAK-Ew52LGVrrLsFj264TULaM9_MG7-V9vBnu1IMu
+
+
+APPS: https://developers.zalo.me/apps
+
+https://developers.zalo.me/tools/explorer/3573344420718015144
+
+
+https://developers.zalo.me/docs/official-account/bat-dau/xac-thuc-va-uy-quyen-cho-ung-dung-new
+//
+
+https://3ns.com.vn/tai-lieu-ket-noi-api/
+Vui lòng lưu lại API Key "75|PuxgN8YWHHZXW8P2Bjui88dIaPWS0ziFdTUcU06L"
+
