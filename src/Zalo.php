@@ -27,12 +27,12 @@ class Zalo {
     }
 
 
-    /* if (!isset($_POST[$context . '_nonce_field'])
-      || !wp_verify_nonce($_POST[$context . '_nonce_field'], $context . '_action')
+    /* if (!isset($_POST['fnonce'])
+      || !wp_verify_nonce($_POST['fnonce'], $context . '_action')
     ) {
-      wp_send_json_error('Sorry, your nonce did not verify.');
-    } */
-
+      wp_send_json_error('Gian lận?');
+    }
+ */
     $phone = trim($_POST['phone']);
     if (!$this->validate_mobile($phone)) {
       wp_send_json_error('Số điện thoại không đúng định dạng.');

@@ -15,6 +15,8 @@ jQuery(document).ready(function ($) {
       return;
     }
 
+    //var fnonce = $('#' + context + '_nonce_field').val();
+
     $('#verificationId_' + context).val('');
 
     $.ajax({
@@ -25,7 +27,8 @@ jQuery(document).ready(function ($) {
         action: 'gap_get_otp_zalo',
         phone: phone,
         context: context,
-        nonce: gap.nonce
+        nonce: gap.nonce,
+        //fnonce: fnonce
       },
       context: this,
       beforeSend: function () {
