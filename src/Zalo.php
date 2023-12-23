@@ -17,6 +17,22 @@ class Zalo {
   }
 
   public function gap_get_otp_zalo_func() {
+    $context = trim($_POST['context']);
+    if ($context != 'register' && $context != 'login') {
+      wp_send_json_error('Lỗi context.');
+    }
+
+    if (!wp_verify_nonce($_POST['nonce'], 'gap_ajax_action')) {
+      wp_send_json_error(__('Gian lận?', 'graby'));
+    }
+
+
+    /* if (!isset($_POST[$context . '_nonce_field'])
+      || !wp_verify_nonce($_POST[$context . '_nonce_field'], $context . '_action')
+    ) {
+      wp_send_json_error('Sorry, your nonce did not verify.');
+    } */
+
     $phone = trim($_POST['phone']);
     if (!$this->validate_mobile($phone)) {
       wp_send_json_error('Số điện thoại không đúng định dạng.');
@@ -33,7 +49,8 @@ class Zalo {
       )
     );
 
-    $context = trim($_POST['context']);
+
+
     if ($context === 'register' && $user) {
       wp_send_json_error('Tài khoản đã tồn tại.');
     }
@@ -41,7 +58,7 @@ class Zalo {
     if ($context === 'login' && !$user) {
       wp_send_json_error('Tài khoản không tồn tại.');
     }
-    
+
     $newotp = rand(100000, 999999);
     //$zalo_otp = WC()->session->set('zalo_otp', $newotp);
     //file_put_contents("D:/newotp.txt", $newotp);
