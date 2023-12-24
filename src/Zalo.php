@@ -14,6 +14,9 @@ class Zalo {
   private function __construct() {
     add_action('wp_ajax_' . 'gap_get_otp_zalo', [$this, 'gap_get_otp_zalo_func']);
     add_action('wp_ajax_nopriv_' . 'gap_get_otp_zalo', [$this, 'gap_get_otp_zalo_func']);
+
+    add_action('wp_ajax_' . 'gap_login_zalo_otp', [$this, 'gap_login_otp_func']);
+    add_action('wp_ajax_nopriv_' . 'gap_login_zalo_otp', [$this, 'gap_login_otp_func']);
   }
 
   public function gap_get_otp_zalo_func() {
@@ -48,8 +51,6 @@ class Zalo {
         )
       )
     );
-
-
 
     if ($context === 'register' && $user) {
       wp_send_json_error('Tài khoản đã tồn tại.');
@@ -99,6 +100,48 @@ class Zalo {
     }
 
     die();
+  }
+
+  public function gap_login_otp_func() {
+    
+    if (!wp_verify_nonce($_POST['nonce'], 'gap_ajax_action')) {
+      wp_send_json_error(__('Gian lận?', 'graby'));
+    }
+
+    global $wp;
+
+    $phone = trim($_POST['phone']);
+    $otp = trim($_POST['otp']);
+    $code = trim($_POST['code']);
+
+    $verify = $this->verifyZNS($phone, $otp, $code);
+    if ($verify) {
+      $user = @reset(
+        get_users(
+          array(
+            'meta_key' => 'billing_phone',
+            'meta_value' => $phone,
+            'number' => 1,
+            'count_total' => false
+          )
+        )
+      );
+      if ($user) {
+        wp_set_current_user($user->ID, $user->data->user_login);
+        wp_set_auth_cookie($user->ID);
+        do_action('wp_login', $user->data->user_login, $user->data);
+
+        if (is_user_logged_in()) {
+          wp_send_json_success(['message' => 'You have successfully logged in', 'redirect' => home_url('/tai-khoan')]);
+        } else {
+          wp_send_json_error('OTP Matched but not logged in!');
+        }
+      } else {
+        wp_send_json_error('Lỗi!');
+      }
+    } else {
+      wp_send_json_error('Sai OTP!');
+    }
   }
 
   public function verifyZNS($phone, $otp, $code) {

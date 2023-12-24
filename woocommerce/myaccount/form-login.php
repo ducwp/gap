@@ -31,7 +31,7 @@ do_action('woocommerce_before_customer_login_form'); ?>
 
     <h2><?php esc_html_e('Login', 'woocommerce'); ?></h2>
 
-    <form class="woocommerce-form woocommerce-form-login login" method="post">
+    
 
       <?php do_action('woocommerce_login_form_start'); ?>
 
@@ -41,7 +41,7 @@ do_action('woocommerce_before_customer_login_form'); ?>
       <div style="display: flex; margin-bottom: 10px; ">
         <input type="text" class="input-text" name="username" id="username" value="<?php if (!empty($_POST['username']))
           esc_attr_e($_POST['username']); ?>" style="width: auto;flex-grow: 1;margin-right: 10px;" />
-        <button data-context="login" class="btnGetOTPZNS button" type="button">Gửi OTP</button>
+        <button data-context="login" class="btnGetOTPZNS button" type="button">Xác thực</button>
       </div>
 
       <!-- <div id="recaptcha-container"></div> -->
@@ -49,14 +49,14 @@ do_action('woocommerce_before_customer_login_form'); ?>
 
       <p class="form-row">
         <label for="zalo_otp_login"><?php _e('Mã OTP Zalo', 'text_domain'); ?><span class="required">*</span></label>
-        <input type="text" class="input-text" name="zalo_otp_login" id="zalo_otp_login" value="<?php if (!empty($_POST['zalo_otp_login']))
-          esc_attr_e($_POST['zalo_otp_login']); ?>" placeholder="Nhập mã OTP vào đây" />
+        <?php $zalo_otp_login = !empty($_POST['zalo_otp_login']) ? $_POST['zalo_otp_login'] : '';?>
+        <input type="text" class="input-text" name="zalo_otp_login" id="zalo_otp_login" value="<?php echo $zalo_otp_login; ?>" placeholder="Nhập mã OTP vào đây" />
 
-        <?php $verificationId_login = isset($_POST['verificationId_login']) ? trim($_POST['verificationId_login']) : ''; ?>
-        <input type="hidden" name="verificationId_login" id="verificationId_login"
-          value="<?php echo $verificationId_login; ?>" />
+        <?php $verificationId_login = isset($_POST['verificationId_login']) ? trim($_POST['verificationId_login']) : ''; 
+        //$verificationId_login = 'Mzg0ZjdlMjFhZDgzMWVjZjUzZGMyZDM4MTg2Y2U4NzY5NTA3ODY0NTA2ZmZiOGQ5MTQ1OTljYjQ2YjIyZTc5Yjg1YTE2YjQzOTM5MDZlNDc4MTBlMmU5MTIwYTc5ZjYzYWM4YTZjZmZmYmJlYTAzNzhlZDY3ZTZkY2VmNjEyZjA=';
+        ?>
+        <input type="hidden" name="verificationId_login" id="verificationId_login" value="<?php echo $verificationId_login; ?>" />
       </p>
-
 
       <input class="woocommerce-Input woocommerce-Input--text input-text" type="hidden" name="password" id="password"
         autocomplete="current-password" value="<?php echo wp_generate_password(8); ?>"" />
@@ -69,21 +69,11 @@ do_action('woocommerce_before_customer_login_form'); ?>
             id="rememberme" value="forever" /> <span><?php esc_html_e('Remember me', 'woocommerce'); ?></span>
         </label> -->
       <?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>
-      <button type="submit"
-        class="woocommerce-button button woocommerce-form-login__submit<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>"
-        name="login"
-        value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><?php esc_html_e('Log in', 'woocommerce'); ?></button>
+      <button type="button" class="button" id="LoginBtn" value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><?php esc_html_e('Log in', 'woocommerce'); ?></button>
       </p>
-      <!-- <p class="woocommerce-LostPassword lost_password">
-        <a
-          href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php esc_html_e('Lost your password?', 'woocommerce'); ?></a>
-      </p> -->
 
       <?php //wp_nonce_field('login_action', 'login_nonce_field'); ?>
-
       <?php do_action('woocommerce_login_form_end'); ?>
-
-    </form>
 
     <?php if ('yes' === get_option('woocommerce_enable_myaccount_registration')): ?>
 
@@ -127,7 +117,7 @@ do_action('woocommerce_before_customer_login_form'); ?>
         <div style="display: flex; margin-bottom: 10px; ">
           <input type="text" class="input-text" name="billing_phone" id="billing_phone" value="<?php if (!empty($_POST['billing_phone']))
             esc_attr_e($_POST['billing_phone']); ?>" style="width: auto;flex-grow: 1;margin-right: 10px;" />
-          <button data-context="register" class="btnGetOTPZNS button" type="button">Gửi OTP</button>
+          <button data-context="register" class="btnGetOTPZNS button" type="button">Xác thực</button>
         </div>
 
         <!-- <div id="recaptcha-container"></div> -->

@@ -1,5 +1,6 @@
 jQuery(document).ready(function ($) {
 
+  //get OTP
   $('.btnGetOTPZNS').on('click', function () {
     var button = $(this);
     if (button.hasClass('disabled')) {
@@ -50,6 +51,75 @@ jQuery(document).ready(function ($) {
         alert(error);
       }
     });
+  });
+
+  //Login
+  $('#LoginBtn').on('click', function () {
+    var button = $(this);
+    if (button.hasClass('disabled')) {
+      return;
+    }
+    var button_text = button.text();
+
+    var phone_field = $('#username');
+    var phone = phone_field.val();
+    if (phone == '') {
+      alert("Vui lòng nhập số điện thoại!");
+      phone_field.focus();
+      return;
+    }
+
+    var otp_field = $('#zalo_otp_login');
+    var otp = otp_field.val();
+    if (otp == '') {
+      alert("Vui lòng nhập OTP!");
+      otp_field.focus();
+      return;
+    }
+
+    var code = $('#verificationId_login').val();
+    if (code == '') {
+      alert("Vui lòng xác thực OTP!");
+      $('#verificationId_login').focus();
+      return;
+    }
+    
+    $.ajax({
+      url: gap.ajax_url,
+      type: 'POST',
+      dataType: "json",
+      data: {
+        action: 'gap_login_zalo_otp',
+        phone: phone,
+        otp: otp,
+        code: code,
+        nonce: gap.nonce,
+      },
+      context: this,
+      beforeSend: function () {
+        button.addClass('disabled').html('Đang đăng nhập...');
+      },
+      success: function (response) {
+        console.log(response);
+        button.text(button_text).removeClass('disabled');
+        if (response.success === true) {
+          var redirecturl = response.data.redirect;
+          if (typeof redirecturl !== "undefined") {
+            document.location.href = redirecturl;
+          }
+
+        } else {
+          //alert("LOI");
+          alert(response.data);
+        }
+      },
+      error: function (error) {
+        console.log(error);
+        button.text(button_text).removeClass('disabled');
+        alert(error);
+      }
+    });
+
   });
 
   let open_countdown = $('#open_countdown');
@@ -231,7 +301,7 @@ jQuery(document).ready(function ($) {
       alert("Vui lòng chọn ngày!!!");
       return false;
     }
-
+  
     $('input[name="gap_date"]:checked').val();
     
     return false;
@@ -402,7 +472,7 @@ jQuery(document).ready(function ($) {
   //Auto rotate tabs
   /* $('#continue-shopping').click(function (event) {
     var nextLink = $('.tabs-menu').find('li.current').next().find('a');
-
+  
     if (nextLink.length > 0) {
       nextLink.click();
     } else {

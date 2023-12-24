@@ -318,7 +318,7 @@ class Woo {
       }
     });
 
-    remove_filter('authenticate', 'wp_authenticate_username_password', 20);
+
     add_filter('woocommerce_process_login_errors', function ($validation_error, $creds_user_login, $creds_user_password) {
       $user_login = trim($_POST['username']);
       if (empty($user_login)) {
@@ -354,68 +354,9 @@ class Woo {
         }
       }
 
-
-
-      // Automatic login //
-      // $username = "ducnv119";
-      // $user = get_user_by('login', $username);
-
-      // Redirect URL //
-      /* if (!is_wp_error($user)) {
-        wp_clear_auth_cookie();
-        wp_set_current_user($user->ID);
-        wp_set_auth_cookie($user->ID);
-
-        $redirect_to = './';
-        wp_safe_redirect($redirect_to);
-        exit();
-      } */
-
-      //remove_filter('authenticate', 'wp_authenticate_username_password', 20);
-
-      /* $login_otp = wc()->session->get('login_otp');
-
-      if (empty($_POST['otp_login_field'])) {
-
-        remove_action('authenticate', 'wp_authenticate_username_password', 20);
-        $user = new WP_Error('denied', __("Otp field is empty"));
-      } elseif ($_POST['otp_login_field'] != $login_otp) {
-        remove_action('authenticate', 'wp_authenticate_username_password', 20);
-        $user = new WP_Error('denied', __("Invalid otp"));
-
-      } */
-
       return $validation_error;
-
-      /* remove_action('authenticate', 'wp_authenticate_username_password', 20);
-      $user = new \WP_Error('denied', __("Invalid otp")); */
-
-      //return $user;
+      
     }, 10, 3);
-
-    remove_filter('authenticate', 'wp_authenticate_username_password', 20);
-    add_filter('authenticate', function ($user, $username, $password) {
-      $user_login = sanitize_text_field($_POST['username']);
-      $user = @reset(
-        get_users(
-          array(
-            'meta_key' => 'billing_phone',
-            'meta_value' => $user_login,
-            'number' => 1,
-            'count_total' => false
-          )
-        )
-      );
-
-      if ($user) {
-        wp_set_current_user($user->ID, $user->data->user_login);
-        wp_set_auth_cookie($user->ID);
-        //do_action('wp_login', $user->data->user_login);
-
-        wp_safe_redirect('./tai-khoan');
-        exit;
-      }
-    }, 20, 3);
 
   }
 
