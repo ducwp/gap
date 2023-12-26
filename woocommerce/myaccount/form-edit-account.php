@@ -44,12 +44,15 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 		<input type="email" class="woocommerce-Input woocommerce-Input--email input-text" name="account_email" id="account_email" autocomplete="email" value="<?php echo esc_attr( $user->user_email ); ?>" />
 	</p>
 
-  <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+  <!-- <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
     <label for="billing_mobile_phone"><?php _e('Số điện thoại', 'woocommerce'); ?> <span
         class="required">*</span></label>
     <input type="text" class="woocommerce-Input woocommerce-Input--phone input-text" name="billing_phone"
       id="billing_phone" value="<?php echo esc_attr($user->billing_phone); ?>" />
-  </p>
+  </p> -->
+
+  <input type="hidden" class="woocommerce-Input woocommerce-Input--phone input-text" name="billing_phone"
+      id="billing_phone" value="<?php echo esc_attr($user->billing_phone); ?>" />
 
 	<!-- <fieldset>
 		<legend><?php esc_html_e( 'Password change', 'woocommerce' ); ?></legend>
