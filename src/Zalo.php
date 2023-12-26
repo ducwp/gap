@@ -60,6 +60,13 @@ class Zalo {
       wp_send_json_error('Tài khoản không tồn tại.');
     }
 
+    //check blocked
+    //user_status
+    $user_status = get_user_meta($user->ID, 'user_status', true);
+    if($user_status == 'deactive'){
+      wp_send_json_error('Tài khoản đã bị khóa.');
+    }
+
     $newotp = rand(100000, 999999);
     //$zalo_otp = WC()->session->set('zalo_otp', $newotp);
     //file_put_contents("D:/newotp.txt", $newotp);

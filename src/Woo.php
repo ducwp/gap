@@ -14,6 +14,8 @@ class Woo {
   }
 
   private function __construct() {
+    //Disable Application Passwords
+    add_filter('wp_is_application_passwords_available', '__return_false');
     $this->user_obj = new User;
     $this->gap_settings = get_option("gap_settings", array());
     /* $username = '1 duc';
@@ -49,6 +51,12 @@ class Woo {
       return $required_fields;
     });
 
+    //Hide Shippping and Billing form users backend
+    add_filter('woocommerce_customer_meta_fields', function ($show_fields) {
+      unset($show_fields['shipping']);
+      unset($show_fields['billing']);
+      return $show_fields;
+    });
 
     /* add_action('woocommerce_login_form_end', function () {
       if (!wc_get_raw_referer())
@@ -355,7 +363,7 @@ class Woo {
       }
 
       return $validation_error;
-      
+
     }, 10, 3);
 
   }

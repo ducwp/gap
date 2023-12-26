@@ -19,7 +19,6 @@ class Init {
     Hooks::instance();
     Shortcodes::instance();
     //Firebase::instance();
-    //WooCommerce::instance();
     Woo::instance();
     Zalo::instance();
     Countdown::instance();
